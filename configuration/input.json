@@ -1,0 +1,50 @@
+{
+    "sequences": [
+        {   
+        "sequenceName":"XYZ", 
+        "sequenceInterconnection":{"list":[]},
+            "features":
+            [
+                { 
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "attr":
+                    [
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify"]
+                        },
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"text",
+                            "intraAttrTask":["identify"]
+                        }
+                    ]
+                },
+                { 
+                    "featureGranularity":"segment",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Gene Annotation",
+                    "featureInterconnection": false,
+                    "attr":
+                    [
+                    {
+                        "dataType":"categorical",
+                        "intraAttrTask":["identify","summarize"]
+                    },
+                    {
+                        "dataType":"text",
+                        "intraAttrTask":["identify"]
+                    }]
+                }
+            ]
+    }]}

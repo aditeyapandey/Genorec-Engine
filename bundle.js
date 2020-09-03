@@ -1,8 +1,59 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
+    "sequences": [
+        {   
+        "sequenceName":"XYZ", 
+        "sequenceInterconnection":{"list":[]},
+            "features":
+            [
+                { 
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "attr":
+                    [
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify"]
+                        },
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"text",
+                            "intraAttrTask":["identify"]
+                        }
+                    ]
+                },
+                { 
+                    "featureGranularity":"segment",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Gene Annotation",
+                    "featureInterconnection": false,
+                    "attr":
+                    [
+                    {
+                        "dataType":"categorical",
+                        "intraAttrTask":["identify","summarize"]
+                    },
+                    {
+                        "dataType":"text",
+                        "intraAttrTask":["identify"]
+                    }]
+                }
+            ]
+    }]}
+},{}],2:[function(require,module,exports){
+module.exports={
     "metric": "tanimoto"
 }
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
 {"chart":"lineChart","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
@@ -15,7 +66,7 @@ module.exports=[
 {"chart":"annotation","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"0","summarize":"0"}
 ]
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -62,7 +113,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -73,7 +124,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -91,7 +142,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":6}],6:[function(require,module,exports){
+},{"ml-array-sum":7}],7:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -121,7 +172,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":4}],7:[function(require,module,exports){
+},{"is-any-array":5}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -137,7 +188,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -729,7 +780,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":5,"ml-distance-euclidean":7,"ml-tree-similarity":9}],9:[function(require,module,exports){
+},{"ml-array-mean":6,"ml-distance-euclidean":8,"ml-tree-similarity":10}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -866,7 +917,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":3,"num-sort":10}],10:[function(require,module,exports){
+},{"binary-search":4,"num-sort":11}],11:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -905,7 +956,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
  class Dataspec {
     sequences = [];
     constructor(obj){
@@ -974,58 +1025,14 @@ exports.descending = (left, right) => {
 }
 
 module.exports = Dataspec
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var Dataspec = require('./dataspec.js')
 var encodeattribute  = require("./s1_en.js")
 var combineattributes  = require("./s2_ca.js")
+var inputData = require("../configuration/input.json")
 
 //Validate the input dataspecification to ensure correctness of input data
-const dataspec = new Dataspec(
-{
-sequences: [
-    {   
-    sequenceName:"XYZ", 
-    sequenceInterconnection:{list:[]},
-        features:
-        [
-            { 
-                featureGranularity:"point",
-                featureDensity:"sparse",
-                featureLabel: "Epigenetic Signal",
-                featureInterconnection: false,
-                attr:
-                [
-                    {
-                        dataType:"quantitative",
-                        intraAttrTask:["identify","compare"]
-                    },
-                    {
-                        dataType:"quantitative",
-                        intraAttrTask:["identify"]
-                    },
-                    {
-                        dataType:"text",
-                        intraAttrTask:["identify"]
-                    }
-                ]
-            },
-            { 
-                featureGranularity:"segment",
-                featureDensity:"sparse",
-                featureLabel: "Gene Annotation",
-                featureInterconnection: false,
-                attr:
-                [{
-                    dataType:"categorical",
-                    intraAttrTask:["identify","summarize"]
-                },
-                {
-                    dataType:"text",
-                    intraAttrTask:["identify"]
-                }]
-            }
-        ]
-}]})
+const dataspec = new Dataspec(inputData)
 
 var result = dataspec.printConfig()
 
@@ -1036,12 +1043,14 @@ for (var i=0;i<dataspec.sequences.length;i++){
     //Stage 2: Combining Attributes
     var combinedEncoding = combineattributes(encodingSpecification)
 }
+
+//Define the libary's api for external applications
 // module.exports ={
 // test:result
 // }
-},{"./dataspec.js":11,"./s1_en.js":13,"./s2_ca.js":14}],13:[function(require,module,exports){
+},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":14,"./s2_ca.js":15}],14:[function(require,module,exports){
 const model = require('../model/stage1.json');
-const recommendationSetting = require('../model/recommendationsetting.json');
+const recommendationSetting = require('../configuration/recommendationsetting.json');
 var dsMetric = require("ml-distance")
 var partialSpecification = {}
 var vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]
@@ -1162,7 +1171,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/recommendationsetting.json":1,"../model/stage1.json":2,"ml-distance":8}],14:[function(require,module,exports){
+},{"../configuration/recommendationsetting.json":2,"../model/stage1.json":3,"ml-distance":9}],15:[function(require,module,exports){
 
 // Attributes that can be combined
 var attrCombination = {
@@ -1179,9 +1188,7 @@ var attrCombination = {
 var superimposition = {
     "dotplot": ["dotplot","lineChart","barSize"],
     "lineChart": ["lineChart","dotplot","barSize"],
-    "barSize":["dotplot","lineChart"],
-    "barSaturation":["dotplot","lineChart"],
-    "barHue":["dotplot","lineChart"]
+    "barSize":["dotplot","lineChart"]
 }
 
 //Description:This function is going to take input specifications and try to output a list of visualizable 
@@ -1206,15 +1213,23 @@ function getCombinations(feature)
 
     var encodingOptions = cartesian(allEncoding)
 
-    
-
     //Find the attributes that merge
-    var finalEncodingCombination = []
+    var finalEncodingCombination = [];
     for (var x = 0; x< encodingOptions.length; x++){
       var set = encodingOptions[x]  
-     finalEncodingCombination.push(combineLogic(set))
+      finalEncodingCombination.push(combineLogic(set))
     }
-   //  console.log(finalEncodingCombination)
+   
+    //Superimpose Attributes
+    var finalSuperimposed = []
+    for (var x=0;x<finalEncodingCombination.length;x++)
+    {
+        var set  = finalEncodingCombination[x]
+        finalSuperimposed.push(superimposeLogic(set))
+    }
+
+    return finalSuperimposed
+//    console.log(finalEncodingCombination)
     
 }
 
@@ -1227,12 +1242,87 @@ function canCombine(a,b){
     return listOfCombinedAttr.indexOf(b) != -1 ? true : false
 }
 
+//Description: Check if two items groups/individual atttributes can be superimposed
+//Input Both a and b are array and we will do a cartesian combination and check 
+function canSuperimposed(a,b){
+    var canSuperimposed = []
+    var allcombinations = cartesian([a,b])
+
+    for(var i=0;i<allcombinations.length;i++){
+        var a = allcombinations[i][0]
+        var b = allcombinations[i][1]
+        if(superimposition[a] == undefined || superimposition[a] == undefined){
+            canSuperimposed.push(false)
+            continue
+        }
+        superimposition[a].indexOf(b) != -1 ? canSuperimposed.push(true) : canSuperimposed.push(false) // Incorrect
+    }
+
+    // console.log("boolean array", canSuperimposed) 
+     return canSuperimposed.every(v => v === true)
+
+}
+
+
+//Description: Algorithm to superimpose
+function superimposeLogic(arr)
+{
+    var finalSuperImposed = []
+    var visited = arr.map(val =>
+        {
+            return 0
+        })
+    
+    for(var i=0;i<arr.length;i++)
+    {
+        if(visited[i]==0)
+        {
+            var superImpositionNotFound = true
+            var a = arr[i]
+            var addSuperImposed = []
+            var aEncoding = arr[i].map(val => {return val['encoding']})
+
+            for(var j=0;j<arr.length;j++)
+            {
+                if(visited[j]==0)
+                {
+                    if(i==j){continue} // Skip the same 
+                    var b = arr[j]
+                    var bEncoding = arr[j].map(val => {return val['encoding']})
+                    if(canSuperimposed(aEncoding,bEncoding))
+                    {
+                        visited[j] = 1
+                        b.map(arr => {
+                            arr["superimposed"] = true
+                        })
+                        addSuperImposed.push(...b)
+                        superImpositionNotFound = false
+                        continue
+                    }
+                }
+
+            }
+                a.map(arr => {
+                    arr["superimposed"] = !superImpositionNotFound
+                })
+                addSuperImposed.push(...a)
+                
+
+                finalSuperImposed.push(addSuperImposed)
+            
+        }
+    }  
+    
+    return finalSuperImposed
+
+}
+
+
 //Description: This method returns a combined list of attributes
 //Input: Array of object containing the attribtue id and encoding recoomendation
 //Output: Array of combined and non-combined attributes. E.g [[a1_dotplot,a2_barchart],[a3_annotation]]
 function combineLogic(arr)
 {
-    console.log(arr)
     var finalEncodingCombination = []   
     var visited = arr.map(val =>
         {
@@ -1244,35 +1334,42 @@ function combineLogic(arr)
             if(visited[i]==0)
             {
                 var combinationNotFound = true // This variable will keep track incase the combination was found 
-                var a = arr[i]
+                var a = Object.assign({},arr[i])
                 for (var j = 0;j<arr.length;j++)
                 {
-                    var b = arr[j]
-                    if(a['attributeId'] == b['attributeId'])
+                    if(visited[j]==0)
                     {
-                         continue
-                    }
-                    else
-                    {
-                        var combine = canCombine(a['encoding'],b['encoding'])
-                        if (combine)
+                        var b = Object.assign({},arr[j])
+                        if(a['attributeId'] == b['attributeId'])
                         {
-                            visited[i] = 1
-                            visited[j] = 1
-                            finalEncodingCombination.push(`${a['attributeId']}_${a['encoding']}_${b['encoding']}`)
-                            combinationNotFound = false
-                            break;
+                            continue
+                        }
+                        else
+                        {
+                            var combine = canCombine(a['encoding'],b['encoding'])
+                            if (combine)
+                            {
+                                visited[i] = 1
+                                visited[j] = 1
+                                // finalEncodingCombination.push(`${a['attributeId']}_${a['encoding']}_${b['encoding']}`)
+                                a['combined'] = true
+                                b['combined'] = true
+                                finalEncodingCombination.push([a,b])
+                                combinationNotFound = false
+                                break;
+                            }
                         }
                     }
                 }
                 if(combinationNotFound)
                 {
-                    finalEncodingCombination.push(`${a['encoding']}`)
+                    a['combined'] = false
+                    finalEncodingCombination.push([a])
                 }
             }
         }
 
-console.log(finalEncodingCombination)
+return finalEncodingCombination
     
 }
 
@@ -1303,10 +1400,12 @@ function combineAttributes(encodingSpecification){
     // Step 1: For each feature
     for(i=0;i<featureKeys.length;i++){
         var mergedAttributeList = getCombinations(encodingSpecification[featureKeys[i]])
+        console.log(`Stage 2 Output Feature ${i}`, mergedAttributeList)
+        return mergedAttributeList
     }
     
 
 }
 
 module.exports = combineAttributes
-},{}]},{},[12]);
+},{}]},{},[13]);

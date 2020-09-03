@@ -1,5 +1,5 @@
 const model = require('../model/stage1.json');
-const recommendationSetting = require('../model/recommendationsetting.json');
+const recommendationSetting = require('../configuration/recommendationsetting.json');
 var dsMetric = require("ml-distance")
 var partialSpecification = {}
 var vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]

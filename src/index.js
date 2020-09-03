@@ -1,54 +1,10 @@
 var Dataspec = require('./dataspec.js')
 var encodeattribute  = require("./s1_en.js")
 var combineattributes  = require("./s2_ca.js")
+var inputData = require("../configuration/input.json")
 
 //Validate the input dataspecification to ensure correctness of input data
-const dataspec = new Dataspec(
-{
-sequences: [
-    {   
-    sequenceName:"XYZ", 
-    sequenceInterconnection:{list:[]},
-        features:
-        [
-            { 
-                featureGranularity:"point",
-                featureDensity:"sparse",
-                featureLabel: "Epigenetic Signal",
-                featureInterconnection: false,
-                attr:
-                [
-                    {
-                        dataType:"quantitative",
-                        intraAttrTask:["identify","compare"]
-                    },
-                    {
-                        dataType:"quantitative",
-                        intraAttrTask:["identify"]
-                    },
-                    {
-                        dataType:"text",
-                        intraAttrTask:["identify"]
-                    }
-                ]
-            },
-            { 
-                featureGranularity:"segment",
-                featureDensity:"sparse",
-                featureLabel: "Gene Annotation",
-                featureInterconnection: false,
-                attr:
-                [{
-                    dataType:"categorical",
-                    intraAttrTask:["identify","summarize"]
-                },
-                {
-                    dataType:"text",
-                    intraAttrTask:["identify"]
-                }]
-            }
-        ]
-}]})
+const dataspec = new Dataspec(inputData)
 
 var result = dataspec.printConfig()
 
@@ -59,6 +15,8 @@ for (var i=0;i<dataspec.sequences.length;i++){
     //Stage 2: Combining Attributes
     var combinedEncoding = combineattributes(encodingSpecification)
 }
+
+//Define the libary's api for external applications
 // module.exports ={
 // test:result
 // }
