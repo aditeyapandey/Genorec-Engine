@@ -36,12 +36,14 @@
     interFeatureTasks = []
     featureLabel 
     featureInterconnection
+    denseInterconnection
     constructor(obj){
         this.featureGranularity =  (["point","interval"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
         this.featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
         this.featureLabel = obj.featureLabel
         this.interFeatureTasks = obj.interFeatureTasks
         this.featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
+        this.denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
         for(let i=0;i<obj.attr.length;i++){
         this.attributes.push(new Attributes(obj.attr[i]))
         }    

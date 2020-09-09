@@ -1,27 +1,27 @@
 
 // Attributes that can be combined
 var attrCombination = {
-    "dotplot":["barSaturation","barHue"],
-    "barSize":["barSaturation","barHue"],
-    "barSaturation":["dotplot","barSize"],
-    "barHue":["dotplot","barSize"],
-    "areaSize":["areSaturation","areaHue"],
-    "areSaturation":["areaSize"],
-    "areaHue":["areaSize"]
+    "dotplot":["barsaturation","barhue"],
+    "barsize":["barsaturation","barhue"],
+    "barsaturation":["dotplot","barsize"],
+    "barhue":["dotplot","barsize"],
+    "areasize":["areasaturation","areahue"],
+    "areasaturation":["areasize"],
+    "areahue":["areasize"]
 }
 
 //Superimposable encodings
 var superimposition = {
-    "dotplot": ["dotplot","lineChart","barSize"],
-    "lineChart": ["lineChart","dotplot","barSize"],
-    "barSize":["dotplot","lineChart"]
+    "dotplot": ["dotplot","linechart","barsize"],
+    "linechart": ["linechart","dotplot","barsize"],
+    "barsize":["dotplot","linechart"]
 }
 
 //Description:This function is going to take input specifications and try to output a list of visualizable 
 //attributes per feature
 //Input: Feature object
-//Output: ? 
-function getCombinations(feature)
+//Output: Returns the tracks 
+function getPossibilities(feature)
 {
     var allEncoding = []//First store all the possible encodings in the dataspec.
 
@@ -55,16 +55,12 @@ function getCombinations(feature)
     }
 
     return finalSuperimposed
-//    console.log(finalEncodingCombination)
-    
 }
 
 //Description: Checks if two variables can be combined, based on decision rules.
 function canCombine(a,b){
     var listOfCombinedAttr = attrCombination[a]
-
     if(listOfCombinedAttr == undefined) {return false}
-
     return listOfCombinedAttr.indexOf(b) != -1 ? true : false
 }
 
@@ -172,7 +168,7 @@ function combineLogic(arr)
                         }
                         else
                         {
-                            var combine = canCombine(a['encoding'],b['encoding'])
+                            var combine = canCombine(a['encoding'],b['encoding'])                            
                             if (combine)
                             {
                                 visited[i] = 1
@@ -219,18 +215,51 @@ function cartesian(args) {
     return r;
 }
 
-function combineAttributes(encodingSpecification){
+//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
+//Input: An entire Feature input
+//Output: List of tasks users wants to perform
+function getTasks(feature){
+    let tasks = new Set()
+
+    for(var i=0;i<feature.length;i++){
+        var currentFeature = feature[i];
+
+        if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
+        {
+            tasks.add("compare")
+        }
+        if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
+        {
+            tasks.add("identify")
+        }
+        if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
+        {
+            tasks.add("summarize")
+        }
+        
+    }
+
+    return tasks
+}
+
+
+function getTracks(encodingSpecification){
     
     var featureKeys= Object.keys(encodingSpecification)
+    var trackList =[]
 
-    // Step 1: For each feature
     for(i=0;i<featureKeys.length;i++){
-        var mergedAttributeList = getCombinations(encodingSpecification[featureKeys[i]])
-        console.log(`Stage 2 Output Feature ${i}`, mergedAttributeList)
-        return mergedAttributeList
+        var tasks = getTasks(encodingSpecification[featureKeys[i]])
+        var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
+        var featureId = `feature_${i}`
+        var returnTrackSpec = {[featureId]:{trackPossibilities,tasks}}
+        console.log(`Stage 2 Output`, returnTrackSpec)
+
+        trackList.push(returnTrackSpec)
     }
     
+    return trackList
 
 }
 
-module.exports = combineAttributes
+module.exports = getTracks

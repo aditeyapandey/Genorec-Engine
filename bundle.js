@@ -10,13 +10,10 @@ module.exports={
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
                     "attr":
                     [
-                        {
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
                         {
                             "dataType":"quantitative",
                             "intraAttrTask":["identify"]
@@ -35,7 +32,8 @@ module.exports={
                     "featureGranularity":"segment",
                     "featureDensity":"sparse",
                     "featureLabel": "Gene Annotation",
-                    "featureInterconnection": false,
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
                     "attr":
                     [
                     {
@@ -50,20 +48,23 @@ module.exports={
             ]
     }]}
 },{}],2:[function(require,module,exports){
-module.exports={
-    "metric": "tanimoto"
-}
+module.exports=[
+{"chart":"dotplot","mark":"point","channel":"position","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
+{"chart":"linechart","mark":"line","channel":"position","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
+{"chart":"barsize","mark":"line","channel":"size","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
+{"chart":"barsaturation","mark":"line","channel":"saturation","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"0","summarize":"1"},
+{"chart":"barhue","mark":"line","channel":"hue","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
+{"chart":"areasize","mark":"area","channel":"size","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"1","summarize":"1"},
+{"chart":"areasaturation","mark":"area","channel":"saturation","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"0","summarize":"1"},
+{"chart":"areahue","mark":"area","channel":"hue","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"1","summarize":"1"},
+{"chart":"annotation","mark":"label","channel":"text","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"0","summarize":"0"}
+]
+
 },{}],3:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
-{"chart":"lineChart","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
-{"chart":"barSize","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
-{"chart":"barSaturation","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"0","summarize":"1"},
-{"chart":"barHue","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
-{"chart":"areaSize","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"1","summarize":"1"},
-{"chart":"areaSaturation","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"0","summarize":"1"},
-{"chart":"areaHue","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"1","summarize":"1"},
-{"chart":"annotation","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"0","summarize":"0"}
+{"layout":"linear","spacesaving":"0","featureinterconnection":"1","denseinterconnection":"1","identify":"1","compare":"1","summarize":"1","size":"1","hue":"1","saturation":"1","text":"1"},
+{"layout":"circular","spacesaving":"1","featureinterconnection":"1","denseinterconnection":"0","identify":"1","compare":"0","summarize":"1","size":"0","hue":"1","saturation":"1","text":"1"},
+{"layout":"hilbert","spacesaving":"1","featureinterconnection":"0","denseinterconnection":"0","identify":"1","compare":"0","summarize":"0","size":"0","hue":"1","saturation":"1","text":"0"}
 ]
 
 },{}],4:[function(require,module,exports){
@@ -995,12 +996,14 @@ exports.descending = (left, right) => {
     interFeatureTasks = []
     featureLabel 
     featureInterconnection
+    denseInterconnection
     constructor(obj){
         this.featureGranularity =  (["point","interval"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
         this.featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
         this.featureLabel = obj.featureLabel
         this.interFeatureTasks = obj.interFeatureTasks
         this.featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
+        this.denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
         for(let i=0;i<obj.attr.length;i++){
         this.attributes.push(new Attributes(obj.attr[i]))
         }    
@@ -1027,9 +1030,10 @@ exports.descending = (left, right) => {
 module.exports = Dataspec
 },{}],13:[function(require,module,exports){
 var Dataspec = require('./dataspec.js')
-var encodeattribute  = require("./s1_en.js")
-var combineattributes  = require("./s2_ca.js")
+var encodeAttribute  = require("./s1_en.js")
+var getTracks  = require("./s2_ca.js")
 var inputData = require("../configuration/input.json")
+var getLayout  = require("./s3_ls.js")
 
 //Validate the input dataspecification to ensure correctness of input data
 const dataspec = new Dataspec(inputData)
@@ -1039,112 +1043,107 @@ var result = dataspec.printConfig()
 //First determine sequence level encoding
 for (var i=0;i<dataspec.sequences.length;i++){
     //Stage 1: Encoding Selection
-    var encodingSpecification = encodeattribute(dataspec.sequences[i]);
+    var attributeEncoding = encodeAttribute(dataspec.sequences[i]);
     //Stage 2: Combining Attributes
-    var combinedEncoding = combineattributes(encodingSpecification)
+    var tracks = getTracks(attributeEncoding)
+    //Stage 3: Predict the Layout
+    var layout = getLayout(tracks, attributeEncoding)
 }
 
 //Define the libary's api for external applications
 // module.exports ={
 // test:result
 // }
-},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":14,"./s2_ca.js":15}],14:[function(require,module,exports){
-const model = require('../model/stage1.json');
-const recommendationSetting = require('../configuration/recommendationsetting.json');
-var dsMetric = require("ml-distance")
-var partialSpecification = {}
-var vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]
+},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17}],14:[function(require,module,exports){
+const stage1Model = require('../model/stage1.json');
+const stage3Model = require('../model/stage3.json');
 
-//   This function will convert the dataspec to an array of user input
-function convertDataspectoInput(feature,attribute){
+//Converting the model to objects
+let stage1ModelObj = {}
+
+stage1Model.map(val =>{
+    stage1ModelObj[val["chart"]] = val
+})
+
+
+let stage3ModelObj = {}
+
+stage3Model.map(val =>{
+    stage3ModelObj[val["layout"]] = val
+})
+
+
+
+
+
+
+module.exports = {
+    model1: stage1ModelObj,
+    model3: stage3ModelObj
+}
+
+},{"../model/stage1.json":2,"../model/stage3.json":3}],15:[function(require,module,exports){
+// Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
+// Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
+// inputVector consists an array and an object that store information about the input attribute.
+// similarityScore contains the score of an inputVector with all the encoding options available for genomics visualization.
+// recommendation is an array of one or more product recommendation. 
+const model = require('../model/stage1.json');
+const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]
+const  globalData = require("./modelDataProcessing.js")
+const stage1Model = globalData.model1
+const getProductProperties  = require("./utils.js").productProperties
+const computeSimilarity = require("./utils.js").computeSimilarity
+const recommendedProducts = require("./utils.js").recommendedProducts
+//Product vector only needs to be computed once
+const productVector = getProductProperties(stage1Model,vectorKeys)
+
+
+
+// Description: This function will convert the dataspec to an array of user input
+// Description: As a side we will also store the input object vector
+// Input: The feature spec and attribute
+// Output: Vector array and object 
+function createInputVector(feature,attribute){
   
   // Mapping attributes 
   var inputVectorObject = {}
   var inputArray = []
 
-  inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
-  inputArray.push(inputVectorObject["categorical"] = attribute.dataType == "categorical" ? 1 : 0)
-  inputArray.push(inputVectorObject["text"] = attribute.dataType == "text" ? 1 : 0)
-  inputArray.push(inputVectorObject["sparse"] = feature.featureDensity == "sparse" ? 1 : 0)
-  inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
-  inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
-  inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-  inputArray.push(inputVectorObject["identify"] = attribute.intraAttrTask.indexOf("identify") != -1 ? 1 : 0 
-  )
-  inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
-  inputArray.push(inputVectorObject["summarize"] = attribute.intraAttrTask.indexOf("summarize") != -1 ? 1 : 0 
-  )
+  //Vector array and object
+    inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
+    inputArray.push(inputVectorObject["categorical"] = attribute.dataType == "categorical" ? 1 : 0)
+    inputArray.push(inputVectorObject["text"] = attribute.dataType == "text" ? 1 : 0)
+    inputArray.push(inputVectorObject["sparse"] = feature.featureDensity == "sparse" ? 1 : 0)
+    inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
+    inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
+    inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
+    inputArray.push(inputVectorObject["identify"] = attribute.intraAttrTask.indexOf("identify") != -1 ? 1 : 0 
+    )
+    inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
+    inputArray.push(inputVectorObject["summarize"] = attribute.intraAttrTask.indexOf("summarize") != -1 ? 1 : 0 
+    )
+
+  //Additional elements to add to the object
+  inputVectorObject["featureInterconnection"] = feature.featureInterconnection ? 1 : 0
+  inputVectorObject["denseInterconnection"] = feature.denseInterconnection  ? 1 : 0
   
   return {inputVectorObject, inputArray}
   }
 
-  // Function breaks down the model information into format for recommendation
 
-  function productProperties(){
-      var productProperties = []
-      for(var i=0;i<model.length;i++){
-        var currentProduct = model[i]["chart"];
-        var tempProductProperties = {}
-        tempProductProperties[currentProduct]=[]
-  
-        vectorKeys.map(val => {
-          tempProductProperties[currentProduct].push(parseInt(model[i][val]))
-        })
-        productProperties.push(tempProductProperties)
-      }
-
-      return productProperties
-
-    }
-
-    // Calculate the recommendation
-    // Input: product and input vector
-    // Output: similarity score corresponding to each output
-    function computeSimilarity(inputVectorObject,productVector){
-      var inpVec = inputVectorObject["inputArray"]
-      var resultSimilarity = {}
-    
-      for (var i =0;i<productVector.length;i++){
-        var obj = productVector[i];
-        var key = Object.keys(obj)[0]
-        var proVec = obj[key]
-        var similarity = dsMetric.similarity.tanimoto(inpVec,proVec)
-        var similarityEC = 1/ (1+ dsMetric.distance.euclidean(inpVec,proVec))
-        resultSimilarity[key] = {'tanimoto':similarity,'euclideansimilarity':similarityEC}
-      }
-      //console.log(result_similarity)
-     return resultSimilarity
-    }
+// Description: Get the type of within interconnection at a feature level
+// Input: Feature Specification
+// Output: {interconnection:boolean, denseinterconnection:boolean}
+function getInterconnectionFeature(feature){
+  return { featureInterconnection: feature.featureInterconnection ? 1 : 0, denseInterconnection: feature.denseInterconnection ? 1 : 0 }
+}
 
 
-    //Input: An object with vis techniques as keys and similarity scores. Additionally, key for the similarity metric to use.
-    //Output: Array of recommendation. The array allows for mutiple output in the cases where the scores are exactly similar.
-    function recommendProducts (similarityScores, metric)
-    {
-      let arr = Object.values(similarityScores);
-      let newarr = arr.map(val =>{
-        return val[metric]
-      })
 
-      let max = Math.max(...newarr);
-      var recommendedProducts = []
-
-      Object.keys(similarityScores).map((val) => {
-        if(similarityScores[val][metric] == max) {recommendedProducts.push(val) }
-      })
-
-      return recommendedProducts
-    }
-
-//Pseudo main function to control the execution of stage 1 of encoding
 function encodeAttribute(dataspec){
 
-    // Hierarchy of the encoding specification
-    // -> Feature 1
-    //       -> Attr1: I/P Vector, Prediction Scores {linechart:0.9(Score),.......}
-    //       -> Attr2: I/P Vector, Prediction Scores  
-    
-    //Step 1: Create a template for the for the partial specification from the input dataspec
+    var partialSpecification = {}
 
     for(var i = 0; i<dataspec.features.length;i++)
     {
@@ -1156,12 +1155,11 @@ function encodeAttribute(dataspec){
       //Get recommendation of the input feature vector
       for(j=0;j<currentFeature.attributes.length;j++){
         var currentAttribute = currentFeature.attributes[j]
-        var inputVectorObject = convertDataspectoInput(currentFeature,currentAttribute)  
-        var productVector = productProperties(inputVectorObject)
+        var inputVectorObject = createInputVector(currentFeature,currentAttribute)  
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        var recommendation = recommendProducts(similarityScores,recommendationSetting['metric'])
-        
-        var tempAttributeStorage = {'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation}
+        var recommendation = recommendedProducts(similarityScores)
+        var featureConnection = getInterconnectionFeature(currentFeature)
+        var tempAttributeStorage = {'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
         
         partialSpecification[`feature_${i}`].push(tempAttributeStorage)
       }
@@ -1171,31 +1169,31 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../configuration/recommendationsetting.json":2,"../model/stage1.json":3,"ml-distance":9}],15:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":18}],16:[function(require,module,exports){
 
 // Attributes that can be combined
 var attrCombination = {
-    "dotplot":["barSaturation","barHue"],
-    "barSize":["barSaturation","barHue"],
-    "barSaturation":["dotplot","barSize"],
-    "barHue":["dotplot","barSize"],
-    "areaSize":["areSaturation","areaHue"],
-    "areSaturation":["areaSize"],
-    "areaHue":["areaSize"]
+    "dotplot":["barsaturation","barhue"],
+    "barsize":["barsaturation","barhue"],
+    "barsaturation":["dotplot","barsize"],
+    "barhue":["dotplot","barsize"],
+    "areasize":["areasaturation","areahue"],
+    "areasaturation":["areasize"],
+    "areahue":["areasize"]
 }
 
 //Superimposable encodings
 var superimposition = {
-    "dotplot": ["dotplot","lineChart","barSize"],
-    "lineChart": ["lineChart","dotplot","barSize"],
-    "barSize":["dotplot","lineChart"]
+    "dotplot": ["dotplot","linechart","barsize"],
+    "linechart": ["linechart","dotplot","barsize"],
+    "barsize":["dotplot","linechart"]
 }
 
 //Description:This function is going to take input specifications and try to output a list of visualizable 
 //attributes per feature
 //Input: Feature object
-//Output: ? 
-function getCombinations(feature)
+//Output: Returns the tracks 
+function getPossibilities(feature)
 {
     var allEncoding = []//First store all the possible encodings in the dataspec.
 
@@ -1229,16 +1227,12 @@ function getCombinations(feature)
     }
 
     return finalSuperimposed
-//    console.log(finalEncodingCombination)
-    
 }
 
 //Description: Checks if two variables can be combined, based on decision rules.
 function canCombine(a,b){
     var listOfCombinedAttr = attrCombination[a]
-
     if(listOfCombinedAttr == undefined) {return false}
-
     return listOfCombinedAttr.indexOf(b) != -1 ? true : false
 }
 
@@ -1346,7 +1340,7 @@ function combineLogic(arr)
                         }
                         else
                         {
-                            var combine = canCombine(a['encoding'],b['encoding'])
+                            var combine = canCombine(a['encoding'],b['encoding'])                            
                             if (combine)
                             {
                                 visited[i] = 1
@@ -1393,19 +1387,252 @@ function cartesian(args) {
     return r;
 }
 
-function combineAttributes(encodingSpecification){
+//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
+//Input: An entire Feature input
+//Output: List of tasks users wants to perform
+function getTasks(feature){
+    let tasks = new Set()
+
+    for(var i=0;i<feature.length;i++){
+        var currentFeature = feature[i];
+
+        if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
+        {
+            tasks.add("compare")
+        }
+        if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
+        {
+            tasks.add("identify")
+        }
+        if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
+        {
+            tasks.add("summarize")
+        }
+        
+    }
+
+    return tasks
+}
+
+
+function getTracks(encodingSpecification){
     
     var featureKeys= Object.keys(encodingSpecification)
+    var trackList =[]
 
-    // Step 1: For each feature
     for(i=0;i<featureKeys.length;i++){
-        var mergedAttributeList = getCombinations(encodingSpecification[featureKeys[i]])
-        console.log(`Stage 2 Output Feature ${i}`, mergedAttributeList)
-        return mergedAttributeList
+        var tasks = getTasks(encodingSpecification[featureKeys[i]])
+        var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
+        var featureId = `feature_${i}`
+        var returnTrackSpec = {[featureId]:{trackPossibilities,tasks}}
+        console.log(`Stage 2 Output`, returnTrackSpec)
+
+        trackList.push(returnTrackSpec)
     }
     
+    return trackList
 
 }
 
-module.exports = combineAttributes
-},{}]},{},[13]);
+module.exports = getTracks
+},{}],17:[function(require,module,exports){
+const globalData = require("./modelDataProcessing.js")
+const stage1Model = globalData.model1
+const stage3Model = globalData.model3
+const vectorKeys = ["featureinterconnection","denseinterconnection", "identify", "compare","summarize","size","hue","saturation","text"]
+const getProductProperties  = require("./utils.js").productProperties
+const computeSimilarity = require("./utils.js").computeSimilarity
+const recommendedProducts = require("./utils.js").recommendedProducts
+const productVector = getProductProperties(stage3Model,vectorKeys)
+
+
+//Todo: Need to figure out how to take into consideration user preferences
+
+//Description: Use the input from stage 2 and dataspec to create an input vector.
+//Input: 
+//Output: 
+function createInputVector(channels,tasks,interconnection){
+  // Mapping attributes 
+  var inputVectorObject = {}
+  var inputArray = []
+
+  inputArray.push(inputVectorObject["featureinterconnection"] = interconnection['featureInterconnection'] == 1 ? 1 : 0)
+  inputArray.push(inputVectorObject["denseinterconnection"] = interconnection['denseInterconnection'] == 1 ? 1 : 0)
+  inputArray.push(inputVectorObject["identify"] = tasks.has("identify") ? 1 : 0)
+  inputArray.push(inputVectorObject["compare"] = tasks.has("compare") ? 1 : 0)
+  inputArray.push(inputVectorObject["summarize"] = tasks.has("summarize")  ? 1 : 0)
+  inputArray.push(inputVectorObject["size"] = (channels.indexOf("size") !=-1 || channels.indexOf("position") !=-1 )  ? 1 : 0)
+  inputArray.push(inputVectorObject["hue"] = channels.indexOf("hue") !=-1  ? 1 : 0)
+  inputArray.push(inputVectorObject["saturation"] = channels.indexOf("saturation") !=-1  ? 1 : 0)
+  inputArray.push(inputVectorObject["text"] = channels.indexOf("text") !=-1  ? 1 : 0)
+
+  return {inputVectorObject,inputArray}
+}
+
+//Description: Track combinations are designed to nest though all the combinations and find trackCombinations for all possible individual trackCombinations
+//Input: Previous stage outputs
+//Output: Inputvector and Inputarray for each track and all the possible combinations.
+function createTrackInputVector(stage2Output,stage1Output){
+
+    var trackPossibilities = stage2Output.trackPossibilities
+    var tasks = stage2Output.tasks
+    
+    var interconnection = stage1Output[0]['featureConnection']
+  
+
+    var allTrackInput = []
+    //This loop identifies the possible combination of trackCombinations within a feature
+    for(var j =0; j<trackPossibilities.length; j++){
+      var trackCombinationInputVector = []
+      var trackCombinations = trackPossibilities[j]
+      //In this loop we check for each individual track and find its input vector.
+      for(var k=0; k<trackCombinations.length;k++)
+        {     
+          var channels = trackCombinations[k].map(val => {
+          return stage1Model[val['encoding']]['channel']
+        })
+        // allTrackInput.push(createInputVector(channels,tasks,interconnection))
+        var inputVector = createInputVector(channels,tasks,interconnection)
+        trackCombinationInputVector.push({inputVector,trackCombinations:trackCombinations[k]})
+      }
+      allTrackInput.push(trackCombinationInputVector)
+    }
+    // console.log(allTrackInput)
+    return allTrackInput
+}
+
+function mode(array)
+{
+    if(array.length == 0)
+        return null;
+    var modeMap = {};
+    var maxEl = array[0], maxCount = 1;
+    for(var i = 0; i < array.length; i++)
+    {
+        var el = array[i];
+        if(modeMap[el] == null)
+            modeMap[el] = 1;
+        else
+            modeMap[el]++;  
+        if(modeMap[el] > maxCount)
+        {
+            maxEl = el;
+            maxCount = modeMap[el];
+        }
+    }
+    return maxEl;
+}
+
+
+// Description: For each input feature, identify the types of trackCombinations
+//We need information about the 
+function getLayout (stage2Output,stage1Output) {
+
+  //Layout recommendation for each possible track  indexed by feature id
+  var trackLayout = {}
+
+  
+  // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
+  for (var i = 0; i< stage2Output.length;i++)
+  {
+    // We want to extract the key of the feature that we are analyzing
+    var key = Object.keys(stage2Output[i])[0]
+    
+    //Track possibilities store all the tracks that our recommendatio system predicted per feature
+    var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], stage1Output[key])
+    
+    //Initialize the features
+    trackLayout[key] = []
+
+    // A track consists of one or more
+    for(var j =0; j< trackPossibilities.length;j++)
+    {
+      var tracks = trackPossibilities[j]
+      var trackLayoutRecommendation = []
+      for (var k = 0; k< tracks.length; k++){
+        var inputVectorObject = tracks[k]['inputVector']
+        var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        trackLayoutRecommendation.push(recommendedProducts(similarityScores,"tanimoto"))
+      }
+      //find the most common layout in the tracklayoutrecommendation array
+      var layoutRecommendation = mode(trackLayoutRecommendation)
+      trackLayout[key].push({tracks, layoutRecommendation:layoutRecommendation[0]})
+    }
+
+
+  } 
+console.log("stage 3 outout", trackLayout)
+return trackLayout
+}
+
+
+module.exports = getLayout
+},{"./modelDataProcessing.js":14,"./utils.js":18}],18:[function(require,module,exports){
+//https://github.com/mljs/distance#ml-distance
+
+var dsMetric = require("ml-distance")
+
+function getProductProperties(model,vectorKeys){
+  var getProductProperties = []
+
+  var productKeys = Object.keys(model)
+
+  for (var i=0;i<productKeys.length;i++)
+  {
+    var currentProduct = productKeys[i]
+    var tempgetProductProperties = {}
+
+    tempgetProductProperties[currentProduct]=[]
+    vectorKeys.map(val => {
+      tempgetProductProperties[currentProduct].push(parseInt(model[currentProduct][val]))
+    })
+    getProductProperties.push(tempgetProductProperties)
+  }
+  return getProductProperties
+}
+
+// Description: Calculate the recommendation
+// Input: product and input vector
+// Output: similarity score corresponding to each output
+function computeSimilarity(inputVectorObject,productVector){
+  var inpVec = inputVectorObject["inputArray"]
+  var resultSimilarity = {}
+
+  for (var i =0;i<productVector.length;i++){
+    var obj = productVector[i];
+    var key = Object.keys(obj)[0]
+    var proVec = obj[key]
+    var similarity = dsMetric.similarity.tanimoto(inpVec,proVec)
+    var similarityEC = 1/ (1+ dsMetric.distance.euclidean(inpVec,proVec))
+    resultSimilarity[key] = {'tanimoto':similarity,'euclideansimilarity':similarityEC}
+  }
+  return resultSimilarity
+}
+
+//Input: An object with vis techniques as keys and similarity scores. Additionally, key for the similarity metric to use.
+//Output: Array of recommendation. The array allows for mutiple output in the cases where the scores are exactly similar.
+function recommendedProducts (similarityScores)
+{
+  var metric="tanimoto"
+  let arr = Object.values(similarityScores);
+  let newarr = arr.map(val =>{
+    return val[metric]
+  })
+
+  let max = Math.max(...newarr);
+  var recommendedProducts = []
+
+  Object.keys(similarityScores).map((val) => {
+    if(similarityScores[val][metric] == max) {recommendedProducts.push(val) }
+  })
+
+  return recommendedProducts
+}
+
+module.exports =
+{
+  productProperties: getProductProperties,
+  computeSimilarity: computeSimilarity,
+  recommendedProducts:  recommendedProducts 
+}
+},{"ml-distance":9}]},{},[13]);

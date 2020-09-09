@@ -9,13 +9,10 @@
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
                     "attr":
                     [
-                        {
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
                         {
                             "dataType":"quantitative",
                             "intraAttrTask":["identify"]
@@ -34,7 +31,8 @@
                     "featureGranularity":"segment",
                     "featureDensity":"sparse",
                     "featureLabel": "Gene Annotation",
-                    "featureInterconnection": false,
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
                     "attr":
                     [
                     {

@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "lite-server",
     "watch": "npx watchify src/index.js -o bundle.js",
-    "csv2json": "csvtojson model/stage1model.csv > model/stage1.json"
+    "csv2json": "csvtojson model/stage1model.csv > model/stage1.json && csvtojson model/stage3.csv > model/stage3.json"
   },
   "devDependencies": {
     "lite-server": "2.5.4",
