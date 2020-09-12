@@ -958,7 +958,7 @@ exports.descending = (left, right) => {
 };
 
 },{}],12:[function(require,module,exports){
- class Dataspec {
+class Dataspec {
     sequences = [];
     constructor(obj){
         for(let i=0;i<obj.sequences.length;i++)
@@ -971,6 +971,8 @@ exports.descending = (left, right) => {
         return this
     }
 }
+
+
 
 // //Definition of the Sequence Specification 
  class Sequence {
@@ -1034,27 +1036,56 @@ var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
 var inputData = require("../configuration/input.json")
 var getLayout  = require("./s3_ls.js")
+var getAlignment = require("./s4_al.js")
 
 //Validate the input dataspecification to ensure correctness of input data
 const dataspec = new Dataspec(inputData)
 
-var result = dataspec.printConfig()
+console.log(dataspec)
 
-//First determine sequence level encoding
+// //First determine sequence level encoding
 for (var i=0;i<dataspec.sequences.length;i++){
     //Stage 1: Encoding Selection
+    console.log(dataspec.sequences[i])
     var attributeEncoding = encodeAttribute(dataspec.sequences[i]);
     //Stage 2: Combining Attributes
     var tracks = getTracks(attributeEncoding)
     //Stage 3: Predict the Layout
     var layout = getLayout(tracks, attributeEncoding)
+    //Stage 4: Alignment 
+    // var finalSequence = getAlignment(layout)
 }
 
-//Define the libary's api for external applications
+
+// function setInput(param) {
+//     //Validate the input dataspecification to ensure correctness of input data
+//     const dataspec = new Dataspec(param)
+
+//     var result = dataspec.printConfig()
+
+//     //Test output only for 1 sequence
+//     var attributeEncoding,tracks,layout
+
+//     // //First determine sequence level encoding
+//     for (var i=0;i<dataspec.sequences.length;i++){
+//         //Stage 1: Encoding Selection
+//          attributeEncoding = encodeAttribute(dataspec.sequences[i]);
+//         //Stage 2: Combining Attributes
+//          tracks = getTracks(attributeEncoding)
+//         //Stage 3: Predict the Layout
+//          layout = getLayout(tracks, attributeEncoding)
+//         //Stage 4: Alignment 
+//         // var finalSequence = getAlignment(layout)
+//     }
+    
+//     return {attributeEncoding,tracks,layout}
+// }  
+
+// //Define the libary's api for external applications
 // module.exports ={
-// test:result
+// setInput
 // }
-},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17}],14:[function(require,module,exports){
+},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18}],14:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 
@@ -1169,7 +1200,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":18}],16:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":19}],16:[function(require,module,exports){
 
 // Attributes that can be combined
 var attrCombination = {
@@ -1261,6 +1292,7 @@ function canSuperimposed(a,b){
 //Description: Algorithm to superimpose
 function superimposeLogic(arr)
 {
+    console.log(arr)
     var finalSuperImposed = []
     var visited = arr.map(val =>
         {
@@ -1567,7 +1599,58 @@ return trackLayout
 
 
 module.exports = getLayout
-},{"./modelDataProcessing.js":14,"./utils.js":18}],18:[function(require,module,exports){
+},{"./modelDataProcessing.js":14,"./utils.js":19}],18:[function(require,module,exports){
+const cartesian = require("./utils.js").cartesian
+
+//Superimposable encodings
+var superimposition = {
+    "dotplot": ["dotplot","linechart","barsize"],
+    "linechart": ["linechart","dotplot","barsize"],
+    "barsize":["dotplot","linechart"],
+}
+
+
+
+//Description: Get the alignment of the encoding
+//Input: Two or more elements in the array
+//Output: stacked or superimposed
+function returnAlignmentChoice(input)
+{
+    //Base case only one encoding
+    if(input.length<2){
+        return "stacked"
+    }
+
+    //First check if all the input elements have samelayout have the same layout
+    const allEqual = arr => arr.every( v => v === arr[0] )
+    if(!allEqual)
+    {
+        return "stacked"
+    }
+
+    //Check superimposition
+}
+
+function getAlignment (stage3Output)
+{
+
+    // Get the tracks from each feature
+    var tracksPerFeature = []
+    Object.keys(stage3Output).map(val=>{
+        tracksPerFeature.push(stage3Output[val])
+    })
+
+    var possibleCombination = cartesian(tracksPerFeature)
+    
+    possibleCombination.forEach(val =>{
+        console.log(val)
+        var alignment = returnAlignmentChoice(val)
+    })
+
+}
+
+module.exports = getAlignment
+},{"./utils.js":19}],19:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -1629,10 +1712,30 @@ function recommendedProducts (similarityScores)
   return recommendedProducts
 }
 
+//Description: Test function to evaluate combinations of attributes
+//Input: Array of arrays that have to be combined
+//Output: All possible combinations of the arrays
+function cartesian(args) {
+  var r = [], max = args.length-1;
+  function helper(arr, i) {
+      for (var j=0, l=args[i].length; j<l; j++) {
+          var a = arr.slice(0); // clone arr
+          a.push(args[i][j]);
+          if (i==max)
+              r.push(a);
+          else
+              helper(a, i+1);
+      }
+  }
+  helper([], 0);
+  return r;
+}
+
 module.exports =
 {
   productProperties: getProductProperties,
   computeSimilarity: computeSimilarity,
-  recommendedProducts:  recommendedProducts 
+  recommendedProducts:  recommendedProducts ,
+  cartesian: cartesian
 }
 },{"ml-distance":9}]},{},[13]);

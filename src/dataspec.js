@@ -1,4 +1,4 @@
- class Dataspec {
+class Dataspec {
     sequences = [];
     constructor(obj){
         for(let i=0;i<obj.sequences.length;i++)
@@ -11,6 +11,8 @@
         return this
     }
 }
+
+
 
 // //Definition of the Sequence Specification 
  class Sequence {
