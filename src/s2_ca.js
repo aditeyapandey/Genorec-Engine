@@ -89,7 +89,6 @@ function canSuperimposed(a,b){
 //Description: Algorithm to superimpose
 function superimposeLogic(arr)
 {
-    console.log(arr)
     var finalSuperImposed = []
     var visited = arr.map(val =>
         {

@@ -958,74 +958,75 @@ exports.descending = (left, right) => {
 };
 
 },{}],12:[function(require,module,exports){
-class Dataspec {
+
+
+function Dataspec(obj) {
     sequences = [];
-    constructor(obj){
-        for(let i=0;i<obj.sequences.length;i++)
-        {
-            this.sequences.push(new Sequence(obj.sequences[i]))
-        }
-    }
-    printConfig()
+  
+    for(let i=0;i<obj.sequences.length;i++)
     {
-        return this
+        sequences.push(Sequence(obj.sequences[i]))
     }
+
+    return sequences
+
 }
 
 
-
-// //Definition of the Sequence Specification 
- class Sequence {
-    sequenceName;
-    features = [];
-    sequenceInterconnection;
-    constructor(obj){
+function Sequence(obj) {
+    var sequenceName;
+    var features = [];
+    var sequenceInterconnection;
+   
     //We can implement a type of checker before assignment of the value    
-    this.sequenceName = (typeof obj.sequenceName =="string") ?  obj.sequenceName : (function(){throw "Sequence name should be a string"}());
-    this.sequenceInterconnection = (typeof obj.sequenceInterconnection =="object") ? obj.sequenceName : (function(){throw "Interconnection should be an object"}());
+    sequenceName = (typeof obj.sequenceName =="string") ?  obj.sequenceName : (function(){throw "Sequence name should be a string"}());
+    sequenceInterconnection = (typeof obj.sequenceInterconnection =="object") ? obj.sequenceName : (function(){throw "Interconnection should be an object"}());
     //Features has to be an array
     for(let i=0;i<obj.features.length;i++){
-        this.features.push(new Features(obj.features[i]));
+        features.push(Features(obj.features[i]));
     }
-    }
+
+    return {sequenceName,features,sequenceInterconnection}
 }
 
-// //Definition of the Feature Specification 
- class Features{
-    featureGranularity
-    featureDensity
-    attributes = []
-    interFeatureTasks = []
-    featureLabel 
-    featureInterconnection
-    denseInterconnection
-    constructor(obj){
-        this.featureGranularity =  (["point","interval"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
-        this.featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
-        this.featureLabel = obj.featureLabel
-        this.interFeatureTasks = obj.interFeatureTasks
-        this.featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
-        this.denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
-        for(let i=0;i<obj.attr.length;i++){
-        this.attributes.push(new Attributes(obj.attr[i]))
-        }    
+
+
+function Features(obj){
+    var featureGranularity
+    var featureDensity
+    var attributes = []
+    var interFeatureTasks = []
+    var featureLabel 
+    var featureInterconnection
+    var denseInterconnection
+   
+    featureGranularity =  (["point","interval"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
+    featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
+    featureLabel = obj.featureLabel
+    interFeatureTasks = obj.interFeatureTasks
+    featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
+    denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
+    for(let i=0;i<obj.attr.length;i++){
+        attributes.push(Attributes(obj.attr[i]))   
     }
+    return {featureGranularity,featureDensity,featureLabel,interFeatureTasks,featureInterconnection,denseInterconnection,attributes}
 }
 
-//Definition of the Attribute Specification 
- class Attributes{
-    dataDescriptor
-    dataType
-    intraAttrTask = []
-    interAttrTask = []
 
-    constructor(obj)
-    {
-        this.dataDescriptor =  obj.dataDescriptor; // Allow assignment without typecheck for partial dataspec
-        this.dataType = (typeof obj.dataType == "string" && ["quantitative","categorical","text"].indexOf(obj.dataType) != -1) ?  obj.dataType : (function(){throw "Data Descriptor should be a string and should be either: Quant, Categorical or Text "}());
-        this.intraAttrTask = (Array.isArray(obj.intraAttrTask)) ? obj.intraAttrTask: (function(){throw "Intra attribute tasks should be an array with one or more entries consisting indentify, compare or summarize"}());
-        this.interAttrTask = (Array.isArray(obj.interAttrTask)) ? obj.interAttrTask : [] // Allow assignment of [] without typecheck for partial dataspec
-    }
+
+function Attributes(obj){
+    var dataDescriptor
+    var dataType
+    var intraAttrTask = []
+    var interAttrTask = []
+
+
+    dataDescriptor =  obj.dataDescriptor; // Allow assignment without typecheck for partial dataspec
+    dataType = (typeof obj.dataType == "string" && ["quantitative","categorical","text"].indexOf(obj.dataType) != -1) ?  obj.dataType : (function(){throw "Data Descriptor should be a string and should be either: Quant, Categorical or Text "}());
+    intraAttrTask = (Array.isArray(obj.intraAttrTask)) ? obj.intraAttrTask: (function(){throw "Intra attribute tasks should be an array with one or more entries consisting indentify, compare or summarize"}());
+    interAttrTask = (Array.isArray(obj.interAttrTask)) ? obj.interAttrTask : [] // Allow assignment of [] without typecheck for partial dataspec
+    
+    return {dataDescriptor,dataType,intraAttrTask,interAttrTask}
   
 }
 
@@ -1039,52 +1040,47 @@ var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 
 //Validate the input dataspecification to ensure correctness of input data
-const dataspec = new Dataspec(inputData)
+// const dataspec = Dataspec(inputData)
 
-console.log(dataspec)
+// console.log(dataspec)
 
-// //First determine sequence level encoding
-for (var i=0;i<dataspec.sequences.length;i++){
-    //Stage 1: Encoding Selection
-    console.log(dataspec.sequences[i])
-    var attributeEncoding = encodeAttribute(dataspec.sequences[i]);
-    //Stage 2: Combining Attributes
-    var tracks = getTracks(attributeEncoding)
-    //Stage 3: Predict the Layout
-    var layout = getLayout(tracks, attributeEncoding)
-    //Stage 4: Alignment 
-    // var finalSequence = getAlignment(layout)
-}
-
-
-// function setInput(param) {
-//     //Validate the input dataspecification to ensure correctness of input data
-//     const dataspec = new Dataspec(param)
-
-//     var result = dataspec.printConfig()
-
-//     //Test output only for 1 sequence
-//     var attributeEncoding,tracks,layout
-
-//     // //First determine sequence level encoding
-//     for (var i=0;i<dataspec.sequences.length;i++){
-//         //Stage 1: Encoding Selection
-//          attributeEncoding = encodeAttribute(dataspec.sequences[i]);
-//         //Stage 2: Combining Attributes
-//          tracks = getTracks(attributeEncoding)
-//         //Stage 3: Predict the Layout
-//          layout = getLayout(tracks, attributeEncoding)
-//         //Stage 4: Alignment 
-//         // var finalSequence = getAlignment(layout)
-//     }
-    
-//     return {attributeEncoding,tracks,layout}
-// }  
-
-// //Define the libary's api for external applications
-// module.exports ={
-// setInput
+// // //First determine sequence level encoding
+// for (var i=0;i<dataspec.length;i++){
+//     //Stage 1: Encoding Selection
+//     var attributeEncoding = encodeAttribute(dataspec[i]);
+//     //Stage 2: Combining Attributes
+//     var tracks = getTracks(attributeEncoding)
+//     //Stage 3: Predict the Layout
+//     var layout = getLayout(tracks, attributeEncoding)
+//     //Stage 4: Alignment 
+//     // var finalSequence = getAlignment(layout)
 // }
+
+
+function setInput(param) {
+    //Validate the input dataspecification to ensure correctness of input data
+    const dataspec = Dataspec(param)
+    //Test output only for 1 sequence
+    var attributeEncoding,tracks,layout
+
+    // //First determine sequence level encoding
+    for (var i=0;i<dataspec.length;i++){
+        //Stage 1: Encoding Selection
+        var attributeEncoding = encodeAttribute(dataspec[i]);
+        //Stage 2: Combining Attributes
+        var tracks = getTracks(attributeEncoding)
+        //Stage 3: Predict the Layout
+        var layout = getLayout(tracks, attributeEncoding)
+        //Stage 4: Alignment 
+        // var finalSequence = getAlignment(layout)
+    }
+    return {attributeEncoding,tracks,layout}
+}  
+
+//Define the libary's api for external applications
+module.exports ={
+setInput
+}
 },{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18}],14:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
@@ -1292,7 +1288,6 @@ function canSuperimposed(a,b){
 //Description: Algorithm to superimpose
 function superimposeLogic(arr)
 {
-    console.log(arr)
     var finalSuperImposed = []
     var visited = arr.map(val =>
         {
