@@ -74,12 +74,12 @@ function encodeAttribute(dataspec){
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         var recommendation = recommendedProducts(similarityScores)
         var featureConnection = getInterconnectionFeature(currentFeature)
-        var tempAttributeStorage = {'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
+        var tempAttributeStorage = {'featureId':`feature_${i}`,'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
         
         partialSpecification[`feature_${i}`].push(tempAttributeStorage)
       }
     }
-    console.log("Stage1 Output:", partialSpecification)
+    // console.log("Stage1 Output:", partialSpecification)
     return partialSpecification
 }
 

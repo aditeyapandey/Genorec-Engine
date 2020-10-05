@@ -3,9 +3,11 @@
         {   
         "sequenceName":"XYZ", 
         "sequenceInterconnection":{"list":[]},
+        "interFeatureTasks":{"compare":["feature_0","feature_1"],"summarize":["feature_0"],"browse":["feature_0","feature_1"]},
             "features":
             [
                 { 
+                    "featureId":"feature_0",
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
@@ -28,6 +30,7 @@
                     ]
                 },
                 { 
+                    "featureId":"feature_1",
                     "featureGranularity":"segment",
                     "featureDensity":"sparse",
                     "featureLabel": "Gene Annotation",

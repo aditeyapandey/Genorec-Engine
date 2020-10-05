@@ -5,6 +5,7 @@ const vectorKeys = ["featureinterconnection","denseinterconnection", "identify",
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
+const getVisOptions = require("./utils.js").getVisOptions
 const productVector = getProductProperties(stage3Model,vectorKeys)
 
 
@@ -55,7 +56,7 @@ function createTrackInputVector(stage2Output,stage1Output){
         })
         // allTrackInput.push(createInputVector(channels,tasks,interconnection))
         var inputVector = createInputVector(channels,tasks,interconnection)
-        trackCombinationInputVector.push({inputVector,trackCombinations:trackCombinations[k]})
+        trackCombinationInputVector.push({inputVector,encodings:trackCombinations[k]})
       }
       allTrackInput.push(trackCombinationInputVector)
     }
@@ -93,7 +94,6 @@ function getLayout (stage2Output,stage1Output) {
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
 
-  
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
@@ -104,7 +104,7 @@ function getLayout (stage2Output,stage1Output) {
     var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], stage1Output[key])
     
     //Initialize the features
-    trackLayout[key] = []
+    trackLayout[key] = {"trackPossibilities":[]}
 
     // A track consists of one or more
     for(var j =0; j< trackPossibilities.length;j++)
@@ -114,17 +114,18 @@ function getLayout (stage2Output,stage1Output) {
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        trackLayoutRecommendation.push(recommendedProducts(similarityScores,"tanimoto"))
+        trackLayoutRecommendation.push(recommendedProducts(similarityScores))
       }
       //find the most common layout in the tracklayoutrecommendation array
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      trackLayout[key].push({tracks, layoutRecommendation:layoutRecommendation[0]})
+      trackLayout[key]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0]})
     }
-
-
   } 
-console.log("stage 3 outout", trackLayout)
-return trackLayout
+
+//For each feature  we have an array
+//Array: A possible combination of attributes for a feature representation
+//Goal: Seperate unique methods to visualize the sequence. This seperation will be helpful in the feature alignment.
+return getVisOptions(trackLayout)
 }
 
 

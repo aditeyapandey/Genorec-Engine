@@ -1,5 +1,3 @@
-
-
 function Dataspec(obj) {
     sequences = [];
   
@@ -21,12 +19,13 @@ function Sequence(obj) {
     //We can implement a type of checker before assignment of the value    
     sequenceName = (typeof obj.sequenceName =="string") ?  obj.sequenceName : (function(){throw "Sequence name should be a string"}());
     sequenceInterconnection = (typeof obj.sequenceInterconnection =="object") ? obj.sequenceName : (function(){throw "Interconnection should be an object"}());
+    interFeatureTasks = (typeof obj.interFeatureTasks =="object") ? obj.interFeatureTasks : (function(){throw "Inter feature tasks should be an object"}());
     //Features has to be an array
     for(let i=0;i<obj.features.length;i++){
         features.push(Features(obj.features[i]));
     }
 
-    return {sequenceName,features,sequenceInterconnection}
+    return {sequenceName,features,sequenceInterconnection,interFeatureTasks}
 }
 
 

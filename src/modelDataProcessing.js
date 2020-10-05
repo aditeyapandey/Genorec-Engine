@@ -16,10 +16,6 @@ stage3Model.map(val =>{
 })
 
 
-
-
-
-
 module.exports = {
     model1: stage1ModelObj,
     model3: stage3ModelObj

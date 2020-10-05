@@ -1,6 +1,7 @@
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
+var metric="tanimoto"
 
 function getProductProperties(model,vectorKeys){
   var getProductProperties = []
@@ -27,14 +28,12 @@ function getProductProperties(model,vectorKeys){
 function computeSimilarity(inputVectorObject,productVector){
   var inpVec = inputVectorObject["inputArray"]
   var resultSimilarity = {}
-
   for (var i =0;i<productVector.length;i++){
     var obj = productVector[i];
     var key = Object.keys(obj)[0]
     var proVec = obj[key]
-    var similarity = dsMetric.similarity.tanimoto(inpVec,proVec)
-    var similarityEC = 1/ (1+ dsMetric.distance.euclidean(inpVec,proVec))
-    resultSimilarity[key] = {'tanimoto':similarity,'euclideansimilarity':similarityEC}
+    var similarity = dsMetric.similarity[metric](inpVec,proVec)
+    resultSimilarity[key] = similarity
   }
   return resultSimilarity
 }
@@ -43,17 +42,17 @@ function computeSimilarity(inputVectorObject,productVector){
 //Output: Array of recommendation. The array allows for mutiple output in the cases where the scores are exactly similar.
 function recommendedProducts (similarityScores)
 {
-  var metric="tanimoto"
+  
   let arr = Object.values(similarityScores);
   let newarr = arr.map(val =>{
     return val[metric]
   })
 
-  let max = Math.max(...newarr);
+  let max = Math.max(...arr);
   var recommendedProducts = []
 
   Object.keys(similarityScores).map((val) => {
-    if(similarityScores[val][metric] == max) {recommendedProducts.push(val) }
+    if(similarityScores[val] == max) {recommendedProducts.push(val) }
   })
 
   return recommendedProducts
@@ -78,10 +77,48 @@ function cartesian(args) {
   return r;
 }
 
+//Input: Object of features. Each feature consists of an array of elements. 
+//Output: Merge by performing a cartesian product. 
+//Output Schema: {'visid':[a:{information},b,c], 'visid2':[a,b]} 
+//Information: {featureid:[] ,encoding/s:[], layoutrecommendation} 
+function getVisOptions(tracks)
+{
+  var features = Object.keys(tracks)
+  var trackPossibilitiesArray = features.map((val,i) =>{
+    var index = i
+    var localTrackPossilities = tracks[val]['trackPossibilities']
+    localTrackPossilities.every((val1) => {
+      return val1["featureId"] = "feature_"+index
+    })
+    return localTrackPossilities
+  })
+
+  var visOptions = cartesian(trackPossibilitiesArray)
+  
+  var returnVisOptions = {}
+
+  for (var j=0;j<visOptions.length;j++){
+    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+  }
+  
+  return returnVisOptions
+}
+
+//Description -> Converts an arra [id:val, key: val] to id:{id,val} 
+const arrayToObject = (array, keyField) =>
+   array.reduce((obj, item) => {
+     obj[item[keyField]] = item
+     return obj
+   }, {})
+
+
+
+
 module.exports =
 {
   productProperties: getProductProperties,
   computeSimilarity: computeSimilarity,
   recommendedProducts:  recommendedProducts ,
-  cartesian: cartesian
+  cartesian: cartesian,
+  getVisOptions: getVisOptions
 }

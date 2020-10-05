@@ -4,9 +4,11 @@ module.exports={
         {   
         "sequenceName":"XYZ", 
         "sequenceInterconnection":{"list":[]},
+        "interFeatureTasks":{"compare":["feature_0","feature_1"],"summarize":["feature_0"],"browse":["feature_0","feature_1"]},
             "features":
             [
                 { 
+                    "featureId":"feature_0",
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
@@ -29,6 +31,7 @@ module.exports={
                     ]
                 },
                 { 
+                    "featureId":"feature_1",
                     "featureGranularity":"segment",
                     "featureDensity":"sparse",
                     "featureLabel": "Gene Annotation",
@@ -958,8 +961,6 @@ exports.descending = (left, right) => {
 };
 
 },{}],12:[function(require,module,exports){
-
-
 function Dataspec(obj) {
     sequences = [];
   
@@ -981,12 +982,13 @@ function Sequence(obj) {
     //We can implement a type of checker before assignment of the value    
     sequenceName = (typeof obj.sequenceName =="string") ?  obj.sequenceName : (function(){throw "Sequence name should be a string"}());
     sequenceInterconnection = (typeof obj.sequenceInterconnection =="object") ? obj.sequenceName : (function(){throw "Interconnection should be an object"}());
+    interFeatureTasks = (typeof obj.interFeatureTasks =="object") ? obj.interFeatureTasks : (function(){throw "Inter feature tasks should be an object"}());
     //Features has to be an array
     for(let i=0;i<obj.features.length;i++){
         features.push(Features(obj.features[i]));
     }
 
-    return {sequenceName,features,sequenceInterconnection}
+    return {sequenceName,features,sequenceInterconnection,interFeatureTasks}
 }
 
 
@@ -1040,47 +1042,49 @@ var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 
 //Validate the input dataspecification to ensure correctness of input data
-// const dataspec = Dataspec(inputData)
+const dataspec = Dataspec(inputData)
 
-// console.log(dataspec)
+console.log(dataspec)
 
-// // //First determine sequence level encoding
-// for (var i=0;i<dataspec.length;i++){
-//     //Stage 1: Encoding Selection
-//     var attributeEncoding = encodeAttribute(dataspec[i]);
-//     //Stage 2: Combining Attributes
-//     var tracks = getTracks(attributeEncoding)
-//     //Stage 3: Predict the Layout
-//     var layout = getLayout(tracks, attributeEncoding)
-//     //Stage 4: Alignment 
-//     // var finalSequence = getAlignment(layout)
-// }
+// //First determine sequence level encoding
+for (var i=0;i<dataspec.length;i++){
+    //Stage 1: Encoding Selection
+    var attributeEncoding = encodeAttribute(dataspec[i]);
+    //Stage 2: Combining Attributes
+    var tracks = getTracks(attributeEncoding)
+    //Stage 3: Predict the Layout
+    var layout = getLayout(tracks, attributeEncoding)
+    //Stage 4: Alignment 
+    var finalSequence = getAlignment(layout,dataspec[i]['interFeatureTasks'])
 
-
-function setInput(param) {
-    //Validate the input dataspecification to ensure correctness of input data
-    const dataspec = Dataspec(param)
-    //Test output only for 1 sequence
-    var attributeEncoding,tracks,layout
-
-    // //First determine sequence level encoding
-    for (var i=0;i<dataspec.length;i++){
-        //Stage 1: Encoding Selection
-        var attributeEncoding = encodeAttribute(dataspec[i]);
-        //Stage 2: Combining Attributes
-        var tracks = getTracks(attributeEncoding)
-        //Stage 3: Predict the Layout
-        var layout = getLayout(tracks, attributeEncoding)
-        //Stage 4: Alignment 
-        // var finalSequence = getAlignment(layout)
-    }
-    return {attributeEncoding,tracks,layout}
-}  
-
-//Define the libary's api for external applications
-module.exports ={
-setInput
+    //console.log(attributeEncoding,tracks,layout)
 }
+
+
+// function setInput(param) {
+//     //Validate the input dataspecification to ensure correctness of input data
+//     const dataspec = Dataspec(param)
+//     //Test output only for 1 sequence
+//     var attributeEncoding,tracks,layout
+
+//     // //First determine sequence level encoding
+//     for (var i=0;i<dataspec.length;i++){
+//         //Stage 1: Encoding Selection
+//         var attributeEncoding = encodeAttribute(dataspec[i]);
+//         //Stage 2: Combining Attributes
+//         var tracks = getTracks(attributeEncoding)
+//         //Stage 3: Predict the Layout
+//         var layout = getLayout(tracks, attributeEncoding)
+//         //Stage 4: Alignment 
+//         // var finalSequence = getAlignment(layout)
+//     }
+//     return {attributeEncoding,tracks,layout}
+// }  
+
+// //Define the libary's api for external applications
+// module.exports ={
+// setInput
+// }
 },{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18}],14:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
@@ -1098,10 +1102,6 @@ let stage3ModelObj = {}
 stage3Model.map(val =>{
     stage3ModelObj[val["layout"]] = val
 })
-
-
-
-
 
 
 module.exports = {
@@ -1186,12 +1186,12 @@ function encodeAttribute(dataspec){
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         var recommendation = recommendedProducts(similarityScores)
         var featureConnection = getInterconnectionFeature(currentFeature)
-        var tempAttributeStorage = {'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
+        var tempAttributeStorage = {'featureId':`feature_${i}`,'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
         
         partialSpecification[`feature_${i}`].push(tempAttributeStorage)
       }
     }
-    console.log("Stage1 Output:", partialSpecification)
+    // console.log("Stage1 Output:", partialSpecification)
     return partialSpecification
 }
 
@@ -1211,10 +1211,20 @@ var attrCombination = {
 
 //Superimposable encodings
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barsize"],
-    "linechart": ["linechart","dotplot","barsize"],
-    "barsize":["dotplot","linechart"]
+    "dotplot": ["dotplot","linechart","barsize","annotation"],
+    "linechart": ["linechart","dotplot","barsize","annotation"],
+    "barsize":["dotplot","linechart","annotation"],
+    "barsaturation":["annotation"],
+    "barhue":["annotation"],
+    "areahue":["annotation"],
+    "areasize":["annotation"],
+    "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
 }
+// var superimposition = {
+//     "dotplot": ["dotplot","linechart","barsize"],
+//     "linechart": ["linechart","dotplot","barsize"],
+//     "barsize":["dotplot","linechart"]
+// }
 
 //Description:This function is going to take input specifications and try to output a list of visualizable 
 //attributes per feature
@@ -1228,13 +1238,15 @@ function getPossibilities(feature)
     for (var i=0; i<feature.length;i++)
     {    
         var recommendation = feature[i]['recommendation']
+        var similarityScore = recommendation.map((val)=>{return feature[i]['similarityScore'][val]})
         var encodingRecommendations = []
         for (var j=0; j<recommendation.length; j++){
-            var encoding = {'attributeId':feature[i]['attributeId'], 'encoding':recommendation[j]}
+            var encoding = {'featureId':feature[i]["featureId"],'attributeId':feature[i]['attributeId'], 'encoding':recommendation[j], 'similarityScore':similarityScore[j]}
             encodingRecommendations.push(encoding)
         }
         allEncoding.push(encodingRecommendations)
     } 
+
 
     var encodingOptions = cartesian(allEncoding)
 
@@ -1253,7 +1265,25 @@ function getPossibilities(feature)
         finalSuperimposed.push(superimposeLogic(set))
     }
 
+    // console.log(finalSuperimposed)
+    var trackIdAdded = addTrackId(finalSuperimposed)
+
     return finalSuperimposed
+}
+
+function addTrackId(tracks)
+{
+   var trackIdAdded = tracks.map(element => {
+        var trackIdArray = element.map((innerElement,trackId) => {
+            var innterTid =  innerElement.map(innerInner => {
+                    innerInner['trackId'] = trackId
+                    return innerInner
+            })
+            return innterTid
+        });
+        return trackIdArray
+    });
+    return trackIdAdded
 }
 
 //Description: Checks if two variables can be combined, based on decision rules.
@@ -1452,8 +1482,7 @@ function getTracks(encodingSpecification){
         var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
         var featureId = `feature_${i}`
         var returnTrackSpec = {[featureId]:{trackPossibilities,tasks}}
-        console.log(`Stage 2 Output`, returnTrackSpec)
-
+        // console.log(`Stage 2 Output`, returnTrackSpec)
         trackList.push(returnTrackSpec)
     }
     
@@ -1470,6 +1499,7 @@ const vectorKeys = ["featureinterconnection","denseinterconnection", "identify",
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
+const getVisOptions = require("./utils.js").getVisOptions
 const productVector = getProductProperties(stage3Model,vectorKeys)
 
 
@@ -1520,7 +1550,7 @@ function createTrackInputVector(stage2Output,stage1Output){
         })
         // allTrackInput.push(createInputVector(channels,tasks,interconnection))
         var inputVector = createInputVector(channels,tasks,interconnection)
-        trackCombinationInputVector.push({inputVector,trackCombinations:trackCombinations[k]})
+        trackCombinationInputVector.push({inputVector,encodings:trackCombinations[k]})
       }
       allTrackInput.push(trackCombinationInputVector)
     }
@@ -1558,7 +1588,6 @@ function getLayout (stage2Output,stage1Output) {
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
 
-  
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
@@ -1569,7 +1598,7 @@ function getLayout (stage2Output,stage1Output) {
     var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], stage1Output[key])
     
     //Initialize the features
-    trackLayout[key] = []
+    trackLayout[key] = {"trackPossibilities":[]}
 
     // A track consists of one or more
     for(var j =0; j< trackPossibilities.length;j++)
@@ -1579,17 +1608,18 @@ function getLayout (stage2Output,stage1Output) {
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        trackLayoutRecommendation.push(recommendedProducts(similarityScores,"tanimoto"))
+        trackLayoutRecommendation.push(recommendedProducts(similarityScores))
       }
       //find the most common layout in the tracklayoutrecommendation array
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      trackLayout[key].push({tracks, layoutRecommendation:layoutRecommendation[0]})
+      trackLayout[key]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0]})
     }
-
-
   } 
-console.log("stage 3 outout", trackLayout)
-return trackLayout
+
+//For each feature  we have an array
+//Array: A possible combination of attributes for a feature representation
+//Goal: Seperate unique methods to visualize the sequence. This seperation will be helpful in the feature alignment.
+return getVisOptions(trackLayout)
 }
 
 
@@ -1599,9 +1629,14 @@ const cartesian = require("./utils.js").cartesian
 
 //Superimposable encodings
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barsize"],
-    "linechart": ["linechart","dotplot","barsize"],
-    "barsize":["dotplot","linechart"],
+    "dotplot": ["dotplot","linechart","barsize","annotation"],
+    "linechart": ["linechart","dotplot","barsize","annotation"],
+    "barsize":["dotplot","linechart","annotation"],
+    "barsaturation":["annotation"],
+    "barhue":["annotation"],
+    "areahue":["annotation"],
+    "areasize":["annotation"],
+    "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
 }
 
 
@@ -1623,24 +1658,188 @@ function returnAlignmentChoice(input)
         return "stacked"
     }
 
-    //Check superimposition
 }
 
-function getAlignment (stage3Output)
+
+//Description: Check if two items groups/individual atttributes can be superimposed
+//Input Both a and b are array and we will do a cartesian combination and check 
+function canSuperimposed(a,b){
+    var canSuperimposed = []
+    var allcombinations = cartesian([a,b])
+
+    for(var i=0;i<allcombinations.length;i++){
+        var a = allcombinations[i][0]
+        var b = allcombinations[i][1]
+        if(superimposition[a] == undefined || superimposition[a] == undefined){
+            canSuperimposed.push(false)
+            continue
+        }
+        superimposition[a].indexOf(b) != -1 ? canSuperimposed.push(true) : canSuperimposed.push(false) // Incorrect
+    }
+
+    // console.log("boolean array", canSuperimposed) 
+     return canSuperimposed.every(v => v === true)
+
+}
+
+
+//Description: Algorithm to superimpose
+function checkForSuperImposition(features)
 {
+    var featureArray= Object.values(features);
+    var cartesianFeatureArray = cartesian(featureArray)
+    var cartesianEncodings =  cartesianFeatureArray.map(element=>{
+        var encodingArray= element.map(innerElement=>{
+            var encodingArrayTemp = innerElement.map(innerInnerElement=>{
+                return innerInnerElement['encoding']
+            })
+          return encodingArrayTemp
+        })
+        return encodingArray
+    })
+    var superImposedIndex = encodingSuperImposable(cartesianEncodings)
+    return cartesianFeatureArray[superImposedIndex]
+}
 
+// //Input: An array of encoding arrays
+// //Description: For each subarray crete 
+function encodingSuperImposable(cartesianEncodings)
+{
+    var returnIndex=[];
+    var superImpose = false
+    for(var k=0;k<cartesianEncodings.length;k++){
+        var val = cartesianEncodings[k]
+        for(var i=0;i<val.length-1;i++)
+        {
+            for(var j= i+1;j<val.length;j++)
+            {
+                if(canSuperimposed(val[i],val[j]))
+                {
+                    returnIndex.push(k)
+                }
+       
+            }
+        }
+    }
+
+    if(returnIndex.length>0){
+        return returnIndex[0]
+    }
+    else{
+        return returnIndex
+    }
+}
+
+
+
+function getAlignment (layouts,tasks)
+{
     // Get the tracks from each feature
-    var tracksPerFeature = []
-    Object.keys(stage3Output).map(val=>{
-        tracksPerFeature.push(stage3Output[val])
-    })
+    var visOptions = Object.values(layouts)
+    console.log(layouts)
 
-    var possibleCombination = cartesian(tracksPerFeature)
-    
-    possibleCombination.forEach(val =>{
-        console.log(val)
-        var alignment = returnAlignmentChoice(val)
+    visOptions.forEach((vis,i) =>{
+        var featureUsed ={}
+        var stacked= []
+        var superImpose =[]
+        Object.keys(vis).map((val) =>{
+            featureUsed[val] = false            
+        })
+
+        if(tasks.compare.length>0){
+            //do something
+            var featureList = Object.values(tasks.compare)
+            var featureObjectForSuperImposition = {}
+            // create an array of tracks in each feature
+            featureList.forEach((element)=>{
+                if(!featureUsed[element])
+                {
+                    var valuesToPush = vis[element]["tracks"].map((elemtnVal,trackId) => { 
+                        // elemtnVal["encodings"]["trackId"] = trackId
+                        return elemtnVal["encodings"]})
+            
+                    featureObjectForSuperImposition[element]= valuesToPush
+                }
+            })
+            var superImposedFeatures = (checkForSuperImposition(featureObjectForSuperImposition))            
+            
+            if(superImposedFeatures!=undefined){
+            var superImposedFlat = superImposedFeatures.flat()
+            superImposedFlat.forEach(element=>{
+                var tempString = element["featureId"]+"track_"+element["trackId"]
+                if(superImpose.indexOf(tempString)==-1){
+                    superImpose.push(tempString)
+                    featureUsed[element["featureId"]] = true
+                }
+            })
+         }
+        }
+        if(tasks.browse.length>0){
+            //do something
+            var featureList = Object.values(tasks.browse)
+            featureList.forEach(element => {
+                if(featureUsed[element] == false){
+                    featureUsed[element] = true
+                    stacked.push(element)
+                }
+            });
+        }
+        if(tasks.summarize.length>0){
+            //do something
+            var featureList = Object.values(tasks.browse)
+            featureList.forEach(element => {
+                if(featureUsed[element] == false){
+                    featureUsed[element] = true
+                    stacked.push(element)
+                }
+            });
+        }
+
+        //If no tasks then check for features that can be superimposed
+        {
+            var featuresForSuperImposition = {}
+            Object.keys(vis).map((val)=>{
+                if(!featureUsed[val])
+                {
+                    var valuesToPush = vis[val]["tracks"].map((element,trackId) => { 
+                        // elemtnVal["encodings"]["trackId"] = trackId
+                        return element["encodings"]})
+                        
+                    featuresForSuperImposition[val]= valuesToPush
+                }
+            })   
+            if(Object.entries(featuresForSuperImposition).length!=0){
+            var superImposedFeatures = (checkForSuperImposition(featuresForSuperImposition))      
+            }
+
+            if(superImposedFeatures!=undefined)
+            {
+            var superImposedFlat = superImposedFeatures.flat()
+            superImposedFlat.forEach(element=>{
+                var tempString = element["featureId"]+"track_"+element["trackId"]
+                if(superImpose.indexOf(tempString)==-1){
+                    superImpose.push(tempString)
+                    featureUsed[element["featureId"]] = true
+                    }
+                })
+            }
+     }
+
+         //Deafult stacking
+         {
+             
+            Object.keys(featureUsed).map(val=>{
+                if(!featureUsed[val]){
+                    stacked.push(val)
+                }
+            })
+         }
+
+
+        layouts['vis_'+i]["stacked"] = stacked
+        layouts['vis_'+i]["superImposed"] = superImpose
     })
+    
 
 }
 
@@ -1649,6 +1848,7 @@ module.exports = getAlignment
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
+var metric="tanimoto"
 
 function getProductProperties(model,vectorKeys){
   var getProductProperties = []
@@ -1675,14 +1875,12 @@ function getProductProperties(model,vectorKeys){
 function computeSimilarity(inputVectorObject,productVector){
   var inpVec = inputVectorObject["inputArray"]
   var resultSimilarity = {}
-
   for (var i =0;i<productVector.length;i++){
     var obj = productVector[i];
     var key = Object.keys(obj)[0]
     var proVec = obj[key]
-    var similarity = dsMetric.similarity.tanimoto(inpVec,proVec)
-    var similarityEC = 1/ (1+ dsMetric.distance.euclidean(inpVec,proVec))
-    resultSimilarity[key] = {'tanimoto':similarity,'euclideansimilarity':similarityEC}
+    var similarity = dsMetric.similarity[metric](inpVec,proVec)
+    resultSimilarity[key] = similarity
   }
   return resultSimilarity
 }
@@ -1691,17 +1889,17 @@ function computeSimilarity(inputVectorObject,productVector){
 //Output: Array of recommendation. The array allows for mutiple output in the cases where the scores are exactly similar.
 function recommendedProducts (similarityScores)
 {
-  var metric="tanimoto"
+  
   let arr = Object.values(similarityScores);
   let newarr = arr.map(val =>{
     return val[metric]
   })
 
-  let max = Math.max(...newarr);
+  let max = Math.max(...arr);
   var recommendedProducts = []
 
   Object.keys(similarityScores).map((val) => {
-    if(similarityScores[val][metric] == max) {recommendedProducts.push(val) }
+    if(similarityScores[val] == max) {recommendedProducts.push(val) }
   })
 
   return recommendedProducts
@@ -1726,11 +1924,49 @@ function cartesian(args) {
   return r;
 }
 
+//Input: Object of features. Each feature consists of an array of elements. 
+//Output: Merge by performing a cartesian product. 
+//Output Schema: {'visid':[a:{information},b,c], 'visid2':[a,b]} 
+//Information: {featureid:[] ,encoding/s:[], layoutrecommendation} 
+function getVisOptions(tracks)
+{
+  var features = Object.keys(tracks)
+  var trackPossibilitiesArray = features.map((val,i) =>{
+    var index = i
+    var localTrackPossilities = tracks[val]['trackPossibilities']
+    localTrackPossilities.every((val1) => {
+      return val1["featureId"] = "feature_"+index
+    })
+    return localTrackPossilities
+  })
+
+  var visOptions = cartesian(trackPossibilitiesArray)
+  
+  var returnVisOptions = {}
+
+  for (var j=0;j<visOptions.length;j++){
+    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+  }
+  
+  return returnVisOptions
+}
+
+//Description -> Converts an arra [id:val, key: val] to id:{id,val} 
+const arrayToObject = (array, keyField) =>
+   array.reduce((obj, item) => {
+     obj[item[keyField]] = item
+     return obj
+   }, {})
+
+
+
+
 module.exports =
 {
   productProperties: getProductProperties,
   computeSimilarity: computeSimilarity,
   recommendedProducts:  recommendedProducts ,
-  cartesian: cartesian
+  cartesian: cartesian,
+  getVisOptions: getVisOptions
 }
 },{"ml-distance":9}]},{},[13]);
