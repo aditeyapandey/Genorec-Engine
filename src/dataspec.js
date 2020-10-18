@@ -1,12 +1,15 @@
 function Dataspec(obj) {
-    sequences = [];
+    console.log(obj)
+    dataSpec = {}
+    dataSpec["sequences"] = [];
+    dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
   
     for(let i=0;i<obj.sequences.length;i++)
     {
-        sequences.push(Sequence(obj.sequences[i]))
+        dataSpec["sequences"].push(Sequence(obj.sequences[i]))
     }
 
-    return sequences
+    return dataSpec
 
 }
 

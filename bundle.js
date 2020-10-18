@@ -49,7 +49,35 @@ module.exports={
                     }]
                 }
             ]
-    }]}
+    },{
+        "sequenceName":"ABC", 
+        "sequenceInterconnection":{"list":[]},
+        "interFeatureTasks":{"compare":[],"summarize":[],"browse":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
+                    "attr":
+                    [
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"text",
+                            "intraAttrTask":["identify"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"correlate":["XYZ","ABC"]}
+}
 },{}],2:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"position","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","identify":"1","compare":"1","summarize":"1"},
@@ -962,14 +990,17 @@ exports.descending = (left, right) => {
 
 },{}],12:[function(require,module,exports){
 function Dataspec(obj) {
-    sequences = [];
+    console.log(obj)
+    dataSpec = {}
+    dataSpec["sequences"] = [];
+    dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
   
     for(let i=0;i<obj.sequences.length;i++)
     {
-        sequences.push(Sequence(obj.sequences[i]))
+        dataSpec["sequences"].push(Sequence(obj.sequences[i]))
     }
 
-    return sequences
+    return dataSpec
 
 }
 
@@ -1040,25 +1071,29 @@ var getTracks  = require("./s2_ca.js")
 var inputData = require("../configuration/input.json")
 var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
+var getArrangment = require("./s5_ar.js")
 
 //Validate the input dataspecification to ensure correctness of input data
 const dataspec = Dataspec(inputData)
+const sequenceInputArrays = dataspec["sequences"]
+var sequencesOutput = {}
 
-console.log(dataspec)
 
 // //First determine sequence level encoding
-for (var i=0;i<dataspec.length;i++){
+for (var i=0;i<sequenceInputArrays.length;i++){
     //Stage 1: Encoding Selection
-    var attributeEncoding = encodeAttribute(dataspec[i]);
+    var attributeEncoding = encodeAttribute(sequenceInputArrays[i]);
     //Stage 2: Combining Attributes
     var tracks = getTracks(attributeEncoding)
     //Stage 3: Predict the Layout
     var layout = getLayout(tracks, attributeEncoding)
     //Stage 4: Alignment 
-    var finalSequence = getAlignment(layout,dataspec[i]['interFeatureTasks'])
-
+    sequencesOutput[sequenceInputArrays[i]['sequenceName']]= getAlignment(layout,sequenceInputArrays[i]['interFeatureTasks'],sequenceInputArrays[i]['sequenceName'])
     //console.log(attributeEncoding,tracks,layout)
 }
+
+//Get Arrangement given the entire sequence data
+var arrangements = getArrangment(sequencesOutput)
 
 
 // function setInput(param) {
@@ -1085,7 +1120,7 @@ for (var i=0;i<dataspec.length;i++){
 // module.exports ={
 // setInput
 // }
-},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18}],14:[function(require,module,exports){
+},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18,"./s5_ar.js":19}],14:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 
@@ -1196,7 +1231,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":19}],16:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":20}],16:[function(require,module,exports){
 
 // Attributes that can be combined
 var attrCombination = {
@@ -1588,6 +1623,8 @@ function getLayout (stage2Output,stage1Output) {
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
 
+  console.log(stage2Output)
+
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
@@ -1599,6 +1636,7 @@ function getLayout (stage2Output,stage1Output) {
     
     //Initialize the features
     trackLayout[key] = {"trackPossibilities":[]}
+    
 
     // A track consists of one or more
     for(var j =0; j< trackPossibilities.length;j++)
@@ -1616,6 +1654,8 @@ function getLayout (stage2Output,stage1Output) {
     }
   } 
 
+  
+
 //For each feature  we have an array
 //Array: A possible combination of attributes for a feature representation
 //Goal: Seperate unique methods to visualize the sequence. This seperation will be helpful in the feature alignment.
@@ -1624,7 +1664,7 @@ return getVisOptions(trackLayout)
 
 
 module.exports = getLayout
-},{"./modelDataProcessing.js":14,"./utils.js":19}],18:[function(require,module,exports){
+},{"./modelDataProcessing.js":14,"./utils.js":20}],18:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 
 //Superimposable encodings
@@ -1732,11 +1772,10 @@ function encodingSuperImposable(cartesianEncodings)
 
 
 
-function getAlignment (layouts,tasks)
+function getAlignment (layouts,tasks,sequenceName)
 {
     // Get the tracks from each feature
     var visOptions = Object.values(layouts)
-    console.log(layouts)
 
     visOptions.forEach((vis,i) =>{
         var featureUsed ={}
@@ -1838,13 +1877,33 @@ function getAlignment (layouts,tasks)
 
         layouts['vis_'+i]["stacked"] = stacked
         layouts['vis_'+i]["superImposed"] = superImpose
+        layouts['vis_'+i]["sequenceName"] =sequenceName
     })
     
-
+    return layouts
 }
 
 module.exports = getAlignment
-},{"./utils.js":19}],19:[function(require,module,exports){
+},{"./utils.js":20}],19:[function(require,module,exports){
+const cartesian = require("./utils.js").cartesian
+
+
+function getArrangement(input){
+    var sequenceNames = Object.keys(input)
+    var sequenceArray = []
+
+    //Add sequence name as an index to the object
+    for(var i = 0;i< sequenceNames.length;i++){
+        var visOptions = Object.values(input[sequenceNames[i]])
+        sequenceArray.push(visOptions)
+    }
+
+    console.log(sequenceArray)
+
+}
+
+module.exports = getArrangement
+},{"./utils.js":20}],20:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")

@@ -48,4 +48,32 @@
                     }]
                 }
             ]
-    }]}
+    },{
+        "sequenceName":"ABC", 
+        "sequenceInterconnection":{"list":[]},
+        "interFeatureTasks":{"compare":[],"summarize":[],"browse":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
+                    "attr":
+                    [
+                        {
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        },
+                        {
+                            "dataType":"text",
+                            "intraAttrTask":["identify"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"correlate":["XYZ","ABC"]}
+}

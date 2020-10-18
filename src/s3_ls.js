@@ -94,6 +94,8 @@ function getLayout (stage2Output,stage1Output) {
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
 
+  console.log(stage2Output)
+
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
@@ -105,6 +107,7 @@ function getLayout (stage2Output,stage1Output) {
     
     //Initialize the features
     trackLayout[key] = {"trackPossibilities":[]}
+    
 
     // A track consists of one or more
     for(var j =0; j< trackPossibilities.length;j++)
@@ -121,6 +124,8 @@ function getLayout (stage2Output,stage1Output) {
       trackLayout[key]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0]})
     }
   } 
+
+  
 
 //For each feature  we have an array
 //Array: A possible combination of attributes for a feature representation

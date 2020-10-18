@@ -105,11 +105,10 @@ function encodingSuperImposable(cartesianEncodings)
 
 
 
-function getAlignment (layouts,tasks)
+function getAlignment (layouts,tasks,sequenceName)
 {
     // Get the tracks from each feature
     var visOptions = Object.values(layouts)
-    console.log(layouts)
 
     visOptions.forEach((vis,i) =>{
         var featureUsed ={}
@@ -211,9 +210,10 @@ function getAlignment (layouts,tasks)
 
         layouts['vis_'+i]["stacked"] = stacked
         layouts['vis_'+i]["superImposed"] = superImpose
+        layouts['vis_'+i]["sequenceName"] =sequenceName
     })
     
-
+    return layouts
 }
 
 module.exports = getAlignment
