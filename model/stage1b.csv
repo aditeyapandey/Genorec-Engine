@@ -1,6 +1,6 @@
 chart,quatitative_quantitative,quantitative_categorical,a1_identify,a1_compare,a2_identify,a2_compare
-size_color,0,1,1,1,1,0
-color_size,0,1,1,0,1,1
+size_hue,0,1,1,1,1,0
+hue_size,0,1,1,0,1,1
 size_saturation,1,0,1,1,1,0
 saturation_size,1,0,1,0,1,1
 none,1,0,1,1,1,1

@@ -1,3 +1,7 @@
+const globalData = require("./modelDataProcessing.js")
+const model = globalData.modelAttrComb
+const stage1Model = globalData.model1
+
 
 // Attributes that can be combined
 var attrCombination = {
@@ -21,21 +25,7 @@ var superimposition = {
     "areasize":[],
     "annotation":[]
 }
-// var superimposition = {
-//     "dotplot": ["dotplot","linechart","barsize","annotation"],
-//     "linechart": ["linechart","dotplot","barsize","annotation"],
-//     "barsize":["dotplot","linechart","annotation"],
-//     "barsaturation":["annotation"],
-//     "barhue":["annotation"],
-//     "areahue":["annotation"],
-//     "areasize":["annotation"],
-//     "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
-// }
-// var superimposition = {
-//     "dotplot": ["dotplot","linechart","barsize"],
-//     "linechart": ["linechart","dotplot","barsize"],
-//     "barsize":["dotplot","linechart"]
-// }
+
 
 //Description:This function is going to take input specifications and try to output a list of visualizable attributes per feature
 //Input: Feature object
@@ -59,15 +49,17 @@ function getPossibilities(feature)
     } 
 
     var encodingOptions = cartesian(allEncoding)
+    console.log("encodingoptions", encodingOptions)
 
     //Find the attributes that merge
     var finalEncodingCombination = [];
-    for (var x = 0; x< encodingOptions.length; x++){
+    for (var x = 0; x< encodingOptions.length; x++)
+    {
       var set = encodingOptions[x]  
       finalEncodingCombination.push(combineLogic(set))
     }
+    console.log("combinations",finalEncodingCombination)
     
-    console.log(finalEncodingCombination)
 
     //Superimpose Attributes
     var finalSuperimposed = []
@@ -77,7 +69,6 @@ function getPossibilities(feature)
         finalSuperimposed.push(superimposeLogic(set))
     }
 
-    console.log(finalSuperimposed)
     var trackIdAdded = addTrackId(finalSuperimposed)
 
     return finalSuperimposed
@@ -98,7 +89,9 @@ function addTrackId(tracks)
     return trackIdAdded
 }
 
-//Description: Checks if two variables can be combined, based on decision rules.
+//Description: Checks if two variables can be combined. To check there will be two steps, first we will cont.
+//ensure that two attributes can logically be combined and next we test whether based on tasks it makes sense to combine
+//then test if the combination will work.
 function canCombine(a,b){
     var listOfCombinedAttr = attrCombination[a]
     if(listOfCombinedAttr == undefined) {return false}
@@ -186,13 +179,17 @@ function superimposeLogic(arr)
 function combineLogic(arr)
 {
     var finalEncodingCombination = []   
+    
+    //Create an array to keep track of all the attributes that have been combined
     var visited = arr.map(val =>
         {
             return 0
         })
     
+    //Loop through all the options in the arr to check for pairs that can be combined    
     for(var i = 0;i<arr.length;i++)
         {
+            //Only check if the attribute has not been combined at a previous stage
             if(visited[i]==0)
             {
                 var combinationNotFound = true // This variable will keep track incase the combination was found 
@@ -213,7 +210,6 @@ function combineLogic(arr)
                             {
                                 visited[i] = 1
                                 visited[j] = 1
-                                // finalEncodingCombination.push(`${a['attributeId']}_${a['encoding']}_${b['encoding']}`)
                                 a['combined'] = true
                                 b['combined'] = true
                                 finalEncodingCombination.push([a,b])
@@ -232,7 +228,6 @@ function combineLogic(arr)
         }
 
 return finalEncodingCombination
-    
 }
 
 

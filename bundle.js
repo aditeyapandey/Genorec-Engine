@@ -93,12 +93,21 @@ module.exports=[
 
 },{}],3:[function(require,module,exports){
 module.exports=[
+{"chart":"size_hue","quatitative_quantitative":"0","quantitative_categorical":"1","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"0"},
+{"chart":"hue_size","quatitative_quantitative":"0","quantitative_categorical":"1","a1_identify":"1","a1_compare":"0","a2_identify":"1","a2_compare":"1"},
+{"chart":"size_saturation","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"0"},
+{"chart":"saturation_size","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"0","a2_identify":"1","a2_compare":"1"},
+{"chart":"none","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"1"}
+]
+
+},{}],4:[function(require,module,exports){
+module.exports=[
 {"layout":"linear","spacesaving":"0","featureinterconnection":"1","denseinterconnection":"1","identify":"1","compare":"1","summarize":"1","size":"1","hue":"1","saturation":"1","text":"1"},
 {"layout":"circular","spacesaving":"1","featureinterconnection":"1","denseinterconnection":"0","identify":"1","compare":"0","summarize":"1","size":"0","hue":"1","saturation":"1","text":"1"},
 {"layout":"hilbert","spacesaving":"1","featureinterconnection":"0","denseinterconnection":"0","identify":"1","compare":"0","summarize":"0","size":"0","hue":"1","saturation":"1","text":"0"}
 ]
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -145,7 +154,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -156,7 +165,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -174,7 +183,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":7}],7:[function(require,module,exports){
+},{"ml-array-sum":8}],8:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -204,7 +213,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":5}],8:[function(require,module,exports){
+},{"is-any-array":6}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -220,7 +229,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -812,7 +821,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":6,"ml-distance-euclidean":8,"ml-tree-similarity":10}],10:[function(require,module,exports){
+},{"ml-array-mean":7,"ml-distance-euclidean":9,"ml-tree-similarity":11}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -949,7 +958,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":4,"num-sort":11}],11:[function(require,module,exports){
+},{"binary-search":5,"num-sort":12}],12:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -988,7 +997,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 function Dataspec(obj) {
     console.log(obj)
     dataSpec = {}
@@ -1064,7 +1073,7 @@ function Attributes(obj){
 }
 
 module.exports = Dataspec
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var Dataspec = require('./dataspec.js')
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -1120,8 +1129,9 @@ var arrangements = getArrangment(sequencesOutput,dataspec['intraSequenceTask'])
 // module.exports ={
 // setInput
 // }
-},{"../configuration/input.json":1,"./dataspec.js":12,"./s1_en.js":15,"./s2_ca.js":16,"./s3_ls.js":17,"./s4_al.js":18,"./s5_ar.js":19}],14:[function(require,module,exports){
+},{"../configuration/input.json":1,"./dataspec.js":13,"./s1_en.js":16,"./s2_ca.js":17,"./s3_ls.js":18,"./s4_al.js":19,"./s5_ar.js":20}],15:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
+const stage1bModel = require('../model/stage1b.json');
 const stage3Model = require('../model/stage3.json');
 
 //Converting the model to objects
@@ -1138,13 +1148,20 @@ stage3Model.map(val =>{
     stage3ModelObj[val["layout"]] = val
 })
 
+let stage1bModelObj = {}
+
+stage1bModel.map(val =>{
+    stage1bModelObj[val["chart"]] = val
+})
+
 
 module.exports = {
     model1: stage1ModelObj,
+    modelAttrComb: stage1bModelObj,
     model3: stage3ModelObj
 }
 
-},{"../model/stage1.json":2,"../model/stage3.json":3}],15:[function(require,module,exports){
+},{"../model/stage1.json":2,"../model/stage1b.json":3,"../model/stage3.json":4}],16:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -1231,7 +1248,11 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":14,"./utils.js":20}],16:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":15,"./utils.js":21}],17:[function(require,module,exports){
+const globalData = require("./modelDataProcessing.js")
+const model = globalData.modelAttrComb
+const stage1Model = globalData.model1
+
 
 // Attributes that can be combined
 var attrCombination = {
@@ -1255,21 +1276,7 @@ var superimposition = {
     "areasize":[],
     "annotation":[]
 }
-// var superimposition = {
-//     "dotplot": ["dotplot","linechart","barsize","annotation"],
-//     "linechart": ["linechart","dotplot","barsize","annotation"],
-//     "barsize":["dotplot","linechart","annotation"],
-//     "barsaturation":["annotation"],
-//     "barhue":["annotation"],
-//     "areahue":["annotation"],
-//     "areasize":["annotation"],
-//     "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
-// }
-// var superimposition = {
-//     "dotplot": ["dotplot","linechart","barsize"],
-//     "linechart": ["linechart","dotplot","barsize"],
-//     "barsize":["dotplot","linechart"]
-// }
+
 
 //Description:This function is going to take input specifications and try to output a list of visualizable attributes per feature
 //Input: Feature object
@@ -1293,15 +1300,17 @@ function getPossibilities(feature)
     } 
 
     var encodingOptions = cartesian(allEncoding)
+    console.log("encodingoptions", encodingOptions)
 
     //Find the attributes that merge
     var finalEncodingCombination = [];
-    for (var x = 0; x< encodingOptions.length; x++){
+    for (var x = 0; x< encodingOptions.length; x++)
+    {
       var set = encodingOptions[x]  
       finalEncodingCombination.push(combineLogic(set))
     }
+    console.log("combinations",finalEncodingCombination)
     
-    console.log(finalEncodingCombination)
 
     //Superimpose Attributes
     var finalSuperimposed = []
@@ -1311,7 +1320,6 @@ function getPossibilities(feature)
         finalSuperimposed.push(superimposeLogic(set))
     }
 
-    console.log(finalSuperimposed)
     var trackIdAdded = addTrackId(finalSuperimposed)
 
     return finalSuperimposed
@@ -1332,7 +1340,9 @@ function addTrackId(tracks)
     return trackIdAdded
 }
 
-//Description: Checks if two variables can be combined, based on decision rules.
+//Description: Checks if two variables can be combined. To check there will be two steps, first we will cont.
+//ensure that two attributes can logically be combined and next we test whether based on tasks it makes sense to combine
+//then test if the combination will work.
 function canCombine(a,b){
     var listOfCombinedAttr = attrCombination[a]
     if(listOfCombinedAttr == undefined) {return false}
@@ -1420,13 +1430,17 @@ function superimposeLogic(arr)
 function combineLogic(arr)
 {
     var finalEncodingCombination = []   
+    
+    //Create an array to keep track of all the attributes that have been combined
     var visited = arr.map(val =>
         {
             return 0
         })
     
+    //Loop through all the options in the arr to check for pairs that can be combined    
     for(var i = 0;i<arr.length;i++)
         {
+            //Only check if the attribute has not been combined at a previous stage
             if(visited[i]==0)
             {
                 var combinationNotFound = true // This variable will keep track incase the combination was found 
@@ -1447,7 +1461,6 @@ function combineLogic(arr)
                             {
                                 visited[i] = 1
                                 visited[j] = 1
-                                // finalEncodingCombination.push(`${a['attributeId']}_${a['encoding']}_${b['encoding']}`)
                                 a['combined'] = true
                                 b['combined'] = true
                                 finalEncodingCombination.push([a,b])
@@ -1466,7 +1479,6 @@ function combineLogic(arr)
         }
 
 return finalEncodingCombination
-    
 }
 
 
@@ -1509,7 +1521,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{}],17:[function(require,module,exports){
+},{"./modelDataProcessing.js":15}],18:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const stage1Model = globalData.model1
 const stage3Model = globalData.model3
@@ -1677,7 +1689,7 @@ return getVisOptions(trackLayout)
 
 
 module.exports = getLayout
-},{"./modelDataProcessing.js":14,"./utils.js":20}],18:[function(require,module,exports){
+},{"./modelDataProcessing.js":15,"./utils.js":21}],19:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 
 //Superimposable encodings
@@ -1908,7 +1920,7 @@ function getAlignment (layouts,tasks,sequenceName)
 }
 
 module.exports = getAlignment
-},{"./utils.js":20}],19:[function(require,module,exports){
+},{"./utils.js":21}],20:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 
 function checkOrthogonal(seq1,seq2){
@@ -1944,7 +1956,7 @@ function getArrangement(input,task){
 }
 
 module.exports = getArrangement
-},{"./utils.js":20}],20:[function(require,module,exports){
+},{"./utils.js":21}],21:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -2069,4 +2081,4 @@ module.exports =
   cartesian: cartesian,
   getVisOptions: getVisOptions
 }
-},{"ml-distance":9}]},{},[13]);
+},{"ml-distance":10}]},{},[14]);
