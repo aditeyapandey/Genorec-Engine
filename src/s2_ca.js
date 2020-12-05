@@ -12,15 +12,25 @@ var attrCombination = {
 
 //Superimposable encodings
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barsize","annotation"],
-    "linechart": ["linechart","dotplot","barsize","annotation"],
-    "barsize":["dotplot","linechart","annotation"],
-    "barsaturation":["annotation"],
-    "barhue":["annotation"],
-    "areahue":["annotation"],
-    "areasize":["annotation"],
-    "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
+    "dotplot": ["dotplot","linechart","barsize"],
+    "linechart": ["linechart","dotplot","barsize"],
+    "barsize":["dotplot","linechart"],
+    "barsaturation":[],
+    "barhue":[],
+    "areahue":[],
+    "areasize":[],
+    "annotation":[]
 }
+// var superimposition = {
+//     "dotplot": ["dotplot","linechart","barsize","annotation"],
+//     "linechart": ["linechart","dotplot","barsize","annotation"],
+//     "barsize":["dotplot","linechart","annotation"],
+//     "barsaturation":["annotation"],
+//     "barhue":["annotation"],
+//     "areahue":["annotation"],
+//     "areasize":["annotation"],
+//     "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
+// }
 // var superimposition = {
 //     "dotplot": ["dotplot","linechart","barsize"],
 //     "linechart": ["linechart","dotplot","barsize"],
@@ -68,25 +78,25 @@ function getPossibilities(feature)
     }
 
     console.log(finalSuperimposed)
-    //var trackIdAdded = addTrackId(finalSuperimposed)
+    var trackIdAdded = addTrackId(finalSuperimposed)
 
     return finalSuperimposed
 }
 
-// function addTrackId(tracks)
-// {
-//    var trackIdAdded = tracks.map(element => {
-//         var trackIdArray = element.map((innerElement,trackId) => {
-//             var innterTid =  innerElement.map(innerInner => {
-//                     innerInner['trackId'] = trackId
-//                     return innerInner
-//             })
-//             return innterTid
-//         });
-//         return trackIdArray
-//     });
-//     return trackIdAdded
-// }
+function addTrackId(tracks)
+{
+   var trackIdAdded = tracks.map(element => {
+        var trackIdArray = element.map((innerElement,trackId) => {
+            var innterTid =  innerElement.map(innerInner => {
+                    innerInner['trackId'] = trackId
+                    return innerInner
+            })
+            return innterTid
+        });
+        return trackIdArray
+    });
+    return trackIdAdded
+}
 
 //Description: Checks if two variables can be combined, based on decision rules.
 function canCombine(a,b){
