@@ -1093,7 +1093,7 @@ for (var i=0;i<sequenceInputArrays.length;i++){
 }
 
 //Get Arrangement given the entire sequence data
-var arrangements = getArrangment(sequencesOutput)
+var arrangements = getArrangment(sequencesOutput,dataspec['intraSequenceTask'])
 
 
 // function setInput(param) {
@@ -1226,7 +1226,7 @@ function encodeAttribute(dataspec){
         partialSpecification[`feature_${i}`].push(tempAttributeStorage)
       }
     }
-    // console.log("Stage1 Output:", partialSpecification)
+    console.log("Stage1 Output:", partialSpecification)
     return partialSpecification
 }
 
@@ -1261,14 +1261,14 @@ var superimposition = {
 //     "barsize":["dotplot","linechart"]
 // }
 
-//Description:This function is going to take input specifications and try to output a list of visualizable 
-//attributes per feature
+//Description:This function is going to take input specifications and try to output a list of visualizable attributes per feature
 //Input: Feature object
 //Output: Returns the tracks 
 function getPossibilities(feature)
 {
     var allEncoding = []//First store all the possible encodings in the dataspec.
 
+    //Step 1: Identify all the possible encodings for the attributes
     //Loop through all the options and store the encodings in the allEncoding var
     for (var i=0; i<feature.length;i++)
     {    
@@ -1282,7 +1282,6 @@ function getPossibilities(feature)
         allEncoding.push(encodingRecommendations)
     } 
 
-
     var encodingOptions = cartesian(allEncoding)
 
     //Find the attributes that merge
@@ -1291,7 +1290,9 @@ function getPossibilities(feature)
       var set = encodingOptions[x]  
       finalEncodingCombination.push(combineLogic(set))
     }
-   
+    
+    console.log(finalEncodingCombination)
+
     //Superimpose Attributes
     var finalSuperimposed = []
     for (var x=0;x<finalEncodingCombination.length;x++)
@@ -1300,7 +1301,7 @@ function getPossibilities(feature)
         finalSuperimposed.push(superimposeLogic(set))
     }
 
-    // console.log(finalSuperimposed)
+    console.log(finalSuperimposed)
     var trackIdAdded = addTrackId(finalSuperimposed)
 
     return finalSuperimposed
@@ -1392,8 +1393,7 @@ function superimposeLogic(arr)
                     arr["superimposed"] = !superImpositionNotFound
                 })
                 addSuperImposed.push(...a)
-                
-
+            
                 finalSuperImposed.push(addSuperImposed)
             
         }
@@ -1479,47 +1479,20 @@ function cartesian(args) {
     return r;
 }
 
-//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
-//Input: An entire Feature input
-//Output: List of tasks users wants to perform
-function getTasks(feature){
-    let tasks = new Set()
-
-    for(var i=0;i<feature.length;i++){
-        var currentFeature = feature[i];
-
-        if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
-        {
-            tasks.add("compare")
-        }
-        if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
-        {
-            tasks.add("identify")
-        }
-        if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
-        {
-            tasks.add("summarize")
-        }
-        
-    }
-
-    return tasks
-}
-
-
 function getTracks(encodingSpecification){
     
     var featureKeys= Object.keys(encodingSpecification)
     var trackList =[]
 
     for(i=0;i<featureKeys.length;i++){
-        var tasks = getTasks(encodingSpecification[featureKeys[i]])
         var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
         var featureId = `feature_${i}`
-        var returnTrackSpec = {[featureId]:{trackPossibilities,tasks}}
+        var returnTrackSpec = {[featureId]:{trackPossibilities}}
         // console.log(`Stage 2 Output`, returnTrackSpec)
         trackList.push(returnTrackSpec)
     }
+
+    console.log(`Stage 2 Output`, trackList)
     
     return trackList
 
@@ -1561,16 +1534,17 @@ function createInputVector(channels,tasks,interconnection){
   return {inputVectorObject,inputArray}
 }
 
+
+
+
 //Description: Track combinations are designed to nest though all the combinations and find trackCombinations for all possible individual trackCombinations
 //Input: Previous stage outputs
 //Output: Inputvector and Inputarray for each track and all the possible combinations.
-function createTrackInputVector(stage2Output,stage1Output){
+function createTrackInputVector(stage2Output,tasks,stage1Output){
 
     var trackPossibilities = stage2Output.trackPossibilities
-    var tasks = stage2Output.tasks
-    
+
     var interconnection = stage1Output[0]['featureConnection']
-  
 
     var allTrackInput = []
     //This loop identifies the possible combination of trackCombinations within a feature
@@ -1615,6 +1589,33 @@ function mode(array)
     return maxEl;
 }
 
+//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
+//Input: An entire Feature input
+//Output: List of tasks users wants to perform
+function getTasks(feature){
+  let tasks = new Set()
+
+  for(var i=0;i<feature.length;i++){
+      var currentFeature = feature[i];
+
+      if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
+      {
+          tasks.add("compare")
+      }
+      if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
+      {
+          tasks.add("identify")
+      }
+      if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
+      {
+          tasks.add("summarize")
+      }
+      
+  }
+
+  return tasks
+}
+
 
 // Description: For each input feature, identify the types of trackCombinations
 //We need information about the 
@@ -1622,17 +1623,17 @@ function getLayout (stage2Output,stage1Output) {
 
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
-
-  console.log(stage2Output)
-
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
     // We want to extract the key of the feature that we are analyzing
     var key = Object.keys(stage2Output[i])[0]
+
+    //We want to extract all the tasks for each possible group of attributes
+    var tasks = getTasks(stage1Output[key])
     
     //Track possibilities store all the tracks that our recommendatio system predicted per feature
-    var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], stage1Output[key])
+    var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], tasks ,stage1Output[key])
     
     //Initialize the features
     trackLayout[key] = {"trackPossibilities":[]}
@@ -1654,6 +1655,8 @@ function getLayout (stage2Output,stage1Output) {
     }
   } 
 
+console.log("Stage 3 Output:")
+console.log(trackLayout)
   
 
 //For each feature  we have an array
@@ -1879,7 +1882,8 @@ function getAlignment (layouts,tasks,sequenceName)
         layouts['vis_'+i]["superImposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] =sequenceName
     })
-    
+    console.log("stage 4 output")
+    console.log(layouts)
     return layouts
 }
 
@@ -1887,18 +1891,35 @@ module.exports = getAlignment
 },{"./utils.js":20}],19:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 
+function checkOrthogonal(seq1,seq2){
+    //console.log(seq1,seq2)
+}
 
-function getArrangement(input){
+function getArrangement(input,task){
     var sequenceNames = Object.keys(input)
     var sequenceArray = []
 
     //Add sequence name as an index to the object
     for(var i = 0;i< sequenceNames.length;i++){
-        var visOptions = Object.values(input[sequenceNames[i]])
-        sequenceArray.push(visOptions)
+        var visArray = Object.values(input[sequenceNames[i]])
+        sequenceArray.push(visArray)
     }
 
-    console.log(sequenceArray)
+    // Array that represents the number of unique options
+    var visOptions = cartesian(sequenceArray)
+    //For each option, we have to identify if the sequences can be orthogonally combined
+    visOptions.forEach((array,index)=>{
+        for(var i =0;i<array.length-1;i++)
+        {
+            var sequence1 = array[i]
+            for (var j=i+1;j<array.length;j++){
+                var sequence2 = array[j]
+                if(task['correlate'].indexOf(sequence1['sequenceName']) != -1 && task['correlate'].indexOf(sequence2['sequenceName']) !=-1 ){
+                    checkOrthogonal(sequence1,sequence2)
+                }
+            }
+        }
+    })
 
 }
 

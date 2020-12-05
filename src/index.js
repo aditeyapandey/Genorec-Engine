@@ -26,7 +26,7 @@ for (var i=0;i<sequenceInputArrays.length;i++){
 }
 
 //Get Arrangement given the entire sequence data
-var arrangements = getArrangment(sequencesOutput)
+var arrangements = getArrangment(sequencesOutput,dataspec['intraSequenceTask'])
 
 
 // function setInput(param) {

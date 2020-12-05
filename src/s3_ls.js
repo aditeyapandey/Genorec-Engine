@@ -32,16 +32,17 @@ function createInputVector(channels,tasks,interconnection){
   return {inputVectorObject,inputArray}
 }
 
+
+
+
 //Description: Track combinations are designed to nest though all the combinations and find trackCombinations for all possible individual trackCombinations
 //Input: Previous stage outputs
 //Output: Inputvector and Inputarray for each track and all the possible combinations.
-function createTrackInputVector(stage2Output,stage1Output){
+function createTrackInputVector(stage2Output,tasks,stage1Output){
 
     var trackPossibilities = stage2Output.trackPossibilities
-    var tasks = stage2Output.tasks
-    
+
     var interconnection = stage1Output[0]['featureConnection']
-  
 
     var allTrackInput = []
     //This loop identifies the possible combination of trackCombinations within a feature
@@ -86,6 +87,33 @@ function mode(array)
     return maxEl;
 }
 
+//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
+//Input: An entire Feature input
+//Output: List of tasks users wants to perform
+function getTasks(feature){
+  let tasks = new Set()
+
+  for(var i=0;i<feature.length;i++){
+      var currentFeature = feature[i];
+
+      if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
+      {
+          tasks.add("compare")
+      }
+      if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
+      {
+          tasks.add("identify")
+      }
+      if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
+      {
+          tasks.add("summarize")
+      }
+      
+  }
+
+  return tasks
+}
+
 
 // Description: For each input feature, identify the types of trackCombinations
 //We need information about the 
@@ -93,17 +121,17 @@ function getLayout (stage2Output,stage1Output) {
 
   //Layout recommendation for each possible track  indexed by feature id
   var trackLayout = {}
-
-  console.log(stage2Output)
-
   // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
   for (var i = 0; i< stage2Output.length;i++)
   {
     // We want to extract the key of the feature that we are analyzing
     var key = Object.keys(stage2Output[i])[0]
+
+    //We want to extract all the tasks for each possible group of attributes
+    var tasks = getTasks(stage1Output[key])
     
     //Track possibilities store all the tracks that our recommendatio system predicted per feature
-    var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], stage1Output[key])
+    var trackPossibilities = createTrackInputVector(stage2Output[i][`feature_${i}`], tasks ,stage1Output[key])
     
     //Initialize the features
     trackLayout[key] = {"trackPossibilities":[]}
@@ -125,6 +153,8 @@ function getLayout (stage2Output,stage1Output) {
     }
   } 
 
+console.log("Stage 3 Output:")
+console.log(trackLayout)
   
 
 //For each feature  we have an array

@@ -1,0 +1,7 @@
+[
+{"chart":"size_color","quatitative_quantitative":"0","quantitative_categorical":"1","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"0"},
+{"chart":"color_size","quatitative_quantitative":"0","quantitative_categorical":"1","a1_identify":"1","a1_compare":"0","a2_identify":"1","a2_compare":"1"},
+{"chart":"size_saturation","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"0"},
+{"chart":"saturation_size","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"0","a2_identify":"1","a2_compare":"1"},
+{"chart":"none","quatitative_quantitative":"1","quantitative_categorical":"0","a1_identify":"1","a1_compare":"1","a2_identify":"1","a2_compare":"1"}
+]

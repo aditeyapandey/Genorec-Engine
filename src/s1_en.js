@@ -79,7 +79,7 @@ function encodeAttribute(dataspec){
         partialSpecification[`feature_${i}`].push(tempAttributeStorage)
       }
     }
-    // console.log("Stage1 Output:", partialSpecification)
+    console.log("Stage1 Output:", partialSpecification)
     return partialSpecification
 }
 

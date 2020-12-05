@@ -212,7 +212,8 @@ function getAlignment (layouts,tasks,sequenceName)
         layouts['vis_'+i]["superImposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] =sequenceName
     })
-    
+    console.log("stage 4 output")
+    console.log(layouts)
     return layouts
 }
 

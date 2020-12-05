@@ -27,14 +27,14 @@ var superimposition = {
 //     "barsize":["dotplot","linechart"]
 // }
 
-//Description:This function is going to take input specifications and try to output a list of visualizable 
-//attributes per feature
+//Description:This function is going to take input specifications and try to output a list of visualizable attributes per feature
 //Input: Feature object
 //Output: Returns the tracks 
 function getPossibilities(feature)
 {
     var allEncoding = []//First store all the possible encodings in the dataspec.
 
+    //Step 1: Identify all the possible encodings for the attributes
     //Loop through all the options and store the encodings in the allEncoding var
     for (var i=0; i<feature.length;i++)
     {    
@@ -48,7 +48,6 @@ function getPossibilities(feature)
         allEncoding.push(encodingRecommendations)
     } 
 
-
     var encodingOptions = cartesian(allEncoding)
 
     //Find the attributes that merge
@@ -57,7 +56,9 @@ function getPossibilities(feature)
       var set = encodingOptions[x]  
       finalEncodingCombination.push(combineLogic(set))
     }
-   
+    
+    console.log(finalEncodingCombination)
+
     //Superimpose Attributes
     var finalSuperimposed = []
     for (var x=0;x<finalEncodingCombination.length;x++)
@@ -66,7 +67,7 @@ function getPossibilities(feature)
         finalSuperimposed.push(superimposeLogic(set))
     }
 
-    // console.log(finalSuperimposed)
+    console.log(finalSuperimposed)
     var trackIdAdded = addTrackId(finalSuperimposed)
 
     return finalSuperimposed
@@ -158,8 +159,7 @@ function superimposeLogic(arr)
                     arr["superimposed"] = !superImpositionNotFound
                 })
                 addSuperImposed.push(...a)
-                
-
+            
                 finalSuperImposed.push(addSuperImposed)
             
         }
@@ -245,47 +245,20 @@ function cartesian(args) {
     return r;
 }
 
-//Description: This function will list all the tasks a user may have requested for in the dataspec at a feature level.
-//Input: An entire Feature input
-//Output: List of tasks users wants to perform
-function getTasks(feature){
-    let tasks = new Set()
-
-    for(var i=0;i<feature.length;i++){
-        var currentFeature = feature[i];
-
-        if(currentFeature['inputVectorObject']['inputVectorObject']['compare'] == 1)
-        {
-            tasks.add("compare")
-        }
-        if(currentFeature['inputVectorObject']['inputVectorObject']['identify'] == 1)
-        {
-            tasks.add("identify")
-        }
-        if(currentFeature['inputVectorObject']['inputVectorObject']['summarize'] == 1)
-        {
-            tasks.add("summarize")
-        }
-        
-    }
-
-    return tasks
-}
-
-
 function getTracks(encodingSpecification){
     
     var featureKeys= Object.keys(encodingSpecification)
     var trackList =[]
 
     for(i=0;i<featureKeys.length;i++){
-        var tasks = getTasks(encodingSpecification[featureKeys[i]])
         var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
         var featureId = `feature_${i}`
-        var returnTrackSpec = {[featureId]:{trackPossibilities,tasks}}
+        var returnTrackSpec = {[featureId]:{trackPossibilities}}
         // console.log(`Stage 2 Output`, returnTrackSpec)
         trackList.push(returnTrackSpec)
     }
+
+    console.log(`Stage 2 Output`, trackList)
     
     return trackList
 
