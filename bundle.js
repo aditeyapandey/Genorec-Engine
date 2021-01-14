@@ -89,7 +89,7 @@ module.exports={
                 }
             ]
     }],
-    "intraSequenceTask": {"connectedNodes":[["sequence_0","sequence_1"]],"sequenceConservation":[],"edgeValues":[]},
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
     "denseConnection": true,
     "sparseConnection": false
 }
@@ -114,6 +114,14 @@ module.exports=[
 ]
 
 },{}],4:[function(require,module,exports){
+module.exports=[
+{"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
+{"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
+{"arrangement":"circularAdjacent","layoutcircular":"1","layoutlinear":"0","nointerconnection":"0","sparseinterconnection":"1","denseinterconnection":"1","edgeconnection":"1","readedgevalue":"0","conservation":"0"},
+{"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
+]
+
+},{}],5:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -160,7 +168,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -171,7 +179,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11045,7 +11053,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11063,7 +11071,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":8}],8:[function(require,module,exports){
+},{"ml-array-sum":9}],9:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11093,7 +11101,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":5}],9:[function(require,module,exports){
+},{"is-any-array":6}],10:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11109,7 +11117,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11701,7 +11709,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":7,"ml-distance-euclidean":9,"ml-tree-similarity":11}],11:[function(require,module,exports){
+},{"ml-array-mean":8,"ml-distance-euclidean":10,"ml-tree-similarity":12}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11838,7 +11846,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":4,"num-sort":12}],12:[function(require,module,exports){
+},{"binary-search":5,"num-sort":13}],13:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -11877,7 +11885,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -11904,29 +11912,28 @@ for (var i=0;i<sequenceInputArrays.length;i++){
     var layoutForTracks = getLayout(tracks, currentSequence["sequenceId"] )
     //Stage 4: Alignment 
     sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
-    //console.log(attributeEncoding,tracks,layout)
 }
 
 //Get view options
 var visOptions = []
 Object.keys(sequencesOutput).map(val=>{
     let tempVisArray = []
-    console.log(val)
     Object.keys(sequencesOutput[val]).map(feature=>{
-        console.log(sequencesOutput[val][feature])
         tempVisArray.push(sequencesOutput[val][feature])
     })
     visOptions.push(tempVisArray)
 })
 
-var views = cartesian(visOptions)
+var cartesianCombinationsVisOptions = cartesian(visOptions)
 
-//Get Arrangement given the entire sequence data
-var arrangements;
+//Stage 5: Get Arrangement given the entire sequence data
+var arrangements = [];
 
-views.forEach(view=>{
-    arrangements = getArrangment(view,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection'])
+cartesianCombinationsVisOptions.forEach(option=>{
+    arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
+
+
 
 
 // function setInput(param) {
@@ -11953,7 +11960,7 @@ views.forEach(view=>{
 // module.exports ={
 // setInput
 // }
-},{"../configuration/input.json":1,"./inputspec.js":14,"./s1_en.js":16,"./s2_ca.js":17,"./s3_ls.js":18,"./s4_al.js":19,"./s5_ar.js":20,"./utils.js":21}],14:[function(require,module,exports){
+},{"../configuration/input.json":1,"./inputspec.js":15,"./s1_en.js":17,"./s2_ca.js":18,"./s3_ls.js":19,"./s4_al.js":20,"./s5_ar.js":21,"./utils.js":22}],15:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12052,9 +12059,10 @@ function Attributes(obj){
 module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA}
-},{"jquery":6}],15:[function(require,module,exports){
+},{"jquery":7}],16:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3updated.json');
+const stage5Model = require('../model/stage5.json');
 
 //Converting the model to objects
 let stage1ModelObj = {}
@@ -12063,21 +12071,24 @@ stage1Model.map(val =>{
     stage1ModelObj[val["chart"]] = val
 })
 
-
 let stage3ModelObj = {}
-
 stage3Model.map(val =>{
     stage3ModelObj[val["layout"]] = val
 })
 
+let stage5ModelObj = {}
+stage5Model.map(val =>{
+    stage5ModelObj[val["arrangement"]] = val
+})
 
 
 module.exports = {
     model1: stage1ModelObj,
-    model3: stage3ModelObj
+    model3: stage3ModelObj,
+    model5: stage5ModelObj
 }
 
-},{"../model/stage1.json":2,"../model/stage3updated.json":3}],16:[function(require,module,exports){
+},{"../model/stage1.json":2,"../model/stage3updated.json":3,"../model/stage5.json":4}],17:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12161,7 +12172,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":15,"./utils.js":21}],17:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":16,"./utils.js":22}],18:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12407,7 +12418,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":15,"./utils.js":21}],18:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":22}],19:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -12517,7 +12528,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":14,"./modelDataProcessing.js":15,"./utils.js":21}],19:[function(require,module,exports){
+},{"./inputspec.js":15,"./modelDataProcessing.js":16,"./utils.js":22}],20:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -12712,44 +12723,82 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":14,"./utils.js":21}],20:[function(require,module,exports){
-const cartesian = require("./utils.js").cartesian
-const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
+},{"./inputspec.js":15,"./utils.js":22}],21:[function(require,module,exports){
+const models = require("./modelDataProcessing.js")
+const stage5Model = models.model5
+const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
+const getProductProperties  = require("./utils.js").productProperties
+const computeSimilarity = require("./utils.js").computeSimilarity
+const recommendedProducts = require("./utils.js").recommendedProducts
+//Product vector only needs to be computed once
+const productVector = getProductProperties(stage5Model,vectorKeys)
+const mode = require("./utils.js").mode
 
+
+
+function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation){
+  
+    // Mapping attributes 
+    var inputVectorObject = {}
+    var inputArray = []
+
+    inputArray.push(inputVectorObject["layoutcircular"] = layout==="circular" ? 1 : 0)
+    inputArray.push(inputVectorObject["layoutlinear"] = layout==="linear" ? 1 : 0)
+    inputArray.push(inputVectorObject["nointerconnection"] = dense || sparse ? 0 : 1)
+    inputArray.push(inputVectorObject["sparseinterconnection"] = dense ? 1 : 0)
+    inputArray.push(inputVectorObject["denseinterconnection"] = sparse ? 1 : 0)
+    inputArray.push(inputVectorObject["edgeconnection"] = connectedNodes ? 1 : 0)
+    inputArray.push(inputVectorObject["readedgevalue"] = edgeValue ? 1 : 0)
+    inputArray.push(inputVectorObject["conservation"] = sequenceConservation ? 1 : 0)
+
+    return {inputVectorObject, inputArray}
+}
+
+function addElementsToOuput(input,output,layout){
+    if(layout=="linear"){
+        output["linearStacked"]=[]
+
+        output["linearStacked"] = [...input]
+       }
+       else{
+        output["circleStacked"]=[]
+
+        output["circleStacked"] = [...input]
+       }
+       return output
+}
 
 function getArrangement(input,tasks,dense,sparse){
     var sequencesCovered = {}
-    var output = {"linearStacked":[],"linearOrthogonal":[],"circularStacked":[],"circularAdjacent":[]}
-    //console.log(GLOBAL_INDEX_DATA, tasks)
+    var output = {}
+    console.log(tasks)
 
+    //Find the most common layout and then assign all the sequences same layout
+    var layoutCollection = input.map(val=>{
+        return val['layout']
+    })
+    var layout = mode(layoutCollection)
+
+    //For views with 3 or more sequences
     if(input.length>=3){
-        //check layout
-        if(input[0]['layout']=="linear"){
-         output["linearStacked"] = [...input]
-        }
-        else{
-            output["circleStacked"] = [...input]
-        }
+        output = addElementsToOuput(input,output,layout)
+    }
+    else{
+        var connectedNodes = tasks['connectedNodes'].length === 2 ? true : false
+        var edgeValue = tasks['edgeValues'].length === 2 ? true : false
+        var sequenceConservation = tasks['sequenceConservation'].length === 2 ? true : false
+        var inputVectorObject = createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation)
+        var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        var recommendation = recommendedProducts(similarityScores)
+        output[recommendation] = []
+        output[recommendation] = [...input]
     }
 
-    //create a list of all sequences and based on tasks 
-    Object.keys(GLOBAL_INDEX_DATA).map((val)=>{
-        sequencesCovered[val] = false
-    })
-
-    //Stack all sequences that need conservation tasks
-    tasks.sequenceConservation.map((val)=>{
-        sequencesCovered[val] = true
-        output["linearStacked"].push(input[val])
-    })
-
-    //Check for all possible 
-
-
+    return output
 }
 
 module.exports = getArrangement
-},{"./inputspec.js":14,"./utils.js":21}],21:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":22}],22:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -12898,4 +12947,4 @@ module.exports =
   getVisOptions: getVisOptions,
   mode:mode
 }
-},{"ml-distance":10}]},{},[13]);
+},{"ml-distance":11}]},{},[14]);

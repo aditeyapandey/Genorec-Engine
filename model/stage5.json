@@ -1,6 +1,6 @@
 [
-{"arrangement":"LS","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnectionconnected":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
-{"arrangement":"LO","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnectionconnected":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
-{"arrangement":"CA","layoutcircular":"1","layoutlinear":"0","nointerconnection":"0","sparseinterconnection":"1","denseinterconnectionconnected":"1","edgeconnection":"1","readedgevalue":"0","conservation":"0"},
-{"arrangement":"CS","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnectionconnected":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
+{"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
+{"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
+{"arrangement":"circularAdjacent","layoutcircular":"1","layoutlinear":"0","nointerconnection":"0","sparseinterconnection":"1","denseinterconnection":"1","edgeconnection":"1","readedgevalue":"0","conservation":"0"},
+{"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
 ]

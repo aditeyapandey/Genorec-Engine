@@ -24,29 +24,28 @@ for (var i=0;i<sequenceInputArrays.length;i++){
     var layoutForTracks = getLayout(tracks, currentSequence["sequenceId"] )
     //Stage 4: Alignment 
     sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
-    //console.log(attributeEncoding,tracks,layout)
 }
 
 //Get view options
 var visOptions = []
 Object.keys(sequencesOutput).map(val=>{
     let tempVisArray = []
-    console.log(val)
     Object.keys(sequencesOutput[val]).map(feature=>{
-        console.log(sequencesOutput[val][feature])
         tempVisArray.push(sequencesOutput[val][feature])
     })
     visOptions.push(tempVisArray)
 })
 
-var views = cartesian(visOptions)
+var cartesianCombinationsVisOptions = cartesian(visOptions)
 
-//Get Arrangement given the entire sequence data
-var arrangements;
+//Stage 5: Get Arrangement given the entire sequence data
+var arrangements = [];
 
-views.forEach(view=>{
-    arrangements = getArrangment(view,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection'])
+cartesianCombinationsVisOptions.forEach(option=>{
+    arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
+
+
 
 
 // function setInput(param) {

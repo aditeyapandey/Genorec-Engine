@@ -88,7 +88,7 @@
                 }
             ]
     }],
-    "intraSequenceTask": {"connectedNodes":[["sequence_0","sequence_1"]],"sequenceConservation":[],"edgeValues":[]},
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
     "denseConnection": true,
     "sparseConnection": false
 }
