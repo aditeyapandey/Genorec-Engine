@@ -1,46 +1,11 @@
 const cartesian = require("./utils.js").cartesian
+const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
-//Superimposable encodings
-// var superimposition = {
-//     "dotplot": ["dotplot","linechart","barsize","annotation"],
-//     "linechart": ["linechart","dotplot","barsize","annotation"],
-//     "barsize":["dotplot","linechart","annotation"],
-//     "barsaturation":["annotation"],
-//     "barhue":["annotation"],
-//     "areahue":["annotation"],
-//     "areasize":["annotation"],
-//     "annotation":["dotplot","barsize","barsaturation","areasize","areasaturation","areahue"]
-// }
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barsize"],
-    "linechart": ["linechart","dotplot","barsize"],
-    "barsize":["dotplot","linechart"],
-    "barsaturation":[],
-    "barhue":[],
-    "areahue":[],
-    "areasize":[],
-    "annotation":[]
-}
-
-
-
-//Description: Get the alignment of the encoding
-//Input: Two or more elements in the array
-//Output: stacked or superimposed
-function returnAlignmentChoice(input)
-{
-    //Base case only one encoding
-    if(input.length<2){
-        return "stacked"
-    }
-
-    //First check if all the input elements have samelayout have the same layout
-    const allEqual = arr => arr.every( v => v === arr[0] )
-    if(!allEqual)
-    {
-        return "stacked"
-    }
-
+    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
+    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
+    "barchart":["dotplot","linechart"],
+    "intervalBarchart":["dotplot","linechart"]
 }
 
 
@@ -115,7 +80,7 @@ function encodingSuperImposable(cartesianEncodings)
 
 
 
-function getAlignment (layouts,tasks,sequenceName)
+function getAlignment (layouts,tasks,sequenceName,sequenceId)
 {
     // Get the tracks from each feature
     var visOptions = Object.values(layouts)
@@ -124,12 +89,19 @@ function getAlignment (layouts,tasks,sequenceName)
         var featureUsed ={}
         var stacked= []
         var superImpose =[]
+        var layout
         Object.keys(vis).map((val) =>{
-            featureUsed[val] = false            
+          //featureUsed[val] = false            
+          let interconnection = GLOBAL_INDEX_DATA[sequenceId]['featureIndex'][val]['featureInterconnection']
+          featureUsed[val] = interconnection
+          if(interconnection){
+            stacked.push(val)
+          }
+            
+            layout = vis[val]["layoutRecommendation"]
         })
 
         if(tasks.compare.length>0){
-            //do something
             var featureList = Object.values(tasks.compare)
             var featureObjectForSuperImposition = {}
             // create an array of tracks in each feature
@@ -143,31 +115,24 @@ function getAlignment (layouts,tasks,sequenceName)
                     featureObjectForSuperImposition[element]= valuesToPush
                 }
             })
-            var superImposedFeatures = (checkForSuperImposition(featureObjectForSuperImposition))            
-            
-            if(superImposedFeatures!=undefined){
-            var superImposedFlat = superImposedFeatures.flat()
-            superImposedFlat.forEach(element=>{
-                var tempString = element["featureId"]+"track_"+element["trackId"]
-                if(superImpose.indexOf(tempString)==-1){
-                    superImpose.push(tempString)
-                    featureUsed[element["featureId"]] = true
+
+            if(Object.keys(featureObjectForSuperImposition).length>0)
+            {
+                var superImposedFeatures = (checkForSuperImposition(featureObjectForSuperImposition))            
+                
+                if(superImposedFeatures!=undefined){
+                var superImposedFlat = superImposedFeatures.flat()
+                superImposedFlat.forEach(element=>{
+                    var tempString = element["featureId"]+"track_"+element["trackId"]
+                    if(superImpose.indexOf(tempString)==-1){
+                        superImpose.push(tempString)
+                        featureUsed[element["featureId"]] = true
+                    }
+                })
                 }
-            })
-         }
+            }
         }
-        if(tasks.browse.length>0){
-            //do something
-            var featureList = Object.values(tasks.browse)
-            featureList.forEach(element => {
-                if(featureUsed[element] == false){
-                    featureUsed[element] = true
-                    stacked.push(element)
-                }
-            });
-        }
-        if(tasks.summarize.length>0){
-            //do something
+        if(tasks.correlate.length>0){
             var featureList = Object.values(tasks.browse)
             featureList.forEach(element => {
                 if(featureUsed[element] == false){
@@ -209,7 +174,6 @@ function getAlignment (layouts,tasks,sequenceName)
 
          //Deafult stacking
          {
-             
             Object.keys(featureUsed).map(val=>{
                 if(!featureUsed[val]){
                     stacked.push(val)
@@ -220,10 +184,10 @@ function getAlignment (layouts,tasks,sequenceName)
 
         layouts['vis_'+i]["stacked"] = stacked
         layouts['vis_'+i]["superImposed"] = superImpose
-        layouts['vis_'+i]["sequenceName"] =sequenceName
+        layouts['vis_'+i]["sequenceName"] = sequenceName
+        layouts['vis_'+i]["sequenceId"] = sequenceId
+        layouts['vis_'+i]["layout"] = layout
     })
-    console.log("stage 4 output")
-    console.log(layouts)
     return layouts
 }
 

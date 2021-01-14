@@ -5,7 +5,7 @@
 // recommendation is an array of one or more product recommendation. 
 const model = require('../model/stage1.json');
 const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]
-const  globalData = require("./modelDataProcessing.js")
+const globalData = require("./modelDataProcessing.js")
 const stage1Model = globalData.model1
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
@@ -36,8 +36,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["identify"] = attribute.intraAttrTask.indexOf("identify") != -1 ? 1 : 0 
     )
     inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
-    inputArray.push(inputVectorObject["summarize"] = attribute.intraAttrTask.indexOf("summarize") != -1 ? 1 : 0 
-    )
+    // inputArray.push(inputVectorObject["summarize"] = attribute.intraAttrTask.indexOf("summarize") != -1 ? 1 : 0)
 
   //Additional elements to add to the object
   inputVectorObject["featureInterconnection"] = feature.featureInterconnection ? 1 : 0
@@ -54,18 +53,17 @@ function getInterconnectionFeature(feature){
   return { featureInterconnection: feature.featureInterconnection ? 1 : 0, denseInterconnection: feature.denseInterconnection ? 1 : 0 }
 }
 
-
-
 function encodeAttribute(dataspec){
 
-    var partialSpecification = {}
+    var stage1Output = {}
 
     for(var i = 0; i<dataspec.features.length;i++)
     {
       var currentFeature = dataspec.features[i];
+      var featureId = dataspec.features[i].featureId
 
       //Initiation of the partial specification
-      partialSpecification[`feature_${i}`] = []
+      stage1Output[featureId] = []
 
       //Get recommendation of the input feature vector
       for(j=0;j<currentFeature.attributes.length;j++){
@@ -74,13 +72,12 @@ function encodeAttribute(dataspec){
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         var recommendation = recommendedProducts(similarityScores)
         var featureConnection = getInterconnectionFeature(currentFeature)
-        var tempAttributeStorage = {'featureId':`feature_${i}`,'attributeId':`attribute_${j}`, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
-        
-        partialSpecification[`feature_${i}`].push(tempAttributeStorage)
+        var attributeId = currentFeature.attributes[j].attrId
+        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
+        stage1Output[featureId].push(tempAttributeStorage)
       }
     }
-    console.log("Stage1 Output:", partialSpecification)
-    return partialSpecification
+    return stage1Output
 }
 
  module.exports = encodeAttribute

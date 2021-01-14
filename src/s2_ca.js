@@ -1,29 +1,23 @@
 const globalData = require("./modelDataProcessing.js")
-const model = globalData.modelAttrComb
-const stage1Model = globalData.model1
+const cartesian = require("./utils.js").cartesian
 
 
-// Attributes that can be combined
 var attrCombination = {
-    "dotplot":["barsaturation","barhue"],
-    "barsize":["barsaturation","barhue"],
-    "barsaturation":["dotplot","barsize"],
-    "barhue":["dotplot","barsize"],
-    "areasize":["areasaturation","areahue"],
-    "areasaturation":["areasize"],
-    "areahue":["areasize"]
+    "barchart":["heatmap","barchartCN"],
+    "heatmap":["barchart","dotplot"],
+    "barchartCN":["barchart","dotplot"],
+    "dotplot":["heatmap","barChartCN"],
+    "intervalBarchart":["intervalHeatmap","intervalBarchartCN"],
+    "intervalHeatmap":["intervalBarchart"],
+    "intervalBarchartCN":["intervalBarchart"],
 }
 
-//Superimposable encodings
+
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barsize"],
-    "linechart": ["linechart","dotplot","barsize"],
-    "barsize":["dotplot","linechart"],
-    "barsaturation":[],
-    "barhue":[],
-    "areahue":[],
-    "areasize":[],
-    "annotation":[]
+    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
+    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
+    "barchart":["dotplot","linechart"],
+    "intervalBarchart":["dotplot","linechart"]
 }
 
 
@@ -49,7 +43,7 @@ function getPossibilities(feature)
     } 
 
     var encodingOptions = cartesian(allEncoding)
-    console.log("encodingoptions", encodingOptions)
+    // console.log("encodingoptions", encodingOptions)
 
     //Find the attributes that merge
     var finalEncodingCombination = [];
@@ -58,9 +52,8 @@ function getPossibilities(feature)
       var set = encodingOptions[x]  
       finalEncodingCombination.push(combineLogic(set))
     }
-    console.log("combinations",finalEncodingCombination)
+    // console.log("combinations",finalEncodingCombination)
     
-
     //Superimpose Attributes
     var finalSuperimposed = []
     for (var x=0;x<finalEncodingCombination.length;x++)
@@ -89,13 +82,74 @@ function addTrackId(tracks)
     return trackIdAdded
 }
 
+
+
+
 //Description: Checks if two variables can be combined. To check there will be two steps, first we will cont.
 //ensure that two attributes can logically be combined and next we test whether based on tasks it makes sense to combine
 //then test if the combination will work.
 function canCombine(a,b){
     var listOfCombinedAttr = attrCombination[a]
     if(listOfCombinedAttr == undefined) {return false}
-    return listOfCombinedAttr.indexOf(b) != -1 ? true : false
+    let possibleCombination = listOfCombinedAttr.indexOf(b) != -1 ? true : false
+    return possibleCombination
+}
+
+//Description: This method returns a combined list of attributes
+//Input: Array of object containing the attribtue id and encoding recoomendation
+//Output: Array of combined and non-combined attributes. E.g [[a1_dotplot,a2_barchart],[a3_annotation]]
+function combineLogic(arr)
+{
+    var finalEncodingCombination = []   
+    
+    //Create an array to keep track of all the attributes that have been combined
+    var visited = arr.map(val =>
+        {
+            return 0
+        })
+    
+    //Loop through all the options in the arr to check for pairs that can be combined    
+    for(var i = 0;i<arr.length;i++)
+        {
+            //Only check if the attribute has not been combined at a previous stage
+            if(visited[i]==0)
+            {
+                var combinationNotFound = true // This variable will keep track incase the combination was found 
+                var a = Object.assign({},arr[i])
+                for (var j = 0;j<arr.length;j++)
+                {
+                    if(visited[j]==0)
+                    {
+                        var b = Object.assign({},arr[j])
+                        if(a['attributeId'] == b['attributeId'])
+                        {
+                            continue
+                        }
+                        else
+                        {
+                            var combine = canCombine(a['encoding'],b['encoding'])                            
+                            if (combine)
+                            {
+                                visited[i] = 1
+                                visited[j] = 1
+                                a['combined'] = true
+                                b['combined'] = true
+                                finalEncodingCombination.push([a,b])
+                                combinationNotFound = false
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(combinationNotFound)
+                {
+                    a['combined'] = false
+                    finalEncodingCombination.push([a])
+                }
+            }
+        }
+
+return finalEncodingCombination
 }
 
 //Description: Check if two items groups/individual atttributes can be superimposed
@@ -167,87 +221,7 @@ function superimposeLogic(arr)
             
         }
     }  
-    
     return finalSuperImposed
-
-}
-
-
-//Description: This method returns a combined list of attributes
-//Input: Array of object containing the attribtue id and encoding recoomendation
-//Output: Array of combined and non-combined attributes. E.g [[a1_dotplot,a2_barchart],[a3_annotation]]
-function combineLogic(arr)
-{
-    var finalEncodingCombination = []   
-    
-    //Create an array to keep track of all the attributes that have been combined
-    var visited = arr.map(val =>
-        {
-            return 0
-        })
-    
-    //Loop through all the options in the arr to check for pairs that can be combined    
-    for(var i = 0;i<arr.length;i++)
-        {
-            //Only check if the attribute has not been combined at a previous stage
-            if(visited[i]==0)
-            {
-                var combinationNotFound = true // This variable will keep track incase the combination was found 
-                var a = Object.assign({},arr[i])
-                for (var j = 0;j<arr.length;j++)
-                {
-                    if(visited[j]==0)
-                    {
-                        var b = Object.assign({},arr[j])
-                        if(a['attributeId'] == b['attributeId'])
-                        {
-                            continue
-                        }
-                        else
-                        {
-                            var combine = canCombine(a['encoding'],b['encoding'])                            
-                            if (combine)
-                            {
-                                visited[i] = 1
-                                visited[j] = 1
-                                a['combined'] = true
-                                b['combined'] = true
-                                finalEncodingCombination.push([a,b])
-                                combinationNotFound = false
-                                break;
-                            }
-                        }
-                    }
-                }
-                if(combinationNotFound)
-                {
-                    a['combined'] = false
-                    finalEncodingCombination.push([a])
-                }
-            }
-        }
-
-return finalEncodingCombination
-}
-
-
-//Description: Test function to evaluate combinations of attributes
-//Input: Array of arrays that have to be combined
-//Output: All possible combinations of the arrays
-function cartesian(args) {
-    var r = [], max = args.length-1;
-    function helper(arr, i) {
-        for (var j=0, l=args[i].length; j<l; j++) {
-            var a = arr.slice(0); // clone arr
-            a.push(args[i][j]);
-            if (i==max)
-                r.push(a);
-            else
-                helper(a, i+1);
-        }
-    }
-    helper([], 0);
-    return r;
 }
 
 function getTracks(encodingSpecification){
@@ -259,11 +233,10 @@ function getTracks(encodingSpecification){
         var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
         var featureId = `feature_${i}`
         var returnTrackSpec = {[featureId]:{trackPossibilities}}
-        // console.log(`Stage 2 Output`, returnTrackSpec)
         trackList.push(returnTrackSpec)
     }
 
-    console.log(`Stage 2 Output`, trackList)
+    // console.log(`Stage 2 Output`, trackList)
     
     return trackList
 

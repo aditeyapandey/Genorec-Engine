@@ -1,9 +1,9 @@
 {
     "sequences": [
         {   
+        "sequenceId":"sequence_0",
         "sequenceName":"XYZ", 
-        "sequenceInterconnection":{"list":[]},
-        "interFeatureTasks":{"compare":["feature_0","feature_1"],"summarize":["feature_0"],"browse":["feature_0","feature_1"]},
+        "interFeatureTasks":{"compare":["feature_0","feature_1"],"correlate":[]},
             "features":
             [
                 { 
@@ -13,17 +13,22 @@
                     "featureLabel": "Epigenetic Signal",
                     "featureInterconnection": true,
                     "denseInterconnection": false,
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
                     "attr":
                     [
                         {
+                            "attrId":"attribute_0",
                             "dataType":"quantitative",
                             "intraAttrTask":["identify"]
                         },
                         {
+                            "attrId":"attribute_1",
                             "dataType":"quantitative",
                             "intraAttrTask":["identify","compare"]
                         },
                         {
+                            "attrId":"attribute_2",
                             "dataType":"text",
                             "intraAttrTask":["identify"]
                         }
@@ -36,22 +41,26 @@
                     "featureLabel": "Gene Annotation",
                     "featureInterconnection": true,
                     "denseInterconnection": false,
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
                     "attr":
                     [
                     {
+                        "attrId":"attribute_0",
                         "dataType":"categorical",
                         "intraAttrTask":["identify","summarize"]
                     },
                     {
+                        "attrId":"attribute_1",
                         "dataType":"text",
                         "intraAttrTask":["identify"]
                     }]
                 }
             ]
     },{
+        "sequenceId":"sequence_1",
         "sequenceName":"ABC", 
-        "sequenceInterconnection":{"list":[]},
-        "interFeatureTasks":{"compare":[],"summarize":[],"browse":[]},
+        "interFeatureTasks":{"compare":[],"correlate":[]},
             "features":
             [
                 { 
@@ -61,13 +70,17 @@
                     "featureLabel": "Epigenetic Signal",
                     "featureInterconnection": true,
                     "denseInterconnection": false,
+                    "intraFeatureTasks":["summarize"],
+                    "interactivity":true,
                     "attr":
                     [
                         {
+                            "attrId":"attribute_0",
                             "dataType":"quantitative",
                             "intraAttrTask":["identify","compare"]
                         },
                         {
+                            "attrId":"attribute_1",
                             "dataType":"text",
                             "intraAttrTask":["identify"]
                         }
@@ -75,5 +88,7 @@
                 }
             ]
     }],
-    "intraSequenceTask": {"correlate":["XYZ","ABC"]}
+    "intraSequenceTask": {"connectedNodes":[["sequence_0","sequence_1"]],"sequenceConservation":[],"edgeValues":[]},
+    "denseConnection": true,
+    "sparseConnection": false
 }

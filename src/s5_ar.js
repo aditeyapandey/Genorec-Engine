@@ -1,34 +1,35 @@
 const cartesian = require("./utils.js").cartesian
+const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
-function checkOrthogonal(seq1,seq2){
-    //console.log(seq1,seq2)
-}
 
-function getArrangement(input,task){
-    var sequenceNames = Object.keys(input)
-    var sequenceArray = []
+function getArrangement(input,tasks,dense,sparse){
+    var sequencesCovered = {}
+    var output = {"linearStacked":[],"linearOrthogonal":[],"circularStacked":[],"circularAdjacent":[]}
+    //console.log(GLOBAL_INDEX_DATA, tasks)
 
-    //Add sequence name as an index to the object
-    for(var i = 0;i< sequenceNames.length;i++){
-        var visArray = Object.values(input[sequenceNames[i]])
-        sequenceArray.push(visArray)
+    if(input.length>=3){
+        //check layout
+        if(input[0]['layout']=="linear"){
+         output["linearStacked"] = [...input]
+        }
+        else{
+            output["circleStacked"] = [...input]
+        }
     }
 
-    // Array that represents the number of unique options
-    var visOptions = cartesian(sequenceArray)
-    //For each option, we have to identify if the sequences can be orthogonally combined
-    visOptions.forEach((array,index)=>{
-        for(var i =0;i<array.length-1;i++)
-        {
-            var sequence1 = array[i]
-            for (var j=i+1;j<array.length;j++){
-                var sequence2 = array[j]
-                if(task['correlate'].indexOf(sequence1['sequenceName']) != -1 && task['correlate'].indexOf(sequence2['sequenceName']) !=-1 ){
-                    checkOrthogonal(sequence1,sequence2)
-                }
-            }
-        }
+    //create a list of all sequences and based on tasks 
+    Object.keys(GLOBAL_INDEX_DATA).map((val)=>{
+        sequencesCovered[val] = false
     })
+
+    //Stack all sequences that need conservation tasks
+    tasks.sequenceConservation.map((val)=>{
+        sequencesCovered[val] = true
+        output["linearStacked"].push(input[val])
+    })
+
+    //Check for all possible 
+
 
 }
 

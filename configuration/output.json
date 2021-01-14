@@ -1,0 +1,108 @@
+{
+    "sequences":[{
+        "sequenceId":1,
+        "sequenceName":"XYZ",
+        "visOptions":[{
+            "optionId":1,
+            "visualization":{
+                "features":[{
+                    "featureId":"feature_1",
+                    "layout": "linear",
+                    "interconnection": "none",
+                    "tracks":[
+                            {"group1":[
+                                {
+                                    "attributeId":"attribute_1",
+                                    "mark":"line",
+                                    "channel":"size"
+                                },
+                                {
+                                    "attributeId":"attribute_2",
+                                    "mark":"line",
+                                    "channel":"size"
+                                }],
+                            "superimposed":true,
+                            "combined":false
+                        },
+                            {"group2":[
+                                    {
+                                        "attributeId":"attribute_3",
+                                        "mark":"text",
+                                        "channel":"none"
+                                    }],
+                            "superimposed":false,
+                            "combined":false
+                            }]
+                },{
+                    "featureId":"feature_2",
+                    "layout": "linear",
+                    "tracks":[{"group1":[
+                        {
+                            "attributeId":"attribute_1",
+                            "mark":"text",
+                            "channel":"none"
+                        }],
+                 "superimposed":false,
+                 "combined":false
+                    }]
+                }],
+                "featureStacking":["feature_1","feature_2"],
+                "featureSuperimposition":[]
+            }
+        },
+        { "optionId":2,
+            "visualization":{
+                "features":[{
+                    "featureId":"feature_1",
+                    "layout": "circle",
+                    "interconnection": "none",
+                    "tracks":[
+                            {"group1":[
+                                {
+                                    "attributeId":"attribute_1",
+                                    "mark":"rect",
+                                    "channel":"size"
+                                },
+                                {
+                                    "attributeId":"attribute_2",
+                                    "mark":"rect",
+                                    "channel":"saturation"
+                                }],
+                            "superimposed":false,
+                            "combined":true
+                            },
+                            {"group2":[
+                                {
+                                    "attributeId":"attribute_3",
+                                    "mark":"text",
+                                    "channel":"none"
+                                }],
+                         "superimposed":false,
+                         "combined":false
+                        }]
+                },{
+                    "featureId":"feature_2",
+                    "layout": "circle",
+                    "tracks":[{"group1":[
+                        {
+                            "attributeId":"attribute_1",
+                            "mark":"text",
+                            "channel":"none"
+                        }],
+                 "superimposed":false,
+                 "combined":false
+                    }]
+                }],
+                "featureStacking":["feature_1","feature_2"],
+                "featureSuperimposition":[]
+            }
+        }]
+    }],
+    "interconnection":"dense",
+    "sequenceInteractions":{
+        "FixedFocus_Fixed Scale":true,
+        "FixedFocus_VaryingScale":false,
+        "VaryingFocus_FixedScale":false,
+        "VaryingFocus_VaryingScale":false
+    }
+}

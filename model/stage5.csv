@@ -1,0 +1,5 @@
+﻿arrangement,layoutcircular,layoutlinear,nointerconnection,sparseinterconnection,denseinterconnectionconnected,edgeconnection,readedgevalue,conservation
+LS,0,1,1,1,0,1,0,1
+LO,0,1,0,0,1,0,1,0
+CA,1,0,0,1,1,1,0,0
+CS,1,0,1,0,0,0,0,1
