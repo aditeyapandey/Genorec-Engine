@@ -91,7 +91,8 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
     "denseConnection": true,
-    "sparseConnection": false
+    "sparseConnection": false,
+    "interactivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
 },{}],2:[function(require,module,exports){
 module.exports=[
@@ -11933,6 +11934,8 @@ cartesianCombinationsVisOptions.forEach(option=>{
     arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
 
+console.log(arrangements)
+
 
 
 
@@ -12061,7 +12064,7 @@ module.exports = {
     GLOBAL_INDEX_DATA}
 },{"jquery":7}],16:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
-const stage3Model = require('../model/stage3updated.json');
+const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
 
 //Converting the model to objects
@@ -12088,7 +12091,7 @@ module.exports = {
     model5: stage5ModelObj
 }
 
-},{"../model/stage1.json":2,"../model/stage3updated.json":3,"../model/stage5.json":4}],17:[function(require,module,exports){
+},{"../model/stage1.json":2,"../model/stage3.json":3,"../model/stage5.json":4}],17:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12757,12 +12760,10 @@ function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequence
 function addElementsToOuput(input,output,layout){
     if(layout=="linear"){
         output["linearStacked"]=[]
-
         output["linearStacked"] = [...input]
        }
        else{
         output["circleStacked"]=[]
-
         output["circleStacked"] = [...input]
        }
        return output
@@ -12771,7 +12772,6 @@ function addElementsToOuput(input,output,layout){
 function getArrangement(input,tasks,dense,sparse){
     var sequencesCovered = {}
     var output = {}
-    console.log(tasks)
 
     //Find the most common layout and then assign all the sequences same layout
     var layoutCollection = input.map(val=>{
@@ -12793,7 +12793,6 @@ function getArrangement(input,tasks,dense,sparse){
         output[recommendation] = []
         output[recommendation] = [...input]
     }
-
     return output
 }
 

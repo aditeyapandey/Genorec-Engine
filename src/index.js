@@ -45,6 +45,8 @@ cartesianCombinationsVisOptions.forEach(option=>{
     arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
 
+console.log(arrangements)
+
 
 
 

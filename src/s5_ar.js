@@ -31,12 +31,10 @@ function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequence
 function addElementsToOuput(input,output,layout){
     if(layout=="linear"){
         output["linearStacked"]=[]
-
         output["linearStacked"] = [...input]
        }
        else{
         output["circleStacked"]=[]
-
         output["circleStacked"] = [...input]
        }
        return output
@@ -45,7 +43,6 @@ function addElementsToOuput(input,output,layout){
 function getArrangement(input,tasks,dense,sparse){
     var sequencesCovered = {}
     var output = {}
-    console.log(tasks)
 
     //Find the most common layout and then assign all the sequences same layout
     var layoutCollection = input.map(val=>{
@@ -67,7 +64,6 @@ function getArrangement(input,tasks,dense,sparse){
         output[recommendation] = []
         output[recommendation] = [...input]
     }
-
     return output
 }
 
