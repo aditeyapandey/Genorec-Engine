@@ -92,7 +92,7 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
     "denseConnection": true,
     "sparseConnection": false,
-    "interactivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
+    "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
 },{}],2:[function(require,module,exports){
 module.exports=[
@@ -11894,6 +11894,7 @@ var inputData = require("../configuration/input.json")
 var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
+var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 
 
@@ -11934,7 +11935,13 @@ cartesianCombinationsVisOptions.forEach(option=>{
     arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
 
-console.log(arrangements)
+//Stage 6: Assign interactivity to the arrangements
+var recommendation = []
+arrangements.forEach((arrangement)=>{
+    var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
+    recommendation.push({viewConfig,arrangement})
+})
+console.log(recommendation)
 
 
 
@@ -11963,7 +11970,7 @@ console.log(arrangements)
 // module.exports ={
 // setInput
 // }
-},{"../configuration/input.json":1,"./inputspec.js":15,"./s1_en.js":17,"./s2_ca.js":18,"./s3_ls.js":19,"./s4_al.js":20,"./s5_ar.js":21,"./utils.js":22}],15:[function(require,module,exports){
+},{"../configuration/input.json":1,"./inputspec.js":15,"./s1_en.js":17,"./s2_ca.js":18,"./s3_ls.js":19,"./s4_al.js":20,"./s5_ar.js":21,"./s6_vc":22,"./utils.js":23}],15:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -11974,7 +11981,7 @@ function Dataspec(obj) {
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
     dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
     dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());
-
+    dataSpec["sequenceInteractivity"] = (typeof obj.sequenceInteractivity =="object") ? obj.sequenceInteractivity:(function(){throw "Sequence Interactivity should be an object"}() )
 
     for(let i=0;i<obj.sequences.length;i++)
     {
@@ -12139,14 +12146,6 @@ function createInputVector(feature,attribute){
   return {inputVectorObject, inputArray}
   }
 
-
-// Description: Get the type of within interconnection at a feature level
-// Input: Feature Specification
-// Output: {interconnection:boolean, denseinterconnection:boolean}
-function getInterconnectionFeature(feature){
-  return { featureInterconnection: feature.featureInterconnection ? 1 : 0, denseInterconnection: feature.denseInterconnection ? 1 : 0 }
-}
-
 function encodeAttribute(dataspec){
 
     var stage1Output = {}
@@ -12165,17 +12164,17 @@ function encodeAttribute(dataspec){
         var inputVectorObject = createInputVector(currentFeature,currentAttribute)  
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         var recommendation = recommendedProducts(similarityScores)
-        var featureConnection = getInterconnectionFeature(currentFeature)
         var attributeId = currentFeature.attributes[j].attrId
-        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
+        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation}
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
+    // console.log(stage1Output)
     return stage1Output
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":16,"./utils.js":22}],18:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":16,"./utils.js":23}],18:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12414,14 +12413,14 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
-    // console.log(`Stage 2 Output`, trackList)
+    console.log(`Stage 2 Output`, trackList)
     
     return trackList
 
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":16,"./utils.js":22}],19:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":23}],19:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -12531,7 +12530,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":15,"./modelDataProcessing.js":16,"./utils.js":22}],20:[function(require,module,exports){
+},{"./inputspec.js":15,"./modelDataProcessing.js":16,"./utils.js":23}],20:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -12726,7 +12725,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":15,"./utils.js":22}],21:[function(require,module,exports){
+},{"./inputspec.js":15,"./utils.js":23}],21:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
@@ -12797,7 +12796,27 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":16,"./utils.js":22}],22:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":23}],22:[function(require,module,exports){
+function getViewConfiguration(interactivity){
+    var output =[]
+    
+    Object.keys(interactivity).forEach(val=>{
+        if(interactivity[val].length !== 0){
+            output.push(val)
+        }
+    })
+
+    //There should be only 1 element in the output
+    if(output.length>1){
+        throw ("Stage 6: View configuration error. We can only support one interaction pattern for the entire view.")
+    }
+    else{
+        return output[0]
+    }
+}
+
+module.exports = getViewConfiguration
+},{}],23:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")

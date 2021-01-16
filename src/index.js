@@ -5,6 +5,7 @@ var inputData = require("../configuration/input.json")
 var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
+var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 
 
@@ -45,7 +46,13 @@ cartesianCombinationsVisOptions.forEach(option=>{
     arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
 })
 
-console.log(arrangements)
+//Stage 6: Assign interactivity to the arrangements
+var recommendation = []
+arrangements.forEach((arrangement)=>{
+    var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
+    recommendation.push({viewConfig,arrangement})
+})
+console.log(recommendation)
 
 
 

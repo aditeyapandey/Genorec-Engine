@@ -45,14 +45,6 @@ function createInputVector(feature,attribute){
   return {inputVectorObject, inputArray}
   }
 
-
-// Description: Get the type of within interconnection at a feature level
-// Input: Feature Specification
-// Output: {interconnection:boolean, denseinterconnection:boolean}
-function getInterconnectionFeature(feature){
-  return { featureInterconnection: feature.featureInterconnection ? 1 : 0, denseInterconnection: feature.denseInterconnection ? 1 : 0 }
-}
-
 function encodeAttribute(dataspec){
 
     var stage1Output = {}
@@ -71,12 +63,12 @@ function encodeAttribute(dataspec){
         var inputVectorObject = createInputVector(currentFeature,currentAttribute)  
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         var recommendation = recommendedProducts(similarityScores)
-        var featureConnection = getInterconnectionFeature(currentFeature)
         var attributeId = currentFeature.attributes[j].attrId
-        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation, featureConnection}
+        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation}
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
+    // console.log(stage1Output)
     return stage1Output
 }
 

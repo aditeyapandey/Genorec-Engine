@@ -1,0 +1,83 @@
+{
+  "Recommendation_1":{
+    "RecommendationStage": "6",
+    "ViewConfig":"FixedPan_FixedZoom",
+    "VisDetails":{
+      "RecommendationStage": "5",
+      "Arrangement":"LinearStacked",
+      "PredictionScore": "0.82",
+      "SequenceConnection":true,
+      "ConnectionType":"dense",
+      "VisDetails":{
+            "Sequence_0":{
+              "RecommendationStage": "4",
+              "TrackAlignment":"Stacked",
+              "VisDetails":{
+                  "Track_0":{
+                    "RecommendationStage":"3",
+                    "Layout":"Linear",
+                    "PredictionScore":"0.66",
+                    "Interconnection":true,
+                    "VisDetails":{
+                      "Group_0":{
+                        "RecommendationStage":"2",
+                        "GroupingTechnique":"Combined",
+                        "VisDetails":{
+                          "Attribute_0":{
+                            "RecommendationStage":"1",
+                            "Encoding":{"mark":"","channel":"val"},
+                            "PredictionScore":"0.66"
+                          },
+                          "Attribute_1":{
+                            "RecommendationStage":"1",
+                            "Encoding":{"mark":"val","channel":"val"},
+                            "PredictionScore":"0.66"                            
+                          }
+                        }
+                      },
+                      "Group_1":{                        "RecommendationStage":"2",
+                        "GroupingTechnique":"Combined",
+                        "VisDetails":{
+                          
+                        }
+                      }
+                    }
+                  },
+                  "Track_1":{
+                    "RecommendationStage":"3",
+                    "Layout":"Linear",
+                    "PredictionScore":"0.66",
+                    "Interconnection":true,
+                    "VisDetails":{
+                      "Group_1":{
+                        "RecommendationStage":"2",
+                        "GroupingTechnique":"Combined",
+                        "VisDetails":{
+                          
+                        }
+                      },
+                      "Group_2":{                        "RecommendationStage":"2",
+                        "GroupingTechnique":"Combined",
+                        "VisDetails":{
+                          
+                        }
+                      }
+                    }                    
+                  }
+              }
+            },
+            "Sequence_1":{
+              "TrackAlignment":"Stacked",
+              "RecommendationStage": "4",
+              "VisDetails":{
+                  "Track_0":{},
+                  "Track_1":{}
+              }
+            }
+        }
+    }
+  },
+  "Recommendation_2":{
+    
+  }
+}

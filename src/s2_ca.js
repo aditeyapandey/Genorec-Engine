@@ -236,7 +236,7 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
-    // console.log(`Stage 2 Output`, trackList)
+    console.log(`Stage 2 Output`, trackList)
     
     return trackList
 
