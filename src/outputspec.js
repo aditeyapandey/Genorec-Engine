@@ -1,16 +1,98 @@
-function Output(obj){
-    output = {}
+function RecommendationSpec(systemoutput){
+    var recommendation = {}
 
-    var sequenceIDs = Object.keys(obj) 
+    systemoutput.forEach((element,index) => {
+      recommendation["recommendation_"+index] = ViewConfiguration(element)
+    })
+    return recommendation
+}
 
-    for(let i=0;i<sequenceIDs.sequences.length;i++)
+function ViewConfiguration(obj){
+    var recommendationStage = 6;
+    var viewConfig = obj.viewConfig
+    var visDetails = Arrangement(obj.arrangement)
+
+    return {recommendationStage,viewConfig,visDetails}
+}
+
+function Arrangement(obj){
+    var recommendationStage = 5
+    var arrangement = obj.arrangementName
+    var predictionScore = obj.predictionScore
+    var visDetails = []
+    var sequenceInterconnection = obj.sequenceConnection
+    var connectionType = obj.typeOfInterconnection
+
+    obj[arrangement].forEach((element,index)=>{
+        visDetails["Sequence_"+index] = Sequence(element)
+    })
+
+    return {recommendationStage,arrangement,predictionScore,visDetails,sequenceInterconnection,connectionType}
+}
+
+function Sequence(obj)
+{
+    var recommendationStage = 4
+    var trackAlignment = obj["stacked"].length == 0 ? "superImposed":"stacked"
+    var visDetails = {}
+
+    obj[trackAlignment].forEach((element,val) =>{
+        visDetails["Track_"+val] = Tracks(obj[element])
+    })
+    
+    
+    return {recommendationStage,trackAlignment,visDetails}
+}
+
+function Tracks(obj)
+{
+    var recommendationStage = 3
+    var layout = obj.layoutRecommendation
+    var predictionScore = obj.predictionScore
+    var visDetails = {}
+    var interconnection = obj.interconnection
+
+    obj.tracks.forEach((element,val)=>{
+        visDetails["Group_"+val] = Groups(element)
+    })
+
+    return {recommendationStage,layout,predictionScore,visDetails,interconnection}
+}
+
+function Groups(obj)
+{
+    var recommendationStage =2
+    var groupingTechnique
+    if(obj.encodings.length==1){
+        groupingTechnique = "none"
+    }
+    else if(obj.encodings.length>1)
     {
-        output["sequences"].push(Sequence(obj[sequenceIDs[i]]))
+        groupingTechnique = obj.encodings[0].combined? "combined":"superImposed"
+    }
+    else
+    {
+        throw("Grouping information in recommendation spec is wrong")
     }
 
+    var visDetails = {}
+
+    obj.encodings.forEach((element,val)=>{
+        visDetails["Attribute_"+val] = Attributes(element)
+    })
+
+    return {recommendationStage,groupingTechnique,visDetails}
 
 }
 
-function Sequence(obj){
+function Attributes(obj)
+{
+    var recommendationStage = 1;
+    var encoding = obj.encoding
+    var predictionScore = obj.similarityScore
+    return {recommendationStage,encoding,predictionScore}
+}
 
+module.exports = {
+    RecommendationSpec
 }

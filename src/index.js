@@ -7,6 +7,7 @@ var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
 var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
+var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
 
 
 //Validate the input dataspecification to ensure correctness of input data
@@ -15,7 +16,8 @@ const sequenceInputArrays = dataspec["sequences"]
 var sequencesOutput = {}
 
 //First determine sequence level encoding
-for (var i=0;i<sequenceInputArrays.length;i++){
+for (var i=0;i<sequenceInputArrays.length;i++)
+{
     currentSequence = sequenceInputArrays[i]
     //Stage 1: Encoding Selection
     var attributeEncoding = encodeAttribute(currentSequence);
@@ -52,9 +54,10 @@ arrangements.forEach((arrangement)=>{
     var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
     recommendation.push({viewConfig,arrangement})
 })
-console.log(recommendation)
 
+var recommendationSpec = RecommendationSpec(recommendation)
 
+console.log(recommendationSpec)
 
 
 // function setInput(param) {

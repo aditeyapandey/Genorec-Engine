@@ -12,7 +12,7 @@ module.exports={
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": true,
+                    "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks":["outliers"],
                     "interactivity":false,
@@ -69,7 +69,7 @@ module.exports={
                     "featureGranularity":"point",
                     "featureDensity":"sparse",
                     "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": true,
+                    "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks":["summarize"],
                     "interactivity":true,
@@ -11896,6 +11896,7 @@ var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
 var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
+var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
 
 
 //Validate the input dataspecification to ensure correctness of input data
@@ -11904,7 +11905,8 @@ const sequenceInputArrays = dataspec["sequences"]
 var sequencesOutput = {}
 
 //First determine sequence level encoding
-for (var i=0;i<sequenceInputArrays.length;i++){
+for (var i=0;i<sequenceInputArrays.length;i++)
+{
     currentSequence = sequenceInputArrays[i]
     //Stage 1: Encoding Selection
     var attributeEncoding = encodeAttribute(currentSequence);
@@ -11941,9 +11943,10 @@ arrangements.forEach((arrangement)=>{
     var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
     recommendation.push({viewConfig,arrangement})
 })
-console.log(recommendation)
 
+var recommendationSpec = RecommendationSpec(recommendation)
 
+console.log(recommendationSpec)
 
 
 // function setInput(param) {
@@ -11970,7 +11973,7 @@ console.log(recommendation)
 // module.exports ={
 // setInput
 // }
-},{"../configuration/input.json":1,"./inputspec.js":15,"./s1_en.js":17,"./s2_ca.js":18,"./s3_ls.js":19,"./s4_al.js":20,"./s5_ar.js":21,"./s6_vc":22,"./utils.js":23}],15:[function(require,module,exports){
+},{"../configuration/input.json":1,"./inputspec.js":15,"./outputspec.js":17,"./s1_en.js":18,"./s2_ca.js":19,"./s3_ls.js":20,"./s4_al.js":21,"./s5_ar.js":22,"./s6_vc":23,"./utils.js":24}],15:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12099,6 +12102,105 @@ module.exports = {
 }
 
 },{"../model/stage1.json":2,"../model/stage3.json":3,"../model/stage5.json":4}],17:[function(require,module,exports){
+function RecommendationSpec(systemoutput){
+    var recommendation = {}
+
+    systemoutput.forEach((element,index) => {
+      recommendation["recommendation_"+index] = ViewConfiguration(element)
+    })
+    return recommendation
+}
+
+function ViewConfiguration(obj){
+    var recommendationStage = 6;
+    var viewConfig = obj.viewConfig
+    var visDetails = Arrangement(obj.arrangement)
+
+    return {recommendationStage,viewConfig,visDetails}
+}
+
+function Arrangement(obj){
+    var recommendationStage = 5
+    var arrangement = obj.arrangementName
+    var predictionScore = obj.predictionScore
+    var visDetails = []
+    var sequenceInterconnection = obj.sequenceConnection
+    var connectionType = obj.typeOfInterconnection
+
+    obj[arrangement].forEach((element,index)=>{
+        visDetails["Sequence_"+index] = Sequence(element)
+    })
+
+    return {recommendationStage,arrangement,predictionScore,visDetails,sequenceInterconnection,connectionType}
+}
+
+function Sequence(obj)
+{
+    var recommendationStage = 4
+    var trackAlignment = obj["stacked"].length == 0 ? "superImposed":"stacked"
+    var visDetails = {}
+
+    obj[trackAlignment].forEach((element,val) =>{
+        visDetails["Track_"+val] = Tracks(obj[element])
+    })
+    
+    
+    return {recommendationStage,trackAlignment,visDetails}
+}
+
+function Tracks(obj)
+{
+    var recommendationStage = 3
+    var layout = obj.layoutRecommendation
+    var predictionScore = obj.predictionScore
+    var visDetails = {}
+    var interconnection = obj.interconnection
+
+    obj.tracks.forEach((element,val)=>{
+        visDetails["Group_"+val] = Groups(element)
+    })
+
+    return {recommendationStage,layout,predictionScore,visDetails,interconnection}
+}
+
+function Groups(obj)
+{
+    var recommendationStage =2
+    var groupingTechnique
+    if(obj.encodings.length==1){
+        groupingTechnique = "none"
+    }
+    else if(obj.encodings.length>1)
+    {
+        groupingTechnique = obj.encodings[0].combined? "combined":"superImposed"
+    }
+    else
+    {
+        throw("Grouping information in recommendation spec is wrong")
+    }
+
+    var visDetails = {}
+
+    obj.encodings.forEach((element,val)=>{
+        visDetails["Attribute_"+val] = Attributes(element)
+    })
+
+    return {recommendationStage,groupingTechnique,visDetails}
+
+}
+
+function Attributes(obj)
+{
+    var recommendationStage = 1;
+    var encoding = obj.encoding
+    var predictionScore = obj.similarityScore
+    return {recommendationStage,encoding,predictionScore}
+}
+
+module.exports = {
+    RecommendationSpec
+}
+},{}],18:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12174,7 +12276,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":16,"./utils.js":23}],18:[function(require,module,exports){
+},{"../model/stage1.json":2,"./modelDataProcessing.js":16,"./utils.js":24}],19:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12413,14 +12515,13 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
-    console.log(`Stage 2 Output`, trackList)
-    
+    // console.log(`Stage 2 Output`, trackList)
     return trackList
 
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":16,"./utils.js":23}],19:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":24}],20:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -12475,7 +12576,6 @@ function createTrackInputVector(stage2Output,sequenceId,featureId){
     var trackInputVectors = []
 
     var featureData = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]
-
     //This loop identifies the possible combination of trackCombinations within a feature
     for(var j =0; j<trackPossibilities.length; j++){
       var trackCombinationInputVector = []
@@ -12505,32 +12605,40 @@ function getLayout (stage2Output,sequenceId) {
   {
     var featureId = Object.keys(stage2Output[i])[0]
     var trackInputVectors = createTrackInputVector(stage2Output[i][featureId],sequenceId,featureId)
-    
+    var interconnection = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureInterconnection']
     trackLayoutOutput[featureId] = {"trackPossibilities":[]}
     
     for(var j =0; j< trackInputVectors.length;j++)
     {
       var tracks = trackInputVectors[j]
       var trackLayoutRecommendation = []
+      var predictionScores = []
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         trackLayoutRecommendation.push(recommendedProducts(similarityScores))
+        var tLRecommendation = recommendedProducts(similarityScores)
+        predictionScores.push(similarityScores[tLRecommendation])
       }
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0]})
+      // console.log(predictionScores)
+
+      var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
+      // console.log(predictionScore)
+
+      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection})
     }
   } 
 
-// console.log("Stage 3 Output:")
-// console.log(trackLayoutOutput)
+//  console.log("Stage 3 Output:")
+//  console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }
 
 
 module.exports = getLayout
-},{"./inputspec.js":15,"./modelDataProcessing.js":16,"./utils.js":23}],20:[function(require,module,exports){
+},{"./inputspec.js":15,"./modelDataProcessing.js":16,"./utils.js":24}],21:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -12725,7 +12833,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":15,"./utils.js":23}],21:[function(require,module,exports){
+},{"./inputspec.js":15,"./utils.js":24}],22:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
@@ -12791,12 +12899,16 @@ function getArrangement(input,tasks,dense,sparse){
         var recommendation = recommendedProducts(similarityScores)
         output[recommendation] = []
         output[recommendation] = [...input]
+        output["arrangementName"] = recommendation[0]
+        output['predictionScore'] = similarityScores[recommendation]
+        output['sequenceConnection'] = (dense || sparse) ? true: false
+        output['typeOfInterconnection'] = dense ? "dense":"sparse"
     }
     return output
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":16,"./utils.js":23}],22:[function(require,module,exports){
+},{"./modelDataProcessing.js":16,"./utils.js":24}],23:[function(require,module,exports){
 function getViewConfiguration(interactivity){
     var output =[]
     
@@ -12816,7 +12928,7 @@ function getViewConfiguration(interactivity){
 }
 
 module.exports = getViewConfiguration
-},{}],23:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -12863,16 +12975,23 @@ function recommendedProducts (similarityScores)
 {
   
   let arr = Object.values(similarityScores);
-  let newarr = arr.map(val =>{
-    return val[metric]
-  })
 
   let max = Math.max(...arr);
   var recommendedProducts = []
+  var secondHighest = arr.sort(function(a, b) { return b - a; })[1];
 
   Object.keys(similarityScores).map((val) => {
     if(similarityScores[val] == max) {recommendedProducts.push(val) }
   })
+
+
+  // //To add more recommendation objects
+  // if(recommendedProducts.length==1){
+  //   Object.keys(similarityScores).map((val) => {
+  //     if(similarityScores[val] == secondHighest && secondHighest>0.50) {recommendedProducts.push(val) }
+  //   })
+  
+  // }
 
   return recommendedProducts
 }

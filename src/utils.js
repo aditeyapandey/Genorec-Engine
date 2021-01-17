@@ -44,16 +44,23 @@ function recommendedProducts (similarityScores)
 {
   
   let arr = Object.values(similarityScores);
-  let newarr = arr.map(val =>{
-    return val[metric]
-  })
 
   let max = Math.max(...arr);
   var recommendedProducts = []
+  var secondHighest = arr.sort(function(a, b) { return b - a; })[1];
 
   Object.keys(similarityScores).map((val) => {
     if(similarityScores[val] == max) {recommendedProducts.push(val) }
   })
+
+
+  // //To add more recommendation objects
+  // if(recommendedProducts.length==1){
+  //   Object.keys(similarityScores).map((val) => {
+  //     if(similarityScores[val] == secondHighest && secondHighest>0.50) {recommendedProducts.push(val) }
+  //   })
+  
+  // }
 
   return recommendedProducts
 }

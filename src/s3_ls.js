@@ -52,7 +52,6 @@ function createTrackInputVector(stage2Output,sequenceId,featureId){
     var trackInputVectors = []
 
     var featureData = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]
-
     //This loop identifies the possible combination of trackCombinations within a feature
     for(var j =0; j<trackPossibilities.length; j++){
       var trackCombinationInputVector = []
@@ -82,25 +81,33 @@ function getLayout (stage2Output,sequenceId) {
   {
     var featureId = Object.keys(stage2Output[i])[0]
     var trackInputVectors = createTrackInputVector(stage2Output[i][featureId],sequenceId,featureId)
-    
+    var interconnection = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureInterconnection']
     trackLayoutOutput[featureId] = {"trackPossibilities":[]}
     
     for(var j =0; j< trackInputVectors.length;j++)
     {
       var tracks = trackInputVectors[j]
       var trackLayoutRecommendation = []
+      var predictionScores = []
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
         trackLayoutRecommendation.push(recommendedProducts(similarityScores))
+        var tLRecommendation = recommendedProducts(similarityScores)
+        predictionScores.push(similarityScores[tLRecommendation])
       }
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0]})
+      // console.log(predictionScores)
+
+      var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
+      // console.log(predictionScore)
+
+      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection})
     }
   } 
 
-// console.log("Stage 3 Output:")
-// console.log(trackLayoutOutput)
+//  console.log("Stage 3 Output:")
+//  console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }

@@ -63,6 +63,10 @@ function getArrangement(input,tasks,dense,sparse){
         var recommendation = recommendedProducts(similarityScores)
         output[recommendation] = []
         output[recommendation] = [...input]
+        output["arrangementName"] = recommendation[0]
+        output['predictionScore'] = similarityScores[recommendation]
+        output['sequenceConnection'] = (dense || sparse) ? true: false
+        output['typeOfInterconnection'] = dense ? "dense":"sparse"
     }
     return output
 }
