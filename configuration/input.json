@@ -88,7 +88,7 @@
                 }
             ]
     }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
+    "intraSequenceTask": {"connectedNodes":["sequence_0","sequence_1"],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": true,
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}

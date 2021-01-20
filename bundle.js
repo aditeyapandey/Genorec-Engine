@@ -89,22 +89,22 @@ module.exports={
                 }
             ]
     }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
+    "intraSequenceTask": {"connectedNodes":["sequence_0","sequence_1"],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": true,
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
 },{}],2:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","identify":"1","compare":"1"},
-{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","identify":"1","compare":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1"},
-{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"0"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","identify":"1","compare":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"x_xe_y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"1"},
-{"chart":"intervalHeatmap","mark":"rect","channel":"x_xe_color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","identify":"1","compare":"0"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"x_xe_color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"1"},
-{"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","identify":"1","compare":"0"}
+{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","compare":"1"},
+{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
+{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
+{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"0"},
+{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
+{"chart":"intervalBarchart","mark":"rect","channel":"x_xe_y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"x_xe_color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"0"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"x_xe_color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
+{"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
 ]
 
 },{}],3:[function(require,module,exports){
@@ -11948,30 +11948,61 @@ var recommendationSpec = RecommendationSpec(recommendation)
 
 console.log(recommendationSpec)
 
+//For publishing npm librarty
 
-// function setInput(param) {
-//     //Validate the input dataspecification to ensure correctness of input data
+//  function getRecommendation(param) {
+// //     //Validate the input dataspecification to ensure correctness of input data
 //     const dataspec = Dataspec(param)
-//     //Test output only for 1 sequence
-//     var attributeEncoding,tracks,layout
+//     const sequenceInputArrays = dataspec["sequences"]
+//     var sequencesOutput = {}
 
-//     // //First determine sequence level encoding
-//     for (var i=0;i<dataspec.length;i++){
+//     //First determine sequence level encoding
+//     for (var i=0;i<sequenceInputArrays.length;i++)
+//     {
+//         currentSequence = sequenceInputArrays[i]
 //         //Stage 1: Encoding Selection
-//         var attributeEncoding = encodeAttribute(dataspec[i]);
+//         var attributeEncoding = encodeAttribute(currentSequence);
 //         //Stage 2: Combining Attributes
 //         var tracks = getTracks(attributeEncoding)
 //         //Stage 3: Predict the Layout
-//         var layout = getLayout(tracks, attributeEncoding)
+//         var layoutForTracks = getLayout(tracks, currentSequence["sequenceId"] )
 //         //Stage 4: Alignment 
-//         // var finalSequence = getAlignment(layout)
+//         sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
 //     }
-//     return {attributeEncoding,tracks,layout}
+
+//     //Get view options
+//     var visOptions = []
+//     Object.keys(sequencesOutput).map(val=>{
+//         let tempVisArray = []
+//         Object.keys(sequencesOutput[val]).map(feature=>{
+//             tempVisArray.push(sequencesOutput[val][feature])
+//         })
+//         visOptions.push(tempVisArray)
+//     })
+
+//     var cartesianCombinationsVisOptions = cartesian(visOptions)
+
+//     //Stage 5: Get Arrangement given the entire sequence data
+//     var arrangements = [];
+
+//     cartesianCombinationsVisOptions.forEach(option=>{
+//         arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
+//     })
+
+//     //Stage 6: Assign interactivity to the arrangements
+//     var recommendation = []
+//     arrangements.forEach((arrangement)=>{
+//         var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
+//         recommendation.push({viewConfig,arrangement})
+//     })
+
+//     var recommendationSpec = RecommendationSpec(recommendation)
+
 // }  
 
 // //Define the libary's api for external applications
 // module.exports ={
-// setInput
+// getRecommendation
 // }
 },{"../configuration/input.json":1,"./inputspec.js":15,"./outputspec.js":17,"./s1_en.js":18,"./s2_ca.js":19,"./s3_ls.js":20,"./s4_al.js":21,"./s5_ar.js":22,"./s6_vc":23,"./utils.js":24}],15:[function(require,module,exports){
 const { data } = require("jquery");
@@ -12207,7 +12238,7 @@ module.exports = {
 // similarityScore contains the score of an inputVector with all the encoding options available for genomics visualization.
 // recommendation is an array of one or more product recommendation. 
 const model = require('../model/stage1.json');
-const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","identify","compare","summarize"]
+const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","compare"]
 const globalData = require("./modelDataProcessing.js")
 const stage1Model = globalData.model1
 const getProductProperties  = require("./utils.js").productProperties
@@ -12236,14 +12267,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    inputArray.push(inputVectorObject["identify"] = attribute.intraAttrTask.indexOf("identify") != -1 ? 1 : 0 
-    )
     inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
-    // inputArray.push(inputVectorObject["summarize"] = attribute.intraAttrTask.indexOf("summarize") != -1 ? 1 : 0)
-
-  //Additional elements to add to the object
-  inputVectorObject["featureInterconnection"] = feature.featureInterconnection ? 1 : 0
-  inputVectorObject["denseInterconnection"] = feature.denseInterconnection  ? 1 : 0
   
   return {inputVectorObject, inputArray}
   }
@@ -12288,7 +12312,7 @@ var attrCombination = {
     "dotplot":["heatmap","barChartCN"],
     "intervalBarchart":["intervalHeatmap","intervalBarchartCN"],
     "intervalHeatmap":["intervalBarchart"],
-    "intervalBarchartCN":["intervalBarchart"],
+    "intervalBarchartCN":["intervalBarchart"]
 }
 
 
@@ -12515,7 +12539,6 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
-    // console.log(`Stage 2 Output`, trackList)
     return trackList
 
 }

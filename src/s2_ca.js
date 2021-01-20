@@ -9,7 +9,7 @@ var attrCombination = {
     "dotplot":["heatmap","barChartCN"],
     "intervalBarchart":["intervalHeatmap","intervalBarchartCN"],
     "intervalHeatmap":["intervalBarchart"],
-    "intervalBarchartCN":["intervalBarchart"],
+    "intervalBarchartCN":["intervalBarchart"]
 }
 
 
@@ -236,7 +236,6 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
-    // console.log(`Stage 2 Output`, trackList)
     return trackList
 
 }
