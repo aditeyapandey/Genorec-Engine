@@ -19,7 +19,7 @@ function Arrangement(obj){
     var recommendationStage = 5
     var arrangement = obj.arrangementName
     var predictionScore = obj.predictionScore
-    var visDetails = []
+    var visDetails = {}
     var sequenceInterconnection = obj.sequenceConnection
     var connectionType = obj.typeOfInterconnection
 
@@ -33,11 +33,11 @@ function Arrangement(obj){
 function Sequence(obj)
 {
     var recommendationStage = 4
-    var trackAlignment = obj["stacked"].length == 0 ? "superImposed":"stacked"
+    var trackAlignment = obj["stacked"].length == 0 ? "superposed":"stacked"
     var visDetails = {}
 
     obj[trackAlignment].forEach((element,val) =>{
-        visDetails["Track_"+val] = Tracks(obj[element])
+        visDetails["TrackGroup_"+val] = Tracks(obj[element])
     })
     
     
@@ -53,7 +53,7 @@ function Tracks(obj)
     var interconnection = obj.interconnection
 
     obj.tracks.forEach((element,val)=>{
-        visDetails["Group_"+val] = Groups(element)
+        visDetails["Track_"+val] = Groups(element)
     })
 
     return {recommendationStage,layout,predictionScore,visDetails,interconnection}
@@ -68,7 +68,7 @@ function Groups(obj)
     }
     else if(obj.encodings.length>1)
     {
-        groupingTechnique = obj.encodings[0].combined? "combined":"superImposed"
+        groupingTechnique = obj.encodings[0].combined? "combined":"superposed"
     }
     else
     {

@@ -1,7 +1,7 @@
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
-const vectorKeys = ['spacesaving','interconnection','sparseinterconnection','denseinterconnection','outliers','summarize','interactivity','length','color','text']
+const vectorKeys = ['spacesaving','sparseinterconnection','denseinterconnection','outliers','summarize','interactivity','length','color','text']
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
@@ -20,11 +20,9 @@ function createInputVector(channels,featureData){
   var inputVectorObject = {}
   var inputArray = []
 
-  //TODO
   inputArray.push(inputVectorObject["spacesaving"] = 0)
 
   //Todo: No interconnection is not defined 
-  inputArray.push(inputVectorObject["interconnection"] = (featureData['featureInterconnection']) ? 1:0)
   inputArray.push(inputVectorObject["sparseinterconnection"] = (featureData['denseInterconnection']) ? 0:1)
   inputArray.push(inputVectorObject["denseinterconnection"] = (featureData['denseInterconnection']) ? 1:0)
   

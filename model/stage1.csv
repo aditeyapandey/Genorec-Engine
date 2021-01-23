@@ -1,5 +1,5 @@
 chart,mark,channel,quantitative,categorical,text,sparse,continous,point,segment,compare
-dotplot,point,y,1,0,0,1,0,1,0,1
+dotplot,point,y,1,0,0,1,1,1,0,1
 linechart,line,y,1,0,0,0,1,1,0,1
 barchart,rect,y,1,0,0,1,1,1,0,1
 heatmap,rect,color(sequential),1,0,0,1,1,1,0,0

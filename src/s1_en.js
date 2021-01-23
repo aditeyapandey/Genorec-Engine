@@ -34,7 +34,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
     inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
-  
+    
   return {inputVectorObject, inputArray}
   }
 

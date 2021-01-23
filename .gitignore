@@ -2,4 +2,6 @@ node_modules
 src/similaritymetric.js
 model/stage1b.csv
 model/stage1b.json
+TestInput
+RecommendedSpec
 

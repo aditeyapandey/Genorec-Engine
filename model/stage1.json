@@ -1,5 +1,5 @@
 [
-{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"0","point":"1","segment":"0","compare":"1"},
+{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"0"},
