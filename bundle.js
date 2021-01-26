@@ -293,6 +293,65 @@ module.exports={
                 { 
                     "featureId":"feature_0",
                     "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        }
+                    ]
+                }
+            ]
+    },{
+        "sequenceId":"sequence_1",
+        "sequenceName":"ABC", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":["summarize"],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
+    "denseConnection": true,
+    "sparseConnection": false,
+    "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
+}
+},{}],9:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"XYZ", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
                     "featureDensity":"continous",
                     "featureLabel": "Epigenetic Signal",
                     "featureInterconnection": false,
@@ -315,7 +374,7 @@ module.exports={
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -379,7 +438,7 @@ module.exports={
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":["sequence_0","sequence_1"]}
 }
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -475,7 +534,7 @@ module.exports={
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
@@ -488,14 +547,14 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports=[
-{"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"0","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
+{"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","spacesaving":"1","sparseinterconnection":"1","denseinterconnection":"1","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","spacesaving":"1","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
@@ -503,7 +562,7 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
 ]
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -550,9 +609,9 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],15:[function(require,module,exports){
-
 },{}],16:[function(require,module,exports){
+
+},{}],17:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -563,7 +622,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11437,7 +11496,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11455,7 +11514,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":19}],19:[function(require,module,exports){
+},{"ml-array-sum":20}],20:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11485,7 +11544,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":16}],20:[function(require,module,exports){
+},{"is-any-array":17}],21:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11501,7 +11560,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12093,7 +12152,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":18,"ml-distance-euclidean":20,"ml-tree-similarity":22}],22:[function(require,module,exports){
+},{"ml-array-mean":19,"ml-distance-euclidean":21,"ml-tree-similarity":23}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12230,7 +12289,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":14,"num-sort":23}],23:[function(require,module,exports){
+},{"binary-search":15,"num-sort":24}],24:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12269,7 +12328,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],24:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -12279,6 +12338,7 @@ var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
 var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
+const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
 var fs = require('fs');
 
@@ -12296,6 +12356,7 @@ input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
 input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
 input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
 input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
+input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
 
 
 input.forEach(val=>{
@@ -12352,13 +12413,15 @@ function getRecommendation(inputData,file)
 
     var recommendationSpec = RecommendationSpec(recommendation)
 
-    console.log(recommendationSpec)
+    var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
-    // var json = JSON.stringify(recommendationSpec);
-    // fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
-    //     if (err) throw err;
-    //     console.log('Data written to file');
-    // });
+    console.log(recommendationSpecNonDuplicates)
+
+    var json = JSON.stringify(recommendationSpec);
+    fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
+        if (err) throw err;
+        console.log('Data written to file');
+    });
 
 
 
@@ -12423,7 +12486,7 @@ function getRecommendation(inputData,file)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/Barcharts.json":1,"../TestInput/Circos.json":2,"../TestInput/CircularStacked.json":3,"../TestInput/Gremlin.json":4,"../TestInput/Heatmaps.json":5,"../TestInput/Ideogram.json":6,"../TestInput/IdeogramNonInteractive.json":7,"../TestInput/Linechart.json":8,"../TestInput/MultiSequencesMultiTracks.json":9,"../TestInput/input.json":10,"./inputspec.js":25,"./outputspec.js":27,"./s1_en.js":28,"./s2_ca.js":29,"./s3_ls.js":30,"./s4_al.js":31,"./s5_ar.js":32,"./s6_vc":33,"./utils.js":34,"fs":15}],25:[function(require,module,exports){
+},{"../TestInput/Barcharts.json":1,"../TestInput/Circos.json":2,"../TestInput/CircularStacked.json":3,"../TestInput/Gremlin.json":4,"../TestInput/Heatmaps.json":5,"../TestInput/Ideogram.json":6,"../TestInput/IdeogramNonInteractive.json":7,"../TestInput/LinearOrtho.json":8,"../TestInput/Linechart.json":9,"../TestInput/MultiSequencesMultiTracks.json":10,"../TestInput/input.json":11,"./inputspec.js":26,"./outputspec.js":28,"./s1_en.js":29,"./s2_ca.js":30,"./s3_ls.js":31,"./s4_al.js":32,"./s5_ar.js":33,"./s6_vc":34,"./utils.js":35,"fs":16}],26:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12521,7 +12584,7 @@ function Attributes(obj){
 module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA}
-},{"jquery":17}],26:[function(require,module,exports){
+},{"jquery":18}],27:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12550,7 +12613,7 @@ module.exports = {
     model5: stage5ModelObj
 }
 
-},{"../model/stage1.json":11,"../model/stage3.json":12,"../model/stage5.json":13}],27:[function(require,module,exports){
+},{"../model/stage1.json":12,"../model/stage3.json":13,"../model/stage5.json":14}],28:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
 
@@ -12649,7 +12712,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12718,7 +12781,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":11,"./modelDataProcessing.js":26,"./utils.js":34}],29:[function(require,module,exports){
+},{"../model/stage1.json":12,"./modelDataProcessing.js":27,"./utils.js":35}],30:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12962,7 +13025,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":26,"./utils.js":34}],30:[function(require,module,exports){
+},{"./modelDataProcessing.js":27,"./utils.js":35}],31:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -13077,7 +13140,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":25,"./modelDataProcessing.js":26,"./utils.js":34}],31:[function(require,module,exports){
+},{"./inputspec.js":26,"./modelDataProcessing.js":27,"./utils.js":35}],32:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13263,7 +13326,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 
 
         layouts['vis_'+i]["stacked"] = stacked
-        layouts['vis_'+i]["superImposed"] = superImpose
+        layouts['vis_'+i]["superimposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] = sequenceName
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout
@@ -13272,7 +13335,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":25,"./utils.js":34}],32:[function(require,module,exports){
+},{"./inputspec.js":26,"./utils.js":35}],33:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
@@ -13347,7 +13410,7 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":26,"./utils.js":34}],33:[function(require,module,exports){
+},{"./modelDataProcessing.js":27,"./utils.js":35}],34:[function(require,module,exports){
 function getViewConfiguration(interactivity){
     var output =[]
     
@@ -13367,7 +13430,7 @@ function getViewConfiguration(interactivity){
 }
 
 module.exports = getViewConfiguration
-},{}],34:[function(require,module,exports){
+},{}],35:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13512,6 +13575,25 @@ const arrayToObject = (array, keyField) =>
        return maxEl;
    }
 
+  //Check duplicate recommendation spec string
+  function checkDuplicates(inputArray)
+  {
+    var output = inputArray
+
+    for(let i=0;i<inputArray.length-1;i++)
+    {
+      for(let j = i+1;j<inputArray.length;j++)
+      {
+        if (JSON.stringify(output[i]) === JSON.stringify(output[j]))
+        {
+          output.splice(j, 1)
+        }
+      }
+    }
+
+    return output
+  }
+
 
 
 module.exports =
@@ -13521,6 +13603,7 @@ module.exports =
   recommendedProducts:  recommendedProducts ,
   cartesian: cartesian,
   getVisOptions: getVisOptions,
-  mode:mode
+  mode:mode,
+  checkDuplicates:checkDuplicates
 }
-},{"ml-distance":21}]},{},[24]);
+},{"ml-distance":22}]},{},[25]);

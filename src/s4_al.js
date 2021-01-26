@@ -183,7 +183,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 
 
         layouts['vis_'+i]["stacked"] = stacked
-        layouts['vis_'+i]["superImposed"] = superImpose
+        layouts['vis_'+i]["superimposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] = sequenceName
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout

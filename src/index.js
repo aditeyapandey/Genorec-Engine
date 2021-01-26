@@ -7,6 +7,7 @@ var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
 var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
+const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
 var fs = require('fs');
 
@@ -24,6 +25,7 @@ input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
 input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
 input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
 input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
+input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
 
 
 input.forEach(val=>{
@@ -80,13 +82,15 @@ function getRecommendation(inputData,file)
 
     var recommendationSpec = RecommendationSpec(recommendation)
 
-    console.log(recommendationSpec)
+    var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
-    // var json = JSON.stringify(recommendationSpec);
-    // fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
-    //     if (err) throw err;
-    //     console.log('Data written to file');
-    // });
+    console.log(recommendationSpecNonDuplicates)
+
+    var json = JSON.stringify(recommendationSpec);
+    fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
+        if (err) throw err;
+        console.log('Data written to file');
+    });
 
 
 

@@ -142,6 +142,25 @@ const arrayToObject = (array, keyField) =>
        return maxEl;
    }
 
+  //Check duplicate recommendation spec string
+  function checkDuplicates(inputArray)
+  {
+    var output = inputArray
+
+    for(let i=0;i<inputArray.length-1;i++)
+    {
+      for(let j = i+1;j<inputArray.length;j++)
+      {
+        if (JSON.stringify(output[i]) === JSON.stringify(output[j]))
+        {
+          output.splice(j, 1)
+        }
+      }
+    }
+
+    return output
+  }
+
 
 
 module.exports =
@@ -151,5 +170,6 @@ module.exports =
   recommendedProducts:  recommendedProducts ,
   cartesian: cartesian,
   getVisOptions: getVisOptions,
-  mode:mode
+  mode:mode,
+  checkDuplicates:checkDuplicates
 }
