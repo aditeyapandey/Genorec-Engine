@@ -84,15 +84,11 @@ function getRecommendation(inputData,file)
 
     var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
-    console.log(recommendationSpecNonDuplicates)
-
-    var json = JSON.stringify(recommendationSpec);
-    fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
-        if (err) throw err;
-        console.log('Data written to file');
-    });
-
-
+    // var json = JSON.stringify(recommendationSpecNonDuplicates);
+    // fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
+    //     if (err) throw err;
+    //     console.log('Data written to file');
+    // });
 
 }
 

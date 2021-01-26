@@ -145,19 +145,22 @@ const arrayToObject = (array, keyField) =>
   //Check duplicate recommendation spec string
   function checkDuplicates(inputArray)
   {
-    var output = inputArray
-
+    var output = {}
     for(let i=0;i<inputArray.length-1;i++)
     {
       for(let j = i+1;j<inputArray.length;j++)
       {
-        if (JSON.stringify(output[i]) === JSON.stringify(output[j]))
+        if (JSON.stringify(inputArray[i]) === JSON.stringify(inputArray[j]))
         {
-          output.splice(j, 1)
+          inputArray.splice(j, 1)
         }
       }
     }
 
+    inputArray.forEach((element,index) => {
+      output["recommendation_"+index] = element 
+    });
+    
     return output
   }
 
