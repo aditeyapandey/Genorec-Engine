@@ -43,8 +43,7 @@ function getPossibilities(feature)
     } 
 
     var encodingOptions = cartesian(allEncoding)
-    // console.log("encodingoptions", encodingOptions)
-
+    
     //Find the attributes that merge
     var finalEncodingCombination = [];
     for (var x = 0; x< encodingOptions.length; x++)
@@ -59,7 +58,7 @@ function getPossibilities(feature)
     for (var x=0;x<finalEncodingCombination.length;x++)
     {
         var set  = finalEncodingCombination[x]
-        finalSuperimposed.push(superimposeLogic(set))
+        finalSuperimposed.push(superimposeLogic(set,x))
     }
 
     var trackIdAdded = addTrackId(finalSuperimposed)
@@ -174,8 +173,9 @@ function canSuperimposed(a,b){
 }
 
 
+
 //Description: Algorithm to superimpose
-function superimposeLogic(arr)
+function superimposeLogic(arr,index)
 {
     var finalSuperImposed = []
     var visited = arr.map(val =>
@@ -199,6 +199,8 @@ function superimposeLogic(arr)
                     if(i==j){continue} // Skip the same 
                     var b = arr[j]
                     var bEncoding = arr[j].map(val => {return val['encoding']})
+                    // console.log(aEncoding,bEncoding)
+                    // console.log(canSuperimposed(aEncoding,bEncoding))
                     if(canSuperimposed(aEncoding,bEncoding))
                     {
                         visited[j] = 1
@@ -206,12 +208,14 @@ function superimposeLogic(arr)
                             arr["superimposed"] = true
                         })
                         addSuperImposed.push(...b)
+                        aEncoding.push(...bEncoding)//new
                         superImpositionNotFound = false
                         continue
                     }
                 }
 
             }
+                visited[i] = 1//new
                 a.map(arr => {
                     arr["superimposed"] = !superImpositionNotFound
                 })
