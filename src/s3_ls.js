@@ -79,6 +79,7 @@ function getLayout (stage2Output,sequenceId) {
   {
     var featureId = Object.keys(stage2Output[i])[0]
     var trackInputVectors = createTrackInputVector(stage2Output[i][featureId],sequenceId,featureId)
+    console.log(GLOBAL_INDEX_DATA)
     var interconnection = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureInterconnection']
     trackLayoutOutput[featureId] = {"trackPossibilities":[]}
     

@@ -10,18 +10,22 @@ const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
 var fs = require('fs');
+//Change this
+console.log("CHECK THIS")
+const needDefaultTask = true
+let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"]
 
 
 //Local validation of the backend
 
 var input = []
-input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json")})
-input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json")})
-// input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json")})
+input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
+input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
+input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
 // input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
 // input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
 // input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
-// input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
+input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
 // input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
 // input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
 // input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
@@ -29,11 +33,11 @@ input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json")})
 
 
 input.forEach(val=>{
-    getRecommendation(val["data"],val["chart"])
+    getRecommendation(val["data"],val["chart"],val['tasks'])
 })
 
 //Validate the input dataspecification to ensure correctness of input data
-function getRecommendation(inputData,file)
+function getRecommendation(inputData,file,tasks)
 {
     console.log(file)
     const dataspec = Dataspec(inputData)
@@ -72,7 +76,7 @@ function getRecommendation(inputData,file)
     cartesianCombinationsVisOptions.forEach(option=>{
         arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
     })
-
+    
     //Stage 6: Assign interactivity to the arrangements
     var recommendation = []
     arrangements.forEach((arrangement)=>{
@@ -83,7 +87,10 @@ function getRecommendation(inputData,file)
 
     var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
+    if(needDefaultTask) {recommendationSpecNonDuplicates["tasks"] = tasks}
+
     console.log(recommendationSpecNonDuplicates)
+
 
     // var json = JSON.stringify(recommendationSpecNonDuplicates);
     // fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {

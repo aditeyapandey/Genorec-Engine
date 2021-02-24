@@ -4,6 +4,7 @@ function RecommendationSpec(systemoutput){
     systemoutput.forEach((element,index) => {
         recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
+    
     return recommendation
 }
 
@@ -50,7 +51,7 @@ function Tracks(obj)
     var layout = obj.layoutRecommendation
     var predictionScore = obj.predictionScore
     var visDetails = {}
-    var interconnection = obj.interconnection
+    var interconnection = obj.interconnection ? true:false
 
     obj.tracks.forEach((element,val)=>{
         visDetails["Track_"+val] = Groups(element)
