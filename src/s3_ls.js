@@ -79,9 +79,10 @@ function getLayout (stage2Output,sequenceId) {
   {
     var featureId = Object.keys(stage2Output[i])[0]
     var trackInputVectors = createTrackInputVector(stage2Output[i][featureId],sequenceId,featureId)
-    console.log(GLOBAL_INDEX_DATA)
     var interconnection = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureInterconnection']
     trackLayoutOutput[featureId] = {"trackPossibilities":[]}
+    var featureGranularity =  GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureGranularity']
+    var featureDensity = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureDensity']
     
     for(var j =0; j< trackInputVectors.length;j++)
     {
@@ -101,12 +102,12 @@ function getLayout (stage2Output,sequenceId) {
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
       // console.log(predictionScore)
 
-      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection})
+      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection,featureGranularity,featureAvailability:featureDensity})
     }
   } 
 
 //  console.log("Stage 3 Output:")
-//  console.log(trackLayoutOutput)
+// console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }

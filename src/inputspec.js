@@ -13,9 +13,11 @@ function Dataspec(obj) {
     for(let i=0;i<obj.sequences.length;i++)
     {
         let sequence = Sequence(obj.sequences[i])
+        // console.log("SEQUENCE",sequence)
         dataSpec["sequences"].push(sequence)
         GLOBAL_INDEX_DATA[sequence['sequenceId']] = sequence
     }
+    // console.log("GLOBAL",GLOBAL_INDEX_DATA)
     return dataSpec
 }
 
@@ -38,7 +40,6 @@ function Sequence(obj) {
         features.push(feature);
         featureIndex[feature['featureId']] = feature
     }
-
     return {sequenceId,featureIndex,sequenceName,features,interFeatureTasks}
 }
 
@@ -57,7 +58,7 @@ function Features(obj){
     var interactivity  
    
     featureId = (typeof obj.featureId == "string") ?  obj.featureId : (function(){throw "Feature Id is missing"}());
-    featureGranularity =  (["point","interval"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
+    featureGranularity =  (["point","segment"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
     featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
     featureLabel = obj.featureLabel
     featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());

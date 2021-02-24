@@ -1,6 +1,6 @@
 function RecommendationSpec(systemoutput){
     var recommendation = {}
-
+    
     systemoutput.forEach((element,index) => {
         recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
@@ -52,12 +52,15 @@ function Tracks(obj)
     var predictionScore = obj.predictionScore
     var visDetails = {}
     var interconnection = obj.interconnection ? true:false
+    var granularity = obj.featureGranularity
+    var availability = obj.featureAvailability
+
 
     obj.tracks.forEach((element,val)=>{
         visDetails["Track_"+val] = Groups(element)
     })
 
-    return {recommendationStage,layout,predictionScore,visDetails,interconnection}
+    return {recommendationStage,layout,predictionScore,visDetails,interconnection,granularity,availability}
 }
 
 function Groups(obj)

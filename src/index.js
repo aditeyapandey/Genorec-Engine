@@ -22,14 +22,14 @@ var input = []
 input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
 input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
 input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
-// input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
-// input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
-// input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
+input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json"),"tasks":["explore"]})
+input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json"),"tasks":["explore"]})
+input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
 input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
-// input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
-// input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
-// input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
-// input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
+input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
+input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json"),"tasks":["explore"]})
+input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
+input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
 
 
 input.forEach(val=>{
@@ -76,7 +76,7 @@ function getRecommendation(inputData,file,tasks)
     cartesianCombinationsVisOptions.forEach(option=>{
         arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
     })
-    
+
     //Stage 6: Assign interactivity to the arrangements
     var recommendation = []
     arrangements.forEach((arrangement)=>{
