@@ -53,304 +53,6 @@ module.exports={
             [
                 { 
                     "featureId":"feature_0",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Random",
-                    "featureInterconnection": true,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":[],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
-                        {
-                            "attrId":"attribute_2",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],3:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Random",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":[],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
-                        {
-                            "attrId":"attribute_2",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],4:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Random",
-                    "featureInterconnection": true,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":[],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],5:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_2",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],6:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":[""],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],7:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":[""],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],8:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    },{
-        "sequenceId":"sequence_1",
-        "sequenceName":"ABC", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["summarize"],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
-    "denseConnection": true,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
-},{}],9:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
                     "featureGranularity":"point",
                     "featureDensity":"continous",
                     "featureLabel": "Epigenetic Signal",
@@ -374,71 +76,7 @@ module.exports={
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
-},{}],10:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    },{
-        "sequenceId":"sequence_1",
-        "sequenceName":"ABC", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["summarize"],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":["sequence_0","sequence_1"]}
-}
-},{}],11:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -534,7 +172,7 @@ module.exports={
     "sparseConnection": false,
     "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
-},{}],12:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
@@ -547,14 +185,14 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","spacesaving":"1","sparseinterconnection":"1","denseinterconnection":"1","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","spacesaving":"1","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],14:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
@@ -562,7 +200,7 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
 ]
 
-},{}],15:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -609,9 +247,9 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],16:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
-},{}],17:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -622,7 +260,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],18:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11496,7 +11134,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],19:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11514,7 +11152,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":20}],20:[function(require,module,exports){
+},{"ml-array-sum":12}],12:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11544,7 +11182,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":17}],21:[function(require,module,exports){
+},{"is-any-array":9}],13:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11560,7 +11198,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],22:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12152,7 +11790,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":19,"ml-distance-euclidean":21,"ml-tree-similarity":23}],23:[function(require,module,exports){
+},{"ml-array-mean":11,"ml-distance-euclidean":13,"ml-tree-similarity":15}],15:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12289,7 +11927,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":15,"num-sort":24}],24:[function(require,module,exports){
+},{"binary-search":7,"num-sort":16}],16:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12328,7 +11966,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],25:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -12348,15 +11986,15 @@ var fs = require('fs');
 var input = []
 input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json")})
 input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json")})
-input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json")})
-input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
-input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
-input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
-input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
-input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
-input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
-input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
-input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
+// input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json")})
+// input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
+// input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
+// input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
+// input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
+// input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
+// input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
+// input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
+// input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
 
 
 input.forEach(val=>{
@@ -12407,8 +12045,7 @@ function getRecommendation(inputData,file)
     //Stage 6: Assign interactivity to the arrangements
     var recommendation = []
     arrangements.forEach((arrangement)=>{
-        var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
-        recommendation.push({viewConfig,arrangement})
+        recommendation.push({arrangement})
     })
 
     var recommendationSpec = RecommendationSpec(recommendation)
@@ -12484,7 +12121,7 @@ function getRecommendation(inputData,file)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/Barcharts.json":1,"../TestInput/Circos.json":2,"../TestInput/CircularStacked.json":3,"../TestInput/Gremlin.json":4,"../TestInput/Heatmaps.json":5,"../TestInput/Ideogram.json":6,"../TestInput/IdeogramNonInteractive.json":7,"../TestInput/LinearOrtho.json":8,"../TestInput/Linechart.json":9,"../TestInput/MultiSequencesMultiTracks.json":10,"../TestInput/input.json":11,"./inputspec.js":26,"./outputspec.js":28,"./s1_en.js":29,"./s2_ca.js":30,"./s3_ls.js":31,"./s4_al.js":32,"./s5_ar.js":33,"./s6_vc":34,"./utils.js":35,"fs":16}],26:[function(require,module,exports){
+},{"../TestInput/Barcharts.json":1,"../TestInput/Linechart.json":2,"../TestInput/input.json":3,"./inputspec.js":18,"./outputspec.js":20,"./s1_en.js":21,"./s2_ca.js":22,"./s3_ls.js":23,"./s4_al.js":24,"./s5_ar.js":25,"./s6_vc":26,"./utils.js":27,"fs":8}],18:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12582,7 +12219,7 @@ function Attributes(obj){
 module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA}
-},{"jquery":18}],27:[function(require,module,exports){
+},{"jquery":10}],19:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12611,23 +12248,23 @@ module.exports = {
     model5: stage5ModelObj
 }
 
-},{"../model/stage1.json":12,"../model/stage3.json":13,"../model/stage5.json":14}],28:[function(require,module,exports){
+},{"../model/stage1.json":4,"../model/stage3.json":5,"../model/stage5.json":6}],20:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
 
     systemoutput.forEach((element,index) => {
-      recommendation["recommendation_"+index] = ViewConfiguration(element)
+        recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
     return recommendation
 }
 
-function ViewConfiguration(obj){
-    var recommendationStage = 6;
-    var viewConfig = obj.viewConfig
-    var visDetails = Arrangement(obj.arrangement)
+// function ViewConfiguration(obj){
+//     var recommendationStage = 6;
+//     var viewConfig = obj.viewConfig
+//     var visDetails = Arrangement(obj.arrangement)
 
-    return {recommendationStage,viewConfig,visDetails}
-}
+//     return {recommendationStage,viewConfig,visDetails}
+// }
 
 function Arrangement(obj){
     var recommendationStage = 5
@@ -12710,7 +12347,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],29:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12779,7 +12416,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":12,"./modelDataProcessing.js":27,"./utils.js":35}],30:[function(require,module,exports){
+},{"../model/stage1.json":4,"./modelDataProcessing.js":19,"./utils.js":27}],22:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -13027,7 +12664,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":27,"./utils.js":35}],31:[function(require,module,exports){
+},{"./modelDataProcessing.js":19,"./utils.js":27}],23:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -13142,7 +12779,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":26,"./modelDataProcessing.js":27,"./utils.js":35}],32:[function(require,module,exports){
+},{"./inputspec.js":18,"./modelDataProcessing.js":19,"./utils.js":27}],24:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13337,7 +12974,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":26,"./utils.js":35}],33:[function(require,module,exports){
+},{"./inputspec.js":18,"./utils.js":27}],25:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
@@ -13412,7 +13049,7 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":27,"./utils.js":35}],34:[function(require,module,exports){
+},{"./modelDataProcessing.js":19,"./utils.js":27}],26:[function(require,module,exports){
 function getViewConfiguration(interactivity){
     var output =[]
     
@@ -13432,7 +13069,7 @@ function getViewConfiguration(interactivity){
 }
 
 module.exports = getViewConfiguration
-},{}],35:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13611,4 +13248,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":22}]},{},[25]);
+},{"ml-distance":14}]},{},[17]);

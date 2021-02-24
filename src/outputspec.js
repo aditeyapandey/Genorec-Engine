@@ -2,18 +2,18 @@ function RecommendationSpec(systemoutput){
     var recommendation = {}
 
     systemoutput.forEach((element,index) => {
-      recommendation["recommendation_"+index] = ViewConfiguration(element)
+        recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
     return recommendation
 }
 
-function ViewConfiguration(obj){
-    var recommendationStage = 6;
-    var viewConfig = obj.viewConfig
-    var visDetails = Arrangement(obj.arrangement)
+// function ViewConfiguration(obj){
+//     var recommendationStage = 6;
+//     var viewConfig = obj.viewConfig
+//     var visDetails = Arrangement(obj.arrangement)
 
-    return {recommendationStage,viewConfig,visDetails}
-}
+//     return {recommendationStage,viewConfig,visDetails}
+// }
 
 function Arrangement(obj){
     var recommendationStage = 5

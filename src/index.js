@@ -17,15 +17,15 @@ var fs = require('fs');
 var input = []
 input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json")})
 input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json")})
-input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json")})
-input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
-input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
-input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
-input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
-input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
-input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
-input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
-input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
+// input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json")})
+// input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json")})
+// input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json")})
+// input.push({"chart":"complexchart", "data":require("../TestInput/input.json")})
+// input.push({"chart":"circos", "data":require("../TestInput/Circos.json")})
+// input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json")})
+// input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json")})
+// input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json")})
+// input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json")})
 
 
 input.forEach(val=>{
@@ -76,8 +76,7 @@ function getRecommendation(inputData,file)
     //Stage 6: Assign interactivity to the arrangements
     var recommendation = []
     arrangements.forEach((arrangement)=>{
-        var viewConfig = getViewConfiguration(dataspec['sequenceInteractivity'])
-        recommendation.push({viewConfig,arrangement})
+        recommendation.push({arrangement})
     })
 
     var recommendationSpec = RecommendationSpec(recommendation)
