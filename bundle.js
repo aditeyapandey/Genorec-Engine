@@ -337,9 +337,7 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
     "denseConnection": true,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
+    "sparseConnection": false}
 },{}],9:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -372,7 +370,6 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": false,
     "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
 }
 },{}],10:[function(require,module,exports){
 module.exports={
@@ -435,9 +432,7 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": false,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":[], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":["sequence_0","sequence_1"]}
-}
+    "sparseConnection": false}
 },{}],11:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -531,9 +526,7 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":["sequence_0","sequence_1"],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": true,
-    "sparseConnection": false,
-    "sequenceInteractivity":{"fixedPan_fixedZoom":["sequence_0","sequence_1"], "fixedPan_varyingZoom":[], "varyingPan_fixedZoom":[],"varyingPan_varyingZoom":[]}
-}
+    "sparseConnection": false}
 },{}],12:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
@@ -12350,6 +12343,8 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 //Local validation of the backend
 
 var input = []
+// input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
+
 input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
 input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
 input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
@@ -12501,7 +12496,7 @@ function Dataspec(obj) {
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
     dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
     dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());
-    dataSpec["sequenceInteractivity"] = (typeof obj.sequenceInteractivity =="object") ? obj.sequenceInteractivity:(function(){throw "Sequence Interactivity should be an object"}() )
+    // dataSpec["sequenceInteractivity"] = (typeof obj.sequenceInteractivity =="object") ? obj.sequenceInteractivity:(function(){throw "Sequence Interactivity should be an object"}() )
 
     for(let i=0;i<obj.sequences.length;i++)
     {
