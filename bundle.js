@@ -11812,7 +11812,7 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 //Local validation of the backend
 
 // var input = []
-// // input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
+// input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
 
 // input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
 // input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
@@ -11823,8 +11823,8 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 // input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
 // input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
 // input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json"),"tasks":["explore"]})
-// input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
-// input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
+// // input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
+// // input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
 // input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
 
 
@@ -11878,6 +11878,8 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 //     arrangements.forEach((arrangement)=>{
 //         recommendation.push({arrangement})
 //     })
+
+//     console.log(recommendation)
 
 //     var recommendationSpec = RecommendationSpec(recommendation)
 
@@ -12124,8 +12126,9 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
+    console.log(obj)
     var recommendationStage = 4
-    var trackAlignment = obj["stacked"].length == 0 ? "superposed":"stacked"
+    var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}
 
     obj[trackAlignment].forEach((element,val) =>{
@@ -12751,7 +12754,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
                 if(superImposedFeatures!=undefined){
                 var superImposedFlat = superImposedFeatures.flat()
                 superImposedFlat.forEach(element=>{
-                    var tempString = element["featureId"]+"track_"+element["trackId"]
+                    var tempString = element["featureId"]
                     if(superImpose.indexOf(tempString)==-1){
                         superImpose.push(tempString)
                         featureUsed[element["featureId"]] = true
@@ -12791,7 +12794,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
             {
             var superImposedFlat = superImposedFeatures.flat()
             superImposedFlat.forEach(element=>{
-                var tempString = element["featureId"]+"track_"+element["trackId"]
+                var tempString = element["featureId"]
                 if(superImpose.indexOf(tempString)==-1){
                     superImpose.push(tempString)
                     featureUsed[element["featureId"]] = true
@@ -12808,8 +12811,6 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
                 }
             })
          }
-
-
         layouts['vis_'+i]["stacked"] = stacked
         layouts['vis_'+i]["superimposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] = sequenceName

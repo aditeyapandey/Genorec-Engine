@@ -123,7 +123,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
                 if(superImposedFeatures!=undefined){
                 var superImposedFlat = superImposedFeatures.flat()
                 superImposedFlat.forEach(element=>{
-                    var tempString = element["featureId"]+"track_"+element["trackId"]
+                    var tempString = element["featureId"]
                     if(superImpose.indexOf(tempString)==-1){
                         superImpose.push(tempString)
                         featureUsed[element["featureId"]] = true
@@ -163,7 +163,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
             {
             var superImposedFlat = superImposedFeatures.flat()
             superImposedFlat.forEach(element=>{
-                var tempString = element["featureId"]+"track_"+element["trackId"]
+                var tempString = element["featureId"]
                 if(superImpose.indexOf(tempString)==-1){
                     superImpose.push(tempString)
                     featureUsed[element["featureId"]] = true
@@ -180,8 +180,6 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
                 }
             })
          }
-
-
         layouts['vis_'+i]["stacked"] = stacked
         layouts['vis_'+i]["superimposed"] = superImpose
         layouts['vis_'+i]["sequenceName"] = sequenceName
