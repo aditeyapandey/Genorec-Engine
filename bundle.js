@@ -1,98 +1,4 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"XYZ", 
-        "interFeatureTasks":{"compare":["feature_0","feature_1"],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
-                        {
-                            "attrId":"attribute_2",
-                            "dataType":"text",
-                            "intraAttrTask":["identify"]
-                        }
-                    ]
-                },
-                { 
-                    "featureId":"feature_1",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Gene Annotation",
-                    "featureInterconnection": true,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                    {
-                        "attrId":"attribute_0",
-                        "dataType":"categorical",
-                        "intraAttrTask":["identify"]
-                    },
-                    {
-                        "attrId":"attribute_1",
-                        "dataType":"text",
-                        "intraAttrTask":["identify"]
-                    }]
-                }
-            ]
-    },{
-        "sequenceId":"sequence_1",
-        "sequenceName":"ABC", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks":["summarize"],
-                    "interactivity":true,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"text",
-                            "intraAttrTask":["identify"]
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":["sequence_0","sequence_1"],"sequenceConservation":[],"edgeValues":[]},
-    "denseConnection": true,
-    "sparseConnection": false}
-},{}],2:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
@@ -105,14 +11,14 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
 ]
 
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","spacesaving":"1","sparseinterconnection":"1","denseinterconnection":"1","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","spacesaving":"1","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
@@ -120,7 +26,7 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
 ]
 
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -167,9 +73,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],6:[function(require,module,exports){
-
-},{}],7:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -180,7 +84,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],8:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11054,7 +10958,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],9:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11072,7 +10976,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":10}],10:[function(require,module,exports){
+},{"ml-array-sum":8}],8:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11102,7 +11006,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":7}],11:[function(require,module,exports){
+},{"is-any-array":5}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11118,7 +11022,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],12:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11710,7 +11614,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":9,"ml-distance-euclidean":11,"ml-tree-similarity":13}],13:[function(require,module,exports){
+},{"ml-array-mean":7,"ml-distance-euclidean":9,"ml-tree-similarity":11}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11847,7 +11751,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":5,"num-sort":14}],14:[function(require,module,exports){
+},{"binary-search":4,"num-sort":12}],12:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -11886,19 +11790,19 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],15:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
-var inputData = require("../TestInput/input.json")
+// var inputData = require("../TestInput/input.json")
 var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
-var getViewConfiguration = require("./s6_vc")
+// var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
-var fs = require('fs');
+// var fs = require('fs');
 //Change this
 console.log("CHECK THIS")
 const needDefaultTask = false
@@ -12055,7 +11959,7 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 module.exports ={
 getRecommendation
 }
-},{"../TestInput/input.json":1,"./inputspec.js":16,"./outputspec.js":18,"./s1_en.js":19,"./s2_ca.js":20,"./s3_ls.js":21,"./s4_al.js":22,"./s5_ar.js":23,"./s6_vc":24,"./utils.js":25,"fs":6}],16:[function(require,module,exports){
+},{"./inputspec.js":14,"./outputspec.js":16,"./s1_en.js":17,"./s2_ca.js":18,"./s3_ls.js":19,"./s4_al.js":20,"./s5_ar.js":21,"./utils.js":22}],14:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12155,7 +12059,7 @@ function Attributes(obj){
 module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA}
-},{"jquery":8}],17:[function(require,module,exports){
+},{"jquery":6}],15:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12184,7 +12088,7 @@ module.exports = {
     model5: stage5ModelObj
 }
 
-},{"../model/stage1.json":2,"../model/stage3.json":3,"../model/stage5.json":4}],18:[function(require,module,exports){
+},{"../model/stage1.json":1,"../model/stage3.json":2,"../model/stage5.json":3}],16:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     
@@ -12287,7 +12191,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],19:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12356,7 +12260,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":2,"./modelDataProcessing.js":17,"./utils.js":25}],20:[function(require,module,exports){
+},{"../model/stage1.json":1,"./modelDataProcessing.js":15,"./utils.js":22}],18:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12604,7 +12508,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":17,"./utils.js":25}],21:[function(require,module,exports){
+},{"./modelDataProcessing.js":15,"./utils.js":22}],19:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -12721,7 +12625,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":16,"./modelDataProcessing.js":17,"./utils.js":25}],22:[function(require,module,exports){
+},{"./inputspec.js":14,"./modelDataProcessing.js":15,"./utils.js":22}],20:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -12916,7 +12820,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":16,"./utils.js":25}],23:[function(require,module,exports){
+},{"./inputspec.js":14,"./utils.js":22}],21:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
@@ -12991,27 +12895,7 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":17,"./utils.js":25}],24:[function(require,module,exports){
-function getViewConfiguration(interactivity){
-    var output =[]
-    
-    Object.keys(interactivity).forEach(val=>{
-        if(interactivity[val].length !== 0){
-            output.push(val)
-        }
-    })
-
-    //There should be only 1 element in the output
-    if(output.length>1){
-        throw ("Stage 6: View configuration error. We can only support one interaction pattern for the entire view.")
-    }
-    else{
-        return output[0]
-    }
-}
-
-module.exports = getViewConfiguration
-},{}],25:[function(require,module,exports){
+},{"./modelDataProcessing.js":15,"./utils.js":22}],22:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13190,4 +13074,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":12}]},{},[15]);
+},{"ml-distance":10}]},{},[13]);

@@ -1,15 +1,15 @@
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
-var inputData = require("../TestInput/input.json")
+// var inputData = require("../TestInput/input.json")
 var getLayout  = require("./s3_ls.js")
 var getAlignment = require("./s4_al.js")
 var getArrangment = require("./s5_ar.js")
-var getViewConfiguration = require("./s6_vc")
+// var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
-var fs = require('fs');
+// var fs = require('fs');
 //Change this
 console.log("CHECK THIS")
 const needDefaultTask = false
