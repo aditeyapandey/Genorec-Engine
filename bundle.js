@@ -5,17 +5,17 @@ module.exports=[
 {"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
 {"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"0"},
 {"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"x_xe_y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
-{"chart":"intervalHeatmap","mark":"rect","channel":"x_xe_color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"0"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"x_xe_color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
+{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"0"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
 ]
 
 },{}],2:[function(require,module,exports){
 module.exports=[
-{"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
-{"layout":"circular","spacesaving":"1","sparseinterconnection":"1","denseinterconnection":"1","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
-{"layout":"hilbert","spacesaving":"1","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
+{"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
+{"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
+{"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
 },{}],3:[function(require,module,exports){
@@ -12514,7 +12514,7 @@ module.exports = getTracks
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
-const vectorKeys = ['spacesaving','sparseinterconnection','denseinterconnection','outliers','summarize','interactivity','length','color','text']
+const vectorKeys = ['sparseinterconnection','denseinterconnection','outliers','summarize','interactivity','length','color','text']
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
@@ -12529,11 +12529,11 @@ const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 //Description: Use the input from stage 2 and dataspec to create an input vector.
 function createInputVector(channels,featureData){
 
+  console.log(channels)
+
   // Mapping attributes 
   var inputVectorObject = {}
   var inputArray = []
-
-  inputArray.push(inputVectorObject["spacesaving"] = 0)
 
   //Todo: No interconnection is not defined 
   inputArray.push(inputVectorObject["sparseinterconnection"] = (featureData['denseInterconnection']) ? 0:1)
@@ -12549,7 +12549,7 @@ function createInputVector(channels,featureData){
   inputArray.push(inputVectorObject["color"] = (channels.indexOf("color(sequential)") !=-1 || channels.indexOf("color(nominal)") !=-1) ? 1 : 0)
   inputArray.push(inputVectorObject["text"] = channels.indexOf("none") !=-1  ? 1 : 0)
 
-  //console.log(inputArray,inputVectorObject)
+  console.log(inputArray,inputVectorObject)
   return {inputVectorObject,inputArray}
 }
 
@@ -12573,6 +12573,7 @@ function createTrackInputVector(stage2Output,sequenceId,featureId){
           var channels = trackCombinations[k].map(val => {
           return stage1Model[val['encoding']]['channel']
         })
+        console.log(channels)
         // allTrackInput.push(createInputVector(channels,tasks,interconnection))
         var inputVector = createInputVector(channels,featureData)
         trackCombinationInputVector.push({inputVector,encodings:trackCombinations[k]})
@@ -12605,13 +12606,17 @@ function getLayout (stage2Output,sequenceId) {
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        console.log(similarityScores)
         trackLayoutRecommendation.push(recommendedProducts(similarityScores))
         var tLRecommendation = recommendedProducts(similarityScores)
         predictionScores.push(similarityScores[tLRecommendation])
       }
+
+      console.log(trackLayoutRecommendation)
+
       var layoutRecommendation = mode(trackLayoutRecommendation)
       // console.log(predictionScores)
-
+      console.log(layoutRecommendation)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
       // console.log(predictionScore)
 
@@ -12620,7 +12625,7 @@ function getLayout (stage2Output,sequenceId) {
   } 
 
 //  console.log("Stage 3 Output:")
-// console.log(trackLayoutOutput)
+ console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }

@@ -1,5 +1,5 @@
 [
-{"layout":"linear","spacesaving":"0","sparseinterconnection":"1","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
-{"layout":"circular","spacesaving":"1","sparseinterconnection":"1","denseinterconnection":"1","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
-{"layout":"hilbert","spacesaving":"1","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
+{"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
+{"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
+{"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]

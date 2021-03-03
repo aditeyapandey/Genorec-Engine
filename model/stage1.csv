@@ -4,7 +4,7 @@ linechart,line,y,1,0,0,0,1,1,0,1
 barchart,rect,y,1,0,0,1,1,1,0,1
 heatmap,rect,color(sequential),1,0,0,1,1,1,0,0
 barchartCN,rect,color(nominal),0,1,0,1,1,1,0,1
-intervalBarchart,rect,x_xe_y,1,0,0,1,1,0,1,1
-intervalHeatmap,rect,x_xe_color(sequential),1,0,0,1,1,0,1,0
-intervalBarchartCN,rect,x_xe_color(nominal),0,1,0,1,1,0,1,1
+intervalBarchart,rect,y,1,0,0,1,1,0,1,1
+intervalHeatmap,rect,color(sequential),1,0,0,1,1,0,1,0
+intervalBarchartCN,rect,color(nominal),0,1,0,1,1,0,1,1
 annotation,text,none,0,0,1,1,1,1,1,0

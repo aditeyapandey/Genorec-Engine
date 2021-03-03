@@ -1,4 +1,4 @@
-﻿layout,spacesaving,sparseinterconnection,denseinterconnection,outliers,summarize,interactivity,length,color,text
-linear,0,1,1,1,1,1,1,1,1
-circular,1,1,1,0,1,0,0,1,1
-hilbert,1,0,0,0,0,0,0,1,0
+﻿layout,sparseinterconnection,denseinterconnection,outliers,summarize,interactivity,length,color,text
+linear,0,1,1,1,1,1,1,1
+circular,1,0,0,1,0,0,1,1
+hilbert,0,0,0,0,0,0,1,0
