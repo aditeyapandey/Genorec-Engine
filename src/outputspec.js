@@ -33,7 +33,6 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
-    console.log(obj)
     var recommendationStage = 4
     var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}

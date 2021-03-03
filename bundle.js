@@ -12126,7 +12126,6 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
-    console.log(obj)
     var recommendationStage = 4
     var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}
@@ -12843,8 +12842,8 @@ function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequence
     inputArray.push(inputVectorObject["layoutcircular"] = layout==="circular" ? 1 : 0)
     inputArray.push(inputVectorObject["layoutlinear"] = layout==="linear" ? 1 : 0)
     inputArray.push(inputVectorObject["nointerconnection"] = dense || sparse ? 0 : 1)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = dense ? 1 : 0)
-    inputArray.push(inputVectorObject["denseinterconnection"] = sparse ? 1 : 0)
+    inputArray.push(inputVectorObject["sparseinterconnection"] = sparse ? 1 : 0)
+    inputArray.push(inputVectorObject["denseinterconnection"] = dense ? 1 : 0)
     inputArray.push(inputVectorObject["edgeconnection"] = connectedNodes ? 1 : 0)
     inputArray.push(inputVectorObject["readedgevalue"] = edgeValue ? 1 : 0)
     inputArray.push(inputVectorObject["conservation"] = sequenceConservation ? 1 : 0)
