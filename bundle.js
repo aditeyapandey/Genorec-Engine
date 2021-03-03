@@ -12549,7 +12549,7 @@ function createInputVector(channels,featureData){
   inputArray.push(inputVectorObject["color"] = (channels.indexOf("color(sequential)") !=-1 || channels.indexOf("color(nominal)") !=-1) ? 1 : 0)
   inputArray.push(inputVectorObject["text"] = channels.indexOf("none") !=-1  ? 1 : 0)
 
-  console.log(inputArray,inputVectorObject)
+  // console.log(inputArray,inputVectorObject)
   return {inputVectorObject,inputArray}
 }
 
@@ -12625,7 +12625,7 @@ function getLayout (stage2Output,sequenceId) {
   } 
 
 //  console.log("Stage 3 Output:")
- console.log(trackLayoutOutput)
+//  console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }
@@ -12821,6 +12821,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout
     })
+    // console.log(layouts)
     return layouts
 }
 
