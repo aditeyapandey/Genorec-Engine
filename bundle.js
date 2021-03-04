@@ -12526,9 +12526,6 @@ const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 //Todo: Need to figure out how to take into consideration user preferences.
 //Description: Use the input from stage 2 and dataspec to create an input vector.
 function createInputVector(channels,featureData){
-
-  console.log(channels)
-
   // Mapping attributes 
   var inputVectorObject = {}
   var inputArray = []
@@ -12571,7 +12568,6 @@ function createTrackInputVector(stage2Output,sequenceId,featureId){
           var channels = trackCombinations[k].map(val => {
           return stage1Model[val['encoding']]['channel']
         })
-        console.log(channels)
         // allTrackInput.push(createInputVector(channels,tasks,interconnection))
         var inputVector = createInputVector(channels,featureData)
         trackCombinationInputVector.push({inputVector,encodings:trackCombinations[k]})
@@ -12604,17 +12600,13 @@ function getLayout (stage2Output,sequenceId) {
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        console.log(similarityScores)
         trackLayoutRecommendation.push(recommendedProducts(similarityScores))
         var tLRecommendation = recommendedProducts(similarityScores)
         predictionScores.push(similarityScores[tLRecommendation])
       }
 
-      console.log(trackLayoutRecommendation)
-
       var layoutRecommendation = mode(trackLayoutRecommendation)
       // console.log(predictionScores)
-      console.log(layoutRecommendation)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
       // console.log(predictionScore)
 
