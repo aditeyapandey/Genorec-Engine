@@ -238,6 +238,7 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
+    // console.log(trackList)
     return trackList
 
 }

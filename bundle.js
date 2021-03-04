@@ -20,10 +20,10 @@ module.exports=[
 
 },{}],3:[function(require,module,exports){
 module.exports=[
-{"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0","conservation":"1"},
-{"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1","conservation":"0"},
-{"arrangement":"circularAdjacent","layoutcircular":"1","layoutlinear":"0","nointerconnection":"0","sparseinterconnection":"1","denseinterconnection":"1","edgeconnection":"1","readedgevalue":"0","conservation":"0"},
-{"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0","conservation":"1"}
+{"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0"},
+{"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1"},
+{"arrangement":"circularAdjacent","layoutcircular":"1","layoutlinear":"0","nointerconnection":"0","sparseinterconnection":"1","denseinterconnection":"1","edgeconnection":"1","readedgevalue":"0"},
+{"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0"}
 ]
 
 },{}],4:[function(require,module,exports){
@@ -12503,6 +12503,7 @@ function getTracks(encodingSpecification){
         trackList.push(returnTrackSpec)
     }
 
+    // console.log(trackList)
     return trackList
 
 }
@@ -12808,7 +12809,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout
     })
-    console.log(layouts)
+    // console.log(layouts)
     return layouts
 }
 
@@ -12816,7 +12817,7 @@ module.exports = getAlignment
 },{"./inputspec.js":14,"./utils.js":22}],21:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
-const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
+const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
@@ -12839,8 +12840,8 @@ function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequence
     inputArray.push(inputVectorObject["denseinterconnection"] = dense ? 1 : 0)
     inputArray.push(inputVectorObject["edgeconnection"] = connectedNodes ? 1 : 0)
     inputArray.push(inputVectorObject["readedgevalue"] = edgeValue ? 1 : 0)
-    inputArray.push(inputVectorObject["conservation"] = sequenceConservation ? 1 : 0)
 
+    // console.log(inputVectorObject, inputArray)
     return {inputVectorObject, inputArray}
 }
 
@@ -12857,6 +12858,7 @@ function addElementsToOuput(input,output,layout){
 }
 
 function getArrangement(input,tasks,dense,sparse){
+    // console.log(dense,sparse)
     // var sequencesCovered = {}
     var output = {}
 
@@ -12876,6 +12878,7 @@ function getArrangement(input,tasks,dense,sparse){
         var sequenceConservation = tasks['sequenceConservation'].length === 2 ? true : false
         var inputVectorObject = createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation)
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        // console.log(similarityScores)
         var recommendation = recommendedProducts(similarityScores)
         output[recommendation] = []
         output[recommendation] = [...input]
@@ -12991,7 +12994,12 @@ function getVisOptions(tracks)
     return localTrackPossilities
   })
 
-  var visOptions = cartesian(trackPossibilitiesArray)  
+  var visOptions = cartesian(trackPossibilitiesArray) 
+
+  if(visOptions.every(val => val.length==1)){
+    let tempVisOptions = [...visOptions]
+    let predictedLayout = uniformizeSingleFeaturePrediction(tempVisOptions)
+  }
   
   var returnVisOptions = {}
 
@@ -13008,17 +13016,33 @@ function getVisOptions(tracks)
 function uniformizeLayoutPrediction (vis)
 {
   let testVis = JSON.parse(vis)
-
   var predictionScore = 0
   var layout
 
   testVis.map(val => {
-    console.log(val)
     if(val["predictionScore"] >= predictionScore) layout = val["layoutRecommendation"]
   }) 
    testVis.map(val=> 
     {
       val["layoutRecommendation"] = layout
+    })
+  return testVis
+}
+
+//
+function uniformizeSingleFeaturePrediction(vis)
+{
+  let testVis = vis
+  var predictionScore = 0
+  var layout
+
+  testVis.map(val => {
+    console.log(val)
+    if(val[0]["predictionScore"] >= predictionScore) layout = val[0]["layoutRecommendation"]
+  }) 
+   testVis.map(val=> 
+    {
+      val[0]["layoutRecommendation"] = layout
     })
   return testVis
 }

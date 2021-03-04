@@ -100,7 +100,12 @@ function getVisOptions(tracks)
     return localTrackPossilities
   })
 
-  var visOptions = cartesian(trackPossibilitiesArray)  
+  var visOptions = cartesian(trackPossibilitiesArray) 
+
+  if(visOptions.every(val => val.length==1)){
+    let tempVisOptions = [...visOptions]
+    let predictedLayout = uniformizeSingleFeaturePrediction(tempVisOptions)
+  }
   
   var returnVisOptions = {}
 
@@ -117,17 +122,33 @@ function getVisOptions(tracks)
 function uniformizeLayoutPrediction (vis)
 {
   let testVis = JSON.parse(vis)
-
   var predictionScore = 0
   var layout
 
   testVis.map(val => {
-    console.log(val)
     if(val["predictionScore"] >= predictionScore) layout = val["layoutRecommendation"]
   }) 
    testVis.map(val=> 
     {
       val["layoutRecommendation"] = layout
+    })
+  return testVis
+}
+
+//
+function uniformizeSingleFeaturePrediction(vis)
+{
+  let testVis = vis
+  var predictionScore = 0
+  var layout
+
+  testVis.map(val => {
+    console.log(val)
+    if(val[0]["predictionScore"] >= predictionScore) layout = val[0]["layoutRecommendation"]
+  }) 
+   testVis.map(val=> 
+    {
+      val[0]["layoutRecommendation"] = layout
     })
   return testVis
 }

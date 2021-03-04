@@ -1,6 +1,6 @@
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
-const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue","conservation"]
+const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
 const getProductProperties  = require("./utils.js").productProperties
 const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
@@ -23,8 +23,8 @@ function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequence
     inputArray.push(inputVectorObject["denseinterconnection"] = dense ? 1 : 0)
     inputArray.push(inputVectorObject["edgeconnection"] = connectedNodes ? 1 : 0)
     inputArray.push(inputVectorObject["readedgevalue"] = edgeValue ? 1 : 0)
-    inputArray.push(inputVectorObject["conservation"] = sequenceConservation ? 1 : 0)
 
+    // console.log(inputVectorObject, inputArray)
     return {inputVectorObject, inputArray}
 }
 
@@ -41,6 +41,7 @@ function addElementsToOuput(input,output,layout){
 }
 
 function getArrangement(input,tasks,dense,sparse){
+    // console.log(dense,sparse)
     // var sequencesCovered = {}
     var output = {}
 
@@ -60,6 +61,7 @@ function getArrangement(input,tasks,dense,sparse){
         var sequenceConservation = tasks['sequenceConservation'].length === 2 ? true : false
         var inputVectorObject = createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation)
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        // console.log(similarityScores)
         var recommendation = recommendedProducts(similarityScores)
         output[recommendation] = []
         output[recommendation] = [...input]

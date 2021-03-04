@@ -184,7 +184,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout
     })
-    console.log(layouts)
+    // console.log(layouts)
     return layouts
 }
 
