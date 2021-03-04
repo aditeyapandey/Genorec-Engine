@@ -1,14 +1,14 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
-{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0","compare":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
-{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"0"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0","compare":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
-{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"0"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"0","segment":"1","compare":"1"},
-{"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","compare":"0"}
+{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
+{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0"},
+{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
+{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
+{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
+{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"0","segment":"1"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"0","categorical":"1","text":"0","sparse":"1","continous":"1","point":"0","segment":"1"},
+{"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1"}
 ]
 
 },{}],2:[function(require,module,exports){
@@ -12200,7 +12200,7 @@ module.exports = {
 // similarityScore contains the score of an inputVector with all the encoding options available for genomics visualization.
 // recommendation is an array of one or more product recommendation. 
 const model = require('../model/stage1.json');
-const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","compare"]
+const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment"]
 const globalData = require("./modelDataProcessing.js")
 const stage1Model = globalData.model1
 const getProductProperties  = require("./utils.js").productProperties
@@ -12229,7 +12229,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
+    // inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
     
   return {inputVectorObject, inputArray}
   }
@@ -12606,16 +12606,15 @@ function getLayout (stage2Output,sequenceId) {
       }
 
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      // console.log(predictionScores)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
-      // console.log(predictionScore)
 
       trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection,featureGranularity,featureAvailability:featureDensity})
     }
+  
   } 
 
 //  console.log("Stage 3 Output:")
-//  console.log(trackLayoutOutput)
+// console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }
@@ -12809,7 +12808,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
         layouts['vis_'+i]["sequenceId"] = sequenceId
         layouts['vis_'+i]["layout"] = layout
     })
-    // console.log(layouts)
+    console.log(layouts)
     return layouts
 }
 
@@ -12858,7 +12857,7 @@ function addElementsToOuput(input,output,layout){
 }
 
 function getArrangement(input,tasks,dense,sparse){
-    var sequencesCovered = {}
+    // var sequencesCovered = {}
     var output = {}
 
     //Find the most common layout and then assign all the sequences same layout
@@ -12992,15 +12991,36 @@ function getVisOptions(tracks)
     return localTrackPossilities
   })
 
-  var visOptions = cartesian(trackPossibilitiesArray)
+  var visOptions = cartesian(trackPossibilitiesArray)  
   
   var returnVisOptions = {}
 
   for (var j=0;j<visOptions.length;j++){
-    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+    let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
+    returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
   }
   
   return returnVisOptions
+}
+
+//Description -> Assigns all features in a vis the same layout
+// Function uses prediction score to find the more prominent layout and then uses for the assignment
+function uniformizeLayoutPrediction (vis)
+{
+  let testVis = JSON.parse(vis)
+
+  var predictionScore = 0
+  var layout
+
+  testVis.map(val => {
+    console.log(val)
+    if(val["predictionScore"] >= predictionScore) layout = val["layoutRecommendation"]
+  }) 
+   testVis.map(val=> 
+    {
+      val["layoutRecommendation"] = layout
+    })
+  return testVis
 }
 
 //Description -> Converts an arra [id:val, key: val] to id:{id,val} 

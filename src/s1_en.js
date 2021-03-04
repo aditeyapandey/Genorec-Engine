@@ -4,7 +4,7 @@
 // similarityScore contains the score of an inputVector with all the encoding options available for genomics visualization.
 // recommendation is an array of one or more product recommendation. 
 const model = require('../model/stage1.json');
-const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","compare"]
+const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment"]
 const globalData = require("./modelDataProcessing.js")
 const stage1Model = globalData.model1
 const getProductProperties  = require("./utils.js").productProperties
@@ -33,7 +33,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
+    // inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
     
   return {inputVectorObject, inputArray}
   }

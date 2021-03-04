@@ -41,7 +41,7 @@ function addElementsToOuput(input,output,layout){
 }
 
 function getArrangement(input,tasks,dense,sparse){
-    var sequencesCovered = {}
+    // var sequencesCovered = {}
     var output = {}
 
     //Find the most common layout and then assign all the sequences same layout

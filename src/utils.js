@@ -100,15 +100,36 @@ function getVisOptions(tracks)
     return localTrackPossilities
   })
 
-  var visOptions = cartesian(trackPossibilitiesArray)
+  var visOptions = cartesian(trackPossibilitiesArray)  
   
   var returnVisOptions = {}
 
   for (var j=0;j<visOptions.length;j++){
-    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+    let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
+    returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
   }
   
   return returnVisOptions
+}
+
+//Description -> Assigns all features in a vis the same layout
+// Function uses prediction score to find the more prominent layout and then uses for the assignment
+function uniformizeLayoutPrediction (vis)
+{
+  let testVis = JSON.parse(vis)
+
+  var predictionScore = 0
+  var layout
+
+  testVis.map(val => {
+    console.log(val)
+    if(val["predictionScore"] >= predictionScore) layout = val["layoutRecommendation"]
+  }) 
+   testVis.map(val=> 
+    {
+      val["layoutRecommendation"] = layout
+    })
+  return testVis
 }
 
 //Description -> Converts an arra [id:val, key: val] to id:{id,val} 

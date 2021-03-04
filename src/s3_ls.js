@@ -95,16 +95,15 @@ function getLayout (stage2Output,sequenceId) {
       }
 
       var layoutRecommendation = mode(trackLayoutRecommendation)
-      // console.log(predictionScores)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
-      // console.log(predictionScore)
 
       trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection,featureGranularity,featureAvailability:featureDensity})
     }
+  
   } 
 
 //  console.log("Stage 3 Output:")
-//  console.log(trackLayoutOutput)
+// console.log(trackLayoutOutput)
   
 return getVisOptions(trackLayoutOutput)
 }
