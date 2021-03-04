@@ -1,6 +1,7 @@
 function RecommendationSpec(systemoutput){
     var recommendation = {}
-    
+    console.log(systemoutput)
+
     systemoutput.forEach((element,index) => {
         recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
@@ -17,6 +18,8 @@ function RecommendationSpec(systemoutput){
 // }
 
 function Arrangement(obj){
+    console.log(obj)
+
     var recommendationStage = 5
     var arrangement = obj.arrangementName
     var predictionScore = obj.predictionScore
@@ -33,6 +36,7 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
+    console.log(obj)
     var recommendationStage = 4
     var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}

@@ -14,10 +14,8 @@ var attrCombination = {
 
 
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
-    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
-    "barchart":["dotplot","linechart"],
-    "intervalBarchart":["dotplot","linechart"]
+    "dotplot": ["dotplot","linechart"],
+    "linechart": ["linechart","dotplot"]
 }
 
 

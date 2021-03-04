@@ -2,10 +2,8 @@ const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
-    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
-    "barchart":["dotplot","linechart"],
-    "intervalBarchart":["dotplot","linechart"]
+    "dotplot": ["dotplot","linechart"],
+    "linechart": ["linechart","dotplot"]
 }
 
 

@@ -12093,7 +12093,8 @@ module.exports = {
 },{"../model/stage1.json":1,"../model/stage3.json":2,"../model/stage5.json":3}],16:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
-    
+    console.log(systemoutput)
+
     systemoutput.forEach((element,index) => {
         recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
@@ -12110,6 +12111,8 @@ function RecommendationSpec(systemoutput){
 // }
 
 function Arrangement(obj){
+    console.log(obj)
+
     var recommendationStage = 5
     var arrangement = obj.arrangementName
     var predictionScore = obj.predictionScore
@@ -12126,6 +12129,7 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
+    console.log(obj)
     var recommendationStage = 4
     var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}
@@ -12279,10 +12283,8 @@ var attrCombination = {
 
 
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
-    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
-    "barchart":["dotplot","linechart"],
-    "intervalBarchart":["dotplot","linechart"]
+    "dotplot": ["dotplot","linechart"],
+    "linechart": ["linechart","dotplot"]
 }
 
 
@@ -12637,10 +12639,8 @@ const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
 var superimposition = {
-    "dotplot": ["dotplot","linechart","barchart","intervalBarchart"],
-    "linechart": ["linechart","dotplot","barchart","intervalBarchart"],
-    "barchart":["dotplot","linechart"],
-    "intervalBarchart":["dotplot","linechart"]
+    "dotplot": ["dotplot","linechart"],
+    "linechart": ["linechart","dotplot"]
 }
 
 
