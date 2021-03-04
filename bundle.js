@@ -12093,8 +12093,6 @@ module.exports = {
 },{"../model/stage1.json":1,"../model/stage3.json":2,"../model/stage5.json":3}],16:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
-    console.log(systemoutput)
-
     systemoutput.forEach((element,index) => {
         recommendation["recommendation_"+index] = Arrangement(element.arrangement)
     })
@@ -12111,8 +12109,6 @@ function RecommendationSpec(systemoutput){
 // }
 
 function Arrangement(obj){
-    console.log(obj)
-
     var recommendationStage = 5
     var arrangement = obj.arrangementName
     var predictionScore = obj.predictionScore
@@ -12129,17 +12125,17 @@ function Arrangement(obj){
 
 function Sequence(obj)
 {
-    console.log(obj)
     var recommendationStage = 4
     var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
     var visDetails = {}
+    var sequenceName = obj["sequenceName"]
 
     obj[trackAlignment].forEach((element,val) =>{
         visDetails["TrackGroup_"+val] = Tracks(obj[element])
     })
     
     
-    return {recommendationStage,trackAlignment,visDetails}
+    return {recommendationStage,sequenceName,trackAlignment,visDetails}
 }
 
 function Tracks(obj)
