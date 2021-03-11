@@ -93,7 +93,6 @@ function getLayout (stage2Output,sequenceId) {
         var tLRecommendation = recommendedProducts(similarityScores)
         predictionScores.push(similarityScores[tLRecommendation])
       }
-
       var layoutRecommendation = mode(trackLayoutRecommendation)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
 

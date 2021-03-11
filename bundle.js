@@ -12605,7 +12605,6 @@ function getLayout (stage2Output,sequenceId) {
         var tLRecommendation = recommendedProducts(similarityScores)
         predictionScores.push(similarityScores[tLRecommendation])
       }
-
       var layoutRecommendation = mode(trackLayoutRecommendation)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
 
@@ -12995,12 +12994,12 @@ function getVisOptions(tracks)
   })
 
   var visOptions = cartesian(trackPossibilitiesArray) 
-
-  if(visOptions.every(val => val.length==1)){
-    let tempVisOptions = [...visOptions]
-    let predictedLayout = uniformizeSingleFeaturePrediction(tempVisOptions)
-  }
   
+  // if(visOptions.every(val => val.length==1)){
+  //   let tempVisOptions = [...visOptions]
+  //   let predictedLayout = uniformizeSingleFeaturePrediction(tempVisOptions)
+  // }
+
   var returnVisOptions = {}
 
   for (var j=0;j<visOptions.length;j++){
@@ -13037,7 +13036,6 @@ function uniformizeSingleFeaturePrediction(vis)
   var layout
 
   testVis.map(val => {
-    console.log(val)
     if(val[0]["predictionScore"] >= predictionScore) layout = val[0]["layoutRecommendation"]
   }) 
    testVis.map(val=> 
@@ -13086,6 +13084,7 @@ const arrayToObject = (array, keyField) =>
     {
       for(let j = i+1;j<inputArray.length;j++)
       {
+        console.log(inputArray[i])
         if (JSON.stringify(inputArray[i]) === JSON.stringify(inputArray[j]))
         {
           inputArray.splice(j, 1)
