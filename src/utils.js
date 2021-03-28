@@ -1,7 +1,7 @@
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
-var metric="tanimoto"
+var metric="cosine"
 
 function getProductProperties(model,vectorKeys){
   var getProductProperties = []
@@ -110,8 +110,10 @@ function getVisOptions(tracks)
   var returnVisOptions = {}
 
   for (var j=0;j<visOptions.length;j++){
-    let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
-    returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
+    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+
+    // let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
+    // returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
   }
   
   return returnVisOptions

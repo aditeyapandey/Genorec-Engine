@@ -12601,13 +12601,17 @@ function getLayout (stage2Output,sequenceId) {
       for (var k = 0; k< tracks.length; k++){
         var inputVectorObject = tracks[k]['inputVector']
         var similarityScores = computeSimilarity(inputVectorObject,productVector)
+        console.log(similarityScores)
         trackLayoutRecommendation.push(recommendedProducts(similarityScores))
         var tLRecommendation = recommendedProducts(similarityScores)
-        predictionScores.push(similarityScores[tLRecommendation])
+        console.log(tLRecommendation)
+        predictionScores.push(similarityScores[tLRecommendation[0]])
       }
       var layoutRecommendation = mode(trackLayoutRecommendation)
+      console.log(predictionScores)
       var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
 
+      console.log(predictionScore)
       trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection,featureGranularity,featureAvailability:featureDensity})
     }
   
@@ -12894,7 +12898,7 @@ module.exports = getArrangement
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
-var metric="tanimoto"
+var metric="cosine"
 
 function getProductProperties(model,vectorKeys){
   var getProductProperties = []
@@ -13003,8 +13007,10 @@ function getVisOptions(tracks)
   var returnVisOptions = {}
 
   for (var j=0;j<visOptions.length;j++){
-    let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
-    returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
+    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+
+    // let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
+    // returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
   }
   
   return returnVisOptions
