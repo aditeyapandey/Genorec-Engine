@@ -37,7 +37,8 @@ To use genorec-engine independently, you can ues a sample input spec file.
 
 ```javascript
 
-    {"sequences": [
+{
+    "sequences": [
         {   
         "sequenceId":"sequence_0",
         "sequenceName":"XYZ", 
@@ -46,19 +47,19 @@ To use genorec-engine independently, you can ues a sample input spec file.
             [
                 { 
                     "featureId":"feature_0",
-                    "featureGranularity":"point",
+                    "featureGranularity":"segment",
                     "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "featureInterconnection": false,
+                    "featureLabel": "Random",
+                    "featureInterconnection": true,
                     "denseInterconnection": false,
-                    "intraFeatureTasks":["outliers"],
+                    "intraFeatureTasks":[],
                     "interactivity":false,
                     "attr":
                     [
                         {
                             "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"]
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify"]
                         },
                         {
                             "attrId":"attribute_1",
@@ -77,6 +78,66 @@ To use genorec-engine independently, you can ues a sample input spec file.
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": false,
     "sparseConnection": false}
-    }
 ```
 ## Output Spec
+
+The output recommendation spec of genore-engine contains information about the recommended visualization. 
+
+```javascript
+{
+  "recommendation_0": {
+    "recommendationStage": 5,
+    "arrangement": "circularStacked",
+    "predictionScore": 0.6666666666666667,
+    "visDetails": {
+      "Sequence_0": {
+        "recommendationStage": 4,
+        "trackAlignment": "stacked",
+        "visDetails": {
+          "TrackGroup_0": {
+            "recommendationStage": 3,
+            "layout": "circular",
+            "predictionScore": 0.16666666666666663,
+            "visDetails": {
+              "Track_0": {
+                "recommendationStage": 2,
+                "groupingTechnique": "combined",
+                "visDetails": {
+                  "Attribute_0": {
+                    "recommendationStage": 1,
+                    "encoding": "intervalBarchartCN",
+                    "predictionScore": 0.6
+                  },
+                  "Attribute_1": {
+                    "recommendationStage": 1,
+                    "encoding": "intervalBarchart",
+                    "predictionScore": 0.8
+                  }
+                }
+              },
+              "Track_1": {
+                "recommendationStage": 2,
+                "groupingTechnique": "none",
+                "visDetails": {
+                  "Attribute_0": {
+                    "recommendationStage": 1,
+                    "encoding": "intervalBarchart",
+                    "predictionScore": 0.8
+                  }
+                }
+              }
+            },
+            "interconnection": true,
+            "granularity": "segment",
+            "availability": "sparse"
+          }
+        }
+      }
+    },
+    "sequenceInterconnection": false,
+    "connectionType": "sparse"
+  },
+  "tasks": ["explore"]
+}
+
+```
