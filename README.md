@@ -30,7 +30,8 @@ If you have a package.json file created in your project, you can also save the l
 ## Input Spec
 
 ```javascript
-    "sequences": [
+
+    {"sequences": [
         {   
         "sequenceId":"sequence_0",
         "sequenceName":"XYZ", 
@@ -70,4 +71,5 @@ If you have a package.json file created in your project, you can also save the l
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "denseConnection": false,
     "sparseConnection": false}
+    }
     ```
