@@ -29,6 +29,12 @@ If you have a package.json file created in your project, you can also save the l
 
 ## Input Spec
 
+Currently, genorec-engine is designed to work with genorec web application. We recommend you check out the web application for genorec-engine.
+
+https://github.com/aditeyapandey/Genorec-Client
+
+To use genorec-engine independently, you can ues a sample input spec file. 
+
 ```javascript
 
     {"sequences": [
@@ -72,4 +78,5 @@ If you have a package.json file created in your project, you can also save the l
     "denseConnection": false,
     "sparseConnection": false}
     }
-    ```
+```
+## Output Spec
