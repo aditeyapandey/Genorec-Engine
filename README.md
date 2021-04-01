@@ -1,5 +1,5 @@
 # Genorec-Engine
-This is the recommendation engine for genomics visualization recommendation tool.
+Genorec-Engine is a JavaScript library for recommending genomics visualizations.
 
 ## NPM 
 
@@ -9,7 +9,7 @@ https://www.npmjs.com/package/genorec-engine
 
 Install Node version v 12 or higher.
 
-## Installation of library in your project
+## Installation
 
 > npm install genorec-engine
 
@@ -17,7 +17,7 @@ If you have a package.json file created in your project, you can also save the l
 
 > npm install --save genorec-engine
 
-## How to import the library in your JavaScript project and use it
+## How to use the library
 
 1. Import the library in your script file
 
