@@ -9,14 +9,23 @@ https://www.npmjs.com/package/genorec-engine
 
 Install Node version v 12 or higher.
 
-## Installation
+## Installation of library in your project
 
-> npm install
+> npm install genorec-engine
 
-## Running the tool
+If you have a package.json file created in your project, you can also save the library to your package.json file.
 
-1. To run the application on a browser
-> npm run dev
+> npm install --save genorec-engine
 
-2. To run the application on terminal use node
-> node src/index.js
+## How to import the library in your JavaScript project and use it
+
+1. Import the library in your script file
+
+> var genorec = require("genorec-engine")
+
+2. To execute the code and get recommendation spec, you will need to the getRecommendation method and pass it an 'input spec' file.
+
+> var recommendationSpec = genorec.getRecommendation(inputSpec)
+
+## Input Spec
+
