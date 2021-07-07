@@ -19,7 +19,7 @@
   },
   "name": "genorec-engine",
   "description": "This is the recommendation engine for genomics visualization recommendation tool.",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "src/index.js",
   "repository": {
     "type": "git",

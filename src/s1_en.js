@@ -14,16 +14,15 @@ const recommendedProducts = require("./utils.js").recommendedProducts
 const productVector = getProductProperties(stage1Model,vectorKeys)
 
 
-
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
 // Output: Vector array and object 
 function createInputVector(feature,attribute){
   
-  // Mapping attributes 
-  var inputVectorObject = {}
-  var inputArray = []
+    // Mapping attributes 
+    var inputVectorObject = {}
+    var inputArray = []
 
   //Vector array and object
     inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
@@ -61,7 +60,7 @@ function encodeAttribute(dataspec){
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
-    // console.log(stage1Output)
+    console.log(stage1Output)
     return stage1Output
 }
 
