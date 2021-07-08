@@ -21,18 +21,18 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 var input = []
 input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
 
-input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
-input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
-input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
-input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json"),"tasks":["explore"]})
-input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json"),"tasks":["explore"]})
-input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
-input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
-input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
-input.push({"chart":"multisequencemultitrack", "data":require("../TestInput/MultiSequencesMultiTracks.json"),"tasks":["explore"]})
+// input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
+// input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
+// input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
+// input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json"),"tasks":["explore"]})
+// input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json"),"tasks":["explore"]})
+// input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
+// input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
+// input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]})
 // input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
 // input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
-input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
+// input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
 
 
 input.forEach(val=>{
@@ -44,6 +44,7 @@ function getRecommendation(inputData,file,tasks)
 {
     console.log(file)
     const dataspec = Dataspec(inputData)
+    console.log("Dataspec")
     console.log(dataspec)
     const sequenceInputArrays = dataspec["sequences"]
     var sequencesOutput = {}

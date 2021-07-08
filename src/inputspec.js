@@ -8,7 +8,11 @@ function Dataspec(obj) {
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
     dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
     dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());
-    // dataSpec["sequenceInteractivity"] = (typeof obj.sequenceInteractivity =="object") ? obj.sequenceInteractivity:(function(){throw "Sequence Interactivity should be an object"}() )
+    // After changes make this property consistent
+    if(obj.hasOwnProperty('tasks'))
+    {dataSpec["tasks"] = (Array.isArray(obj.tasks)) ?  obj.tasks : (function(){throw "Tasks are not provided in correct format. They should be provided as an Array []"}());}
+
+    //dataSpec["sequenceInteractivity"] = (typeof obj.sequenceInteractivity =="object") ? obj.sequenceInteractivity:(function(){throw "Sequence Interactivity should be an object"}() )
 
     for(let i=0;i<obj.sequences.length;i++)
     {
@@ -83,14 +87,21 @@ function Attributes(obj){
     var intraAttrTask = []
     var interAttrTask = []
     var attrId
+    var fileName
+    var encodingName
 
     attrId = (typeof obj.attrId == "string") ?  obj.attrId : (function(){throw "Attribute Id is missing"}());
     dataDescriptor =  obj.dataDescriptor; // Allow assignment without typecheck for partial dataspec
     dataType = (typeof obj.dataType == "string" && ["quantitative","categorical","text"].indexOf(obj.dataType) != -1) ?  obj.dataType : (function(){throw "Data Descriptor should be a string and should be either: Quant, Categorical or Text "}());
     intraAttrTask = (Array.isArray(obj.intraAttrTask)) ? obj.intraAttrTask: (function(){throw "Intra attribute tasks should be an array with one or more entries consisting indentify, compare or summarize"}());
     interAttrTask = (Array.isArray(obj.interAttrTask)) ? obj.interAttrTask : [] // Allow assignment of [] without typecheck for partial dataspec
-    
-    return {attrId,dataDescriptor,dataType,intraAttrTask,interAttrTask}
+    if(obj.hasOwnProperty("fileName") && obj.hasOwnProperty("encodingName"))
+    {
+    fileName = (typeof obj.fileName == "string") ?  obj.fileName : (function(){throw "Filename is missing"}());
+    encodingName = (typeof obj.encodingName == "string") ?  obj.encodingName : (function(){throw "Encoding name is missing"}());
+    }
+
+    return {attrId,dataDescriptor,dataType,intraAttrTask,interAttrTask,fileName,encodingName}
   
 }
 
