@@ -16,6 +16,10 @@ const needDefaultTask = false
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"]
 
 
+//Updated variables
+var encodeAttributeUpdated  = require("./s1_en_updated.js")
+
+
 //Local validation of the backend
 
 var input = []
@@ -44,8 +48,6 @@ function getRecommendation(inputData,file,tasks)
 {
     console.log(file)
     const dataspec = Dataspec(inputData)
-    console.log("Dataspec")
-    console.log(dataspec)
     const sequenceInputArrays = dataspec["sequences"]
     var sequencesOutput = {}
 
@@ -62,6 +64,17 @@ function getRecommendation(inputData,file,tasks)
         //Stage 4: Alignment 
         sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
     }
+
+    //Updated stagewise processing
+    for (var i=0;i<sequenceInputArrays.length;i++)
+    {
+        currentSequence = sequenceInputArrays[i]
+        const tasks = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+
+        //Stage 1: Encoding Selection
+        var attributeEncoding = encodeAttributeUpdated(currentSequence,tasks);
+    }
+
 
     //Get view options
     var visOptions = []

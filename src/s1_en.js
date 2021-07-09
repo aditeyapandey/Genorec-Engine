@@ -12,6 +12,8 @@ const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
 //Product vector only needs to be computed once
 const productVector = getProductProperties(stage1Model,vectorKeys)
+console.log("productvector")
+console.log(productVector)
 
 
 // Description: This function will convert the dataspec to an array of user input
@@ -32,7 +34,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    // inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
+    //inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
     
   return {inputVectorObject, inputArray}
   }
@@ -44,7 +46,8 @@ function encodeAttribute(dataspec){
     for(var i = 0; i<dataspec.features.length;i++)
     {
       var currentFeature = dataspec.features[i];
-      var featureId = dataspec.features[i].featureId
+      var featureId = dataspec.features[i].featureId;
+
 
       //Initiation of the partial specification
       stage1Output[featureId] = []

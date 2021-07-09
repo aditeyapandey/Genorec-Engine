@@ -107,4 +107,5 @@ function Attributes(obj){
 
 module.exports = {
     Dataspec,
-    GLOBAL_INDEX_DATA}
+    GLOBAL_INDEX_DATA
+}
