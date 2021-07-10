@@ -22,15 +22,30 @@ stage5Model.map(val =>{
 
 //Updated Models
 const stage1UpdatedModel = require('../model/stage1updated.json');
+const stage2UpdatedModel = require('../model/stage2updated.json');
+const stage3UpdatedModel = require('../model/stage3updated.json');
 
-let stage1UpdatedModelObj = {}
+
+let stage1UpdatedModelObj = {};
 stage1UpdatedModel.map(val =>{
-    stage1UpdatedModelObj[val["chart"]] = val
+    stage1UpdatedModelObj[val["chart"]] = val;
+})
+
+let stage2UpdatedModelObj = {};
+stage2UpdatedModel.map(val =>{
+    stage2UpdatedModelObj[val["alignment"]] = val;
+})
+
+let stage3UpdatedModelObj = {};
+stage3UpdatedModel.map(val =>{
+    stage3UpdatedModelObj[val["layout"]] = val;
 })
 
 module.exports = {
     model1: stage1ModelObj,
     model3: stage3ModelObj,
     model5: stage5ModelObj,
-    model1Updated: stage1UpdatedModelObj
+    model1Updated: stage1UpdatedModelObj,
+    model2Updated: stage2UpdatedModelObj,
+    model3Updated: stage3UpdatedModelObj
 }

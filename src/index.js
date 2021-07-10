@@ -17,7 +17,9 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 
 
 //Updated variables
-var encodeAttributeUpdated  = require("./s1_en_updated.js")
+var encodeAttributeUpdated  = require("./s1_en_updated.js");
+var getAlignmentUpdated  = require("./s2_al_updated.js");
+var getLayoutUpdated  = require("./s3_ls_updated.js");
 
 
 //Local validation of the backend
@@ -72,7 +74,14 @@ function getRecommendation(inputData,file,tasks)
         const tasks = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
 
         //Stage 1: Encoding Selection
-        var attributeEncoding = encodeAttributeUpdated(currentSequence,tasks);
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasks);
+
+        //Stage 2: Alignment
+        const trackAlignment = getAlignmentUpdated(attributeEncoding);
+
+        //Stage 3: Layout
+        const getLayout = getLayoutUpdated(trackAlignment,tasks);
+        
     }
 
 

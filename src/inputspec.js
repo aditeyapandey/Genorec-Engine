@@ -65,8 +65,11 @@ function Features(obj){
     featureGranularity =  (["point","segment"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
     featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
     featureLabel = obj.featureLabel
-    featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
-    denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
+    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("featureInterconnection"))
+    {
+        featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
+        denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
+    }
     interactivity =   obj.interactivity
     intraFeatureTasks = obj.intraFeatureTasks
     
@@ -89,6 +92,8 @@ function Attributes(obj){
     var attrId
     var fileName
     var encodingName
+    var featureInterconnection
+    var denseInterconnection
 
     attrId = (typeof obj.attrId == "string") ?  obj.attrId : (function(){throw "Attribute Id is missing"}());
     dataDescriptor =  obj.dataDescriptor; // Allow assignment without typecheck for partial dataspec
@@ -100,8 +105,13 @@ function Attributes(obj){
     fileName = (typeof obj.fileName == "string") ?  obj.fileName : (function(){throw "Filename is missing"}());
     encodingName = (typeof obj.encodingName == "string") ?  obj.encodingName : (function(){throw "Encoding name is missing"}());
     }
+    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("featureInterconnection"))
+    {
+        featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
+        denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
+    }
 
-    return {attrId,dataDescriptor,dataType,intraAttrTask,interAttrTask,fileName,encodingName}
+    return {attrId,dataDescriptor,dataType,intraAttrTask,interAttrTask,fileName,encodingName,featureInterconnection,denseInterconnection}
   
 }
 

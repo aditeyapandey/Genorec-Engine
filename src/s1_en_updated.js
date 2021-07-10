@@ -9,13 +9,13 @@ function createInputVector(feature,attribute,task){
     var inputArray = []
 
   //Vector array and object
-    inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : -1)
-    inputArray.push(inputVectorObject["categorical"] = attribute.dataType == "categorical" ? 1 : -1)
-    inputArray.push(inputVectorObject["text"] = attribute.dataType == "text" ? 1 : -1)
-    inputArray.push(inputVectorObject["sparse"] = feature.featureDensity == "sparse" ? 1 : -1)
-    inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : -1)
-    inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:-1)
-    inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:-1)
+    inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
+    inputArray.push(inputVectorObject["categorical"] = attribute.dataType == "categorical" ? 1 : 0)
+    inputArray.push(inputVectorObject["text"] = attribute.dataType == "text" ? 1 : 0)
+    inputArray.push(inputVectorObject["sparse"] = feature.featureDensity == "sparse" ? 1 : 0)
+    inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
+    inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
+    inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
     inputArray.push(inputVectorObject["comparerois"] = task? 1 : 0 )
     
   return {inputVectorObject, inputArray}
@@ -57,13 +57,17 @@ function encodeAttributeUpdated(dataspec,tasks){
             var encodingName = currentFeature.attributes[j].encodingName
             // var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation,fileName,encodingName}
             var tempAttributeStorage = [];
+            const denseInterconnection = currentFeature.attributes[j].denseInterconnection;
+            const featureInterconnection = currentFeature.attributes[j].featureInterconnection;
+
             recommendation.forEach((val)=>{
-                tempAttributeStorage.push({"encoding":val,encodingName,fileName,"encodingPredictionScore":similarityScores[val]});
+                tempAttributeStorage.push({"encoding":val,encodingName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
             })
             stage1Output.push(tempAttributeStorage);
         }
     }
     const output = cartesian(stage1Output);
+    console.log(output);
     return output;
 }
 
