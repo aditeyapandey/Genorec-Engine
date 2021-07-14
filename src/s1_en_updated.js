@@ -23,7 +23,6 @@ function createInputVector(feature,attribute,task){
 
 function encodeAttributeUpdated(dataspec,tasks){
 
-    console.log('updated');
     const model = require('../model/stage1updated.json');
     const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
     const globalData = require("./modelDataProcessing.js")
@@ -67,7 +66,6 @@ function encodeAttributeUpdated(dataspec,tasks){
         }
     }
     const output = cartesian(stage1Output);
-    console.log(output);
     return output;
 }
 

@@ -22,15 +22,13 @@ function createInputVector(spec,tasks,stage1)
     inputArray.push(inputVectorObject["color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
     inputArray.push(inputVectorObject["text"] = channels.includes("none")  ? 1 : 0)
 
-    return{inputVectorObject,inputArray}; 
-
+    return{inputVectorObject,inputArray};
 
 }
 
 
 function getLayoutUpdated(visOptions,tasks)
 {
-    console.log("stage3")
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
@@ -47,35 +45,26 @@ function getLayoutUpdated(visOptions,tasks)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
 
-        // recommendation.forEach(rec =>{
-        //         const layout = rec;
-        //         const layoutPredictionScore = similarityScores[rec];
-        //         // const fileName = track["fileName"];
-        //         const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-        //         const encodings = element["tracks"]
-        //         // const interconnection = track["featureInterconnection"];
-        //         output.push({layout,layoutPredictionScore,fileName,encodings,interconnection})
-        //     })
+        var tracksTemp =[];
 
-        console.log(element)
-        
-        element["tracks"].forEach(track => {
-            tracksTemp = []
-            recommendation.forEach(rec =>{
-                const layout = rec;
-                const layoutPredictionScore = similarityScores[rec];
-                const fileName = track["fileName"];
-                const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-                const interconnection = track["featureInterconnection"];
-                tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection})
-            })
-        })
-
+             recommendation.forEach(rec =>{
+                 var tempOutput;
+                 var tracksTemp = [];
+                element["tracks"].forEach(track => { 
+                    const layout = rec;
+                    const layoutPredictionScore = similarityScores[rec];
+                    const fileName = track["fileName"];
+                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
+                    const interconnection = track["featureInterconnection"];
+                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection});
+                })
+                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
+                output.push(tempOutput)
+             })
 
     });
-
-console.log(output)
     
+    return output    
 }
 
 module.exports = getLayoutUpdated

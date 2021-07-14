@@ -1,0 +1,4 @@
+[
+{"partition":"contiguous","linearlayout":"1","circularlayout":"1","overview":"1","comparerois":"1","multitrack":"1","multiview":"1"},
+{"partition":"segregated","linearlayout":"1","circularlayout":"-1","overview":"1","comparerois":"-1","multitrack":"-1","multiview":"-1"}
+]

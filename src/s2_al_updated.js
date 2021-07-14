@@ -22,14 +22,14 @@ function createInputVector(spec){
 function getAlignmentUpdated(visoptions)
 {
 
-    const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"]
-    const globalData = require("./modelDataProcessing.js")
-    const model = globalData.model2Updated
-    const getProductProperties  = require("./utils.js").productProperties
-    const computeSimilarity = require("./utils.js").computeSimilarity
-    const recommendedProducts = require("./utils.js").recommendedProducts
-    const productVector = getProductProperties(model,vectorKeys)
-    const output = []
+    const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
+    const globalData = require("./modelDataProcessing.js");
+    const model = globalData.model2Updated;
+    const getProductProperties  = require("./utils.js").productProperties;
+    const computeSimilarity = require("./utils.js").computeSimilarity;
+    const recommendedProducts = require("./utils.js").recommendedProducts;
+    const productVector = getProductProperties(model,vectorKeys);
+    const output = [];
 
 
 
@@ -41,7 +41,7 @@ function getAlignmentUpdated(visoptions)
         recommendation.forEach((val)=>{
             tempAttributeStorage = {"trackAlignment":val,"trackAlignmentPrediction":similarityScores[val],"tracks":element};
         })
-        output.push(tempAttributeStorage)
+        output.push(tempAttributeStorage);
     });
     return output;
 }

@@ -86,6 +86,105 @@ module.exports={
                             "encodingName": "Quantitative1",
                             "featureInterconnection": false,
                             "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    },
+    {   
+        "sequenceId":"sequence_1",
+        "sequenceName":"hg19", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"continous",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED2",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "denseConnection": false,
+    "sparseConnection": false}
+},{}],3:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": ["overview"],
+    "denseConnection": false,
+    "sparseConnection": false}
+},{}],4:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
                         },
                         {
                             "attrId":"attribute_1",
@@ -113,7 +212,7 @@ module.exports={
     "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
     "denseConnection": false,
     "sparseConnection": false}
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0"},
@@ -126,40 +225,46 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1"}
 ]
 
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"-1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"1","point":"1","segment":"-1","comparerois":"-1"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"1","point":"-1","segment":"1","comparerois":"1"},
-{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"1","point":"-1","segment":"1","comparerois":"-1"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"1","point":"-1","segment":"1","comparerois":"1"},
-{"chart":"annotation","mark":"text","channel":"none","quantitative":"-1","categorical":"-1","text":"1","sparse":"1","continous":"1","point":"1","segment":"1","comparerois":"1"}
+{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"-1"},
+{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"-1"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
+{"chart":"annotation","mark":"text","channel":"none","quantitative":"-1","categorical":"-1","text":"1","sparse":"1","continous":"-1","point":"1","segment":"1","comparerois":"1"}
 ]
 
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports=[
 {"alignment":"overlayed","trackssamefile":"1","tracksdifffile":"-1","alllinechart":"1","allbarchart":"1","otherencoding":"-1","singletrack":"-1"},
 {"alignment":"stacked","trackssamefile":"1","tracksdifffile":"1","alllinechart":"1","allbarchart":"1","otherencoding":"1","singletrack":"1"}
 ]
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","sparseinterconnection":"1","denseinterconnection":"1","identify":"1","overview":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","sparseinterconnection":"1","denseinterconnection":"-1","identify":"1","overview":"1","length":"-1","color":"1","text":"1"},
 {"layout":"hilbert","sparseinterconnection":"-1","denseinterconnection":"-1","identify":"-1","overview":"1","length":"-1","color":"1","text":"-1"}
 ]
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
+module.exports=[
+{"partition":"contiguous","linearlayout":"1","circularlayout":"1","overview":"1","comparerois":"1","multitrack":"1","multiview":"1"},
+{"partition":"segregated","linearlayout":"1","circularlayout":"-1","overview":"1","comparerois":"-1","multitrack":"-1","multiview":"-1"}
+]
+
+},{}],11:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1"},
@@ -167,7 +272,7 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0"}
 ]
 
-},{}],9:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -214,7 +319,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -225,7 +330,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11099,7 +11204,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11117,7 +11222,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":13}],13:[function(require,module,exports){
+},{"ml-array-sum":16}],16:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11147,7 +11252,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":10}],14:[function(require,module,exports){
+},{"is-any-array":13}],17:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11163,7 +11268,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],15:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11755,7 +11860,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":12,"ml-distance-euclidean":14,"ml-tree-similarity":16}],16:[function(require,module,exports){
+},{"ml-array-mean":15,"ml-distance-euclidean":17,"ml-tree-similarity":19}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11892,7 +11997,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":9,"num-sort":17}],17:[function(require,module,exports){
+},{"binary-search":12,"num-sort":20}],20:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -11931,7 +12036,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],18:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -11954,7 +12059,7 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 var encodeAttributeUpdated  = require("./s1_en_updated.js");
 var getAlignmentUpdated  = require("./s2_al_updated.js");
 var getLayoutUpdated  = require("./s3_ls_updated.js");
-
+var getPartitionUpdated  = require("./s4_pt_updated.js");
 
 //Local validation of the backend
 
@@ -11969,11 +12074,14 @@ input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.jso
 // input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
 // input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
 // input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]})
 // input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
 // input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
 // input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
 
+//Updated Inputs
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
 
 input.forEach(val=>{
     getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -12001,24 +12109,7 @@ function getRecommendation(inputData,file,tasks)
         sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
     }
 
-    //Updated stagewise processing
-    for (var i=0;i<sequenceInputArrays.length;i++)
-    {
-        currentSequence = sequenceInputArrays[i]
-        const tasks = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
-
-        //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasks);
-
-        //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding);
-
-        //Stage 3: Layout
-        const getLayout = getLayoutUpdated(trackAlignment,tasks);
-        
-    }
-
-
+    
     //Get view options
     var visOptions = []
     Object.keys(sequencesOutput).map(val=>{
@@ -12061,6 +12152,39 @@ function getRecommendation(inputData,file,tasks)
     //     console.log('Data written to file');
     // });
 
+
+    //Updated stagewise processing
+    const viewGroups = [];
+    const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+    for (var i=0;i<sequenceInputArrays.length;i++)
+    {
+        currentSequence = sequenceInputArrays[i];
+        
+        //Stage 1: Encoding Selection
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
+
+        //Stage 2: Alignment
+        const trackAlignment = getAlignmentUpdated(attributeEncoding);
+
+        //Stage 3: Layout
+        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
+
+        //Add View Information
+        const viewGroupElement = [];
+        getLayout.forEach(val=>{
+            val["sequenceName"] = currentSequence["sequenceName"];
+            viewGroupElement.push(val);
+            })
+            viewGroups.push(viewGroupElement);
+        }
+
+        //Stage 4: Partition
+        const partition = getPartitionUpdated(viewGroups,tasksUpdated);
+        console.log(partition);
+
+        //Stage 5: 
+        
+        
 }
 
 //For publishing npm library
@@ -12126,7 +12250,7 @@ function getRecommendation(inputData,file,tasks)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/InputInterface.json":1,"../TestInput/V2UpdatedInput.json":2,"./inputspec.js":19,"./outputspec.js":21,"./s1_en.js":22,"./s1_en_updated.js":23,"./s2_al_updated.js":24,"./s2_ca.js":25,"./s3_ls.js":26,"./s3_ls_updated.js":27,"./s4_al.js":28,"./s5_ar.js":29,"./utils.js":30}],19:[function(require,module,exports){
+},{"../TestInput/InputInterface.json":1,"../TestInput/V2SingleTrackMultipleView.json":2,"../TestInput/V2SingleTrackSingleView.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":22,"./outputspec.js":24,"./s1_en.js":25,"./s1_en_updated.js":26,"./s2_al_updated.js":27,"./s2_ca.js":28,"./s3_ls.js":29,"./s3_ls_updated.js":30,"./s4_al.js":31,"./s4_pt_updated.js":32,"./s5_ar.js":33,"./utils.js":34}],22:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12248,7 +12372,7 @@ module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA
 }
-},{"jquery":11}],20:[function(require,module,exports){
+},{"jquery":14}],23:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12275,7 +12399,7 @@ stage5Model.map(val =>{
 const stage1UpdatedModel = require('../model/stage1updated.json');
 const stage2UpdatedModel = require('../model/stage2updated.json');
 const stage3UpdatedModel = require('../model/stage3updated.json');
-
+const stage4UpdatedModel = require('../model/stage4updated.json');
 
 let stage1UpdatedModelObj = {};
 stage1UpdatedModel.map(val =>{
@@ -12292,16 +12416,22 @@ stage3UpdatedModel.map(val =>{
     stage3UpdatedModelObj[val["layout"]] = val;
 })
 
+let stage4UpdatedModelObj = {};
+stage4UpdatedModel.map(val =>{
+    stage4UpdatedModelObj[val["partition"]] = val;
+})
+
 module.exports = {
     model1: stage1ModelObj,
     model3: stage3ModelObj,
     model5: stage5ModelObj,
     model1Updated: stage1UpdatedModelObj,
     model2Updated: stage2UpdatedModelObj,
-    model3Updated: stage3UpdatedModelObj
+    model3Updated: stage3UpdatedModelObj,
+    model4Updated: stage4UpdatedModelObj
 }
 
-},{"../model/stage1.json":3,"../model/stage1updated.json":4,"../model/stage2updated.json":5,"../model/stage3.json":6,"../model/stage3updated.json":7,"../model/stage5.json":8}],21:[function(require,module,exports){
+},{"../model/stage1.json":5,"../model/stage1updated.json":6,"../model/stage2updated.json":7,"../model/stage3.json":8,"../model/stage3updated.json":9,"../model/stage4updated.json":10,"../model/stage5.json":11}],24:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     systemoutput.forEach((element,index) => {
@@ -12404,7 +12534,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],22:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12475,7 +12605,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":3,"./modelDataProcessing.js":20,"./utils.js":30}],23:[function(require,module,exports){
+},{"../model/stage1.json":5,"./modelDataProcessing.js":23,"./utils.js":34}],26:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12501,7 +12631,6 @@ function createInputVector(feature,attribute,task){
 
 function encodeAttributeUpdated(dataspec,tasks){
 
-    console.log('updated');
     const model = require('../model/stage1updated.json');
     const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
     const globalData = require("./modelDataProcessing.js")
@@ -12545,12 +12674,11 @@ function encodeAttributeUpdated(dataspec,tasks){
         }
     }
     const output = cartesian(stage1Output);
-    console.log(output);
     return output;
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":4,"./modelDataProcessing.js":20,"./utils.js":30}],24:[function(require,module,exports){
+},{"../model/stage1updated.json":6,"./modelDataProcessing.js":23,"./utils.js":34}],27:[function(require,module,exports){
 function createInputVector(spec){
     const inputVectorObject = {};
     const inputArray = [];
@@ -12575,14 +12703,14 @@ function createInputVector(spec){
 function getAlignmentUpdated(visoptions)
 {
 
-    const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"]
-    const globalData = require("./modelDataProcessing.js")
-    const model = globalData.model2Updated
-    const getProductProperties  = require("./utils.js").productProperties
-    const computeSimilarity = require("./utils.js").computeSimilarity
-    const recommendedProducts = require("./utils.js").recommendedProducts
-    const productVector = getProductProperties(model,vectorKeys)
-    const output = []
+    const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
+    const globalData = require("./modelDataProcessing.js");
+    const model = globalData.model2Updated;
+    const getProductProperties  = require("./utils.js").productProperties;
+    const computeSimilarity = require("./utils.js").computeSimilarity;
+    const recommendedProducts = require("./utils.js").recommendedProducts;
+    const productVector = getProductProperties(model,vectorKeys);
+    const output = [];
 
 
 
@@ -12594,14 +12722,14 @@ function getAlignmentUpdated(visoptions)
         recommendation.forEach((val)=>{
             tempAttributeStorage = {"trackAlignment":val,"trackAlignmentPrediction":similarityScores[val],"tracks":element};
         })
-        output.push(tempAttributeStorage)
+        output.push(tempAttributeStorage);
     });
     return output;
 }
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":20,"./utils.js":30}],25:[function(require,module,exports){
+},{"./modelDataProcessing.js":23,"./utils.js":34}],28:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12848,7 +12976,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":20,"./utils.js":30}],26:[function(require,module,exports){
+},{"./modelDataProcessing.js":23,"./utils.js":34}],29:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -12964,7 +13092,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":19,"./modelDataProcessing.js":20,"./utils.js":30}],27:[function(require,module,exports){
+},{"./inputspec.js":22,"./modelDataProcessing.js":23,"./utils.js":34}],30:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1)
 {
     var inputVectorObject = {};
@@ -12989,15 +13117,13 @@ function createInputVector(spec,tasks,stage1)
     inputArray.push(inputVectorObject["color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
     inputArray.push(inputVectorObject["text"] = channels.includes("none")  ? 1 : 0)
 
-    return{inputVectorObject,inputArray}; 
-
+    return{inputVectorObject,inputArray};
 
 }
 
 
 function getLayoutUpdated(visOptions,tasks)
 {
-    console.log("stage3")
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
@@ -13014,39 +13140,30 @@ function getLayoutUpdated(visOptions,tasks)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
 
-        // recommendation.forEach(rec =>{
-        //         const layout = rec;
-        //         const layoutPredictionScore = similarityScores[rec];
-        //         // const fileName = track["fileName"];
-        //         const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-        //         const encodings = element["tracks"]
-        //         // const interconnection = track["featureInterconnection"];
-        //         output.push({layout,layoutPredictionScore,fileName,encodings,interconnection})
-        //     })
+        var tracksTemp =[];
 
-        console.log(element)
-        
-        element["tracks"].forEach(track => {
-            tracksTemp = []
-            recommendation.forEach(rec =>{
-                const layout = rec;
-                const layoutPredictionScore = similarityScores[rec];
-                const fileName = track["fileName"];
-                const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-                const interconnection = track["featureInterconnection"];
-                tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection})
-            })
-        })
-
+             recommendation.forEach(rec =>{
+                 var tempOutput;
+                 var tracksTemp = [];
+                element["tracks"].forEach(track => { 
+                    const layout = rec;
+                    const layoutPredictionScore = similarityScores[rec];
+                    const fileName = track["fileName"];
+                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
+                    const interconnection = track["featureInterconnection"];
+                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection});
+                })
+                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
+                output.push(tempOutput)
+             })
 
     });
-
-console.log(output)
     
+    return output    
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":20,"./utils.js":30}],28:[function(require,module,exports){
+},{"./modelDataProcessing.js":23,"./utils.js":34}],31:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13238,7 +13355,70 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":19,"./utils.js":30}],29:[function(require,module,exports){
+},{"./inputspec.js":22,"./utils.js":34}],32:[function(require,module,exports){
+function createInputVector(specs,tasks)
+{
+    const inputVectorObject = {};
+    const inputArray = [];
+
+    //Layout
+    let allLayouts = specs.map(view =>{
+        if(view.hasOwnProperty("tracks"))
+        {
+            const layouts= view["tracks"].map(track=>{
+                return track["layout"];
+             })
+        return layouts
+        }
+        else{
+            return []
+        }
+    });
+    allLayouts = allLayouts.flat(1);
+    inputArray.push(inputVectorObject["linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
+    inputArray.push(inputVectorObject["circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
+    
+    //Tasks
+    inputArray.push(inputVectorObject["overview"] = tasks.includes("overview") ? 1 : 0);
+    inputArray.push(inputVectorObject["comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
+    
+    //Tracks and Views
+    inputArray.push(inputVectorObject["multitrack"] = specs.some(val =>{return val["tracks"].length >1})? 1 : 0);
+    inputArray.push(inputVectorObject["multiview"] = specs.length >1 ? 1 : 0);
+   
+    return{inputVectorObject,inputArray};
+}
+
+function getPartitionUpdated(input,tasks)
+{
+    const vectorKeys = ["linearlayout","circularlayout","overview","comparerois","multitrack","multiview"]
+    const globalData = require("./modelDataProcessing.js");
+    const model = globalData.model4Updated;
+    const getProductProperties  = require("./utils.js").productProperties;
+    const computeSimilarity = require("./utils.js").computeSimilarity;
+    const recommendedProducts = require("./utils.js").recommendedProducts;
+    const productVector = getProductProperties(model,vectorKeys);
+    const output = [];
+    const cartesian = require("./utils.js").cartesian;
+
+    const allVisOptions = cartesian(input);
+    allVisOptions.forEach(views =>{
+        const inputVectorObject = createInputVector(views,tasks);
+        const similarityScores = computeSimilarity(inputVectorObject,productVector);
+        const recommendation = recommendedProducts(similarityScores);
+        recommendation.forEach(val =>{
+            const viewPartition = val;
+            const partitionPredictionScore = similarityScores[val];
+            output.push({viewPartition,partitionPredictionScore,views});
+        })
+    })
+
+    return output
+}
+
+
+module.exports = getPartitionUpdated
+},{"./modelDataProcessing.js":23,"./utils.js":34}],33:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
@@ -13315,7 +13495,7 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":20,"./utils.js":30}],30:[function(require,module,exports){
+},{"./modelDataProcessing.js":23,"./utils.js":34}],34:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13538,4 +13718,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":15}]},{},[18]);
+},{"ml-distance":18}]},{},[21]);

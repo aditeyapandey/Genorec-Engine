@@ -20,7 +20,7 @@ let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes"
 var encodeAttributeUpdated  = require("./s1_en_updated.js");
 var getAlignmentUpdated  = require("./s2_al_updated.js");
 var getLayoutUpdated  = require("./s3_ls_updated.js");
-
+var getPartitionUpdated  = require("./s4_pt_updated.js");
 
 //Local validation of the backend
 
@@ -35,11 +35,14 @@ input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.jso
 // input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
 // input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
 // input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]})
 // input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
 // input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
 // input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
 
+//Updated Inputs
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
 
 input.forEach(val=>{
     getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -67,24 +70,7 @@ function getRecommendation(inputData,file,tasks)
         sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
     }
 
-    //Updated stagewise processing
-    for (var i=0;i<sequenceInputArrays.length;i++)
-    {
-        currentSequence = sequenceInputArrays[i]
-        const tasks = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
-
-        //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasks);
-
-        //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding);
-
-        //Stage 3: Layout
-        const getLayout = getLayoutUpdated(trackAlignment,tasks);
-        
-    }
-
-
+    
     //Get view options
     var visOptions = []
     Object.keys(sequencesOutput).map(val=>{
@@ -127,6 +113,39 @@ function getRecommendation(inputData,file,tasks)
     //     console.log('Data written to file');
     // });
 
+
+    //Updated stagewise processing
+    const viewGroups = [];
+    const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+    for (var i=0;i<sequenceInputArrays.length;i++)
+    {
+        currentSequence = sequenceInputArrays[i];
+        
+        //Stage 1: Encoding Selection
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
+
+        //Stage 2: Alignment
+        const trackAlignment = getAlignmentUpdated(attributeEncoding);
+
+        //Stage 3: Layout
+        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
+
+        //Add View Information
+        const viewGroupElement = [];
+        getLayout.forEach(val=>{
+            val["sequenceName"] = currentSequence["sequenceName"];
+            viewGroupElement.push(val);
+            })
+            viewGroups.push(viewGroupElement);
+        }
+
+        //Stage 4: Partition
+        const partition = getPartitionUpdated(viewGroups,tasksUpdated);
+        console.log(partition);
+
+        //Stage 5: 
+        
+        
 }
 
 //For publishing npm library
