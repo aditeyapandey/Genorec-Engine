@@ -12,8 +12,7 @@ const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
 //Product vector only needs to be computed once
 const productVector = getProductProperties(stage1Model,vectorKeys)
-console.log("productvector")
-console.log(productVector)
+
 
 
 // Description: This function will convert the dataspec to an array of user input
@@ -63,7 +62,6 @@ function encodeAttribute(dataspec){
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
-    console.log(stage1Output)
     return stage1Output
 }
 

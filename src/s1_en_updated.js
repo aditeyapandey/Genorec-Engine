@@ -27,7 +27,6 @@ function encodeAttributeUpdated(dataspec,tasks){
     const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
     const globalData = require("./modelDataProcessing.js")
     const stage1Model = globalData.model1Updated
-    console.log(stage1Model)
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts

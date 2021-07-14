@@ -21,6 +21,8 @@ var encodeAttributeUpdated  = require("./s1_en_updated.js");
 var getAlignmentUpdated  = require("./s2_al_updated.js");
 var getLayoutUpdated  = require("./s3_ls_updated.js");
 var getPartitionUpdated  = require("./s4_pt_updated.js");
+var getArrangementUpdated  = require("./s5_ar_updated.js");
+
 
 //Local validation of the backend
 
@@ -51,7 +53,6 @@ input.forEach(val=>{
 //Validate the input dataspecification to ensure correctness of input data
 function getRecommendation(inputData,file,tasks)
 {
-    console.log(file)
     const dataspec = Dataspec(inputData)
     const sequenceInputArrays = dataspec["sequences"]
     var sequencesOutput = {}
@@ -96,15 +97,17 @@ function getRecommendation(inputData,file,tasks)
         recommendation.push({arrangement})
     })
 
-    console.log(recommendation)
+    // console.log("Recommendation",recommendation)
 
     var recommendationSpec = RecommendationSpec(recommendation)
+
+    // console.log("Recommendation Spec",recommendationSpec)
 
     var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
     if(needDefaultTask) {recommendationSpecNonDuplicates["tasks"] = tasks}
 
-    console.log(recommendationSpecNonDuplicates)
+    // console.log(recommendationSpecNonDuplicates)
 
 
     // var json = JSON.stringify(recommendationSpecNonDuplicates);
@@ -141,11 +144,14 @@ function getRecommendation(inputData,file,tasks)
 
         //Stage 4: Partition
         const partition = getPartitionUpdated(viewGroups,tasksUpdated);
-        console.log(partition);
 
-        //Stage 5: 
+        //Stage 5: Arrangement
+        const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
-        
+       const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+       
+       //Return the rec non dupicates
+
 }
 
 //For publishing npm library

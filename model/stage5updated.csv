@@ -1,6 +1,4 @@
-﻿arrangement,layoutcircular,layoutlinear,nointerconnection,sparseinterconnection,denseinterconnection,comparetracks,threeormoreviews
-linearStacked,-1,1,1,1,-1,1,1
-linearOrthogonal,-1,1,-1,-1,1,-1,-1
-linearAdjacent,-1,1,-1,1,-1,1,1
-circularAdjacent,1,-1,-1,1,1,-1,-1
-circularStacked,1,-1,1,-1,-1,1,1
+﻿arrangement,nointerconnection,sparseinterconnection,denseinterconnection,twoviews,otherthantwoviews,allcircles,mixedlayout,compareacrosstracks
+stacked,1,1,-1,1,1,-1,1,1
+adjacent,-1,1,-1,1,-1,1,-1,-1
+orthogonal,-1,1,1,1,-1,-1,-1,-1

@@ -1,0 +1,5 @@
+[
+{"arrangement":"stacked","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"1","allcircles":"-1","mixedlayout":"1","compareacrosstracks":"1"},
+{"arrangement":"adjacent","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"-1","allcircles":"1","mixedlayout":"-1","compareacrosstracks":"-1"},
+{"arrangement":"orthogonal","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"1","twoviews":"1","otherthantwoviews":"-1","allcircles":"-1","mixedlayout":"-1","compareacrosstracks":"-1"}
+]

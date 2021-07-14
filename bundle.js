@@ -273,6 +273,13 @@ module.exports=[
 ]
 
 },{}],12:[function(require,module,exports){
+module.exports=[
+{"arrangement":"stacked","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"1","allcircles":"-1","mixedlayout":"1","compareacrosstracks":"1"},
+{"arrangement":"adjacent","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"-1","allcircles":"1","mixedlayout":"-1","compareacrosstracks":"-1"},
+{"arrangement":"orthogonal","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"1","twoviews":"1","otherthantwoviews":"-1","allcircles":"-1","mixedlayout":"-1","compareacrosstracks":"-1"}
+]
+
+},{}],13:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -319,7 +326,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -330,7 +337,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11204,7 +11211,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11222,7 +11229,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":16}],16:[function(require,module,exports){
+},{"ml-array-sum":17}],17:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11252,7 +11259,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":13}],17:[function(require,module,exports){
+},{"is-any-array":14}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11268,7 +11275,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11860,7 +11867,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":15,"ml-distance-euclidean":17,"ml-tree-similarity":19}],19:[function(require,module,exports){
+},{"ml-array-mean":16,"ml-distance-euclidean":18,"ml-tree-similarity":20}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11997,7 +12004,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":12,"num-sort":20}],20:[function(require,module,exports){
+},{"binary-search":13,"num-sort":21}],21:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12036,7 +12043,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -12060,6 +12067,8 @@ var encodeAttributeUpdated  = require("./s1_en_updated.js");
 var getAlignmentUpdated  = require("./s2_al_updated.js");
 var getLayoutUpdated  = require("./s3_ls_updated.js");
 var getPartitionUpdated  = require("./s4_pt_updated.js");
+var getArrangementUpdated  = require("./s5_ar_updated.js");
+
 
 //Local validation of the backend
 
@@ -12090,7 +12099,6 @@ input.forEach(val=>{
 //Validate the input dataspecification to ensure correctness of input data
 function getRecommendation(inputData,file,tasks)
 {
-    console.log(file)
     const dataspec = Dataspec(inputData)
     const sequenceInputArrays = dataspec["sequences"]
     var sequencesOutput = {}
@@ -12135,15 +12143,17 @@ function getRecommendation(inputData,file,tasks)
         recommendation.push({arrangement})
     })
 
-    console.log(recommendation)
+    // console.log("Recommendation",recommendation)
 
     var recommendationSpec = RecommendationSpec(recommendation)
+
+    // console.log("Recommendation Spec",recommendationSpec)
 
     var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
 
     if(needDefaultTask) {recommendationSpecNonDuplicates["tasks"] = tasks}
 
-    console.log(recommendationSpecNonDuplicates)
+    // console.log(recommendationSpecNonDuplicates)
 
 
     // var json = JSON.stringify(recommendationSpecNonDuplicates);
@@ -12180,11 +12190,14 @@ function getRecommendation(inputData,file,tasks)
 
         //Stage 4: Partition
         const partition = getPartitionUpdated(viewGroups,tasksUpdated);
-        console.log(partition);
 
-        //Stage 5: 
+        //Stage 5: Arrangement
+        const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
-        
+       const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+       
+       //Return the rec non dupicates
+
 }
 
 //For publishing npm library
@@ -12250,7 +12263,7 @@ function getRecommendation(inputData,file,tasks)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/InputInterface.json":1,"../TestInput/V2SingleTrackMultipleView.json":2,"../TestInput/V2SingleTrackSingleView.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":22,"./outputspec.js":24,"./s1_en.js":25,"./s1_en_updated.js":26,"./s2_al_updated.js":27,"./s2_ca.js":28,"./s3_ls.js":29,"./s3_ls_updated.js":30,"./s4_al.js":31,"./s4_pt_updated.js":32,"./s5_ar.js":33,"./utils.js":34}],22:[function(require,module,exports){
+},{"../TestInput/InputInterface.json":1,"../TestInput/V2SingleTrackMultipleView.json":2,"../TestInput/V2SingleTrackSingleView.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":23,"./outputspec.js":25,"./s1_en.js":26,"./s1_en_updated.js":27,"./s2_al_updated.js":28,"./s2_ca.js":29,"./s3_ls.js":30,"./s3_ls_updated.js":31,"./s4_al.js":32,"./s4_pt_updated.js":33,"./s5_ar.js":34,"./s5_ar_updated.js":35,"./utils.js":36}],23:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12372,7 +12385,7 @@ module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA
 }
-},{"jquery":14}],23:[function(require,module,exports){
+},{"jquery":15}],24:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12400,6 +12413,8 @@ const stage1UpdatedModel = require('../model/stage1updated.json');
 const stage2UpdatedModel = require('../model/stage2updated.json');
 const stage3UpdatedModel = require('../model/stage3updated.json');
 const stage4UpdatedModel = require('../model/stage4updated.json');
+const stage5UpdatedModel = require('../model/stage5updated.json');
+
 
 let stage1UpdatedModelObj = {};
 stage1UpdatedModel.map(val =>{
@@ -12421,6 +12436,11 @@ stage4UpdatedModel.map(val =>{
     stage4UpdatedModelObj[val["partition"]] = val;
 })
 
+let stage5UpdatedModelObj = {};
+stage5UpdatedModel.map(val =>{
+    stage5UpdatedModelObj[val["arrangement"]] = val;
+})
+
 module.exports = {
     model1: stage1ModelObj,
     model3: stage3ModelObj,
@@ -12428,10 +12448,11 @@ module.exports = {
     model1Updated: stage1UpdatedModelObj,
     model2Updated: stage2UpdatedModelObj,
     model3Updated: stage3UpdatedModelObj,
-    model4Updated: stage4UpdatedModelObj
+    model4Updated: stage4UpdatedModelObj,
+    model5Updated: stage5UpdatedModelObj
 }
 
-},{"../model/stage1.json":5,"../model/stage1updated.json":6,"../model/stage2updated.json":7,"../model/stage3.json":8,"../model/stage3updated.json":9,"../model/stage4updated.json":10,"../model/stage5.json":11}],24:[function(require,module,exports){
+},{"../model/stage1.json":5,"../model/stage1updated.json":6,"../model/stage2updated.json":7,"../model/stage3.json":8,"../model/stage3updated.json":9,"../model/stage4updated.json":10,"../model/stage5.json":11,"../model/stage5updated.json":12}],25:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     systemoutput.forEach((element,index) => {
@@ -12534,7 +12555,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12549,8 +12570,7 @@ const computeSimilarity = require("./utils.js").computeSimilarity
 const recommendedProducts = require("./utils.js").recommendedProducts
 //Product vector only needs to be computed once
 const productVector = getProductProperties(stage1Model,vectorKeys)
-console.log("productvector")
-console.log(productVector)
+
 
 
 // Description: This function will convert the dataspec to an array of user input
@@ -12600,12 +12620,11 @@ function encodeAttribute(dataspec){
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
-    console.log(stage1Output)
     return stage1Output
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":5,"./modelDataProcessing.js":23,"./utils.js":34}],26:[function(require,module,exports){
+},{"../model/stage1.json":5,"./modelDataProcessing.js":24,"./utils.js":36}],27:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12635,7 +12654,6 @@ function encodeAttributeUpdated(dataspec,tasks){
     const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
     const globalData = require("./modelDataProcessing.js")
     const stage1Model = globalData.model1Updated
-    console.log(stage1Model)
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts
@@ -12678,7 +12696,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":6,"./modelDataProcessing.js":23,"./utils.js":34}],27:[function(require,module,exports){
+},{"../model/stage1updated.json":6,"./modelDataProcessing.js":24,"./utils.js":36}],28:[function(require,module,exports){
 function createInputVector(spec){
     const inputVectorObject = {};
     const inputArray = [];
@@ -12729,7 +12747,7 @@ function getAlignmentUpdated(visoptions)
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":23,"./utils.js":34}],28:[function(require,module,exports){
+},{"./modelDataProcessing.js":24,"./utils.js":36}],29:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12976,7 +12994,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":23,"./utils.js":34}],29:[function(require,module,exports){
+},{"./modelDataProcessing.js":24,"./utils.js":36}],30:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -13092,7 +13110,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":22,"./modelDataProcessing.js":23,"./utils.js":34}],30:[function(require,module,exports){
+},{"./inputspec.js":23,"./modelDataProcessing.js":24,"./utils.js":36}],31:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1)
 {
     var inputVectorObject = {};
@@ -13163,7 +13181,7 @@ function getLayoutUpdated(visOptions,tasks)
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":23,"./utils.js":34}],31:[function(require,module,exports){
+},{"./modelDataProcessing.js":24,"./utils.js":36}],32:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13355,7 +13373,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":22,"./utils.js":34}],32:[function(require,module,exports){
+},{"./inputspec.js":23,"./utils.js":36}],33:[function(require,module,exports){
 function createInputVector(specs,tasks)
 {
     const inputVectorObject = {};
@@ -13418,7 +13436,7 @@ function getPartitionUpdated(input,tasks)
 
 
 module.exports = getPartitionUpdated
-},{"./modelDataProcessing.js":23,"./utils.js":34}],33:[function(require,module,exports){
+},{"./modelDataProcessing.js":24,"./utils.js":36}],34:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
@@ -13495,7 +13513,78 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":23,"./utils.js":34}],34:[function(require,module,exports){
+},{"./modelDataProcessing.js":24,"./utils.js":36}],35:[function(require,module,exports){
+function createInputVector(views,network,tasks)
+{
+    const inputVectorObject = {};
+    const inputArray = [];
+
+    //Network
+    inputArray.push(inputVectorObject["nointerconnection"] = !network["denseNetwork"] && !network["sparseNetwork"] ? 1:0)
+    inputArray.push(inputVectorObject["sparseinterconnection"] = network["sparseNetwork"] ? 1:0)
+    inputArray.push(inputVectorObject["denseinterconnection"] = network["denseNetwork"] ? 1:0)
+
+    //Views
+    inputArray.push(inputVectorObject["twoviews"] = views.length === 2 ? 1:0);
+    inputArray.push(inputVectorObject["otherthantwoviews"] = views.length !== 2 ? 1:0);
+
+
+    //layouts
+    const allLayouts = views.map(view =>{
+        tracks = view["tracks"];
+        var layouts=[]
+        tracks.map((track,i,arr)=>{
+            layouts.push(track["layout"])
+         })
+         return layouts;
+    }).flat()
+    const mixedLayout = !allLayouts.every((val,i,arr)=>{
+        return val === arr[0];
+    })
+    const allCircles = allLayouts.every((val,i,arr)=>{
+        return val === "circular";
+    })
+    inputArray.push(inputVectorObject["allcircles"] = allCircles ? 1:0);
+    inputArray.push(inputVectorObject["mixedlayout"] = mixedLayout ? 1:0);
+
+    //Tasks
+    inputArray.push(inputVectorObject["compareacrosstracks"] = tasks.includes("compareMultipleTracks") ? 1:0);
+
+    return{inputVectorObject,inputArray};
+}
+
+function getArrangementUpdated(input,networkData,tasks)
+{
+    console.log("stage5",input);
+    const vectorKeys = ["nointerconnection","sparseinterconnection","denseinterconnection","twoviews","otherthantwoviews","allcircles","mixedlayout","compareacrosstracks"];
+
+    const globalData = require("./modelDataProcessing.js");
+    const model = globalData.model5Updated;
+    const getProductProperties  = require("./utils.js").productProperties;
+    const computeSimilarity = require("./utils.js").computeSimilarity;
+    const recommendedProducts = require("./utils.js").recommendedProducts;
+    const productVector = getProductProperties(model,vectorKeys);
+    const output = [];
+
+    input.forEach(element => {
+        const inputVectorObject = createInputVector(element["views"],networkData,tasks);
+        const similarityScores = computeSimilarity(inputVectorObject,productVector);
+        const recommendation = recommendedProducts(similarityScores);
+        recommendation.forEach(rec=>{
+            const viewArrangement = rec;
+            const viewArrangementPredictionScore = similarityScores[rec];
+            element["viewArrangement"] = viewArrangement;
+            element["viewArrangementPredictionScore"] = viewArrangementPredictionScore;
+            output.push(element);
+        })
+    });
+
+
+    return output
+}
+
+module.exports = getArrangementUpdated;
+},{"./modelDataProcessing.js":24,"./utils.js":36}],36:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13718,4 +13807,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":18}]},{},[21]);
+},{"ml-distance":19}]},{},[22]);
