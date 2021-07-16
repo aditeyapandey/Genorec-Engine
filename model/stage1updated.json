@@ -1,0 +1,11 @@
+[
+{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"-1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"-1"},
+{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
+{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"-1"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
+{"chart":"annotation","mark":"text","channel":"none","quantitative":"-1","categorical":"-1","text":"1","sparse":"1","continous":"-1","point":"1","segment":"1","comparerois":"1"}
+]

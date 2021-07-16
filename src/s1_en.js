@@ -21,9 +21,9 @@ const productVector = getProductProperties(stage1Model,vectorKeys)
 // Output: Vector array and object 
 function createInputVector(feature,attribute){
   
-  // Mapping attributes 
-  var inputVectorObject = {}
-  var inputArray = []
+    // Mapping attributes 
+    var inputVectorObject = {}
+    var inputArray = []
 
   //Vector array and object
     inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
@@ -33,7 +33,7 @@ function createInputVector(feature,attribute){
     inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
     inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
     inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    // inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
+    //inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
     
   return {inputVectorObject, inputArray}
   }
@@ -45,7 +45,8 @@ function encodeAttribute(dataspec){
     for(var i = 0; i<dataspec.features.length;i++)
     {
       var currentFeature = dataspec.features[i];
-      var featureId = dataspec.features[i].featureId
+      var featureId = dataspec.features[i].featureId;
+
 
       //Initiation of the partial specification
       stage1Output[featureId] = []
@@ -61,7 +62,6 @@ function encodeAttribute(dataspec){
         stage1Output[featureId].push(tempAttributeStorage)
       }
     }
-    // console.log(stage1Output)
     return stage1Output
 }
 

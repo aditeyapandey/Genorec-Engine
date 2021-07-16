@@ -1,0 +1,5 @@
+[
+{"layout":"linear","sparseinterconnection":"1","denseinterconnection":"1","identify":"1","overview":"1","length":"1","color":"1","text":"1"},
+{"layout":"circular","sparseinterconnection":"1","denseinterconnection":"-1","identify":"1","overview":"1","length":"-1","color":"1","text":"1"},
+{"layout":"hilbert","sparseinterconnection":"-1","denseinterconnection":"-1","identify":"-1","overview":"1","length":"-1","color":"1","text":"-1"}
+]

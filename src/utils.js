@@ -193,7 +193,7 @@ const arrayToObject = (array, keyField) =>
     {
       for(let j = i+1;j<inputArray.length;j++)
       {
-        console.log(inputArray[i])
+       // console.log(inputArray[i])
         if (JSON.stringify(inputArray[i]) === JSON.stringify(inputArray[j]))
         {
           inputArray.splice(j, 1)
