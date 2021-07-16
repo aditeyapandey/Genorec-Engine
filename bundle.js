@@ -12194,7 +12194,7 @@ function getRecommendation(inputData,file,tasks)
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
-       const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+        const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
        
        //Return the rec non dupicates
 
@@ -13555,9 +13555,7 @@ function createInputVector(views,network,tasks)
 
 function getArrangementUpdated(input,networkData,tasks)
 {
-    console.log("stage5",input);
     const vectorKeys = ["nointerconnection","sparseinterconnection","denseinterconnection","twoviews","otherthantwoviews","allcircles","mixedlayout","compareacrosstracks"];
-
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model5Updated;
     const getProductProperties  = require("./utils.js").productProperties;

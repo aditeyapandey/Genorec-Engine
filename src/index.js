@@ -148,7 +148,7 @@ function getRecommendation(inputData,file,tasks)
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
-       const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+        const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
        
        //Return the rec non dupicates
 
