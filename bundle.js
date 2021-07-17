@@ -227,15 +227,15 @@ module.exports=[
 
 },{}],6:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"-1","continous":"1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"heatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"-1"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"1","segment":"-1","comparerois":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"y","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
-{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","quantitative":"1","categorical":"-1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"-1"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","quantitative":"-1","categorical":"1","text":"-1","sparse":"1","continous":"-1","point":"-1","segment":"1","comparerois":"1"},
-{"chart":"annotation","mark":"text","channel":"none","quantitative":"-1","categorical":"-1","text":"1","sparse":"1","continous":"-1","point":"1","segment":"1","comparerois":"1"}
+{"chart":"dotplot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"linechart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"barchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"heatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"-1"},
+{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"intervalBarchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"-1"},
+{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]
 
 },{}],7:[function(require,module,exports){
@@ -12172,10 +12172,10 @@ function getRecommendation(inputData,file,tasks)
         currentSequence = sequenceInputArrays[i];
         
         //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated,constraints);
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
 
         //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding["output"],attributeEncoding["decisionStorage"],constraints);
+        const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
         //Stage 3: Layout
         const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
@@ -12652,17 +12652,16 @@ function createInputVector(feature,attribute,task){
   return {inputVectorObject, inputArray}
   }
 
-function encodeAttributeUpdated(dataspec,tasks,constraints){
+function encodeAttributeUpdated(dataspec,tasks){
 
     const model = require('../model/stage1updated.json');
-    const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
+    const vectorKeys = ["d_quantitative","d_categorical","d_text","d_sparse","d_continous","d_point","d_segment","t_comparerois"]
     const globalData = require("./modelDataProcessing.js")
     const stage1Model = globalData.model1Updated;
     const stage1Products = Object.keys(stage1Model);
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts
-    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     //Product vector only needs to be computed once
     const productVector = getProductProperties(stage1Model,vectorKeys)
     const cartesian = require("./utils.js").cartesian;
@@ -12698,16 +12697,7 @@ function encodeAttributeUpdated(dataspec,tasks,constraints){
         }
     }
     const output = cartesian(stage1Output);
-    const decisionStorage = [];
-    if(constraints)
-    {
-        output.forEach(val=>{
-            const recommendedEncodings = val.map(v=> v["encoding"]);
-            decisionStorage.push(createStageDecisionStorageObject(stage1Products,recommendedEncodings));
-            
-        })
-    }
-    return {output,decisionStorage};
+    return output;
 }
 
 module.exports = encodeAttributeUpdated
@@ -12733,23 +12723,18 @@ function createInputVector(spec){
     return{inputVectorObject,inputArray}
 }
 
-function getAlignmentUpdated(visoptions,stage1Selection,constraints)
+function getAlignmentUpdated(visoptions)
 {
 
     const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
+    
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model2Updated;
-    const products = Object.keys(model);
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
-    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     const productVector = getProductProperties(model,vectorKeys);
     const output = [];
-
-    console.log(visoptions);
-
-
 
     visoptions.forEach(element => {
         const inputVectorObject = createInputVector(element);
@@ -12762,16 +12747,6 @@ function getAlignmentUpdated(visoptions,stage1Selection,constraints)
         output.push(tempAttributeStorage);
     });
 
-    const decisionStorage = [];
-    if(constraints)
-    {
-        output.forEach(val=>{
-            console.log(val)
-            const recommendedEncodings = [val["trackAlignment"]];
-            decisionStorage.push(createStageDecisionStorageObject(products,recommendedEncodings));
-        })
-        console.log(decisionStorage)
-    }
     return output;
 }
 
@@ -13823,17 +13798,6 @@ const arrayToObject = (array, keyField) =>
   }
 
 
-  // Desc: Create an object with keys as product and entries as boolean
-  // Input: Array of keys (["dotplot","barchart"...]) and recommendation array ["barchart","dotplot"]
-  // Output: {"key":boolean,....}
-  function createStageDecisionStorageObject(keys,recommendation)
-  {
-    let outputStorageObject = {};
-    keys.forEach(key=>{
-      outputStorageObject[key] = recommendation.includes(key)
-    })
-    return outputStorageObject
-  }
 
 
 module.exports =
@@ -13844,7 +13808,6 @@ module.exports =
   cartesian: cartesian,
   getVisOptions: getVisOptions,
   mode:mode,
-  checkDuplicates:checkDuplicates,
-  createStageDecisionStorageObject
+  checkDuplicates:checkDuplicates
 }
 },{"ml-distance":19}]},{},[22]);

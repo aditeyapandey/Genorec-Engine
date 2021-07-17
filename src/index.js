@@ -126,10 +126,10 @@ function getRecommendation(inputData,file,tasks)
         currentSequence = sequenceInputArrays[i];
         
         //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated,constraints);
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
 
         //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding["output"],attributeEncoding["decisionStorage"],constraints);
+        const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
         //Stage 3: Layout
         const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);

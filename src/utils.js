@@ -209,17 +209,6 @@ const arrayToObject = (array, keyField) =>
   }
 
 
-  // Desc: Create an object with keys as product and entries as boolean
-  // Input: Array of keys (["dotplot","barchart"...]) and recommendation array ["barchart","dotplot"]
-  // Output: {"key":boolean,....}
-  function createStageDecisionStorageObject(keys,recommendation)
-  {
-    let outputStorageObject = {};
-    keys.forEach(key=>{
-      outputStorageObject[key] = recommendation.includes(key)
-    })
-    return outputStorageObject
-  }
 
 
 module.exports =
@@ -230,6 +219,5 @@ module.exports =
   cartesian: cartesian,
   getVisOptions: getVisOptions,
   mode:mode,
-  checkDuplicates:checkDuplicates,
-  createStageDecisionStorageObject
+  checkDuplicates:checkDuplicates
 }

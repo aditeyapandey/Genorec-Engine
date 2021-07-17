@@ -21,17 +21,16 @@ function createInputVector(feature,attribute,task){
   return {inputVectorObject, inputArray}
   }
 
-function encodeAttributeUpdated(dataspec,tasks,constraints){
+function encodeAttributeUpdated(dataspec,tasks){
 
     const model = require('../model/stage1updated.json');
-    const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
+    const vectorKeys = ["d_quantitative","d_categorical","d_text","d_sparse","d_continous","d_point","d_segment","t_comparerois"]
     const globalData = require("./modelDataProcessing.js")
     const stage1Model = globalData.model1Updated;
     const stage1Products = Object.keys(stage1Model);
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts
-    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     //Product vector only needs to be computed once
     const productVector = getProductProperties(stage1Model,vectorKeys)
     const cartesian = require("./utils.js").cartesian;
@@ -67,16 +66,7 @@ function encodeAttributeUpdated(dataspec,tasks,constraints){
         }
     }
     const output = cartesian(stage1Output);
-    const decisionStorage = [];
-    if(constraints)
-    {
-        output.forEach(val=>{
-            const recommendedEncodings = val.map(v=> v["encoding"]);
-            decisionStorage.push(createStageDecisionStorageObject(stage1Products,recommendedEncodings));
-            
-        })
-    }
-    return {output,decisionStorage};
+    return output;
 }
 
 module.exports = encodeAttributeUpdated
