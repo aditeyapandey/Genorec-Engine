@@ -12166,15 +12166,16 @@ function getRecommendation(inputData,file,tasks)
     //Updated stagewise processing
     const viewGroups = [];
     const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+    const constraints = true;
     for (var i=0;i<sequenceInputArrays.length;i++)
     {
         currentSequence = sequenceInputArrays[i];
         
         //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated,constraints);
 
         //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding);
+        const trackAlignment = getAlignmentUpdated(attributeEncoding["output"],attributeEncoding["decisionStorage"],constraints);
 
         //Stage 3: Layout
         const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
@@ -12195,6 +12196,9 @@ function getRecommendation(inputData,file,tasks)
         const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
         const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+
+        console.log(recUpdatedNonDups)
+
        
        //Return the rec non dupicates
 
@@ -12648,15 +12652,17 @@ function createInputVector(feature,attribute,task){
   return {inputVectorObject, inputArray}
   }
 
-function encodeAttributeUpdated(dataspec,tasks){
+function encodeAttributeUpdated(dataspec,tasks,constraints){
 
     const model = require('../model/stage1updated.json');
     const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
     const globalData = require("./modelDataProcessing.js")
-    const stage1Model = globalData.model1Updated
+    const stage1Model = globalData.model1Updated;
+    const stage1Products = Object.keys(stage1Model);
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts
+    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     //Product vector only needs to be computed once
     const productVector = getProductProperties(stage1Model,vectorKeys)
     const cartesian = require("./utils.js").cartesian;
@@ -12692,7 +12698,16 @@ function encodeAttributeUpdated(dataspec,tasks){
         }
     }
     const output = cartesian(stage1Output);
-    return output;
+    const decisionStorage = [];
+    if(constraints)
+    {
+        output.forEach(val=>{
+            const recommendedEncodings = val.map(v=> v["encoding"]);
+            decisionStorage.push(createStageDecisionStorageObject(stage1Products,recommendedEncodings));
+            
+        })
+    }
+    return {output,decisionStorage};
 }
 
 module.exports = encodeAttributeUpdated
@@ -12718,17 +12733,21 @@ function createInputVector(spec){
     return{inputVectorObject,inputArray}
 }
 
-function getAlignmentUpdated(visoptions)
+function getAlignmentUpdated(visoptions,stage1Selection,constraints)
 {
 
     const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model2Updated;
+    const products = Object.keys(model);
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
+    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     const productVector = getProductProperties(model,vectorKeys);
     const output = [];
+
+    console.log(visoptions);
 
 
 
@@ -12742,6 +12761,17 @@ function getAlignmentUpdated(visoptions)
         })
         output.push(tempAttributeStorage);
     });
+
+    const decisionStorage = [];
+    if(constraints)
+    {
+        output.forEach(val=>{
+            console.log(val)
+            const recommendedEncodings = [val["trackAlignment"]];
+            decisionStorage.push(createStageDecisionStorageObject(products,recommendedEncodings));
+        })
+        console.log(decisionStorage)
+    }
     return output;
 }
 
@@ -13577,7 +13607,6 @@ function getArrangementUpdated(input,networkData,tasks)
         })
     });
 
-
     return output
 }
 
@@ -13794,6 +13823,18 @@ const arrayToObject = (array, keyField) =>
   }
 
 
+  // Desc: Create an object with keys as product and entries as boolean
+  // Input: Array of keys (["dotplot","barchart"...]) and recommendation array ["barchart","dotplot"]
+  // Output: {"key":boolean,....}
+  function createStageDecisionStorageObject(keys,recommendation)
+  {
+    let outputStorageObject = {};
+    keys.forEach(key=>{
+      outputStorageObject[key] = recommendation.includes(key)
+    })
+    return outputStorageObject
+  }
+
 
 module.exports =
 {
@@ -13803,6 +13844,7 @@ module.exports =
   cartesian: cartesian,
   getVisOptions: getVisOptions,
   mode:mode,
-  checkDuplicates:checkDuplicates
+  checkDuplicates:checkDuplicates,
+  createStageDecisionStorageObject
 }
 },{"ml-distance":19}]},{},[22]);

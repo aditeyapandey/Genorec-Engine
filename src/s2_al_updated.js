@@ -19,17 +19,21 @@ function createInputVector(spec){
     return{inputVectorObject,inputArray}
 }
 
-function getAlignmentUpdated(visoptions)
+function getAlignmentUpdated(visoptions,stage1Selection,constraints)
 {
 
     const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model2Updated;
+    const products = Object.keys(model);
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
+    const createStageDecisionStorageObject = require("./utils.js").createStageDecisionStorageObject
     const productVector = getProductProperties(model,vectorKeys);
     const output = [];
+
+    console.log(visoptions);
 
 
 
@@ -43,6 +47,17 @@ function getAlignmentUpdated(visoptions)
         })
         output.push(tempAttributeStorage);
     });
+
+    const decisionStorage = [];
+    if(constraints)
+    {
+        output.forEach(val=>{
+            console.log(val)
+            const recommendedEncodings = [val["trackAlignment"]];
+            decisionStorage.push(createStageDecisionStorageObject(products,recommendedEncodings));
+        })
+        console.log(decisionStorage)
+    }
     return output;
 }
 

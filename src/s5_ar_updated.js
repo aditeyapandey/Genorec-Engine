@@ -61,7 +61,6 @@ function getArrangementUpdated(input,networkData,tasks)
         })
     });
 
-
     return output
 }
 

@@ -120,15 +120,16 @@ function getRecommendation(inputData,file,tasks)
     //Updated stagewise processing
     const viewGroups = [];
     const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+    const constraints = true;
     for (var i=0;i<sequenceInputArrays.length;i++)
     {
         currentSequence = sequenceInputArrays[i];
         
         //Stage 1: Encoding Selection
-        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
+        const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated,constraints);
 
         //Stage 2: Alignment
-        const trackAlignment = getAlignmentUpdated(attributeEncoding);
+        const trackAlignment = getAlignmentUpdated(attributeEncoding["output"],attributeEncoding["decisionStorage"],constraints);
 
         //Stage 3: Layout
         const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
@@ -149,6 +150,9 @@ function getRecommendation(inputData,file,tasks)
         const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
         
         const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+
+        console.log(recUpdatedNonDups)
+
        
        //Return the rec non dupicates
 
