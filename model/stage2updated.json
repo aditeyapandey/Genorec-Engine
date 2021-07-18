@@ -1,4 +1,4 @@
 [
-{"alignment":"overlayed","trackssamefile":"1","tracksdifffile":"-1","alllinechart":"1","allbarchart":"1","otherencoding":"-1","singletrack":"-1"},
-{"alignment":"stacked","trackssamefile":"1","tracksdifffile":"1","alllinechart":"1","allbarchart":"1","otherencoding":"1","singletrack":"1"}
+{"alignment":"overlayed","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
+{"alignment":"stacked","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]

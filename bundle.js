@@ -1,67 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
-  "sequences": [
-    {
-      "sequenceId": "sequence_0",
-      "sequenceName": "hg38",
-      "interFeatureTasks": {
-        "compare": [],
-        "correlate": []
-      },
-      "features": [
-        {
-          "featureId": "feature_0",
-          "featureGranularity": "point",
-          "featureDensity": "continous",
-          "featureLabel": "Point_Continous",
-          "featureInterconnection": false,
-          "denseInterconnection": false,
-          "intraFeatureTasks": [],
-          "interactivity": true,
-          "attr": [
-            {
-              "attrId": "attribute_0",
-              "dataType": "quantitative",
-              "intraAttrTask": [
-                "identify",
-                "compare"
-              ]
-            }
-          ]
-        },
-        {
-          "featureId": "feature_1",
-          "featureGranularity": "segment",
-          "featureDensity": "sparse",
-          "featureLabel": "Segment_Sparse",
-          "featureInterconnection": false,
-          "denseInterconnection": false,
-          "intraFeatureTasks": [],
-          "interactivity": true,
-          "attr": [
-            {
-              "attrId": "attribute_0",
-              "dataType": "quantitative",
-              "intraAttrTask": [
-                "identify",
-                "compare"
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "intraSequenceTask": {
-    "connectedNodes": [],
-    "sequenceConservation": [],
-    "edgeValues": []
-  },
-  "denseConnection": false,
-  "sparseConnection": false
-}
-},{}],2:[function(require,module,exports){
-module.exports={
     "sequences": [
         {   
         "sequenceId":"sequence_0",
@@ -124,7 +62,7 @@ module.exports={
     "tasks": [],
     "denseConnection": false,
     "sparseConnection": false}
-},{}],3:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -157,6 +95,50 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["overview"],
+    "denseConnection": false,
+    "sparseConnection": false}
+},{}],3:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        },
+                        {
+                            "attrId":"attribute_1",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Categorical1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
     "denseConnection": false,
     "sparseConnection": false}
 },{}],4:[function(require,module,exports){
@@ -240,8 +222,8 @@ module.exports=[
 
 },{}],7:[function(require,module,exports){
 module.exports=[
-{"alignment":"overlayed","trackssamefile":"1","tracksdifffile":"-1","alllinechart":"1","allbarchart":"1","otherencoding":"-1","singletrack":"-1"},
-{"alignment":"stacked","trackssamefile":"1","tracksdifffile":"1","alllinechart":"1","allbarchart":"1","otherencoding":"1","singletrack":"1"}
+{"alignment":"overlayed","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
+{"alignment":"stacked","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]
 
 },{}],8:[function(require,module,exports){
@@ -253,15 +235,15 @@ module.exports=[
 
 },{}],9:[function(require,module,exports){
 module.exports=[
-{"layout":"linear","sparseinterconnection":"1","denseinterconnection":"1","identify":"1","overview":"1","length":"1","color":"1","text":"1"},
-{"layout":"circular","sparseinterconnection":"1","denseinterconnection":"-1","identify":"1","overview":"1","length":"-1","color":"1","text":"1"},
-{"layout":"hilbert","sparseinterconnection":"-1","denseinterconnection":"-1","identify":"-1","overview":"1","length":"-1","color":"1","text":"-1"}
+{"layout":"linear","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
+{"layout":"circular","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
+{"layout":"hilbert","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]
 
 },{}],10:[function(require,module,exports){
 module.exports=[
-{"partition":"contiguous","linearlayout":"1","circularlayout":"1","overview":"1","comparerois":"1","multitrack":"1","multiview":"1"},
-{"partition":"segregated","linearlayout":"1","circularlayout":"-1","overview":"1","comparerois":"-1","multitrack":"-1","multiview":"-1"}
+{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
+{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]
 
 },{}],11:[function(require,module,exports){
@@ -12073,7 +12055,7 @@ var getArrangementUpdated  = require("./s5_ar_updated.js");
 //Local validation of the backend
 
 var input = []
-input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
+// input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
 
 // input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
 // input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
@@ -12091,6 +12073,8 @@ input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.jso
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+
 
 input.forEach(val=>{
     getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -12267,7 +12251,7 @@ function getRecommendation(inputData,file,tasks)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/InputInterface.json":1,"../TestInput/V2SingleTrackMultipleView.json":2,"../TestInput/V2SingleTrackSingleView.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":23,"./outputspec.js":25,"./s1_en.js":26,"./s1_en_updated.js":27,"./s2_al_updated.js":28,"./s2_ca.js":29,"./s3_ls.js":30,"./s3_ls_updated.js":31,"./s4_al.js":32,"./s4_pt_updated.js":33,"./s5_ar.js":34,"./s5_ar_updated.js":35,"./utils.js":36}],23:[function(require,module,exports){
+},{"../TestInput/V2SingleTrackMultipleView.json":1,"../TestInput/V2SingleTrackSingleView.json":2,"../TestInput/V2SingleViewMultiAttrDiffType.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":23,"./outputspec.js":25,"./s1_en.js":26,"./s1_en_updated.js":27,"./s2_al_updated.js":28,"./s2_ca.js":29,"./s3_ls.js":30,"./s3_ls_updated.js":31,"./s4_al.js":32,"./s4_pt_updated.js":33,"./s5_ar.js":34,"./s5_ar_updated.js":35,"./utils.js":36}],23:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12702,43 +12686,57 @@ function encodeAttributeUpdated(dataspec,tasks){
 
 module.exports = encodeAttributeUpdated
 },{"../model/stage1updated.json":6,"./modelDataProcessing.js":24,"./utils.js":36}],28:[function(require,module,exports){
+// const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
+
 function createInputVector(spec){
     const inputVectorObject = {};
     const inputArray = [];
 
     //File Type 
-    const tracksSameFile= spec.every( (val, i, arr) => val["fileName"] === arr[0]["fileName"]);  
-    inputArray.push(inputVectorObject["trackssamefile"] = tracksSameFile ? 1 : 0);
-    inputArray.push(inputVectorObject["tracksdifffile"] = !tracksSameFile ? 1 : 0);
-    
+    const tracksSameFile = spec.every( (val, i, arr) => val["fileName"] === arr[0]["fileName"]);  
+    inputArray.push(inputVectorObject["d_trackssamefile"] = tracksSameFile ? 1 : 0);
+    inputArray.push(inputVectorObject["d_tracksdifffile"] = !tracksSameFile ? 1 : 0);
+
+    //Data Type
+    const allDataType = spec.map( (val) => val["encodingName"])
+    allDataTypeSame = allDataType.every(val => val.includes("Categorical")) || allDataType.every(val => val.includes("Quantitative")) || allDataType.every(val => val.includes("Text"))
+    inputArray.push(inputVectorObject["d_samedatatype"] = allDataTypeSame ? 1 : 0);
+    inputArray.push(inputVectorObject["d_differentdatatype"] = !allDataTypeSame ? 1 : 0);
+
+    //Tracks (are pseudo of vars)
+    inputArray.push(inputVectorObject["d_singlevar"] = spec.length <= 1 ? 1 : 0);
+
     //Encoding Type
     const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "linechart");
     const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barchart" || val["encoding"] === "intervalBarChart");
-    inputArray.push(inputVectorObject["alllinechart"] = lineChartEncoding ? 1 : 0);
-    inputArray.push(inputVectorObject["allbarchart"] = barChartEncoding ? 1 : 0);
-    inputArray.push(inputVectorObject["otherencoding"] = ! (lineChartEncoding || barChartEncoding) ? 1 : 0);
+    inputArray.push(inputVectorObject["s_alllinechart"] = lineChartEncoding ? 1 : 0);
+    inputArray.push(inputVectorObject["s_allbarchart"] = barChartEncoding ? 1 : 0);
+    inputArray.push(inputVectorObject["s_otherencoding"] = ! (lineChartEncoding || barChartEncoding) ? 1 : 0);
  
-    //Tracks
-    inputArray.push(inputVectorObject["singletrack"] = spec.length <= 1 ? 1 : 0);
-    return{inputVectorObject,inputArray}
+
+    return{inputVectorObject,inputArray};
 }
 
 function getAlignmentUpdated(visoptions)
 {
+    // console.log(GLOBAL_INDEX_DATA)
 
-    const vectorKeys = ["trackssamefile","tracksdifffile","alllinechart","allbarchart","otherencoding","singletrack"];
+    const vectorKeys = ["d_trackssamefile","d_tracksdifffile","d_samedatatype","d_differentdatatype","d_singlevar","s_alllinechart","s_allbarchart","s_otherencoding"];
     
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model2Updated;
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
+
     const productVector = getProductProperties(model,vectorKeys);
     const output = [];
 
     visoptions.forEach(element => {
         const inputVectorObject = createInputVector(element);
+        // console.log(inputVectorObject,productVector);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
+        // console.log(similarityScores);
         const recommendation = recommendedProducts(similarityScores);
         var tempAttributeStorage = {};
         recommendation.forEach((val)=>{
@@ -13125,20 +13123,20 @@ function createInputVector(spec,tasks,stage1)
     const featureInterconnection = spec["tracks"].some( (val) => val["featureInterconnection"]);  
     const denseInterconnection= spec["tracks"].some( (val) => val["denseInterconnection"]);  
     const sparseInterconnection = !denseInterconnection;
-    inputArray.push(inputVectorObject["denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
+    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+    inputArray.push(inputVectorObject["d_sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
    
     //Tasks
-    inputArray.push(inputVectorObject["identify"] = 1);
-    inputArray.push(inputVectorObject["overview"] = tasks.includes("overview") ? 1:0);
+    inputArray.push(inputVectorObject["t_identify"] = 1);
+    inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1:0);
 
     //Encoding
     var channels = spec["tracks"].map(val => {
       return stage1[val['encoding']]['channel']
     })
-    inputArray.push(inputVectorObject["length"] = (channels.includes("y"))  ? 1 : 0)
-    inputArray.push(inputVectorObject["color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
-    inputArray.push(inputVectorObject["text"] = channels.includes("none")  ? 1 : 0)
+    inputArray.push(inputVectorObject["s_length"] = (channels.includes("y"))  ? 1 : 0)
+    inputArray.push(inputVectorObject["s_color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
+    inputArray.push(inputVectorObject["s_text"] = channels.includes("none")  ? 1 : 0)
 
     return{inputVectorObject,inputArray};
 
@@ -13150,7 +13148,7 @@ function getLayoutUpdated(visOptions,tasks)
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
-    const vectorKeys = ['sparseinterconnection','denseinterconnection','identify','overview','length','color','text'];
+    const vectorKeys = ["d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
@@ -13381,8 +13379,28 @@ module.exports = getAlignment
 },{"./inputspec.js":23,"./utils.js":36}],33:[function(require,module,exports){
 function createInputVector(specs,tasks)
 {
+    
     const inputVectorObject = {};
     const inputArray = [];
+
+    //Tracks and Views
+    inputArray.push(inputVectorObject["d_multivars"] = specs.some(val =>{return val["tracks"].length >1})? 1 : 0);
+    inputArray.push(inputVectorObject["d_multisequences"] = specs.length >1 ? 1 : 0);
+
+    //Connection
+    const connection = []
+    specs.forEach(spec=>{
+      connection.push(spec["tracks"].some(track=>{
+            return track["interconnection"]
+        }))
+    })
+    inputArray.push(inputVectorObject["d_connection"] = connection.some(val =>{return val})? 1 : 0);
+
+
+    //Tasks
+    inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1 : 0);
+    inputArray.push(inputVectorObject["t_comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
+
 
     //Layout
     let allLayouts = specs.map(view =>{
@@ -13398,23 +13416,16 @@ function createInputVector(specs,tasks)
         }
     });
     allLayouts = allLayouts.flat(1);
-    inputArray.push(inputVectorObject["linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
-    inputArray.push(inputVectorObject["circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
-    
-    //Tasks
-    inputArray.push(inputVectorObject["overview"] = tasks.includes("overview") ? 1 : 0);
-    inputArray.push(inputVectorObject["comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
-    
-    //Tracks and Views
-    inputArray.push(inputVectorObject["multitrack"] = specs.some(val =>{return val["tracks"].length >1})? 1 : 0);
-    inputArray.push(inputVectorObject["multiview"] = specs.length >1 ? 1 : 0);
+    inputArray.push(inputVectorObject["s_circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
+    inputArray.push(inputVectorObject["s_linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
    
+    // console.log(inputVectorObject)
     return{inputVectorObject,inputArray};
 }
 
 function getPartitionUpdated(input,tasks)
 {
-    const vectorKeys = ["linearlayout","circularlayout","overview","comparerois","multitrack","multiview"]
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_comparerois","s_circularlayout","s_linearlayout"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;

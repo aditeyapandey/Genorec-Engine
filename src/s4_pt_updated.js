@@ -1,7 +1,27 @@
 function createInputVector(specs,tasks)
 {
+    
     const inputVectorObject = {};
     const inputArray = [];
+
+    //Tracks and Views
+    inputArray.push(inputVectorObject["d_multivars"] = specs.some(val =>{return val["tracks"].length >1})? 1 : 0);
+    inputArray.push(inputVectorObject["d_multisequences"] = specs.length >1 ? 1 : 0);
+
+    //Connection
+    const connection = []
+    specs.forEach(spec=>{
+      connection.push(spec["tracks"].some(track=>{
+            return track["interconnection"]
+        }))
+    })
+    inputArray.push(inputVectorObject["d_connection"] = connection.some(val =>{return val})? 1 : 0);
+
+
+    //Tasks
+    inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1 : 0);
+    inputArray.push(inputVectorObject["t_comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
+
 
     //Layout
     let allLayouts = specs.map(view =>{
@@ -17,23 +37,16 @@ function createInputVector(specs,tasks)
         }
     });
     allLayouts = allLayouts.flat(1);
-    inputArray.push(inputVectorObject["linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
-    inputArray.push(inputVectorObject["circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
-    
-    //Tasks
-    inputArray.push(inputVectorObject["overview"] = tasks.includes("overview") ? 1 : 0);
-    inputArray.push(inputVectorObject["comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
-    
-    //Tracks and Views
-    inputArray.push(inputVectorObject["multitrack"] = specs.some(val =>{return val["tracks"].length >1})? 1 : 0);
-    inputArray.push(inputVectorObject["multiview"] = specs.length >1 ? 1 : 0);
+    inputArray.push(inputVectorObject["s_circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
+    inputArray.push(inputVectorObject["s_linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
    
+    // console.log(inputVectorObject)
     return{inputVectorObject,inputArray};
 }
 
 function getPartitionUpdated(input,tasks)
 {
-    const vectorKeys = ["linearlayout","circularlayout","overview","comparerois","multitrack","multiview"]
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_comparerois","s_circularlayout","s_linearlayout"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;
