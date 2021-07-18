@@ -7,20 +7,20 @@ function createInputVector(spec,tasks,stage1)
     const featureInterconnection = spec["tracks"].some( (val) => val["featureInterconnection"]);  
     const denseInterconnection= spec["tracks"].some( (val) => val["denseInterconnection"]);  
     const sparseInterconnection = !denseInterconnection;
-    inputArray.push(inputVectorObject["denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
+    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+    inputArray.push(inputVectorObject["d_sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
    
     //Tasks
-    inputArray.push(inputVectorObject["identify"] = 1);
-    inputArray.push(inputVectorObject["overview"] = tasks.includes("overview") ? 1:0);
+    inputArray.push(inputVectorObject["t_identify"] = 1);
+    inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1:0);
 
     //Encoding
     var channels = spec["tracks"].map(val => {
       return stage1[val['encoding']]['channel']
     })
-    inputArray.push(inputVectorObject["length"] = (channels.includes("y"))  ? 1 : 0)
-    inputArray.push(inputVectorObject["color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
-    inputArray.push(inputVectorObject["text"] = channels.includes("none")  ? 1 : 0)
+    inputArray.push(inputVectorObject["s_length"] = (channels.includes("y"))  ? 1 : 0)
+    inputArray.push(inputVectorObject["s_color"] = (channels.includes("color(sequential)") || channels.includes("color(nominal)")) ? 1 : 0)
+    inputArray.push(inputVectorObject["s_text"] = channels.includes("none")  ? 1 : 0)
 
     return{inputVectorObject,inputArray};
 
@@ -32,7 +32,7 @@ function getLayoutUpdated(visOptions,tasks)
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
-    const vectorKeys = ['sparseinterconnection','denseinterconnection','identify','overview','length','color','text'];
+    const vectorKeys = ["d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;

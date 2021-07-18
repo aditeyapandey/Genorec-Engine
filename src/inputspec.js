@@ -6,8 +6,10 @@ function Dataspec(obj) {
     dataSpec = {}
     dataSpec["sequences"] = [];
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
-    dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
-    dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());
+    dataSpec["connectionType"] = (typeof obj.connectionType === "string") ?  obj.connectionType : (function(){throw "Connection Information must be 'none','dense','sparse type"}());
+
+   // dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
+   // dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());
     // After changes make this property consistent
     if(obj.hasOwnProperty('tasks'))
     {dataSpec["tasks"] = (Array.isArray(obj.tasks)) ?  obj.tasks : (function(){throw "Tasks are not provided in correct format. They should be provided as an Array []"}());}

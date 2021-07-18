@@ -1,5 +1,5 @@
 [
-{"arrangement":"stacked","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"1","allcircles":"-1","mixedlayout":"1","compareacrosstracks":"1"},
-{"arrangement":"adjacent","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"-1","allcircles":"1","mixedlayout":"-1","compareacrosstracks":"-1"},
-{"arrangement":"orthogonal","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"1","twoviews":"1","otherthantwoviews":"-1","allcircles":"-1","mixedlayout":"-1","compareacrosstracks":"-1"}
+{"arrangement":"stacked","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
+{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
+{"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]

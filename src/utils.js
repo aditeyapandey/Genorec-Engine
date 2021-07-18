@@ -210,6 +210,7 @@ const arrayToObject = (array, keyField) =>
 
 
 
+
 module.exports =
 {
   productProperties: getProductProperties,

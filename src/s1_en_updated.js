@@ -24,9 +24,10 @@ function createInputVector(feature,attribute,task){
 function encodeAttributeUpdated(dataspec,tasks){
 
     const model = require('../model/stage1updated.json');
-    const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment","comparerois"]
+    const vectorKeys = ["d_quantitative","d_categorical","d_text","d_sparse","d_continous","d_point","d_segment","t_comparerois"]
     const globalData = require("./modelDataProcessing.js")
-    const stage1Model = globalData.model1Updated
+    const stage1Model = globalData.model1Updated;
+    const stage1Products = Object.keys(stage1Model);
     const getProductProperties  = require("./utils.js").productProperties
     const computeSimilarity = require("./utils.js").computeSimilarity
     const recommendedProducts = require("./utils.js").recommendedProducts

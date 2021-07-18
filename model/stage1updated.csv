@@ -1,4 +1,4 @@
-﻿chart,mark,channel,quantitative,categorical,text,sparse,continous,point,segment,comparerois
+﻿chart,mark,channel,d_quantitative,d_categorical,d_text,d_sparse,d_continous,d_point,d_segment,t_comparerois
 dotplot,point,y,1,-1,-1,1,-1,1,-1,1
 linechart,line,y,1,-1,-1,-1,1,1,-1,1
 barchart,rect,y,1,-1,-1,1,-1,1,-1,1

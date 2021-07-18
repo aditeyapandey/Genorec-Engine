@@ -27,7 +27,7 @@ var getArrangementUpdated  = require("./s5_ar_updated.js");
 //Local validation of the backend
 
 var input = []
-input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
+// input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
 
 // input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
 // input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
@@ -42,9 +42,11 @@ input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.jso
 // input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
 
 //Updated Inputs
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+
 
 input.forEach(val=>{
     getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -120,6 +122,7 @@ function getRecommendation(inputData,file,tasks)
     //Updated stagewise processing
     const viewGroups = [];
     const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+    const constraints = true;
     for (var i=0;i<sequenceInputArrays.length;i++)
     {
         currentSequence = sequenceInputArrays[i];
@@ -146,9 +149,12 @@ function getRecommendation(inputData,file,tasks)
         const partition = getPartitionUpdated(viewGroups,tasksUpdated);
 
         //Stage 5: Arrangement
-        const arrangement = getArrangementUpdated(partition,{"denseNetwork":dataspec["denseConnection"],"sparseNetwork":dataspec["sparseConnection"]},tasksUpdated)
+        const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated)
         
         const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+
+        console.log(recUpdatedNonDups)
+
        
        //Return the rec non dupicates
 
