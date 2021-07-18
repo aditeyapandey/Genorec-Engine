@@ -4,9 +4,9 @@ function createInputVector(views,network,tasks)
     const inputArray = [];
 
     //Network
-    inputArray.push(inputVectorObject["nointerconnection"] = !network["denseNetwork"] && !network["sparseNetwork"] ? 1:0)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = network["sparseNetwork"] ? 1:0)
-    inputArray.push(inputVectorObject["denseinterconnection"] = network["denseNetwork"] ? 1:0)
+    inputArray.push(inputVectorObject["nointerconnection"] = network["connectionType"] ==='none' ? 1:0)
+    inputArray.push(inputVectorObject["sparseinterconnection"] = network["connectionType"] ==='sparse' ? 1:0)
+    inputArray.push(inputVectorObject["denseinterconnection"] = network["connectionType"] ==='dense' ? 1:0)
 
     //Views
     inputArray.push(inputVectorObject["twoviews"] = views.length === 2 ? 1:0);
@@ -57,6 +57,8 @@ function getArrangementUpdated(input,networkData,tasks)
             const viewArrangementPredictionScore = similarityScores[rec];
             element["viewArrangement"] = viewArrangement;
             element["viewArrangementPredictionScore"] = viewArrangementPredictionScore;
+
+            element["viewConnectionType"] = viewArrangementPredictionScore;
             output.push(element);
         })
     });
