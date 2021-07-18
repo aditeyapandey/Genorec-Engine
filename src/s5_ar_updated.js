@@ -39,7 +39,7 @@ function createInputVector(views,network,tasks)
 
 function getArrangementUpdated(input,networkData,tasks)
 {
-    const vectorKeys = ["nointerconnection","sparseinterconnection","denseinterconnection","twoviews","otherthantwoviews","allcircles","mixedlayout","compareacrosstracks"];
+    const vectorKeys = ["d_nointerconnection","d_sparseinterconnection","d_denseinterconnection","d_twosequences","d_otherthantwosequences","s_circularlayout","s_mixedlayout","t_compareacrosstracks"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model5Updated;
     const getProductProperties  = require("./utils.js").productProperties;

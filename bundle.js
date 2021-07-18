@@ -256,9 +256,9 @@ module.exports=[
 
 },{}],12:[function(require,module,exports){
 module.exports=[
-{"arrangement":"stacked","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"1","allcircles":"-1","mixedlayout":"1","compareacrosstracks":"1"},
-{"arrangement":"adjacent","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"-1","twoviews":"1","otherthantwoviews":"-1","allcircles":"1","mixedlayout":"-1","compareacrosstracks":"-1"},
-{"arrangement":"orthogonal","nointerconnection":"-1","sparseinterconnection":"1","denseinterconnection":"1","twoviews":"1","otherthantwoviews":"-1","allcircles":"-1","mixedlayout":"-1","compareacrosstracks":"-1"}
+{"arrangement":"stacked","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
+{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
+{"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]
 
 },{}],13:[function(require,module,exports){
@@ -13571,7 +13571,7 @@ function createInputVector(views,network,tasks)
 
 function getArrangementUpdated(input,networkData,tasks)
 {
-    const vectorKeys = ["nointerconnection","sparseinterconnection","denseinterconnection","twoviews","otherthantwoviews","allcircles","mixedlayout","compareacrosstracks"];
+    const vectorKeys = ["d_nointerconnection","d_sparseinterconnection","d_denseinterconnection","d_twosequences","d_otherthantwosequences","s_circularlayout","s_mixedlayout","t_compareacrosstracks"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model5Updated;
     const getProductProperties  = require("./utils.js").productProperties;
