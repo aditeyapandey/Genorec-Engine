@@ -54,13 +54,14 @@ function encodeAttributeUpdated(dataspec,tasks){
             var attributeId = currentFeature.attributes[j].attrId
             var fileName = currentFeature.attributes[j].fileName
             var encodingName = currentFeature.attributes[j].encodingName
+            var columnName = currentFeature.attributes[j].encodingName
             // var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation,fileName,encodingName}
             var tempAttributeStorage = [];
             const denseInterconnection = currentFeature.attributes[j].denseInterconnection;
             const featureInterconnection = currentFeature.attributes[j].featureInterconnection;
 
             recommendation.forEach((val)=>{
-                tempAttributeStorage.push({"encoding":val,encodingName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
+                tempAttributeStorage.push({"encoding":val,encodingName,columnName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
             })
             stage1Output.push(tempAttributeStorage);
         }

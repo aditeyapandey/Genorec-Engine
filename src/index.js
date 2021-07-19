@@ -149,11 +149,9 @@ function getRecommendation(inputData,file,tasks)
         const partition = getPartitionUpdated(viewGroups,tasksUpdated);
 
         //Stage 5: Arrangement
-        const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated)
-        
-        const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+        const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
 
-        console.log(recUpdatedNonDups)
+        console.log(arrangement)
 
        
        //Return the rec non dupicates

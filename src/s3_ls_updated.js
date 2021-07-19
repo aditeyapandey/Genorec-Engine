@@ -54,9 +54,22 @@ function getLayoutUpdated(visOptions,tasks)
                     const layout = rec;
                     const layoutPredictionScore = similarityScores[rec];
                     const fileName = track["fileName"];
-                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-                    const interconnection = track["featureInterconnection"];
-                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection});
+                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"columnName":track["columnName"],"encodingName":track["encodingName"]}];
+                    const interconnection = track["featureInterconnection"]; 
+                    const interconnectionType = (()=>{
+                        if( !track["featureInterconnection"])
+                        {
+                            return "none";
+                        }
+                        else if (track["featureInterconnection"])
+                        {
+                            return "dense";
+                        }
+                        else{
+                            return "sparse"
+                        }
+                    })()
+                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnectionType});
                 })
                 var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
                 output.push(tempOutput)

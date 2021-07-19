@@ -57,8 +57,7 @@ function getArrangementUpdated(input,networkData,tasks)
             const viewArrangementPredictionScore = similarityScores[rec];
             element["viewArrangement"] = viewArrangement;
             element["viewArrangementPredictionScore"] = viewArrangementPredictionScore;
-
-            element["viewConnectionType"] = viewArrangementPredictionScore;
+            element["viewConnectionType"] = networkData["connectionType"];
             output.push(element);
         })
     });

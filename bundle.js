@@ -12173,11 +12173,9 @@ function getRecommendation(inputData,file,tasks)
         const partition = getPartitionUpdated(viewGroups,tasksUpdated);
 
         //Stage 5: Arrangement
-        const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated)
-        
-        const recUpdatedNonDups = checkDuplicates(Object.values(arrangement));
+        const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
 
-        console.log(recUpdatedNonDups)
+        console.log(arrangement)
 
        
        //Return the rec non dupicates
@@ -12667,13 +12665,14 @@ function encodeAttributeUpdated(dataspec,tasks){
             var attributeId = currentFeature.attributes[j].attrId
             var fileName = currentFeature.attributes[j].fileName
             var encodingName = currentFeature.attributes[j].encodingName
+            var columnName = currentFeature.attributes[j].encodingName
             // var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation,fileName,encodingName}
             var tempAttributeStorage = [];
             const denseInterconnection = currentFeature.attributes[j].denseInterconnection;
             const featureInterconnection = currentFeature.attributes[j].featureInterconnection;
 
             recommendation.forEach((val)=>{
-                tempAttributeStorage.push({"encoding":val,encodingName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
+                tempAttributeStorage.push({"encoding":val,encodingName,columnName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
             })
             stage1Output.push(tempAttributeStorage);
         }
@@ -13168,9 +13167,22 @@ function getLayoutUpdated(visOptions,tasks)
                     const layout = rec;
                     const layoutPredictionScore = similarityScores[rec];
                     const fileName = track["fileName"];
-                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"encodingName":track["encodingName"]}];
-                    const interconnection = track["featureInterconnection"];
-                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnection});
+                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"columnName":track["columnName"],"encodingName":track["encodingName"]}];
+                    const interconnection = track["featureInterconnection"]; 
+                    const interconnectionType = (()=>{
+                        if( !track["featureInterconnection"])
+                        {
+                            return "none";
+                        }
+                        else if (track["featureInterconnection"])
+                        {
+                            return "dense";
+                        }
+                        else{
+                            return "sparse"
+                        }
+                    })()
+                    tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnectionType});
                 })
                 var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
                 output.push(tempOutput)
@@ -13587,8 +13599,7 @@ function getArrangementUpdated(input,networkData,tasks)
             const viewArrangementPredictionScore = similarityScores[rec];
             element["viewArrangement"] = viewArrangement;
             element["viewArrangementPredictionScore"] = viewArrangementPredictionScore;
-
-            element["viewConnectionType"] = viewArrangementPredictionScore;
+            element["viewConnectionType"] = networkData["connectionType"];
             output.push(element);
         })
     });
