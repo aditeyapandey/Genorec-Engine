@@ -1,4 +1,4 @@
-﻿layout,d_sparseinterconnection,d_denseinterconnection,t_identify,t_overview,s_length,s_color,s_text
-linear,1,1,1,1,1,1,1
-circular,1,-1,1,1,-1,1,1
-hilbert,-1,-1,-1,1,-1,1,-1
+﻿layout,d_viewconnection,d_sparseinterconnection,d_denseinterconnection,t_identify,t_overview,s_length,s_color,s_text
+linear,1,1,1,1,1,1,1,1
+circular,-1,1,-1,1,1,-1,1,1
+hilbert,-1,-1,-1,-1,1,-1,1,-1

@@ -9,10 +9,10 @@ function createInputVector(specs,tasks)
     inputArray.push(inputVectorObject["d_multisequences"] = specs.length >1 ? 1 : 0);
 
     //Connection
-    const connection = []
+    const connection = [];
     specs.forEach(spec=>{
       connection.push(spec["tracks"].some(track=>{
-            return track["interconnection"]
+            return track["interconnectionType"] !== "none"
         }))
     })
     inputArray.push(inputVectorObject["d_connection"] = connection.some(val =>{return val})? 1 : 0);

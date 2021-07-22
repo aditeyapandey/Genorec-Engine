@@ -1,15 +1,16 @@
-function createInputVector(spec,tasks,stage1)
+function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
     var inputVectorObject = {};
     var inputArray = [];
-
     //Network Connections
     const featureInterconnection = spec["tracks"].some( (val) => val["featureInterconnection"]);  
     const denseInterconnection= spec["tracks"].some( (val) => val["denseInterconnection"]);  
     const sparseInterconnection = !denseInterconnection;
-    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+
+    inputArray.push(inputVectorObject["d_viewconnection"] = viewConnectionType !== "none" ? 1:0)
     inputArray.push(inputVectorObject["d_sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
-   
+    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+
     //Tasks
     inputArray.push(inputVectorObject["t_identify"] = 1);
     inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1:0);
@@ -27,12 +28,12 @@ function createInputVector(spec,tasks,stage1)
 }
 
 
-function getLayoutUpdated(visOptions,tasks)
+function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 {
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
-    const vectorKeys = ["d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
+    const vectorKeys = ["d_viewconnection","d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
@@ -41,10 +42,9 @@ function getLayoutUpdated(visOptions,tasks)
 
 
     visOptions.forEach(element => {
-        const inputVectorObject = createInputVector(element,tasks,stage1Model)
+        const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
-
         var tracksTemp =[];
 
              recommendation.forEach(rec =>{

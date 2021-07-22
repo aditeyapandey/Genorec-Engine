@@ -18,6 +18,104 @@ module.exports={
                     [
                         {
                             "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Categorical1",
+                            "featureInterconnection": true,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "connectionType": "none"}
+},{}],2:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Categorical1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    },
+    {   
+        "sequenceId":"sequence_1",
+        "sequenceName":"hg19", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"continous",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED2",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "connectionType": "dense"}
+},{}],3:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
                             "dataType":"quantitative",
                             "intraAttrTask":["identify","compare"],
                             "fileName": "BED1",
@@ -61,7 +159,7 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": [],
     "connectionType": "none"}
-},{}],2:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -95,7 +193,7 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["overview"],
     "connectionType": "none"}
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -138,7 +236,7 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
     "connectionType": "none"}
-},{}],4:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -190,7 +288,7 @@ module.exports={
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
     "connectionType": "none"}
-},{}],5:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0"},
@@ -203,7 +301,7 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1"}
 ]
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
 {"chart":"linechart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
@@ -216,33 +314,33 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]
 
-},{}],7:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports=[
 {"alignment":"overlayed","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
 {"alignment":"stacked","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]
 
-},{}],8:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports=[
-{"layout":"linear","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
-{"layout":"circular","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
-{"layout":"hilbert","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
+{"layout":"linear","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
+{"layout":"circular","d_viewconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
+{"layout":"hilbert","d_viewconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports=[
 {"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
 {"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1"},
@@ -250,14 +348,14 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0"}
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports=[
-{"arrangement":"stacked","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
-{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
-{"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
+{"arrangement":"stacked","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
+{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
+{"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -304,7 +402,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -315,7 +413,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11189,7 +11287,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11207,7 +11305,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":17}],17:[function(require,module,exports){
+},{"ml-array-sum":19}],19:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11237,7 +11335,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":14}],18:[function(require,module,exports){
+},{"is-any-array":16}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11253,7 +11351,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11845,7 +11943,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":16,"ml-distance-euclidean":18,"ml-tree-similarity":20}],20:[function(require,module,exports){
+},{"ml-array-mean":18,"ml-distance-euclidean":20,"ml-tree-similarity":22}],22:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11982,7 +12080,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":13,"num-sort":21}],21:[function(require,module,exports){
+},{"binary-search":15,"num-sort":23}],23:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12021,7 +12119,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],22:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -12070,6 +12168,8 @@ input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
 
 
 input.forEach(val=>{
@@ -12158,7 +12258,7 @@ function getRecommendation(inputData,file,tasks)
         const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
         //Stage 3: Layout
-        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
+        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated,dataspec["connectionType"]);
 
         //Add View Information
         const viewGroupElement = [];
@@ -12166,7 +12266,8 @@ function getRecommendation(inputData,file,tasks)
             val["sequenceName"] = currentSequence["sequenceName"];
             viewGroupElement.push(val);
             })
-            viewGroups.push(viewGroupElement);
+
+        viewGroups.push(viewGroupElement);
         }
 
         //Stage 4: Partition
@@ -12175,10 +12276,12 @@ function getRecommendation(inputData,file,tasks)
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
 
-        console.log(arrangement)
+        console.log(arrangement);
 
        
        //Return the rec non dupicates
+       var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
+       console.log(recommendationSpecNonDuplicatesUpdated)
 
 }
 
@@ -12245,7 +12348,7 @@ function getRecommendation(inputData,file,tasks)
 // module.exports ={
 // getRecommendation
 // }
-},{"../TestInput/V2SingleTrackMultipleView.json":1,"../TestInput/V2SingleTrackSingleView.json":2,"../TestInput/V2SingleViewMultiAttrDiffType.json":3,"../TestInput/V2UpdatedInput.json":4,"./inputspec.js":23,"./outputspec.js":25,"./s1_en.js":26,"./s1_en_updated.js":27,"./s2_al_updated.js":28,"./s2_ca.js":29,"./s3_ls.js":30,"./s3_ls_updated.js":31,"./s4_al.js":32,"./s4_pt_updated.js":33,"./s5_ar.js":34,"./s5_ar_updated.js":35,"./utils.js":36}],23:[function(require,module,exports){
+},{"../TestInput/V2CircularConnection.json":1,"../TestInput/V2MatrixTracks.json":2,"../TestInput/V2SingleTrackMultipleView.json":3,"../TestInput/V2SingleTrackSingleView.json":4,"../TestInput/V2SingleViewMultiAttrDiffType.json":5,"../TestInput/V2UpdatedInput.json":6,"./inputspec.js":25,"./outputspec.js":27,"./s1_en.js":28,"./s1_en_updated.js":29,"./s2_al_updated.js":30,"./s2_ca.js":31,"./s3_ls.js":32,"./s3_ls_updated.js":33,"./s4_al.js":34,"./s4_pt_updated.js":35,"./s5_ar.js":36,"./s5_ar_updated.js":37,"./utils.js":38}],25:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12369,7 +12472,7 @@ module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA
 }
-},{"jquery":15}],24:[function(require,module,exports){
+},{"jquery":17}],26:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12436,7 +12539,7 @@ module.exports = {
     model5Updated: stage5UpdatedModelObj
 }
 
-},{"../model/stage1.json":5,"../model/stage1updated.json":6,"../model/stage2updated.json":7,"../model/stage3.json":8,"../model/stage3updated.json":9,"../model/stage4updated.json":10,"../model/stage5.json":11,"../model/stage5updated.json":12}],25:[function(require,module,exports){
+},{"../model/stage1.json":7,"../model/stage1updated.json":8,"../model/stage2updated.json":9,"../model/stage3.json":10,"../model/stage3updated.json":11,"../model/stage4updated.json":12,"../model/stage5.json":13,"../model/stage5updated.json":14}],27:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     systemoutput.forEach((element,index) => {
@@ -12539,7 +12642,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],26:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12608,7 +12711,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":5,"./modelDataProcessing.js":24,"./utils.js":36}],27:[function(require,module,exports){
+},{"../model/stage1.json":7,"./modelDataProcessing.js":26,"./utils.js":38}],29:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12682,7 +12785,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":6,"./modelDataProcessing.js":24,"./utils.js":36}],28:[function(require,module,exports){
+},{"../model/stage1updated.json":8,"./modelDataProcessing.js":26,"./utils.js":38}],30:[function(require,module,exports){
 // const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
 
 function createInputVector(spec){
@@ -12747,7 +12850,7 @@ function getAlignmentUpdated(visoptions)
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":24,"./utils.js":36}],29:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],31:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -12994,7 +13097,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":24,"./utils.js":36}],30:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],32:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -13110,19 +13213,20 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":23,"./modelDataProcessing.js":24,"./utils.js":36}],31:[function(require,module,exports){
-function createInputVector(spec,tasks,stage1)
+},{"./inputspec.js":25,"./modelDataProcessing.js":26,"./utils.js":38}],33:[function(require,module,exports){
+function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
     var inputVectorObject = {};
     var inputArray = [];
-
     //Network Connections
     const featureInterconnection = spec["tracks"].some( (val) => val["featureInterconnection"]);  
     const denseInterconnection= spec["tracks"].some( (val) => val["denseInterconnection"]);  
     const sparseInterconnection = !denseInterconnection;
-    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+
+    inputArray.push(inputVectorObject["d_viewconnection"] = viewConnectionType !== "none" ? 1:0)
     inputArray.push(inputVectorObject["d_sparseinterconnection"] = sparseInterconnection && featureInterconnection ? 1:0)
-   
+    inputArray.push(inputVectorObject["d_denseinterconnection"] = denseInterconnection && featureInterconnection ? 1:0)
+
     //Tasks
     inputArray.push(inputVectorObject["t_identify"] = 1);
     inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1:0);
@@ -13140,12 +13244,12 @@ function createInputVector(spec,tasks,stage1)
 }
 
 
-function getLayoutUpdated(visOptions,tasks)
+function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 {
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
     const stage1Model = globalData.model1
-    const vectorKeys = ["d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
+    const vectorKeys = ["d_viewconnection","d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
     const recommendedProducts = require("./utils.js").recommendedProducts;
@@ -13154,10 +13258,9 @@ function getLayoutUpdated(visOptions,tasks)
 
 
     visOptions.forEach(element => {
-        const inputVectorObject = createInputVector(element,tasks,stage1Model)
+        const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
-
         var tracksTemp =[];
 
              recommendation.forEach(rec =>{
@@ -13194,7 +13297,7 @@ function getLayoutUpdated(visOptions,tasks)
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":24,"./utils.js":36}],32:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],34:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13386,7 +13489,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":23,"./utils.js":36}],33:[function(require,module,exports){
+},{"./inputspec.js":25,"./utils.js":38}],35:[function(require,module,exports){
 function createInputVector(specs,tasks)
 {
     
@@ -13398,10 +13501,10 @@ function createInputVector(specs,tasks)
     inputArray.push(inputVectorObject["d_multisequences"] = specs.length >1 ? 1 : 0);
 
     //Connection
-    const connection = []
+    const connection = [];
     specs.forEach(spec=>{
       connection.push(spec["tracks"].some(track=>{
-            return track["interconnection"]
+            return track["interconnectionType"] !== "none"
         }))
     })
     inputArray.push(inputVectorObject["d_connection"] = connection.some(val =>{return val})? 1 : 0);
@@ -13462,7 +13565,7 @@ function getPartitionUpdated(input,tasks)
 
 
 module.exports = getPartitionUpdated
-},{"./modelDataProcessing.js":24,"./utils.js":36}],34:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],36:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
@@ -13539,20 +13642,20 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":24,"./utils.js":36}],35:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],37:[function(require,module,exports){
 function createInputVector(views,network,tasks)
 {
     const inputVectorObject = {};
     const inputArray = [];
 
     //Network
-    inputArray.push(inputVectorObject["nointerconnection"] = network["connectionType"] ==='none' ? 1:0)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = network["connectionType"] ==='sparse' ? 1:0)
-    inputArray.push(inputVectorObject["denseinterconnection"] = network["connectionType"] ==='dense' ? 1:0)
+    inputArray.push(inputVectorObject["d_nointerconnection"] = network["connectionType"] ==='none' ? 1:0)
+    inputArray.push(inputVectorObject["d_sparseinterconnection"] = network["connectionType"] ==='sparse' ? 1:0)
+    inputArray.push(inputVectorObject["d_denseinterconnection"] = network["connectionType"] ==='dense' ? 1:0)
 
     //Views
-    inputArray.push(inputVectorObject["twoviews"] = views.length === 2 ? 1:0);
-    inputArray.push(inputVectorObject["otherthantwoviews"] = views.length !== 2 ? 1:0);
+    inputArray.push(inputVectorObject["d_twosequences"] = views.length === 2 ? 1:0);
+    inputArray.push(inputVectorObject["d_otherthantwosequences"] = views.length !== 2 ? 1:0);
 
 
     //layouts
@@ -13570,18 +13673,22 @@ function createInputVector(views,network,tasks)
     const allCircles = allLayouts.every((val,i,arr)=>{
         return val === "circular";
     })
-    inputArray.push(inputVectorObject["allcircles"] = allCircles ? 1:0);
-    inputArray.push(inputVectorObject["mixedlayout"] = mixedLayout ? 1:0);
+    const allLinear = allLayouts.every((val,i,arr)=>{
+        return val === "linear";
+    })
+    inputArray.push(inputVectorObject["s_circularlayout"] = allCircles ? 1:0);
+    inputArray.push(inputVectorObject["s_linearlayout"] = allLinear ? 1:0);
+    inputArray.push(inputVectorObject["s_mixedlayout"] = mixedLayout ? 1:0);
 
     //Tasks
-    inputArray.push(inputVectorObject["compareacrosstracks"] = tasks.includes("compareMultipleTracks") ? 1:0);
+    inputArray.push(inputVectorObject["t_compareacrosstracks"] = tasks.includes("compareMultipleTracks") ? 1:0);
 
     return{inputVectorObject,inputArray};
 }
 
 function getArrangementUpdated(input,networkData,tasks)
 {
-    const vectorKeys = ["d_nointerconnection","d_sparseinterconnection","d_denseinterconnection","d_twosequences","d_otherthantwosequences","s_circularlayout","s_mixedlayout","t_compareacrosstracks"];
+    const vectorKeys = ["d_nointerconnection","d_sparseinterconnection","d_denseinterconnection","d_twosequences","d_otherthantwosequences","s_circularlayout","s_linearlayout","s_mixedlayout","t_compareacrosstracks"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model5Updated;
     const getProductProperties  = require("./utils.js").productProperties;
@@ -13600,15 +13707,19 @@ function getArrangementUpdated(input,networkData,tasks)
             element["viewArrangement"] = viewArrangement;
             element["viewArrangementPredictionScore"] = viewArrangementPredictionScore;
             element["viewConnectionType"] = networkData["connectionType"];
-            output.push(element);
+            const views = element["views"];
+            const viewPartition = element["viewPartition"];
+            const partitionPredictionScore = element["partitionPredictionScore"];
+            const tempOutput = {viewPartition,partitionPredictionScore,views,viewArrangement,viewArrangementPredictionScore,viewConnectionType:networkData["connectionType"]}
+            output.push(tempOutput);
         })
     });
 
-    return output
+    return output;
 }
 
 module.exports = getArrangementUpdated;
-},{"./modelDataProcessing.js":24,"./utils.js":36}],36:[function(require,module,exports){
+},{"./modelDataProcessing.js":26,"./utils.js":38}],38:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13832,4 +13943,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":19}]},{},[22]);
+},{"ml-distance":21}]},{},[24]);

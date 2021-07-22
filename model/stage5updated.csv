@@ -1,4 +1,4 @@
-﻿arrangement,d_nointerconnection,d_sparseinterconnection,d_denseinterconnection,d_twosequences,d_otherthantwosequences,s_circularlayout,s_mixedlayout,t_compareacrosstracks
-stacked,1,1,-1,1,1,-1,1,1
-adjacent,-1,1,-1,1,-1,1,-1,-1
-orthogonal,-1,1,1,1,-1,-1,-1,-1
+﻿arrangement,d_nointerconnection,d_sparseinterconnection,d_denseinterconnection,d_twosequences,d_otherthantwosequences,s_circularlayout,s_linearlayout,s_mixedlayout,t_compareacrosstracks
+stacked,1,1,1,1,1,-1,1,1,1
+adjacent,-1,1,1,1,-1,1,-1,-1,-1
+orthogonal,-1,1,1,1,-1,-1,1,-1,-1

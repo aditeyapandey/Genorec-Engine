@@ -46,6 +46,8 @@ input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
 
 
 input.forEach(val=>{
@@ -134,7 +136,7 @@ function getRecommendation(inputData,file,tasks)
         const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
         //Stage 3: Layout
-        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated);
+        const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated,dataspec["connectionType"]);
 
         //Add View Information
         const viewGroupElement = [];
@@ -142,7 +144,8 @@ function getRecommendation(inputData,file,tasks)
             val["sequenceName"] = currentSequence["sequenceName"];
             viewGroupElement.push(val);
             })
-            viewGroups.push(viewGroupElement);
+
+        viewGroups.push(viewGroupElement);
         }
 
         //Stage 4: Partition
@@ -151,10 +154,12 @@ function getRecommendation(inputData,file,tasks)
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
 
-        console.log(arrangement)
+        console.log(arrangement);
 
        
        //Return the rec non dupicates
+       var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
+       console.log(recommendationSpecNonDuplicatesUpdated)
 
 }
 
