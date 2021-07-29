@@ -19,8 +19,8 @@ function createInputVector(spec){
     inputArray.push(inputVectorObject["d_singlevar"] = spec.length <= 1 ? 1 : 0);
 
     //Encoding Type
-    const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "linechart");
-    const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barchart" || val["encoding"] === "intervalBarChart");
+    const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "lineChart");
+    const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barChart" || val["encoding"] === "intervalBarChart");
     inputArray.push(inputVectorObject["s_alllinechart"] = lineChartEncoding ? 1 : 0);
     inputArray.push(inputVectorObject["s_allbarchart"] = barChartEncoding ? 1 : 0);
     inputArray.push(inputVectorObject["s_otherencoding"] = ! (lineChartEncoding || barChartEncoding) ? 1 : 0);

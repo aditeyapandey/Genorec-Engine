@@ -1,11 +1,11 @@
 [
-{"chart":"dotplot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"linechart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"dotPlot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"lineChart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"barChart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
 {"chart":"heatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"-1"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"barChartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"intervalBarChart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
 {"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"-1"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"intervalBarChartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
 {"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]

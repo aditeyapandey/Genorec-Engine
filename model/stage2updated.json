@@ -1,4 +1,4 @@
 [
-{"alignment":"overlayed","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
-{"alignment":"stacked","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
+{"alignment":"overlay","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
+{"alignment":"stack","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]

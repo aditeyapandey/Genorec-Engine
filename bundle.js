@@ -303,21 +303,21 @@ module.exports=[
 
 },{}],8:[function(require,module,exports){
 module.exports=[
-{"chart":"dotplot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"linechart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"barchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"dotPlot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"lineChart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"barChart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
 {"chart":"heatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"-1"},
-{"chart":"barchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
-{"chart":"intervalBarchart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"barChartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
+{"chart":"intervalBarChart","mark":"rect","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
 {"chart":"intervalHeatmap","mark":"rect","channel":"color(sequential)","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"-1"},
-{"chart":"intervalBarchartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
+{"chart":"intervalBarChartCN","mark":"rect","channel":"color(nominal)","d_quantitative":"-1","d_categorical":"1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"-1","d_segment":"1","t_comparerois":"1"},
 {"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]
 
 },{}],9:[function(require,module,exports){
 module.exports=[
-{"alignment":"overlayed","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
-{"alignment":"stacked","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
+{"alignment":"overlay","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
+{"alignment":"stack","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]
 
 },{}],10:[function(require,module,exports){
@@ -350,7 +350,7 @@ module.exports=[
 
 },{}],14:[function(require,module,exports){
 module.exports=[
-{"arrangement":"stacked","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
+{"arrangement":"stack","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
 {"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
 {"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]
@@ -12807,8 +12807,8 @@ function createInputVector(spec){
     inputArray.push(inputVectorObject["d_singlevar"] = spec.length <= 1 ? 1 : 0);
 
     //Encoding Type
-    const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "linechart");
-    const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barchart" || val["encoding"] === "intervalBarChart");
+    const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "lineChart");
+    const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barChart" || val["encoding"] === "intervalBarChart");
     inputArray.push(inputVectorObject["s_alllinechart"] = lineChartEncoding ? 1 : 0);
     inputArray.push(inputVectorObject["s_allbarchart"] = barChartEncoding ? 1 : 0);
     inputArray.push(inputVectorObject["s_otherencoding"] = ! (lineChartEncoding || barChartEncoding) ? 1 : 0);
@@ -13248,7 +13248,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 {
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
-    const stage1Model = globalData.model1
+    const stage1Model = globalData.model1Updated
     const vectorKeys = ["d_viewconnection","d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;

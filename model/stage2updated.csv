@@ -1,3 +1,3 @@
 ﻿alignment,d_trackssamefile,d_tracksdifffile,d_samedatatype,d_differentdatatype,d_singlevar,s_alllinechart,s_allbarchart,s_otherencoding
-overlayed,1,-1,1,-1,-1,1,1,-1
-stacked,1,1,1,1,1,1,1,1
+overlay,1,-1,1,-1,-1,1,1,-1
+stack,1,1,1,1,1,1,1,1
