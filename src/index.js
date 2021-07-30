@@ -48,6 +48,7 @@ input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackS
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
 input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
 
 
 input.forEach(val=>{
@@ -149,7 +150,7 @@ function getRecommendation(inputData,file,tasks)
         }
 
         //Stage 4: Partition
-        const partition = getPartitionUpdated(viewGroups,tasksUpdated);
+        const partition = getPartitionUpdated(viewGroups,tasksUpdated,dataspec["connectionType"]);
 
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);

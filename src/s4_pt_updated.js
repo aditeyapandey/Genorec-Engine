@@ -1,4 +1,4 @@
-function createInputVector(specs,tasks)
+function createInputVector(specs,tasks,network)
 {
     
     const inputVectorObject = {};
@@ -10,10 +10,12 @@ function createInputVector(specs,tasks)
 
     //Connection
     const connection = [];
+    connection.push(network !== "none");
     specs.forEach(spec=>{
       connection.push(spec["tracks"].some(track=>{
             return track["interconnectionType"] !== "none"
         }))
+        
     })
     inputArray.push(inputVectorObject["d_connection"] = connection.some(val =>{return val})? 1 : 0);
 
@@ -44,7 +46,7 @@ function createInputVector(specs,tasks)
     return{inputVectorObject,inputArray};
 }
 
-function getPartitionUpdated(input,tasks)
+function getPartitionUpdated(input,tasks,network)
 {
     const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_comparerois","s_circularlayout","s_linearlayout"];
     const globalData = require("./modelDataProcessing.js");
@@ -58,10 +60,10 @@ function getPartitionUpdated(input,tasks)
 
     const allVisOptions = cartesian(input);
     allVisOptions.forEach(views =>{
-        const inputVectorObject = createInputVector(views,tasks);
+        const inputVectorObject = createInputVector(views,tasks,network);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
-        recommendation.forEach(val =>{
+        recommendation.forEach(val => {
             const viewPartition = val;
             const partitionPredictionScore = similarityScores[val];
             output.push({viewPartition,partitionPredictionScore,views});
