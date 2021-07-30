@@ -9,9 +9,6 @@ var getArrangment = require("./s5_ar.js")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
-// var fs = require('fs');
-//Change this
-console.log("CHECK THIS")
 const needDefaultTask = false
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"]
 
@@ -26,103 +23,78 @@ var getArrangementUpdated  = require("./s5_ar_updated.js");
 
 //Local validation of the backend
 
-var input = []
-// input.push({"chart":"linechart", "data":require("../TestInput/InputInterface.json"),"tasks":["singleROI"]})
-
-// input.push({"chart":"linechart", "data":require("../TestInput/Linechart.json"),"tasks":["singleROI"]})
-// input.push({"chart":"barchart", "data":require("../TestInput/Barcharts.json"),"tasks":["compareMultipleAttributes"]})
-// input.push({"chart":"heatmap", "data":require("../TestInput/Heatmaps.json"),"tasks":["explore"]})
-// input.push({"chart":"ideogram", "data":require("../TestInput/Ideogram.json"),"tasks":["explore"]})
-// input.push({"chart":"radialideogram", "data":require("../TestInput/IdeogramNonInteractive.json"),"tasks":["explore"]})
-// input.push({"chart":"complexchart", "data":require("../TestInput/input.json"),"tasks":["explore"]})
-// input.push({"chart":"circos", "data":require("../TestInput/Circos.json"),"tasks":["explore"]})
-// input.push({"chart":"gremlin", "data":require("../TestInput/Gremlin.json"),"tasks":["explore"]})
-// input.push({"chart":"circularstacked", "data":require("../TestInput/CircularStacked.json"),"tasks":["explore"]})
-// input.push({"chart":"linearortho", "data":require("../TestInput/LinearOrtho.json"),"tasks":["explore"]})
-// input.push({"chart":"test", "data":require("../TestInput/InputInterface.json"),"tasks":["explore"]})
-
-//Updated Inputs
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
-input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+// var input = [];
+// //Inputs
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+// input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
 
 
-input.forEach(val=>{
-    getRecommendation(val["data"],val["chart"],val['tasks'])
-})
+// input.forEach(val=>{
+//     getRecommendation(val["data"],val["chart"],val['tasks'])
+// })
 
-//Validate the input dataspecification to ensure correctness of input data
-function getRecommendation(inputData,file,tasks)
-{
-    const dataspec = Dataspec(inputData)
-    const sequenceInputArrays = dataspec["sequences"]
-    var sequencesOutput = {}
+// //Validate the input dataspecification to ensure correctness of input data
+// function getRecommendation(inputData,file,tasks)
+// {
+//     const dataspec = Dataspec(inputData)
+//     const sequenceInputArrays = dataspec["sequences"]
+//     var sequencesOutput = {}
 
-    //First determine sequence level encoding
-    for (var i=0;i<sequenceInputArrays.length;i++)
-    {
-        currentSequence = sequenceInputArrays[i]
-        //Stage 1: Encoding Selection
-        var attributeEncoding = encodeAttribute(currentSequence);
-        //Stage 2: Combining Attributes
-        var tracks = getTracks(attributeEncoding)
-        //Stage 3: Predict the Layout
-        var layoutForTracks = getLayout(tracks, currentSequence["sequenceId"] )
-        //Stage 4: Alignment 
-        sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
-    }
+//     //Updated stagewise processing
+//     const viewGroups = [];
+//     const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+//     const constraints = true;
+//     for (var i=0;i<sequenceInputArrays.length;i++)
+//     {
+//         currentSequence = sequenceInputArrays[i];
+        
+//         //Stage 1: Encoding Selection
+//         const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
 
-    
-    //Get view options
-    var visOptions = []
-    Object.keys(sequencesOutput).map(val=>{
-        let tempVisArray = []
-        Object.keys(sequencesOutput[val]).map(feature=>{
-            tempVisArray.push(sequencesOutput[val][feature])
-        })
-        visOptions.push(tempVisArray)
-    })
+//         //Stage 2: Alignment
+//         const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
-    var cartesianCombinationsVisOptions = cartesian(visOptions)
+//         //Stage 3: Layout
+//         const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated,dataspec["connectionType"]);
 
-    //Stage 5: Get Arrangement given the entire sequence data
-    var arrangements = [];
+//         //Add View Information
+//         const viewGroupElement = [];
+//         getLayout.forEach(val=>{
+//             val["sequenceName"] = currentSequence["sequenceName"];
+//             viewGroupElement.push(val);
+//             })
 
-    cartesianCombinationsVisOptions.forEach(option=>{
-        arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
-    })
+//         viewGroups.push(viewGroupElement);
+//         }
 
-    //Stage 6: Assign interactivity to the arrangements
-    var recommendation = []
-    arrangements.forEach((arrangement)=>{
-        recommendation.push({arrangement})
-    })
+//         //Stage 4: Partition
+//         const partition = getPartitionUpdated(viewGroups,tasksUpdated,dataspec["connectionType"]);
 
-    // console.log("Recommendation",recommendation)
+//         //Stage 5: Arrangement
+//         const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
+       
+//        //Return the rec non dupicates
+//        var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
+//        console.log(recommendationSpecNonDuplicatesUpdated);
 
-    var recommendationSpec = RecommendationSpec(recommendation)
+// }
 
-    // console.log("Recommendation Spec",recommendationSpec)
+//For publishing npm library
+//Testing the node package in CLI: https://egghead.io/lessons/javascript-creating-the-library-and-adding-dependencies
+//Using NPM library locally: https://egghead.io/lessons/javascript-test-npm-packages-locally-in-another-project-using-npm-link
 
-    var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
+ function getRecommendation(param) {
+//     //Validate the input dataspecification to ensure correctness of input data
+    const dataspec = Dataspec(param);
+    const sequenceInputArrays = dataspec["sequences"];
+    var sequencesOutput = {};
 
-    if(needDefaultTask) {recommendationSpecNonDuplicates["tasks"] = tasks}
-
-    // console.log(recommendationSpecNonDuplicates)
-
-
-    // var json = JSON.stringify(recommendationSpecNonDuplicates);
-    // fs.writeFile('RecommendedSpec/'+file+'.json', json, (err) => {
-    //     if (err) throw err;
-    //     console.log('Data written to file');
-    // });
-
-
-    //Updated stagewise processing
+    //  Updated stagewise processing
     const viewGroups = [];
     const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
     const constraints = true;
@@ -154,76 +126,16 @@ function getRecommendation(inputData,file,tasks)
 
         //Stage 5: Arrangement
         const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
-
-        console.log(arrangement);
-
        
        //Return the rec non dupicates
        var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
-       console.log(recommendationSpecNonDuplicatesUpdated)
+       console.log(recommendationSpecNonDuplicatesUpdated);
 
+    return recommendationSpecNonDuplicatesUpdated;
+
+}  
+
+// //Define the libary's api for external applications
+module.exports ={
+getRecommendation
 }
-
-//For publishing npm library
-//Using NPM library locally: https://egghead.io/lessons/javascript-test-npm-packages-locally-in-another-project-using-npm-link
-
-//  function getRecommendation(param) {
-// //     //Validate the input dataspecification to ensure correctness of input data
-//     const dataspec = Dataspec(param)
-//     const sequenceInputArrays = dataspec["sequences"]
-//     var sequencesOutput = {}
-
-//     //First determine sequence level encoding
-//     for (var i=0;i<sequenceInputArrays.length;i++)
-//     {
-//         currentSequence = sequenceInputArrays[i]
-//         //Stage 1: Encoding Selection
-//         var attributeEncoding = encodeAttribute(currentSequence);
-//         //Stage 2: Combining Attributes
-//         var tracks = getTracks(attributeEncoding)
-//         //Stage 3: Predict the Layout
-//         var layoutForTracks = getLayout(tracks, currentSequence["sequenceId"] )
-//         //Stage 4: Alignment 
-//         sequencesOutput[currentSequence['sequenceId']]= getAlignment(layoutForTracks,currentSequence['interFeatureTasks'],currentSequence['sequenceName'],currentSequence['sequenceId'])
-//     }
-
-//     //Get view options
-//     var visOptions = []
-//     Object.keys(sequencesOutput).map(val=>{
-//         let tempVisArray = []
-//         Object.keys(sequencesOutput[val]).map(feature=>{
-//             tempVisArray.push(sequencesOutput[val][feature])
-//         })
-//         visOptions.push(tempVisArray)
-//     })
-
-//     var cartesianCombinationsVisOptions = cartesian(visOptions)
-
-//     //Stage 5: Get Arrangement given the entire sequence data
-//     var arrangements = [];
-
-//     cartesianCombinationsVisOptions.forEach(option=>{
-//         arrangements.push(getArrangment(option,dataspec['intraSequenceTask'],dataspec['denseConnection'],dataspec['sparseConnection']))
-//     })
-
-//     //Stage 6: Assign interactivity to the arrangements
-//     var recommendation = []
-//      arrangements.forEach((arrangement)=>{
-//         recommendation.push({arrangement})
-//     })
-
-//     var recommendationSpec = RecommendationSpec(recommendation)
-
-//     var recommendationSpecNonDuplicates = checkDuplicates(Object.values(recommendationSpec))
-
-//     if(needDefaultTask) {recommendationSpecNonDuplicates["tasks"] = tasks}
-
-//     console.log(recommendationSpecNonDuplicates)
-//     return recommendationSpecNonDuplicates
-
-// }  
-
-// // //Define the libary's api for external applications
-// module.exports ={
-// getRecommendation
-// }
