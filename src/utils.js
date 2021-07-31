@@ -201,11 +201,11 @@ const arrayToObject = (array, keyField) =>
       }
     }
 
-    inputArray.forEach((element,index) => {
-      output["recommendation_"+index] = element 
-    });
+    // inputArray.forEach((element,index) => {
+    //   output["recommendation_"+index] = element 
+    // });
     
-    return output
+    return inputArray;
   }
 
 
