@@ -32,7 +32,9 @@ module.exports={
     ],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": [],
-    "connectionType": "none"}
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],2:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -67,7 +69,9 @@ module.exports={
     ],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": [],
-    "connectionType": "dense"}
+    "connectionType": "dense",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],3:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -130,7 +134,9 @@ module.exports={
     ],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": [],
-    "connectionType": "dense"}
+    "connectionType": "dense",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],4:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -193,7 +199,9 @@ module.exports={
     ],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": [],
-    "connectionType": "none"}
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],5:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -227,7 +235,9 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["overview"],
-    "connectionType": "none"}
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],6:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -270,7 +280,9 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
-    "connectionType": "none"}
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
 },{}],7:[function(require,module,exports){
 module.exports={
     "sequences": [
@@ -322,7 +334,10 @@ module.exports={
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
     "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
-    "connectionType": "none"}
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true
+}
 },{}],8:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
@@ -12165,8 +12180,8 @@ var getArrangment = require("./s5_ar.js")
 // var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
-var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
-const needDefaultTask = false
+var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
+const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
 const testVersion = false;
 
@@ -12193,7 +12208,6 @@ if(testVersion)
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
 
-
     input.forEach(val=>{
         getRecommendation(val["data"],val["chart"],val['tasks'])
     })
@@ -12201,9 +12215,10 @@ if(testVersion)
     //Validate the input dataspecification to ensure correctness of input data
     function getRecommendation(inputData,file,tasks)
     {
-        const dataspec = Dataspec(inputData)
-        const sequenceInputArrays = dataspec["sequences"]
-        var sequencesOutput = {}
+        const dataspec = Dataspec(inputData);
+        console.log(dataspec);
+        const sequenceInputArrays = dataspec["sequences"];
+        var sequencesOutput = {};
 
         //Updated stagewise processing
         const viewGroups = [];
@@ -12238,6 +12253,11 @@ if(testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            arrangement.forEach((val)=>{
+                val["geneAnnotation"] = dataspec["geneAnnotation"];
+                val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+            })
+
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         console.log(recommendationSpecNonDuplicatesUpdated);
@@ -12289,6 +12309,11 @@ if(!testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            arrangement.forEach((val)=>{
+                val["geneAnnotation"] = dataspec["geneAnnotation"];
+                val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+            })
+            
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         // console.log(recommendationSpecNonDuplicatesUpdated);
@@ -12312,6 +12337,9 @@ function Dataspec(obj) {
     dataSpec["sequences"] = [];
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
     dataSpec["connectionType"] = (typeof obj.connectionType === "string") ?  obj.connectionType : (function(){throw "Connection Information must be 'none','dense','sparse type"}());
+    dataSpec["geneAnnotation"] = (typeof obj.geneAnnotation === "boolean") ?  obj.geneAnnotation : (function(){throw "Gene annotation information is not available"}());
+    dataSpec["ideogramDisplayed"] = (typeof obj.ideogramDisplayed === "boolean") ?  obj.ideogramDisplayed : (function(){throw "Ideogram information is not avaialable"}());
+
 
    // dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
    // dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());

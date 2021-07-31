@@ -7,6 +7,9 @@ function Dataspec(obj) {
     dataSpec["sequences"] = [];
     dataSpec["intraSequenceTask"] = (typeof obj.intraSequenceTask =="object") ? obj.intraSequenceTask : (function(){throw "Interconnection should be an object"}());
     dataSpec["connectionType"] = (typeof obj.connectionType === "string") ?  obj.connectionType : (function(){throw "Connection Information must be 'none','dense','sparse type"}());
+    dataSpec["geneAnnotation"] = (typeof obj.geneAnnotation === "boolean") ?  obj.geneAnnotation : (function(){throw "Gene annotation information is not available"}());
+    dataSpec["ideogramDisplayed"] = (typeof obj.ideogramDisplayed === "boolean") ?  obj.ideogramDisplayed : (function(){throw "Ideogram information is not avaialable"}());
+
 
    // dataSpec["denseConnection"] = (typeof obj.denseConnection == "boolean") ?  obj.denseConnection : (function(){throw "Dense Interconnection must be Boolean type"}());
    // dataSpec["sparseConnection"] = (typeof obj.sparseConnection == "boolean") ?  obj.sparseConnection : (function(){throw "Sparse Interconnection must be Boolean type"}());

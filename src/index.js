@@ -8,8 +8,8 @@ var getArrangment = require("./s5_ar.js")
 // var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
-var RecommendationSpec = require("./outputspec.js")['RecommendationSpec']
-const needDefaultTask = false
+var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
+const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
 const testVersion = false;
 
@@ -36,7 +36,6 @@ if(testVersion)
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
 
-
     input.forEach(val=>{
         getRecommendation(val["data"],val["chart"],val['tasks'])
     })
@@ -44,9 +43,10 @@ if(testVersion)
     //Validate the input dataspecification to ensure correctness of input data
     function getRecommendation(inputData,file,tasks)
     {
-        const dataspec = Dataspec(inputData)
-        const sequenceInputArrays = dataspec["sequences"]
-        var sequencesOutput = {}
+        const dataspec = Dataspec(inputData);
+        console.log(dataspec);
+        const sequenceInputArrays = dataspec["sequences"];
+        var sequencesOutput = {};
 
         //Updated stagewise processing
         const viewGroups = [];
@@ -81,6 +81,11 @@ if(testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            arrangement.forEach((val)=>{
+                val["geneAnnotation"] = dataspec["geneAnnotation"];
+                val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+            })
+
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         console.log(recommendationSpecNonDuplicatesUpdated);
@@ -132,6 +137,11 @@ if(!testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            arrangement.forEach((val)=>{
+                val["geneAnnotation"] = dataspec["geneAnnotation"];
+                val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+            })
+            
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         // console.log(recommendationSpecNonDuplicatesUpdated);
