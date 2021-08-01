@@ -35,6 +35,8 @@ if(testVersion)
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+
 
     input.forEach(val=>{
         getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -81,9 +83,11 @@ if(testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            //Adding additional information to the spec
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+                val["tasks"] = tasksUpdated
             })
 
         //Return the rec non dupicates
@@ -137,9 +141,11 @@ if(!testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            //Adding additional information to the spec
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+                val["tasks"] = tasksUpdated
             })
             
         //Return the rec non dupicates

@@ -61,7 +61,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
                         {
                             return "none";
                         }
-                        else if (track["featureInterconnection"])
+                        else if (track["denseInterconnection"])
                         {
                             return "dense";
                         }

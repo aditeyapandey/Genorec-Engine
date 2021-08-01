@@ -18,10 +18,10 @@ module.exports={
                     [
                         {
                             "attrId":"attribute_0",
-                            "dataType":"categorical",
+                            "dataType":"quantitative",
                             "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Categorical1",
+                            "fileName": "BEDPE1",
+                            "encodingName": "Quantitative1",
                             "featureInterconnection": true,
                             "denseInterconnection": false
                         }
@@ -59,6 +59,43 @@ module.exports={
                             "intraAttrTask":["identify","compare"],
                             "fileName": "BED1",
                             "encodingName": "Categorical1",
+                            "featureInterconnection": true,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
+},{}],3:[function(require,module,exports){
+module.exports={
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Categorical1",
                             "featureInterconnection": false,
                             "denseInterconnection": false
                         }
@@ -72,7 +109,7 @@ module.exports={
     "connectionType": "dense",
     "geneAnnotation": true,
     "ideogramDisplayed": true}
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -137,7 +174,7 @@ module.exports={
     "connectionType": "dense",
     "geneAnnotation": true,
     "ideogramDisplayed": true}
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -202,7 +239,7 @@ module.exports={
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true}
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -237,8 +274,9 @@ module.exports={
     "tasks": ["overview"],
     "connectionType": "none",
     "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],6:[function(require,module,exports){
+    "ideogramDisplayed": true
+}
+},{}],7:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -283,7 +321,7 @@ module.exports={
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true}
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports={
     "sequences": [
         {   
@@ -338,7 +376,7 @@ module.exports={
     "geneAnnotation": true,
     "ideogramDisplayed": true
 }
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0"},
@@ -351,7 +389,7 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1"}
 ]
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports=[
 {"chart":"dotPlot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
 {"chart":"lineChart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
@@ -364,33 +402,33 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports=[
 {"alignment":"overlay","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
 {"alignment":"stack","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
 {"layout":"circular","d_viewconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
 {"layout":"hilbert","d_viewconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports=[
 {"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
 {"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1"},
@@ -398,14 +436,14 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0"}
 ]
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports=[
 {"arrangement":"stack","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
 {"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
 {"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -452,7 +490,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -463,7 +501,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11337,7 +11375,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11355,7 +11393,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":20}],20:[function(require,module,exports){
+},{"ml-array-sum":21}],21:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11385,7 +11423,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":17}],21:[function(require,module,exports){
+},{"is-any-array":18}],22:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11401,7 +11439,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -11993,7 +12031,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":19,"ml-distance-euclidean":21,"ml-tree-similarity":23}],23:[function(require,module,exports){
+},{"ml-array-mean":20,"ml-distance-euclidean":22,"ml-tree-similarity":24}],24:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12130,7 +12168,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":16,"num-sort":24}],24:[function(require,module,exports){
+},{"binary-search":17,"num-sort":25}],25:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12169,7 +12207,7 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
 var encodeAttribute  = require("./s1_en.js")
 var getTracks  = require("./s2_ca.js")
@@ -12207,6 +12245,8 @@ if(testVersion)
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+
 
     input.forEach(val=>{
         getRecommendation(val["data"],val["chart"],val['tasks'])
@@ -12253,9 +12293,11 @@ if(testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            //Adding additional information to the spec
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+                val["tasks"] = tasksUpdated
             })
 
         //Return the rec non dupicates
@@ -12309,9 +12351,11 @@ if(!testVersion)
             //Stage 5: Arrangement
             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
+            //Adding additional information to the spec
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+                val["tasks"] = tasksUpdated
             })
             
         //Return the rec non dupicates
@@ -12327,7 +12371,7 @@ if(!testVersion)
     getRecommendation
     }
 }
-},{"../TestInput/V2CircularConnection.json":1,"../TestInput/V2MatrixSingleSeq.json":2,"../TestInput/V2MatrixTracks.json":3,"../TestInput/V2SingleTrackMultipleView.json":4,"../TestInput/V2SingleTrackSingleView.json":5,"../TestInput/V2SingleViewMultiAttrDiffType.json":6,"../TestInput/V2UpdatedInput.json":7,"./inputspec.js":26,"./outputspec.js":28,"./s1_en.js":29,"./s1_en_updated.js":30,"./s2_al_updated.js":31,"./s2_ca.js":32,"./s3_ls.js":33,"./s3_ls_updated.js":34,"./s4_al.js":35,"./s4_pt_updated.js":36,"./s5_ar.js":37,"./s5_ar_updated.js":38,"./utils.js":39}],26:[function(require,module,exports){
+},{"../TestInput/V2BEDPENetwork.json":1,"../TestInput/V2CircularConnection.json":2,"../TestInput/V2MatrixSingleSeq.json":3,"../TestInput/V2MatrixTracks.json":4,"../TestInput/V2SingleTrackMultipleView.json":5,"../TestInput/V2SingleTrackSingleView.json":6,"../TestInput/V2SingleViewMultiAttrDiffType.json":7,"../TestInput/V2UpdatedInput.json":8,"./inputspec.js":27,"./outputspec.js":29,"./s1_en.js":30,"./s1_en_updated.js":31,"./s2_al_updated.js":32,"./s2_ca.js":33,"./s3_ls.js":34,"./s3_ls_updated.js":35,"./s4_al.js":36,"./s4_pt_updated.js":37,"./s5_ar.js":38,"./s5_ar_updated.js":39,"./utils.js":40}],27:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12454,7 +12498,7 @@ module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA
 }
-},{"jquery":18}],27:[function(require,module,exports){
+},{"jquery":19}],28:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12521,7 +12565,7 @@ module.exports = {
     model5Updated: stage5UpdatedModelObj
 }
 
-},{"../model/stage1.json":8,"../model/stage1updated.json":9,"../model/stage2updated.json":10,"../model/stage3.json":11,"../model/stage3updated.json":12,"../model/stage4updated.json":13,"../model/stage5.json":14,"../model/stage5updated.json":15}],28:[function(require,module,exports){
+},{"../model/stage1.json":9,"../model/stage1updated.json":10,"../model/stage2updated.json":11,"../model/stage3.json":12,"../model/stage3updated.json":13,"../model/stage4updated.json":14,"../model/stage5.json":15,"../model/stage5updated.json":16}],29:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     systemoutput.forEach((element,index) => {
@@ -12624,7 +12668,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],29:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 // Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
 // Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
 // inputVector consists an array and an object that store information about the input attribute.
@@ -12693,7 +12737,7 @@ function encodeAttribute(dataspec){
 }
 
  module.exports = encodeAttribute
-},{"../model/stage1.json":8,"./modelDataProcessing.js":27,"./utils.js":39}],30:[function(require,module,exports){
+},{"../model/stage1.json":9,"./modelDataProcessing.js":28,"./utils.js":40}],31:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12767,7 +12811,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":9,"./modelDataProcessing.js":27,"./utils.js":39}],31:[function(require,module,exports){
+},{"../model/stage1updated.json":10,"./modelDataProcessing.js":28,"./utils.js":40}],32:[function(require,module,exports){
 // const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
 
 function createInputVector(spec){
@@ -12832,7 +12876,7 @@ function getAlignmentUpdated(visoptions)
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":27,"./utils.js":39}],32:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],33:[function(require,module,exports){
 const globalData = require("./modelDataProcessing.js")
 const cartesian = require("./utils.js").cartesian
 
@@ -13079,7 +13123,7 @@ function getTracks(encodingSpecification){
 }
 
 module.exports = getTracks
-},{"./modelDataProcessing.js":27,"./utils.js":39}],33:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],34:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage1Model = models.model1
 const stage3Model = models.model3
@@ -13195,7 +13239,7 @@ return getVisOptions(trackLayoutOutput)
 
 
 module.exports = getLayout
-},{"./inputspec.js":26,"./modelDataProcessing.js":27,"./utils.js":39}],34:[function(require,module,exports){
+},{"./inputspec.js":27,"./modelDataProcessing.js":28,"./utils.js":40}],35:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
     var inputVectorObject = {};
@@ -13259,7 +13303,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
                         {
                             return "none";
                         }
-                        else if (track["featureInterconnection"])
+                        else if (track["denseInterconnection"])
                         {
                             return "dense";
                         }
@@ -13279,7 +13323,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":27,"./utils.js":39}],35:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],36:[function(require,module,exports){
 const cartesian = require("./utils.js").cartesian
 const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
 
@@ -13471,7 +13515,7 @@ function getAlignment (layouts,tasks,sequenceName,sequenceId)
 }
 
 module.exports = getAlignment
-},{"./inputspec.js":26,"./utils.js":39}],36:[function(require,module,exports){
+},{"./inputspec.js":27,"./utils.js":40}],37:[function(require,module,exports){
 function createInputVector(specs,tasks,network)
 {
     
@@ -13549,7 +13593,7 @@ function getPartitionUpdated(input,tasks,network)
 
 
 module.exports = getPartitionUpdated
-},{"./modelDataProcessing.js":27,"./utils.js":39}],37:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],38:[function(require,module,exports){
 const models = require("./modelDataProcessing.js")
 const stage5Model = models.model5
 const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
@@ -13626,7 +13670,7 @@ function getArrangement(input,tasks,dense,sparse){
 }
 
 module.exports = getArrangement
-},{"./modelDataProcessing.js":27,"./utils.js":39}],38:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],39:[function(require,module,exports){
 function createInputVector(views,network,tasks)
 {
     const inputVectorObject = {};
@@ -13703,7 +13747,7 @@ function getArrangementUpdated(input,networkData,tasks)
 }
 
 module.exports = getArrangementUpdated;
-},{"./modelDataProcessing.js":27,"./utils.js":39}],39:[function(require,module,exports){
+},{"./modelDataProcessing.js":28,"./utils.js":40}],40:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -13927,4 +13971,4 @@ module.exports =
   mode:mode,
   checkDuplicates:checkDuplicates
 }
-},{"ml-distance":22}]},{},[25]);
+},{"ml-distance":23}]},{},[26]);
