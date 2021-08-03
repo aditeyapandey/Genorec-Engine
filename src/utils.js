@@ -208,6 +208,26 @@ const arrayToObject = (array, keyField) =>
     return inputArray;
   }
 
+  //Test if no attributes are provided in the input data
+  function checkMissingAttributes(input)
+  {
+  return(input["sequences"].some(sequence=>{
+    return sequence["features"].length === 0
+  }));
+  }
+
+  const coolerOutput = [{
+    "viewPartition": "contiguous",
+    "partitionPredictionScore": 0.5345224838248487,
+    "views": [],
+    "viewArrangement": "orthogonal",
+    "viewArrangementPredictionScore": 0.5773502691896257,
+    "viewConnectionType": "dense",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true,
+    "tasks": []
+}]
+
 
 
 
@@ -219,5 +239,7 @@ module.exports =
   cartesian: cartesian,
   getVisOptions: getVisOptions,
   mode:mode,
-  checkDuplicates:checkDuplicates
+  checkDuplicates:checkDuplicates,
+  checkMissingAttributes:checkMissingAttributes,
+  coolerOutput: coolerOutput
 }

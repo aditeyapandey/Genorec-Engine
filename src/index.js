@@ -8,6 +8,8 @@ var getArrangment = require("./s5_ar.js")
 // var getViewConfiguration = require("./s6_vc")
 const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
+const checkMissingAttributes = require("./utils.js").checkMissingAttributes
+const coolerOutput = require("./utils.js").coolerOutput
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
 const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
@@ -28,14 +30,16 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
 
 
     input.forEach(val=>{
@@ -45,10 +49,15 @@ if(testVersion)
     //Validate the input dataspecification to ensure correctness of input data
     function getRecommendation(inputData,file,tasks)
     {
+        let attrMissing = checkMissingAttributes(inputData);
+        if(attrMissing)
+        {
+            return coolerOutput
+        }
+
         const dataspec = Dataspec(inputData);
         console.log(dataspec);
         const sequenceInputArrays = dataspec["sequences"];
-        var sequencesOutput = {};
 
         //Updated stagewise processing
         const viewGroups = [];
@@ -103,10 +112,17 @@ if(testVersion)
 if(!testVersion)
 {
     function getRecommendation(param) {
-    //     //Validate the input dataspecification to ensure correctness of input data
+
+        let attrMissing = checkMissingAttributes(param);
+        if(attrMissing)
+        {
+            return coolerOutput
+
+        }
+
+       //Validate the input dataspecification to ensure correctness of input data
         const dataspec = Dataspec(param);
         const sequenceInputArrays = dataspec["sequences"];
-        var sequencesOutput = {};
 
         //  Updated stagewise processing
         const viewGroups = [];
