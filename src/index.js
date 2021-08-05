@@ -26,85 +26,85 @@ var getArrangementUpdated  = require("./s5_ar_updated.js");
 
 //Local validation of the backend
 
-if(testVersion)
-{
-    var input = [];
-    //Inputs
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
+// if(testVersion)
+// {
+//     var input = [];
+//     //Inputs
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+//     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+//     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
+//     input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
 
 
-    input.forEach(val=>{
-        getRecommendation(val["data"],val["chart"],val['tasks'])
-    })
+//     input.forEach(val=>{
+//         getRecommendation(val["data"],val["chart"],val['tasks'])
+//     })
 
-    //Validate the input dataspecification to ensure correctness of input data
-    function getRecommendation(inputData,file,tasks)
-    {
-        let attrMissing = checkMissingAttributes(inputData);
-        if(attrMissing)
-        {
-            return coolerOutput
-        }
+//     //Validate the input dataspecification to ensure correctness of input data
+//     function getRecommendation(inputData,file,tasks)
+//     {
+//         let attrMissing = checkMissingAttributes(inputData);
+//         if(attrMissing)
+//         {
+//             return coolerOutput
+//         }
 
-        const dataspec = Dataspec(inputData);
-        console.log(dataspec);
-        const sequenceInputArrays = dataspec["sequences"];
+//         const dataspec = Dataspec(inputData);
+//         console.log(dataspec);
+//         const sequenceInputArrays = dataspec["sequences"];
 
-        //Updated stagewise processing
-        const viewGroups = [];
-        const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
-        const constraints = true;
-        for (var i=0;i<sequenceInputArrays.length;i++)
-        {
-            currentSequence = sequenceInputArrays[i];
+//         //Updated stagewise processing
+//         const viewGroups = [];
+//         const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+//         const constraints = true;
+//         for (var i=0;i<sequenceInputArrays.length;i++)
+//         {
+//             currentSequence = sequenceInputArrays[i];
             
-            //Stage 1: Encoding Selection
-            const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
+//             //Stage 1: Encoding Selection
+//             const attributeEncoding = encodeAttributeUpdated(currentSequence,tasksUpdated);
 
-            //Stage 2: Alignment
-            const trackAlignment = getAlignmentUpdated(attributeEncoding);
+//             //Stage 2: Alignment
+//             const trackAlignment = getAlignmentUpdated(attributeEncoding);
 
-            //Stage 3: Layout
-            const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated,dataspec["connectionType"]);
+//             //Stage 3: Layout
+//             const getLayout = getLayoutUpdated(trackAlignment,tasksUpdated,dataspec["connectionType"]);
 
-            //Add View Information
-            const viewGroupElement = [];
-            getLayout.forEach(val=>{
-                val["sequenceName"] = currentSequence["sequenceName"];
-                viewGroupElement.push(val);
-                })
+//             //Add View Information
+//             const viewGroupElement = [];
+//             getLayout.forEach(val=>{
+//                 val["sequenceName"] = currentSequence["sequenceName"];
+//                 viewGroupElement.push(val);
+//                 })
 
-            viewGroups.push(viewGroupElement);
-            }
+//             viewGroups.push(viewGroupElement);
+//             }
 
-            //Stage 4: Partition
-            const partition = getPartitionUpdated(viewGroups,tasksUpdated,dataspec["connectionType"]);
+//             //Stage 4: Partition
+//             const partition = getPartitionUpdated(viewGroups,tasksUpdated,dataspec["connectionType"]);
 
-            //Stage 5: Arrangement
-            const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
+//             //Stage 5: Arrangement
+//             const arrangement = getArrangementUpdated(partition,{connectionType:dataspec["connectionType"]},tasksUpdated);
         
-            //Adding additional information to the spec
-            arrangement.forEach((val)=>{
-                val["geneAnnotation"] = dataspec["geneAnnotation"];
-                val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
-                val["tasks"] = tasksUpdated
-            })
+//             //Adding additional information to the spec
+//             arrangement.forEach((val)=>{
+//                 val["geneAnnotation"] = dataspec["geneAnnotation"];
+//                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
+//                 val["tasks"] = tasksUpdated
+//             })
 
-        //Return the rec non dupicates
-        var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
-        console.log(recommendationSpecNonDuplicatesUpdated);
+//         //Return the rec non dupicates
+//         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
+//         console.log(recommendationSpecNonDuplicatesUpdated);
 
-    }
-}
+//     }
+// }
 //For publishing npm library
 //Testing the node package in CLI: https://egghead.io/lessons/javascript-creating-the-library-and-adding-dependencies
 //Using NPM library locally: https://egghead.io/lessons/javascript-test-npm-packages-locally-in-another-project-using-npm-link
