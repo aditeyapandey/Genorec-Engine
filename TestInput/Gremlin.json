@@ -1,0 +1,36 @@
+{
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"XYZ", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Random",
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":[],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify"]
+                        },
+                        {
+                            "attrId":"attribute_1",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "denseConnection": false,
+    "sparseConnection": false}

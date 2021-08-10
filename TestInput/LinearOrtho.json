@@ -1,0 +1,56 @@
+{
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"XYZ", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        }
+                    ]
+                }
+            ]
+    },{
+        "sequenceId":"sequence_1",
+        "sequenceName":"ABC", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":["summarize"],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":["sequence_0","sequence_1"]},
+    "denseConnection": true,
+    "sparseConnection": false}

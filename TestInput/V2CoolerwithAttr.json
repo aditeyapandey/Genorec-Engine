@@ -1,0 +1,48 @@
+{
+    "sequences": [
+        {
+            "sequenceId": "sequence_0",
+            "sequenceName": "hg38",
+            "interFeatureTasks": {
+                "compare": [],
+                "correlate": []
+            },
+            "features": [
+                {
+                    "featureId": "feature_0",
+                    "featureGranularity": "point",
+                    "featureDensity": "continous",
+                    "featureLabel": "Point_Continous",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks": [],
+                    "interactivity": true,
+                    "attr": [
+                        {
+                            "attrId": "attribute_0",
+                            "dataType": "quantitative",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": false,
+                            "denseInterconnection": false,
+                            "fileName": "cooler1",
+                            "encodingName": "quant0"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "intraSequenceTask": {
+        "connectedNodes": [],
+        "sequenceConservation": [],
+        "edgeValues": []
+    },
+    "denseConnection": true,
+    "sparseConnection": false,
+    "connectionType": "dense",
+    "tasks": [],
+    "geneAnnotation": true,
+    "ideogramDisplayed": true
+}

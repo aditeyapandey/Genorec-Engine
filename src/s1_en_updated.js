@@ -5,8 +5,9 @@
 function createInputVector(feature,attribute,task){
   
     // Mapping attributes 
-    var inputVectorObject = {}
-    var inputArray = []
+    var inputVectorObject = {};
+    var inputArray = [];
+    console.log(task)
 
   //Vector array and object
     inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
@@ -37,7 +38,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 
     var stage1Output = []; // For each attribute there should be a sub array of objects, e.g.: [[{},{}],[{},{}]]
 
-    compareroisTask =tasks.includes('compareMultipleROI');
+    compareroisTask = tasks.includes('compareMultipleROI');
 
     for(var i = 0; i<dataspec.features.length;i++)
     {

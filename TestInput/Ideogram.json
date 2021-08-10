@@ -1,0 +1,31 @@
+{
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"XYZ", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"segment",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks":[""],
+                    "interactivity":true,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify"]
+                        }
+                    ]
+                }
+            ]
+    }],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "denseConnection": false,
+    "sparseConnection": false}

@@ -1,0 +1,61 @@
+{
+  "sequences": [
+    {
+      "sequenceId": "sequence_0",
+      "sequenceName": "hg38",
+      "interFeatureTasks": {
+        "compare": [],
+        "correlate": []
+      },
+      "features": [
+        {
+          "featureId": "feature_0",
+          "featureGranularity": "point",
+          "featureDensity": "continous",
+          "featureLabel": "Point_Continous",
+          "featureInterconnection": false,
+          "denseInterconnection": false,
+          "intraFeatureTasks": [],
+          "interactivity": true,
+          "attr": [
+            {
+              "attrId": "attribute_0",
+              "dataType": "quantitative",
+              "intraAttrTask": [
+                "identify",
+                "compare"
+              ]
+            }
+          ]
+        },
+        {
+          "featureId": "feature_1",
+          "featureGranularity": "segment",
+          "featureDensity": "sparse",
+          "featureLabel": "Segment_Sparse",
+          "featureInterconnection": false,
+          "denseInterconnection": false,
+          "intraFeatureTasks": [],
+          "interactivity": true,
+          "attr": [
+            {
+              "attrId": "attribute_0",
+              "dataType": "quantitative",
+              "intraAttrTask": [
+                "identify",
+                "compare"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "intraSequenceTask": {
+    "connectedNodes": [],
+    "sequenceConservation": [],
+    "edgeValues": []
+  },
+  "denseConnection": false,
+  "sparseConnection": false
+}

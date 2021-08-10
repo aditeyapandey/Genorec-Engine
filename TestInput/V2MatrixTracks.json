@@ -1,0 +1,64 @@
+{
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"categorical",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED1",
+                            "encodingName": "Categorical1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    },
+    {   
+        "sequenceId":"sequence_1",
+        "sequenceName":"hg19", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"continous",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BED2",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "connectionType": "dense",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}

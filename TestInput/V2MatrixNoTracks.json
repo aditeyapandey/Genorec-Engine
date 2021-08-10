@@ -1,0 +1,25 @@
+{
+    "sequences": [
+        {
+            "sequenceId": "sequence_0",
+            "sequenceName": "hg38",
+            "interFeatureTasks": {
+                "compare": [],
+                "correlate": []
+            },
+            "features": [
+            ]
+        }
+    ],
+    "intraSequenceTask": {
+        "connectedNodes": [],
+        "sequenceConservation": [],
+        "edgeValues": []
+    },
+    "denseConnection": true,
+    "sparseConnection": false,
+    "connectionType": "dense",
+    "tasks": [],
+    "geneAnnotation": true,
+    "ideogramDisplayed": true
+}

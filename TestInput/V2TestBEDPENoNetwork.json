@@ -1,0 +1,45 @@
+{
+    "sequences": [
+        {   
+        "sequenceId":"sequence_0",
+        "sequenceName":"hg38", 
+        "interFeatureTasks":{"compare":[],"correlate":[]},
+            "features":
+            [
+                { 
+                    "featureId":"feature_0",
+                    "featureGranularity":"point",
+                    "featureDensity":"sparse",
+                    "featureLabel": "Epigenetic Signal",
+                    "intraFeatureTasks":["outliers"],
+                    "interactivity":false,
+                    "attr":
+                    [
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BEDPE1",
+                            "encodingName": "Quantitative1",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        },
+                        {
+                            "attrId":"attribute_0",
+                            "dataType":"quantitative",
+                            "intraAttrTask":["identify","compare"],
+                            "fileName": "BEDPE1",
+                            "encodingName": "Quantitative2",
+                            "featureInterconnection": false,
+                            "denseInterconnection": false
+                        }
+                    ]
+                }
+            ]
+    }
+    ],
+    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
+    "tasks": [],
+    "connectionType": "none",
+    "geneAnnotation": true,
+    "ideogramDisplayed": true}
