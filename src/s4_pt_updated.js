@@ -22,6 +22,7 @@ function createInputVector(specs,tasks,network)
 
     //Tasks
     inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1 : 0);
+    inputArray.push(inputVectorObject["t_identify"] = tasks.includes('singleROI') ? 1 : 0);
     inputArray.push(inputVectorObject["t_comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
 
 
@@ -48,7 +49,7 @@ function createInputVector(specs,tasks,network)
 
 function getPartitionUpdated(input,tasks,network)
 {
-    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_comparerois","s_circularlayout","s_linearlayout"];
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;

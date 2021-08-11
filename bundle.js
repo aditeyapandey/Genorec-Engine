@@ -320,7 +320,7 @@ module.exports={
             ]
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["overview"],
+    "tasks": ["singleROI"],
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true
@@ -473,8 +473,8 @@ module.exports=[
 
 },{}],15:[function(require,module,exports){
 module.exports=[
-{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
-{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
+{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_identify":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
+{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_identify":"-1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]
 
 },{}],16:[function(require,module,exports){
@@ -12272,7 +12272,7 @@ const coolerOutput = require("./utils.js").coolerOutput
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
 const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
-const testVersion = true;
+const testVersion = false;
 
 
 //Updated variables
@@ -12820,7 +12820,6 @@ function createInputVector(feature,attribute,task){
     // Mapping attributes 
     var inputVectorObject = {};
     var inputArray = [];
-    console.log(task)
 
   //Vector array and object
     inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
@@ -13614,6 +13613,7 @@ function createInputVector(specs,tasks,network)
 
     //Tasks
     inputArray.push(inputVectorObject["t_overview"] = tasks.includes("overview") ? 1 : 0);
+    inputArray.push(inputVectorObject["t_identify"] = tasks.includes('singleROI') ? 1 : 0);
     inputArray.push(inputVectorObject["t_comparerois"] = tasks.includes('compareMultipleROI') ? 1 : 0);
 
 
@@ -13640,7 +13640,7 @@ function createInputVector(specs,tasks,network)
 
 function getPartitionUpdated(input,tasks,network)
 {
-    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_comparerois","s_circularlayout","s_linearlayout"];
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;

@@ -7,7 +7,6 @@ function createInputVector(feature,attribute,task){
     // Mapping attributes 
     var inputVectorObject = {};
     var inputArray = [];
-    console.log(task)
 
   //Vector array and object
     inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)

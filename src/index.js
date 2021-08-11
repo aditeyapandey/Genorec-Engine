@@ -13,7 +13,7 @@ const coolerOutput = require("./utils.js").coolerOutput
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
 const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
-const testVersion = true;
+const testVersion = false;
 
 
 //Updated variables

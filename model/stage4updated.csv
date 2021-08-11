@@ -1,3 +1,3 @@
-﻿partition,d_multivars,d_multisequences,d_connection,t_overview,t_comparerois,s_circularlayout,s_linearlayout
-contiguous,1,1,1,1,1,1,1
-segregated,-1,-1,-1,1,-1,-1,1
+﻿partition,d_multivars,d_multisequences,d_connection,t_overview,t_identify,t_comparerois,s_circularlayout,s_linearlayout
+contiguous,1,1,1,1,1,1,1,1
+segregated,-1,-1,-1,1,-1,-1,-1,1

@@ -1,4 +1,4 @@
 [
-{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
-{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
+{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_identify":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
+{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_identify":"-1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]

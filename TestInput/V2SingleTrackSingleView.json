@@ -29,7 +29,7 @@
             ]
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["overview"],
+    "tasks": ["singleROI"],
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true
