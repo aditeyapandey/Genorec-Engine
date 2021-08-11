@@ -47,7 +47,7 @@
             ]
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
+    "tasks": ["compareMultipleROI"],
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true

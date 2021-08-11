@@ -366,7 +366,7 @@ module.exports={
             ]
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
+    "tasks": ["singleROI"],
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true}
@@ -420,7 +420,7 @@ module.exports={
             ]
     }],
     "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["singleROI", "compareMultipleROI" ,"compareMultipleTracks","overview","explore"],
+    "tasks": ["compareMultipleROI"],
     "connectionType": "none",
     "geneAnnotation": true,
     "ideogramDisplayed": true
@@ -12272,7 +12272,7 @@ const coolerOutput = require("./utils.js").coolerOutput
 var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
 const needDefaultTask = false;
 let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
-const testVersion = false;
+const testVersion = true;
 
 
 //Updated variables
@@ -12321,6 +12321,11 @@ if(testVersion)
         //Updated stagewise processing
         const viewGroups = [];
         const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+
+        if (tasksUpdated.length>1) {
+            throw 'More than 1 task selection is not allowed';
+          }
+
         const constraints = true;
         for (var i=0;i<sequenceInputArrays.length;i++)
         {
@@ -12355,7 +12360,7 @@ if(testVersion)
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
-                val["tasks"] = tasksUpdated
+                val["tasks"] = tasksUpdated.length>0 ? tasksUpdated[0] : "overview"
             })
 
         //Return the rec non dupicates
@@ -12386,6 +12391,9 @@ if(!testVersion)
         //  Updated stagewise processing
         const viewGroups = [];
         const tasksUpdated = dataspec.hasOwnProperty('tasks') ? dataspec["tasks"]: [];
+        if (tasksUpdated.length>1) {
+            throw 'More than 1 task selection is not allowed';
+          }
         const constraints = true;
         for (var i=0;i<sequenceInputArrays.length;i++)
         {
@@ -12420,7 +12428,7 @@ if(!testVersion)
             arrangement.forEach((val)=>{
                 val["geneAnnotation"] = dataspec["geneAnnotation"];
                 val["ideogramDisplayed"] = dataspec["ideogramDisplayed"];
-                val["tasks"] = tasksUpdated
+                val["tasks"] = tasksUpdated.length>0 ? tasksUpdated[0] : "overview"
             })
             
         //Return the rec non dupicates
