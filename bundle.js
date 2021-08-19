@@ -1,80 +1,6 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 module.exports={
     "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BEDPE1",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": true,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }
-    ],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": [],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],2:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Categorical1",
-                            "featureInterconnection": true,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }
-    ],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": [],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],3:[function(require,module,exports){
-module.exports={
-    "sequences": [
         {
             "sequenceId": "sequence_0",
             "sequenceName": "hg38",
@@ -84,10 +10,10 @@ module.exports={
             },
             "features": [
                 {
-                    "featureId": "feature_0",
+                    "featureId": "feature_1",
                     "featureGranularity": "point",
-                    "featureDensity": "continous",
-                    "featureLabel": "Point_Continous",
+                    "featureDensity": "sparse",
+                    "featureLabel": "Point_Sparse",
                     "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks": [],
@@ -101,8 +27,8 @@ module.exports={
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "cooler1",
-                            "encodingName": "quant0"
+                            "fileName": "VCF1",
+                            "encodingName": "quant1"
                         }
                     ]
                 }
@@ -117,315 +43,13 @@ module.exports={
     "denseConnection": true,
     "sparseConnection": false,
     "connectionType": "dense",
-    "tasks": [],
-    "geneAnnotation": true,
-    "ideogramDisplayed": true
-}
-},{}],4:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"segment",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Categorical1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }
+    "tasks": [
+        ""
     ],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": [],
-    "connectionType": "dense",
     "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],5:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Categorical1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    },
-    {   
-        "sequenceId":"sequence_1",
-        "sequenceName":"hg19", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"continous",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED2",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }
-    ],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": [],
-    "connectionType": "dense",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],6:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    },
-    {   
-        "sequenceId":"sequence_1",
-        "sequenceName":"hg19", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"continous",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED2",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }
-    ],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": [],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],7:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["singleROI"],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true
+    "ideogramDisplayed": false
 }
-},{}],8:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"categorical",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Categorical1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["singleROI"],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true}
-},{}],9:[function(require,module,exports){
-module.exports={
-    "sequences": [
-        {   
-        "sequenceId":"sequence_0",
-        "sequenceName":"hg38", 
-        "interFeatureTasks":{"compare":[],"correlate":[]},
-            "features":
-            [
-                { 
-                    "featureId":"feature_0",
-                    "featureGranularity":"point",
-                    "featureDensity":"sparse",
-                    "featureLabel": "Epigenetic Signal",
-                    "intraFeatureTasks":["outliers"],
-                    "interactivity":false,
-                    "attr":
-                    [
-                        {
-                            "attrId":"attribute_0",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED1",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        },
-                        {
-                            "attrId":"attribute_1",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED2",
-                            "encodingName": "Quantitative1",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        },
-                        {
-                            "attrId":"attribute_2",
-                            "dataType":"quantitative",
-                            "intraAttrTask":["identify","compare"],
-                            "fileName": "BED2",
-                            "encodingName": "Quantitative2",
-                            "featureInterconnection": false,
-                            "denseInterconnection": false
-                        }
-                    ]
-                }
-            ]
-    }],
-    "intraSequenceTask": {"connectedNodes":[],"sequenceConservation":[],"edgeValues":[]},
-    "tasks": ["compareMultipleROI"],
-    "connectionType": "none",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true
-}
-},{}],10:[function(require,module,exports){
+},{}],2:[function(require,module,exports){
 module.exports=[
 {"chart":"dotplot","mark":"point","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"1","continous":"1","point":"1","segment":"0"},
 {"chart":"linechart","mark":"line","channel":"y","quantitative":"1","categorical":"0","text":"0","sparse":"0","continous":"1","point":"1","segment":"0"},
@@ -438,7 +62,7 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","quantitative":"0","categorical":"0","text":"1","sparse":"1","continous":"1","point":"1","segment":"1"}
 ]
 
-},{}],11:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 module.exports=[
 {"chart":"dotPlot","mark":"point","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
 {"chart":"lineChart","mark":"line","channel":"y","d_quantitative":"1","d_categorical":"-1","d_text":"-1","d_sparse":"-1","d_continous":"1","d_point":"1","d_segment":"-1","t_comparerois":"1"},
@@ -451,33 +75,33 @@ module.exports=[
 {"chart":"annotation","mark":"text","channel":"none","d_quantitative":"-1","d_categorical":"-1","d_text":"1","d_sparse":"1","d_continous":"-1","d_point":"1","d_segment":"1","t_comparerois":"1"}
 ]
 
-},{}],12:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports=[
 {"alignment":"overlay","d_trackssamefile":"1","d_tracksdifffile":"-1","d_samedatatype":"1","d_differentdatatype":"-1","d_singlevar":"-1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"-1"},
 {"alignment":"stack","d_trackssamefile":"1","d_tracksdifffile":"1","d_samedatatype":"1","d_differentdatatype":"1","d_singlevar":"1","s_alllinechart":"1","s_allbarchart":"1","s_otherencoding":"1"}
 ]
 
-},{}],13:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","sparseinterconnection":"0","denseinterconnection":"1","outliers":"1","summarize":"1","interactivity":"1","length":"1","color":"1","text":"1"},
 {"layout":"circular","sparseinterconnection":"1","denseinterconnection":"0","outliers":"0","summarize":"1","interactivity":"0","length":"0","color":"1","text":"1"},
 {"layout":"hilbert","sparseinterconnection":"0","denseinterconnection":"0","outliers":"0","summarize":"0","interactivity":"0","length":"0","color":"1","text":"0"}
 ]
 
-},{}],14:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
 {"layout":"circular","d_viewconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
 {"layout":"hilbert","d_viewconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]
 
-},{}],15:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports=[
 {"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_identify":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
 {"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_identify":"-1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
 ]
 
-},{}],16:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports=[
 {"arrangement":"linearStacked","layoutcircular":"0","layoutlinear":"1","nointerconnection":"1","sparseinterconnection":"1","denseinterconnection":"0","edgeconnection":"1","readedgevalue":"0"},
 {"arrangement":"linearOrthogonal","layoutcircular":"0","layoutlinear":"1","nointerconnection":"0","sparseinterconnection":"0","denseinterconnection":"1","edgeconnection":"0","readedgevalue":"1"},
@@ -485,14 +109,14 @@ module.exports=[
 {"arrangement":"circularStacked","layoutcircular":"1","layoutlinear":"0","nointerconnection":"1","sparseinterconnection":"0","denseinterconnection":"0","edgeconnection":"0","readedgevalue":"0"}
 ]
 
-},{}],17:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports=[
-{"arrangement":"stack","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
-{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
+{"arrangement":"stack","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
+{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
 {"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]
 
-},{}],18:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function(haystack, needle, comparator, low, high) {
   var mid, cmp;
 
@@ -539,7 +163,7 @@ module.exports = function(haystack, needle, comparator, low, high) {
   return ~low;
 }
 
-},{}],19:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 const toString = Object.prototype.toString;
@@ -550,7 +174,7 @@ function isAnyArray(object) {
 
 module.exports = isAnyArray;
 
-},{}],20:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
@@ -11424,7 +11048,7 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],21:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11442,7 +11066,7 @@ function mean(input) {
 
 module.exports = mean;
 
-},{"ml-array-sum":22}],22:[function(require,module,exports){
+},{"ml-array-sum":14}],14:[function(require,module,exports){
 'use strict';
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -11472,7 +11096,7 @@ function sum(input) {
 
 module.exports = sum;
 
-},{"is-any-array":19}],23:[function(require,module,exports){
+},{"is-any-array":11}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 function squaredEuclidean(p, q) {
@@ -11488,7 +11112,7 @@ function euclidean(p, q) {
 }
 exports.euclidean = euclidean;
 
-},{}],24:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12080,7 +11704,7 @@ var similarities = /*#__PURE__*/Object.freeze({
 exports.distance = distances;
 exports.similarity = similarities;
 
-},{"ml-array-mean":21,"ml-distance-euclidean":23,"ml-tree-similarity":25}],25:[function(require,module,exports){
+},{"ml-array-mean":13,"ml-distance-euclidean":15,"ml-tree-similarity":17}],17:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', { value: true });
@@ -12217,7 +11841,7 @@ exports.createTree = createTree;
 exports.getFunction = getFunction;
 exports.treeSimilarity = treeSimilarity;
 
-},{"binary-search":18,"num-sort":26}],26:[function(require,module,exports){
+},{"binary-search":10,"num-sort":18}],18:[function(require,module,exports){
 'use strict';
 
 function assertNumber(number) {
@@ -12256,16 +11880,16 @@ exports.descending = (left, right) => {
 	return right - left;
 };
 
-},{}],27:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
-var encodeAttribute  = require("./s1_en.js")
-var getTracks  = require("./s2_ca.js")
+// var encodeAttribute  = require("./s1_en.js")
+// var getTracks  = require("./s2_ca.js")
 // var inputData = require("../TestInput/input.json")
-var getLayout  = require("./s3_ls.js")
-var getAlignment = require("./s4_al.js")
-var getArrangment = require("./s5_ar.js")
+// var getLayout  = require("./s3_ls.js")
+// var getAlignment = require("./s4_al.js")
+// var getArrangment = require("./s5_ar.js")
 // var getViewConfiguration = require("./s6_vc")
-const cartesian = require("./utils.js").cartesian
+// const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
 const coolerOutput = require("./utils.js").coolerOutput
@@ -12289,16 +11913,17 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
-    
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerTest.json"),"tasks":["explore"]});
+
     //Special Cooler Input
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
 
@@ -12316,6 +11941,7 @@ if(testVersion)
         }
 
         const dataspec = Dataspec(inputData);
+        console.log(dataspec);
         const sequenceInputArrays = dataspec["sequences"];
 
         //Updated stagewise processing
@@ -12444,7 +12070,7 @@ if(!testVersion)
     getRecommendation
     }
 }
-},{"../TestInput/V2BEDPENetwork.json":1,"../TestInput/V2CircularConnection.json":2,"../TestInput/V2CoolerwithAttr.json":3,"../TestInput/V2MatrixSingleSeq.json":4,"../TestInput/V2MatrixTracks.json":5,"../TestInput/V2SingleTrackMultipleView.json":6,"../TestInput/V2SingleTrackSingleView.json":7,"../TestInput/V2SingleViewMultiAttrDiffType.json":8,"../TestInput/V2UpdatedInput.json":9,"./inputspec.js":28,"./outputspec.js":30,"./s1_en.js":31,"./s1_en_updated.js":32,"./s2_al_updated.js":33,"./s2_ca.js":34,"./s3_ls.js":35,"./s3_ls_updated.js":36,"./s4_al.js":37,"./s4_pt_updated.js":38,"./s5_ar.js":39,"./s5_ar_updated.js":40,"./utils.js":41}],28:[function(require,module,exports){
+},{"../TestInput/V2CoolerTest.json":1,"./inputspec.js":20,"./outputspec.js":22,"./s1_en_updated.js":23,"./s2_al_updated.js":24,"./s3_ls_updated.js":25,"./s4_pt_updated.js":26,"./s5_ar_updated.js":27,"./utils.js":28}],20:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12517,7 +12143,7 @@ function Features(obj){
     featureGranularity =  (["point","segment"].indexOf(obj.featureGranularity != -1)) ?  obj.featureGranularity : (function(){throw "Feature Granularity must be either Point or Interval"}());
     featureDensity =  (["sparse","continous"].indexOf(obj.featureDensity) != -1) ?  obj.featureDensity : (function(){throw "Feature Density must be either Sparse or Continous"}());
     featureLabel = obj.featureLabel
-    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("featureInterconnection"))
+    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("denseInterconnection"))
     {
         featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
         denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
@@ -12557,7 +12183,7 @@ function Attributes(obj){
     fileName = (typeof obj.fileName == "string") ?  obj.fileName : (function(){throw "Filename is missing"}());
     encodingName = (typeof obj.encodingName == "string") ?  obj.encodingName : (function(){throw "Encoding name is missing"}());
     }
-    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("featureInterconnection"))
+    if(obj.hasOwnProperty("featureInterconnection") && obj.hasOwnProperty("denseInterconnection"))
     {
         featureInterconnection = (typeof obj.featureInterconnection == "boolean") ?  obj.featureInterconnection : (function(){throw "Feature Interconnection must be Boolean type"}());
         denseInterconnection = (typeof obj.denseInterconnection == "boolean") ? obj.denseInterconnection :  (function(){throw "Dense Interconnection must be Boolean type"}());
@@ -12571,7 +12197,7 @@ module.exports = {
     Dataspec,
     GLOBAL_INDEX_DATA
 }
-},{"jquery":20}],29:[function(require,module,exports){
+},{"jquery":12}],21:[function(require,module,exports){
 const stage1Model = require('../model/stage1.json');
 const stage3Model = require('../model/stage3.json');
 const stage5Model = require('../model/stage5.json');
@@ -12638,7 +12264,7 @@ module.exports = {
     model5Updated: stage5UpdatedModelObj
 }
 
-},{"../model/stage1.json":10,"../model/stage1updated.json":11,"../model/stage2updated.json":12,"../model/stage3.json":13,"../model/stage3updated.json":14,"../model/stage4updated.json":15,"../model/stage5.json":16,"../model/stage5updated.json":17}],30:[function(require,module,exports){
+},{"../model/stage1.json":2,"../model/stage1updated.json":3,"../model/stage2updated.json":4,"../model/stage3.json":5,"../model/stage3updated.json":6,"../model/stage4updated.json":7,"../model/stage5.json":8,"../model/stage5updated.json":9}],22:[function(require,module,exports){
 function RecommendationSpec(systemoutput){
     var recommendation = {}
     systemoutput.forEach((element,index) => {
@@ -12741,76 +12367,7 @@ function Attributes(obj)
 module.exports = {
     RecommendationSpec
 }
-},{}],31:[function(require,module,exports){
-// Description: This page identifies the visual encoding of each attribute avaialble in the dataset.
-// Output: Featureid -> [{attrid, inputVector, similarityScore, recommendation}]
-// inputVector consists an array and an object that store information about the input attribute.
-// similarityScore contains the score of an inputVector with all the encoding options available for genomics visualization.
-// recommendation is an array of one or more product recommendation. 
-const model = require('../model/stage1.json');
-const vectorKeys = ["quantitative","categorical","text","sparse","continous","point","segment"]
-const globalData = require("./modelDataProcessing.js")
-const stage1Model = globalData.model1
-const getProductProperties  = require("./utils.js").productProperties
-const computeSimilarity = require("./utils.js").computeSimilarity
-const recommendedProducts = require("./utils.js").recommendedProducts
-//Product vector only needs to be computed once
-const productVector = getProductProperties(stage1Model,vectorKeys)
-
-
-
-// Description: This function will convert the dataspec to an array of user input
-// Description: As a side we will also store the input object vector
-// Input: The feature spec and attribute
-// Output: Vector array and object 
-function createInputVector(feature,attribute){
-  
-    // Mapping attributes 
-    var inputVectorObject = {}
-    var inputArray = []
-
-  //Vector array and object
-    inputArray.push(inputVectorObject["quantitative"] = attribute.dataType == "quantitative" ? 1 : 0)
-    inputArray.push(inputVectorObject["categorical"] = attribute.dataType == "categorical" ? 1 : 0)
-    inputArray.push(inputVectorObject["text"] = attribute.dataType == "text" ? 1 : 0)
-    inputArray.push(inputVectorObject["sparse"] = feature.featureDensity == "sparse" ? 1 : 0)
-    inputArray.push(inputVectorObject["continous"] = feature.featureDensity == "continous" ? 1 : 0)
-    inputArray.push(inputVectorObject["point"] = feature.featureGranularity == "point" ? 1:0)
-    inputArray.push(inputVectorObject["segment"] = feature.featureGranularity == "segment" ? 1:0)
-    //inputArray.push(inputVectorObject["compare"] = attribute.intraAttrTask.indexOf("compare") != -1 ? 1 : 0 )
-    
-  return {inputVectorObject, inputArray}
-  }
-
-function encodeAttribute(dataspec){
-
-    var stage1Output = {}
-
-    for(var i = 0; i<dataspec.features.length;i++)
-    {
-      var currentFeature = dataspec.features[i];
-      var featureId = dataspec.features[i].featureId;
-
-
-      //Initiation of the partial specification
-      stage1Output[featureId] = []
-
-      //Get recommendation of the input feature vector
-      for(j=0;j<currentFeature.attributes.length;j++){
-        var currentAttribute = currentFeature.attributes[j]
-        var inputVectorObject = createInputVector(currentFeature,currentAttribute)  
-        var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        var recommendation = recommendedProducts(similarityScores)
-        var attributeId = currentFeature.attributes[j].attrId
-        var tempAttributeStorage = {'featureId':featureId,'attributeId':attributeId, 'inputVectorObject':inputVectorObject, 'similarityScore': similarityScores, 'recommendation':recommendation}
-        stage1Output[featureId].push(tempAttributeStorage)
-      }
-    }
-    return stage1Output
-}
-
- module.exports = encodeAttribute
-},{"../model/stage1.json":10,"./modelDataProcessing.js":29,"./utils.js":41}],32:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12884,7 +12441,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":11,"./modelDataProcessing.js":29,"./utils.js":41}],33:[function(require,module,exports){
+},{"../model/stage1updated.json":3,"./modelDataProcessing.js":21,"./utils.js":28}],24:[function(require,module,exports){
 // const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
 
 function createInputVector(spec){
@@ -12949,370 +12506,7 @@ function getAlignmentUpdated(visoptions)
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":29,"./utils.js":41}],34:[function(require,module,exports){
-const globalData = require("./modelDataProcessing.js")
-const cartesian = require("./utils.js").cartesian
-
-
-var attrCombination = {
-    "barchart":["heatmap","barchartCN"],
-    "heatmap":["barchart","dotplot"],
-    "barchartCN":["barchart","dotplot"],
-    "dotplot":["heatmap","barChartCN"],
-    "intervalBarchart":["intervalHeatmap","intervalBarchartCN"],
-    "intervalHeatmap":["intervalBarchart"],
-    "intervalBarchartCN":["intervalBarchart"]
-}
-
-
-var superimposition = {
-    "dotplot": ["dotplot","linechart"],
-    "linechart": ["linechart","dotplot"]
-}
-
-
-//Description:This function is going to take input specifications and try to output a list of visualizable attributes per feature
-//Input: Feature object
-//Output: Returns the tracks 
-function getPossibilities(feature)
-{
-    var allEncoding = []//First store all the possible encodings in the dataspec.
-
-    //Step 1: Identify all the possible encodings for the attributes
-    //Loop through all the options and store the encodings in the allEncoding var
-    for (var i=0; i<feature.length;i++)
-    {    
-        var recommendation = feature[i]['recommendation']
-        var similarityScore = recommendation.map((val)=>{return feature[i]['similarityScore'][val]})
-        var encodingRecommendations = []
-        for (var j=0; j<recommendation.length; j++){
-            var encoding = {'featureId':feature[i]["featureId"],'attributeId':feature[i]['attributeId'], 'encoding':recommendation[j], 'similarityScore':similarityScore[j]}
-            encodingRecommendations.push(encoding)
-        }
-        allEncoding.push(encodingRecommendations)
-    } 
-
-    var encodingOptions = cartesian(allEncoding)
-    
-    //Find the attributes that merge
-    var finalEncodingCombination = [];
-    for (var x = 0; x< encodingOptions.length; x++)
-    {
-      var set = encodingOptions[x]  
-      finalEncodingCombination.push(combineLogic(set))
-    }
-    // console.log("combinations",finalEncodingCombination)
-    
-    //Superimpose Attributes
-    var finalSuperimposed = []
-    for (var x=0;x<finalEncodingCombination.length;x++)
-    {
-        var set  = finalEncodingCombination[x]
-        finalSuperimposed.push(superimposeLogic(set,x))
-    }
-
-    var trackIdAdded = addTrackId(finalSuperimposed)
-
-    return finalSuperimposed
-}
-
-function addTrackId(tracks)
-{
-   var trackIdAdded = tracks.map(element => {
-        var trackIdArray = element.map((innerElement,trackId) => {
-            var innterTid =  innerElement.map(innerInner => {
-                    innerInner['trackId'] = trackId
-                    return innerInner
-            })
-            return innterTid
-        });
-        return trackIdArray
-    });
-    return trackIdAdded
-}
-
-
-
-
-//Description: Checks if two variables can be combined. To check there will be two steps, first we will cont.
-//ensure that two attributes can logically be combined and next we test whether based on tasks it makes sense to combine
-//then test if the combination will work.
-function canCombine(a,b){
-    var listOfCombinedAttr = attrCombination[a]
-    if(listOfCombinedAttr == undefined) {return false}
-    let possibleCombination = listOfCombinedAttr.indexOf(b) != -1 ? true : false
-    return possibleCombination
-}
-
-//Description: This method returns a combined list of attributes
-//Input: Array of object containing the attribtue id and encoding recoomendation
-//Output: Array of combined and non-combined attributes. E.g [[a1_dotplot,a2_barchart],[a3_annotation]]
-function combineLogic(arr)
-{
-    var finalEncodingCombination = []   
-    
-    //Create an array to keep track of all the attributes that have been combined
-    var visited = arr.map(val =>
-        {
-            return 0
-        })
-    
-    //Loop through all the options in the arr to check for pairs that can be combined    
-    for(var i = 0;i<arr.length;i++)
-        {
-            //Only check if the attribute has not been combined at a previous stage
-            if(visited[i]==0)
-            {
-                var combinationNotFound = true // This variable will keep track incase the combination was found 
-                var a = Object.assign({},arr[i])
-                for (var j = 0;j<arr.length;j++)
-                {
-                    if(visited[j]==0)
-                    {
-                        var b = Object.assign({},arr[j])
-                        if(a['attributeId'] == b['attributeId'])
-                        {
-                            continue
-                        }
-                        else
-                        {
-                            var combine = canCombine(a['encoding'],b['encoding'])                            
-                            if (combine)
-                            {
-                                visited[i] = 1
-                                visited[j] = 1
-                                a['combined'] = true
-                                b['combined'] = true
-                                finalEncodingCombination.push([a,b])
-                                combinationNotFound = false
-                                break;
-                            }
-                        }
-                    }
-                }
-                if(combinationNotFound)
-                {
-                    a['combined'] = false
-                    finalEncodingCombination.push([a])
-                }
-            }
-        }
-
-return finalEncodingCombination
-}
-
-//Description: Check if two items groups/individual atttributes can be superimposed
-//Input Both a and b are array and we will do a cartesian combination and check 
-function canSuperimposed(a,b){
-    var canSuperimposed = []
-    var allcombinations = cartesian([a,b])
-
-    for(var i=0;i<allcombinations.length;i++){
-        var a = allcombinations[i][0]
-        var b = allcombinations[i][1]
-        if(superimposition[a] == undefined || superimposition[a] == undefined){
-            canSuperimposed.push(false)
-            continue
-        }
-        superimposition[a].indexOf(b) != -1 ? canSuperimposed.push(true) : canSuperimposed.push(false) // Incorrect
-    }
-
-    // console.log("boolean array", canSuperimposed) 
-     return canSuperimposed.every(v => v === true)
-
-}
-
-
-
-//Description: Algorithm to superimpose
-function superimposeLogic(arr,index)
-{
-    var finalSuperImposed = []
-    var visited = arr.map(val =>
-        {
-            return 0
-        })
-    
-    for(var i=0;i<arr.length;i++)
-    {
-        if(visited[i]==0)
-        {
-            var superImpositionNotFound = true
-            var a = arr[i]
-            var addSuperImposed = []
-            var aEncoding = arr[i].map(val => {return val['encoding']})
-
-            for(var j=0;j<arr.length;j++)
-            {
-                if(visited[j]==0)
-                {
-                    if(i==j){continue} // Skip the same 
-                    var b = arr[j]
-                    var bEncoding = arr[j].map(val => {return val['encoding']})
-                    // console.log(aEncoding,bEncoding)
-                    // console.log(canSuperimposed(aEncoding,bEncoding))
-                    if(canSuperimposed(aEncoding,bEncoding))
-                    {
-                        visited[j] = 1
-                        b.map(arr => {
-                            arr["superimposed"] = true
-                        })
-                        addSuperImposed.push(...b)
-                        aEncoding.push(...bEncoding)//new
-                        superImpositionNotFound = false
-                        continue
-                    }
-                }
-
-            }
-                visited[i] = 1//new
-                a.map(arr => {
-                    arr["superimposed"] = !superImpositionNotFound
-                })
-                addSuperImposed.push(...a)
-            
-                finalSuperImposed.push(addSuperImposed)
-            
-        }
-    }  
-    return finalSuperImposed
-}
-
-function getTracks(encodingSpecification){
-    
-    var featureKeys= Object.keys(encodingSpecification)
-    var trackList =[]
-
-    for(i=0;i<featureKeys.length;i++){
-        var trackPossibilities = getPossibilities(encodingSpecification[featureKeys[i]])
-        var featureId = `feature_${i}`
-        var returnTrackSpec = {[featureId]:{trackPossibilities}}
-        trackList.push(returnTrackSpec)
-    }
-
-    // console.log(trackList)
-    return trackList
-
-}
-
-module.exports = getTracks
-},{"./modelDataProcessing.js":29,"./utils.js":41}],35:[function(require,module,exports){
-const models = require("./modelDataProcessing.js")
-const stage1Model = models.model1
-const stage3Model = models.model3
-const vectorKeys = ['sparseinterconnection','denseinterconnection','outliers','summarize','interactivity','length','color','text']
-const getProductProperties  = require("./utils.js").productProperties
-const computeSimilarity = require("./utils.js").computeSimilarity
-const recommendedProducts = require("./utils.js").recommendedProducts
-const mode = require("./utils.js").mode
-const getVisOptions = require("./utils.js").getVisOptions
-const productVector = getProductProperties(stage3Model,vectorKeys)
-const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
-
-
-
-//Todo: Need to figure out how to take into consideration user preferences.
-//Description: Use the input from stage 2 and dataspec to create an input vector.
-function createInputVector(channels,featureData){
-  // Mapping attributes 
-  var inputVectorObject = {}
-  var inputArray = []
-
-  //Todo: No interconnection is not defined 
-  inputArray.push(inputVectorObject["sparseinterconnection"] = (featureData['denseInterconnection']) ? 0:1)
-  inputArray.push(inputVectorObject["denseinterconnection"] = (featureData['denseInterconnection']) ? 1:0)
-  
-  //Todo: Tasks have to be revisited and fixed. We may need to also fix the input format to handle the tasks.
-  inputArray.push(inputVectorObject["outliers"] = featureData["intraFeatureTasks"].indexOf("outliers") !=-1 ? 1:0)
-  inputArray.push(inputVectorObject["summarize"] = featureData["intraFeatureTasks"].indexOf("summarize") !=-1 ? 1:0)
-  inputArray.push(inputVectorObject["interactivity"] = featureData['interactivity'] ? 1:0)
-
-  //Data types from previous stages: Todo needs to be fixed
-  inputArray.push(inputVectorObject["length"] = (channels.indexOf("y") !=-1)  ? 1 : 0)
-  inputArray.push(inputVectorObject["color"] = (channels.indexOf("color(sequential)") !=-1 || channels.indexOf("color(nominal)") !=-1) ? 1 : 0)
-  inputArray.push(inputVectorObject["text"] = channels.indexOf("none") !=-1  ? 1 : 0)
-
-  // console.log(inputArray,inputVectorObject)
-  return {inputVectorObject,inputArray}
-}
-
-
-//Description: Track combinations are designed to nest though all the combinations and find trackCombinations for all possible individual trackCombinations
-//Input: Previous stage outputs
-//Output: Inputvector and Inputarray for each track and all the possible combinations.
-function createTrackInputVector(stage2Output,sequenceId,featureId){
-
-    var trackPossibilities = stage2Output.trackPossibilities
-    var trackInputVectors = []
-
-    var featureData = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]
-    //This loop identifies the possible combination of trackCombinations within a feature
-    for(var j =0; j<trackPossibilities.length; j++){
-      var trackCombinationInputVector = []
-      var trackCombinations = trackPossibilities[j]
-      //In this loop we check for each individual track and find its input vector.
-      for(var k=0; k<trackCombinations.length;k++)
-        {     
-          var channels = trackCombinations[k].map(val => {
-          return stage1Model[val['encoding']]['channel']
-        })
-        // allTrackInput.push(createInputVector(channels,tasks,interconnection))
-        var inputVector = createInputVector(channels,featureData)
-        trackCombinationInputVector.push({inputVector,encodings:trackCombinations[k]})
-      }
-      trackInputVectors.push(trackCombinationInputVector)
-    }
-    return trackInputVectors
-}
-
-
-function getLayout (stage2Output,sequenceId) {
-
-  //Layout recommendation for each possible track  indexed by feature id
-  var trackLayoutOutput = {}
-  // This loop divides the features, and for individual feature set identifies the types of trackCombinations.
-  for (var i = 0; i< stage2Output.length;i++)
-  {
-    var featureId = Object.keys(stage2Output[i])[0]
-    var trackInputVectors = createTrackInputVector(stage2Output[i][featureId],sequenceId,featureId)
-    var interconnection = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureInterconnection']
-    trackLayoutOutput[featureId] = {"trackPossibilities":[]}
-    var featureGranularity =  GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureGranularity']
-    var featureDensity = GLOBAL_INDEX_DATA[sequenceId]["featureIndex"][featureId]['featureDensity']
-    
-    for(var j =0; j< trackInputVectors.length;j++)
-    {
-      var tracks = trackInputVectors[j]
-      var trackLayoutRecommendation = []
-      var predictionScores = []
-      for (var k = 0; k< tracks.length; k++){
-        var inputVectorObject = tracks[k]['inputVector']
-        var similarityScores = computeSimilarity(inputVectorObject,productVector)
-       // console.log(similarityScores)
-        trackLayoutRecommendation.push(recommendedProducts(similarityScores))
-        var tLRecommendation = recommendedProducts(similarityScores)
-       //console.log(tLRecommendation)
-        predictionScores.push(similarityScores[tLRecommendation[0]])
-      }
-      var layoutRecommendation = mode(trackLayoutRecommendation)
-      //console.log(predictionScores)
-      var predictionScore =  predictionScores.map((c, i, arr) => c / arr.length).reduce((p, c) => c + p);
-
-     // console.log(predictionScore)
-      trackLayoutOutput[featureId]["trackPossibilities"].push({tracks, layoutRecommendation:layoutRecommendation[0],predictionScore,interconnection,featureGranularity,featureAvailability:featureDensity})
-    }
-  
-  } 
-
-//  console.log("Stage 3 Output:")
-// console.log(trackLayoutOutput)
-  
-return getVisOptions(trackLayoutOutput)
-}
-
-
-module.exports = getLayout
-},{"./inputspec.js":28,"./modelDataProcessing.js":29,"./utils.js":41}],36:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":28}],25:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
     var inputVectorObject = {};
@@ -13396,199 +12590,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":29,"./utils.js":41}],37:[function(require,module,exports){
-const cartesian = require("./utils.js").cartesian
-const GLOBAL_INDEX_DATA = require('./inputspec.js')['GLOBAL_INDEX_DATA']
-
-var superimposition = {
-    "dotplot": ["dotplot","linechart"],
-    "linechart": ["linechart","dotplot"]
-}
-
-
-//Description: Check if two items groups/individual atttributes can be superimposed
-//Input Both a and b are array and we will do a cartesian combination and check 
-function canSuperimposed(a,b){
-    var canSuperimposed = []
-    var allcombinations = cartesian([a,b])
-
-    for(var i=0;i<allcombinations.length;i++){
-        var a = allcombinations[i][0]
-        var b = allcombinations[i][1]
-        if(superimposition[a] == undefined || superimposition[a] == undefined){
-            canSuperimposed.push(false)
-            continue
-        }
-        superimposition[a].indexOf(b) != -1 ? canSuperimposed.push(true) : canSuperimposed.push(false) // Incorrect
-    }
-
-    // console.log("boolean array", canSuperimposed) 
-     return canSuperimposed.every(v => v === true)
-
-}
-
-
-//Description: Algorithm to superimpose
-function checkForSuperImposition(features)
-{
-    var featureArray= Object.values(features);
-    var cartesianFeatureArray = cartesian(featureArray)
-    var cartesianEncodings =  cartesianFeatureArray.map(element=>{
-        var encodingArray= element.map(innerElement=>{
-            var encodingArrayTemp = innerElement.map(innerInnerElement=>{
-                return innerInnerElement['encoding']
-            })
-          return encodingArrayTemp
-        })
-        return encodingArray
-    })
-    var superImposedIndex = encodingSuperImposable(cartesianEncodings)
-    return cartesianFeatureArray[superImposedIndex]
-}
-
-// //Input: An array of encoding arrays
-// //Description: For each subarray crete 
-function encodingSuperImposable(cartesianEncodings)
-{
-    var returnIndex=[];
-    var superImpose = false
-    for(var k=0;k<cartesianEncodings.length;k++){
-        var val = cartesianEncodings[k]
-        for(var i=0;i<val.length-1;i++)
-        {
-            for(var j= i+1;j<val.length;j++)
-            {
-                if(canSuperimposed(val[i],val[j]))
-                {
-                    returnIndex.push(k)
-                }
-       
-            }
-        }
-    }
-
-    if(returnIndex.length>0){
-        return returnIndex[0]
-    }
-    else{
-        return returnIndex
-    }
-}
-
-
-
-function getAlignment (layouts,tasks,sequenceName,sequenceId)
-{
-    // Get the tracks from each feature
-    var visOptions = Object.values(layouts)
-
-    visOptions.forEach((vis,i) =>{
-        var featureUsed ={}
-        var stacked= []
-        var superImpose =[]
-        var layout
-        Object.keys(vis).map((val) =>{
-          //featureUsed[val] = false            
-          let interconnection = GLOBAL_INDEX_DATA[sequenceId]['featureIndex'][val]['featureInterconnection']
-          featureUsed[val] = interconnection
-          if(interconnection){
-            stacked.push(val)
-          }
-            
-            layout = vis[val]["layoutRecommendation"]
-        })
-
-        if(tasks.compare.length>0){
-            var featureList = Object.values(tasks.compare)
-            var featureObjectForSuperImposition = {}
-            // create an array of tracks in each feature
-            featureList.forEach((element)=>{
-                if(!featureUsed[element])
-                {
-                    var valuesToPush = vis[element]["tracks"].map((elemtnVal,trackId) => { 
-                        // elemtnVal["encodings"]["trackId"] = trackId
-                        return elemtnVal["encodings"]})
-            
-                    featureObjectForSuperImposition[element]= valuesToPush
-                }
-            })
-
-            if(Object.keys(featureObjectForSuperImposition).length>0)
-            {
-                var superImposedFeatures = (checkForSuperImposition(featureObjectForSuperImposition))            
-                
-                if(superImposedFeatures!=undefined){
-                var superImposedFlat = superImposedFeatures.flat()
-                superImposedFlat.forEach(element=>{
-                    var tempString = element["featureId"]
-                    if(superImpose.indexOf(tempString)==-1){
-                        superImpose.push(tempString)
-                        featureUsed[element["featureId"]] = true
-                    }
-                })
-                }
-            }
-        }
-        if(tasks.correlate.length>0){
-            var featureList = Object.values(tasks.browse)
-            featureList.forEach(element => {
-                if(featureUsed[element] == false){
-                    featureUsed[element] = true
-                    stacked.push(element)
-                }
-            });
-        }
-
-        //If no tasks then check for features that can be superimposed
-        {
-            var featuresForSuperImposition = {}
-            Object.keys(vis).map((val)=>{
-                if(!featureUsed[val])
-                {
-                    var valuesToPush = vis[val]["tracks"].map((element,trackId) => { 
-                        // elemtnVal["encodings"]["trackId"] = trackId
-                        return element["encodings"]})
-                        
-                    featuresForSuperImposition[val]= valuesToPush
-                }
-            })   
-            if(Object.entries(featuresForSuperImposition).length!=0){
-            var superImposedFeatures = (checkForSuperImposition(featuresForSuperImposition))      
-            }
-
-            if(superImposedFeatures!=undefined)
-            {
-            var superImposedFlat = superImposedFeatures.flat()
-            superImposedFlat.forEach(element=>{
-                var tempString = element["featureId"]
-                if(superImpose.indexOf(tempString)==-1){
-                    superImpose.push(tempString)
-                    featureUsed[element["featureId"]] = true
-                    }
-                })
-            }
-     }
-
-         //Deafult stacking
-         {
-            Object.keys(featureUsed).map(val=>{
-                if(!featureUsed[val]){
-                    stacked.push(val)
-                }
-            })
-         }
-        layouts['vis_'+i]["stacked"] = stacked
-        layouts['vis_'+i]["superimposed"] = superImpose
-        layouts['vis_'+i]["sequenceName"] = sequenceName
-        layouts['vis_'+i]["sequenceId"] = sequenceId
-        layouts['vis_'+i]["layout"] = layout
-    })
-    // console.log(layouts)
-    return layouts
-}
-
-module.exports = getAlignment
-},{"./inputspec.js":28,"./utils.js":41}],38:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":28}],26:[function(require,module,exports){
 function createInputVector(specs,tasks,network)
 {
     
@@ -13667,84 +12669,7 @@ function getPartitionUpdated(input,tasks,network)
 
 
 module.exports = getPartitionUpdated
-},{"./modelDataProcessing.js":29,"./utils.js":41}],39:[function(require,module,exports){
-const models = require("./modelDataProcessing.js")
-const stage5Model = models.model5
-const vectorKeys = ["layoutcircular","layoutlinear","nointerconnection","sparseinterconnection","denseinterconnection","edgeconnection","readedgevalue"]
-const getProductProperties  = require("./utils.js").productProperties
-const computeSimilarity = require("./utils.js").computeSimilarity
-const recommendedProducts = require("./utils.js").recommendedProducts
-//Product vector only needs to be computed once
-const productVector = getProductProperties(stage5Model,vectorKeys)
-const mode = require("./utils.js").mode
-
-
-
-function createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation){
-  
-    // Mapping attributes 
-    var inputVectorObject = {}
-    var inputArray = []
-
-    inputArray.push(inputVectorObject["layoutcircular"] = layout==="circular" ? 1 : 0)
-    inputArray.push(inputVectorObject["layoutlinear"] = layout==="linear" ? 1 : 0)
-    inputArray.push(inputVectorObject["nointerconnection"] = dense || sparse ? 0 : 1)
-    inputArray.push(inputVectorObject["sparseinterconnection"] = sparse ? 1 : 0)
-    inputArray.push(inputVectorObject["denseinterconnection"] = dense ? 1 : 0)
-    inputArray.push(inputVectorObject["edgeconnection"] = connectedNodes ? 1 : 0)
-    inputArray.push(inputVectorObject["readedgevalue"] = edgeValue ? 1 : 0)
-
-    // console.log(inputVectorObject, inputArray)
-    return {inputVectorObject, inputArray}
-}
-
-function addElementsToOuput(input,output,layout){
-    if(layout=="linear"){
-        output["linearStacked"]=[]
-        output["linearStacked"] = [...input]
-       }
-       else{
-        output["circleStacked"]=[]
-        output["circleStacked"] = [...input]
-       }
-       return output
-}
-
-function getArrangement(input,tasks,dense,sparse){
-    // console.log(dense,sparse)
-    // var sequencesCovered = {}
-    var output = {}
-
-    //Find the most common layout and then assign all the sequences same layout
-    var layoutCollection = input.map(val=>{
-        return val['layout']
-    })
-    var layout = mode(layoutCollection)
-
-    //For views with 3 or more sequences
-    if(input.length>=3){
-        output = addElementsToOuput(input,output,layout)
-    }
-    else{
-        var connectedNodes = tasks['connectedNodes'].length === 2 ? true : false
-        var edgeValue = tasks['edgeValues'].length === 2 ? true : false
-        var sequenceConservation = tasks['sequenceConservation'].length === 2 ? true : false
-        var inputVectorObject = createInputVector(layout,dense,sparse,connectedNodes,edgeValue,sequenceConservation)
-        var similarityScores = computeSimilarity(inputVectorObject,productVector)
-        // console.log(similarityScores)
-        var recommendation = recommendedProducts(similarityScores)
-        output[recommendation] = []
-        output[recommendation] = [...input]
-        output["arrangementName"] = recommendation[0]
-        output['predictionScore'] = similarityScores[recommendation]
-        output['sequenceConnection'] = (dense || sparse) ? true: false
-        output['typeOfInterconnection'] = dense ? "dense":"sparse"
-    }
-    return output
-}
-
-module.exports = getArrangement
-},{"./modelDataProcessing.js":29,"./utils.js":41}],40:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":28}],27:[function(require,module,exports){
 function createInputVector(views,network,tasks)
 {
     const inputVectorObject = {};
@@ -13821,7 +12746,7 @@ function getArrangementUpdated(input,networkData,tasks)
 }
 
 module.exports = getArrangementUpdated;
-},{"./modelDataProcessing.js":29,"./utils.js":41}],41:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":28}],28:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")
@@ -14067,4 +12992,4 @@ module.exports =
   checkMissingAttributes:checkMissingAttributes,
   coolerOutput: coolerOutput
 }
-},{"ml-distance":24}]},{},[27]);
+},{"ml-distance":16}]},{},[19]);

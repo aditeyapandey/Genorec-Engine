@@ -1,0 +1,50 @@
+{
+    "sequences": [
+        {
+            "sequenceId": "sequence_0",
+            "sequenceName": "hg38",
+            "interFeatureTasks": {
+                "compare": [],
+                "correlate": []
+            },
+            "features": [
+                {
+                    "featureId": "feature_0",
+                    "featureGranularity": "point",
+                    "featureDensity": "continous",
+                    "featureLabel": "Point_Continous",
+                    "featureInterconnection": false,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks": [],
+                    "interactivity": true,
+                    "attr": [
+                        {
+                            "attrId": "attribute_0",
+                            "dataType": "categorical",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": false,
+                            "denseInterconnection": false,
+                            "fileName": "vcf1",
+                            "encodingName": "cat0"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "intraSequenceTask": {
+        "connectedNodes": [],
+        "sequenceConservation": [],
+        "edgeValues": []
+    },
+    "denseConnection": false,
+    "sparseConnection": false,
+    "connectionType": "none",
+    "tasks": [
+        ""
+    ],
+    "geneAnnotation": true,
+    "ideogramDisplayed": false
+}

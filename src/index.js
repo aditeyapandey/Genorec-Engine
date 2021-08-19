@@ -1,12 +1,12 @@
 var Dataspec = require('./inputspec.js')['Dataspec']
-var encodeAttribute  = require("./s1_en.js")
-var getTracks  = require("./s2_ca.js")
+// var encodeAttribute  = require("./s1_en.js")
+// var getTracks  = require("./s2_ca.js")
 // var inputData = require("../TestInput/input.json")
-var getLayout  = require("./s3_ls.js")
-var getAlignment = require("./s4_al.js")
-var getArrangment = require("./s5_ar.js")
+// var getLayout  = require("./s3_ls.js")
+// var getAlignment = require("./s4_al.js")
+// var getArrangment = require("./s5_ar.js")
 // var getViewConfiguration = require("./s6_vc")
-const cartesian = require("./utils.js").cartesian
+// const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
 const coolerOutput = require("./utils.js").coolerOutput
@@ -30,16 +30,17 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
-    
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2BEDPENetwork.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerwithAttr.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../TestInput/V2CoolerTest.json"),"tasks":["explore"]});
+
     //Special Cooler Input
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
 
@@ -57,6 +58,7 @@ if(testVersion)
         }
 
         const dataspec = Dataspec(inputData);
+        console.log(dataspec);
         const sequenceInputArrays = dataspec["sequences"];
 
         //Updated stagewise processing

@@ -39,7 +39,7 @@
                             "intraAttrTask":["identify","compare"],
                             "fileName": "BED2",
                             "encodingName": "Quantitative2",
-                            "featureInterconnection": false,
+                            "featureInterconnection": true,
                             "denseInterconnection": false
                         }
                     ]
