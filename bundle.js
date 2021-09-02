@@ -11882,20 +11882,9 @@ exports.descending = (left, right) => {
 
 },{}],19:[function(require,module,exports){
 var Dataspec = require('./inputspec.js')['Dataspec']
-// var encodeAttribute  = require("./s1_en.js")
-// var getTracks  = require("./s2_ca.js")
-// var inputData = require("../TestInput/input.json")
-// var getLayout  = require("./s3_ls.js")
-// var getAlignment = require("./s4_al.js")
-// var getArrangment = require("./s5_ar.js")
-// var getViewConfiguration = require("./s6_vc")
-// const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
 const coolerOutput = require("./utils.js").coolerOutput
-var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
-const needDefaultTask = false;
-let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
 const testVersion = false;
 
 
@@ -12070,7 +12059,7 @@ if(!testVersion)
     getRecommendation
     }
 }
-},{"../TestInput/V2CoolerTest.json":1,"./inputspec.js":20,"./outputspec.js":22,"./s1_en_updated.js":23,"./s2_al_updated.js":24,"./s3_ls_updated.js":25,"./s4_pt_updated.js":26,"./s5_ar_updated.js":27,"./utils.js":28}],20:[function(require,module,exports){
+},{"../TestInput/V2CoolerTest.json":1,"./inputspec.js":20,"./s1_en_updated.js":22,"./s2_al_updated.js":23,"./s3_ls_updated.js":24,"./s4_pt_updated.js":25,"./s5_ar_updated.js":26,"./utils.js":27}],20:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12265,109 +12254,6 @@ module.exports = {
 }
 
 },{"../model/stage1.json":2,"../model/stage1updated.json":3,"../model/stage2updated.json":4,"../model/stage3.json":5,"../model/stage3updated.json":6,"../model/stage4updated.json":7,"../model/stage5.json":8,"../model/stage5updated.json":9}],22:[function(require,module,exports){
-function RecommendationSpec(systemoutput){
-    var recommendation = {}
-    systemoutput.forEach((element,index) => {
-        recommendation["recommendation_"+index] = Arrangement(element.arrangement)
-    })
-    
-    return recommendation
-}
-
-// function ViewConfiguration(obj){
-//     var recommendationStage = 6;
-//     var viewConfig = obj.viewConfig
-//     var visDetails = Arrangement(obj.arrangement)
-
-//     return {recommendationStage,viewConfig,visDetails}
-// }
-
-function Arrangement(obj){
-    var recommendationStage = 5
-    var arrangement = obj.arrangementName
-    var predictionScore = obj.predictionScore
-    var visDetails = {}
-    var sequenceInterconnection = obj.sequenceConnection
-    var connectionType = obj.typeOfInterconnection
-
-    obj[arrangement].forEach((element,index)=>{
-        visDetails["Sequence_"+index] = Sequence(element)
-    })
-
-    return {recommendationStage,arrangement,predictionScore,visDetails,sequenceInterconnection,connectionType}
-}
-
-function Sequence(obj)
-{
-    var recommendationStage = 4
-    var trackAlignment = obj["stacked"].length == 0 ? "superimposed":"stacked"
-    var visDetails = {}
-    var sequenceName = obj["sequenceName"]
-
-    obj[trackAlignment].forEach((element,val) =>{
-        visDetails["TrackGroup_"+val] = Tracks(obj[element])
-    })
-    
-    
-    return {recommendationStage,sequenceName,trackAlignment,visDetails}
-}
-
-function Tracks(obj)
-{
-    var recommendationStage = 3
-    var layout = obj.layoutRecommendation
-    var predictionScore = obj.predictionScore
-    var visDetails = {}
-    var interconnection = obj.interconnection ? true:false
-    var granularity = obj.featureGranularity
-    var availability = obj.featureAvailability
-
-
-    obj.tracks.forEach((element,val)=>{
-        visDetails["Track_"+val] = Groups(element)
-    })
-
-    return {recommendationStage,layout,predictionScore,visDetails,interconnection,granularity,availability}
-}
-
-function Groups(obj)
-{
-    var recommendationStage =2
-    var groupingTechnique
-    if(obj.encodings.length==1){
-        groupingTechnique = "none"
-    }
-    else if(obj.encodings.length>1)
-    {
-        groupingTechnique = obj.encodings[0].combined? "combined":"superposed"
-    }
-    else
-    {
-        throw("Grouping information in recommendation spec is wrong")
-    }
-
-    var visDetails = {}
-
-    obj.encodings.forEach((element,val)=>{
-        visDetails["Attribute_"+val] = Attributes(element)
-    })
-
-    return {recommendationStage,groupingTechnique,visDetails}
-
-}
-
-function Attributes(obj)
-{
-    var recommendationStage = 1;
-    var encoding = obj.encoding
-    var predictionScore = obj.similarityScore
-    return {recommendationStage,encoding,predictionScore}
-}
-
-module.exports = {
-    RecommendationSpec
-}
-},{}],23:[function(require,module,exports){
 // Description: This function will convert the dataspec to an array of user input
 // Description: As a side we will also store the input object vector
 // Input: The feature spec and attribute
@@ -12441,7 +12327,7 @@ function encodeAttributeUpdated(dataspec,tasks){
 }
 
 module.exports = encodeAttributeUpdated
-},{"../model/stage1updated.json":3,"./modelDataProcessing.js":21,"./utils.js":28}],24:[function(require,module,exports){
+},{"../model/stage1updated.json":3,"./modelDataProcessing.js":21,"./utils.js":27}],23:[function(require,module,exports){
 // const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
 
 function createInputVector(spec){
@@ -12506,7 +12392,7 @@ function getAlignmentUpdated(visoptions)
 
 
 module.exports = getAlignmentUpdated
-},{"./modelDataProcessing.js":21,"./utils.js":28}],25:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":27}],24:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
     var inputVectorObject = {};
@@ -12590,7 +12476,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 }
 
 module.exports = getLayoutUpdated
-},{"./modelDataProcessing.js":21,"./utils.js":28}],26:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":27}],25:[function(require,module,exports){
 function createInputVector(specs,tasks,network)
 {
     
@@ -12669,7 +12555,7 @@ function getPartitionUpdated(input,tasks,network)
 
 
 module.exports = getPartitionUpdated
-},{"./modelDataProcessing.js":21,"./utils.js":28}],27:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":27}],26:[function(require,module,exports){
 function createInputVector(views,network,tasks)
 {
     const inputVectorObject = {};
@@ -12746,7 +12632,7 @@ function getArrangementUpdated(input,networkData,tasks)
 }
 
 module.exports = getArrangementUpdated;
-},{"./modelDataProcessing.js":21,"./utils.js":28}],28:[function(require,module,exports){
+},{"./modelDataProcessing.js":21,"./utils.js":27}],27:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
 var dsMetric = require("ml-distance")

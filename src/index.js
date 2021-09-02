@@ -1,18 +1,7 @@
 var Dataspec = require('./inputspec.js')['Dataspec']
-// var encodeAttribute  = require("./s1_en.js")
-// var getTracks  = require("./s2_ca.js")
-// var inputData = require("../TestInput/input.json")
-// var getLayout  = require("./s3_ls.js")
-// var getAlignment = require("./s4_al.js")
-// var getArrangment = require("./s5_ar.js")
-// var getViewConfiguration = require("./s6_vc")
-// const cartesian = require("./utils.js").cartesian
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
 const coolerOutput = require("./utils.js").coolerOutput
-var RecommendationSpec = require("./outputspec.js")['RecommendationSpec'];
-const needDefaultTask = false;
-let defaultTasks = ["singleROI","compareMultipleROI","compareMultipleAttributes","multipleFeatures","multipleSequences","explore"];
 const testVersion = false;
 
 
