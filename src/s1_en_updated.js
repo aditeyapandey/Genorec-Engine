@@ -59,9 +59,11 @@ function encodeAttributeUpdated(dataspec,tasks){
             var tempAttributeStorage = [];
             const denseInterconnection = currentFeature.attributes[j].denseInterconnection;
             const featureInterconnection = currentFeature.attributes[j].featureInterconnection;
+            var granularity = currentFeature["featureGranularity"];
+            var availability = currentFeature["featureDensity"]
 
             recommendation.forEach((val)=>{
-                tempAttributeStorage.push({"encoding":val,encodingName,columnName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
+                tempAttributeStorage.push({"encoding":val,encodingName,granularity,availability,columnName,fileName,"encodingPredictionScore":similarityScores[val], denseInterconnection, featureInterconnection});
             })
             stage1Output.push(tempAttributeStorage);
         }

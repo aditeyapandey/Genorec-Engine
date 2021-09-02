@@ -32,7 +32,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 {
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model3Updated;
-    const stage1Model = globalData.model1Updated
+    const stage1Model = globalData.model1Updated;
     const vectorKeys = ["d_viewconnection","d_sparseinterconnection","d_denseinterconnection","t_identify","t_overview","s_length","s_color","s_text"];
     const getProductProperties  = require("./utils.js").productProperties;
     const computeSimilarity = require("./utils.js").computeSimilarity;
@@ -45,7 +45,6 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
         const recommendation = recommendedProducts(similarityScores);
-        var tracksTemp =[];
 
              recommendation.forEach(rec =>{
                  var tempOutput;
@@ -54,7 +53,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
                     const layout = rec;
                     const layoutPredictionScore = similarityScores[rec];
                     const fileName = track["fileName"];
-                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"columnName":track["columnName"],"encodingName":track["encodingName"]}];
+                    const encodings = [{"encoding":track["encoding"],"encodingPredictionScore":track["encodingPredictionScore"],"columnName":track["columnName"],"encodingName":track["encodingName"],"granularity":track["granularity"],"availability":track["availability"]}];
                     const interconnection = track["featureInterconnection"]; 
                     const interconnectionType = (()=>{
                         if( !track["featureInterconnection"])
