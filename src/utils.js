@@ -73,7 +73,7 @@ function recommendedProductsAllRanked(similarityScores) {
   var set = new Set(arr);
 
   var sortedArr = [...(set)].sort(); // with spread.
-  console.log(sortedArr);
+  // console.log(sortedArr);
 
   let max = sortedArr[sortedArr.length-1];
   let least = sortedArr[0];

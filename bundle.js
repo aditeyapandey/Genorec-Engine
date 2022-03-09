@@ -12357,7 +12357,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
       //var recommendation = recommendedProducts(similarityScores);
       //Updating it to consider all options
       var recommendation = Object.keys(similarityScores);
-      console.log(recommendation);
+      // console.log(recommendation);
       var recommendedProductsRanked =  recommendedProductsAllRanked(similarityScores);
       //console.log(recommendedProductsRanked);
       var attributeId = currentFeature.attributes[j].attrId;
@@ -12392,7 +12392,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
     }
   }
   const output = cartesian(stage1Output);
-  console.log("Encoding Recommendation:", output)
+  // console.log("Encoding Recommendation:", output)
   return output;
 }
 
@@ -12839,7 +12839,7 @@ function recommendedProductsAllRanked(similarityScores) {
   var set = new Set(arr);
 
   var sortedArr = [...(set)].sort(); // with spread.
-  console.log(sortedArr);
+  // console.log(sortedArr);
 
   let max = sortedArr[sortedArr.length-1];
   let least = sortedArr[0];
