@@ -80,7 +80,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
         inputVectorObject,
         productVector
       );
-    //   console.log(similarityScores);
+      console.log("Encoding All Options:",similarityScores);
       var recommendation = recommendedProducts(similarityScores);
     //   console.log(recommendation);
       var attributeId = currentFeature.attributes[j].attrId;
@@ -114,6 +114,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
     }
   }
   const output = cartesian(stage1Output);
+  console.log("Encoding Recommendation:", output)
   return output;
 }
 

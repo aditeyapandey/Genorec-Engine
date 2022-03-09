@@ -11,10 +11,10 @@ module.exports={
             "features": [
                 {
                     "featureId": "feature_0",
-                    "featureGranularity": "segment",
+                    "featureGranularity": "point",
                     "featureDensity": "sparse",
-                    "featureLabel": "Segment_Sparse",
-                    "featureInterconnection": true,
+                    "featureLabel": "Point_Sparse",
+                    "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks": [],
                     "interactivity": true,
@@ -25,20 +25,9 @@ module.exports={
                             "intraAttrTask": [
                                 "identify"
                             ],
-                            "featureInterconnection": true,
-                            "denseInterconnection": false,
-                            "fileName": "BEDPE1",
-                            "encodingName": "QUANT1"
-                        },
-                        {
-                            "attrId": "attribute_1",
-                            "dataType": "quantitative",
-                            "intraAttrTask": [
-                                "identify"
-                            ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "SEG1",
+                            "fileName": "VCF1",
                             "encodingName": "QUANT1"
                         }
                     ]
@@ -57,7 +46,7 @@ module.exports={
     "tasks": [
         ""
     ],
-    "geneAnnotation": false,
+    "geneAnnotation": true,
     "ideogramDisplayed": false
 }
 },{}],2:[function(require,module,exports){
@@ -11916,7 +11905,7 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-     input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
+     input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
      //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
@@ -12073,7 +12062,7 @@ if(!testVersion)
     getRecommendation
     }
 }
-},{"../TestInput/bedpe_seg.json":1,"./inputspec.js":20,"./s1_en_updated.js":22,"./s2_al_updated.js":23,"./s3_ls_updated.js":24,"./s4_pt_updated.js":25,"./s5_ar_updated.js":26,"./utils.js":27}],20:[function(require,module,exports){
+},{"../evalspec/task1.json":1,"./inputspec.js":20,"./s1_en_updated.js":22,"./s2_al_updated.js":23,"./s3_ls_updated.js":24,"./s4_pt_updated.js":25,"./s5_ar_updated.js":26,"./utils.js":27}],20:[function(require,module,exports){
 const { data } = require("jquery");
 
 let GLOBAL_INDEX_DATA = {}
@@ -12350,7 +12339,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
         inputVectorObject,
         productVector
       );
-    //   console.log(similarityScores);
+      console.log("Encoding All Options:",similarityScores);
       var recommendation = recommendedProducts(similarityScores);
     //   console.log(recommendation);
       var attributeId = currentFeature.attributes[j].attrId;
@@ -12384,6 +12373,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
     }
   }
   const output = cartesian(stage1Output);
+  console.log("Encoding Recommendation:", output)
   return output;
 }
 
@@ -12440,7 +12430,7 @@ function getAlignmentUpdated(visoptions)
         const inputVectorObject = createInputVector(element);
         // console.log(inputVectorObject,productVector);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        //console.log(similarityScores);
+        console.log("Alignment All Options:", similarityScores);
         const recommendation = recommendedProducts(similarityScores);
         var tempAttributeStorage = {};
         recommendation.forEach((val)=>{
@@ -12448,7 +12438,7 @@ function getAlignmentUpdated(visoptions)
         })
         output.push(tempAttributeStorage);
     });
-    console.log(output);
+    console.log("Alignment Recommendation:",output);
     return output;
 }
 
@@ -12501,7 +12491,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
     visOptions.forEach(element => {
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        console.log(similarityScores);
+        console.log("Layout All Options",similarityScores);
         const recommendation = recommendedProducts(similarityScores);
 
              recommendation.forEach(rec =>{
@@ -12534,6 +12524,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 
     });
     
+    console.log("Layout Recommendation",output)
     return output    
 }
 

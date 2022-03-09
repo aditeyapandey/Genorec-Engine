@@ -44,7 +44,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
     visOptions.forEach(element => {
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        console.log(similarityScores);
+        console.log("Layout All Options",similarityScores);
         const recommendation = recommendedProducts(similarityScores);
 
              recommendation.forEach(rec =>{
@@ -77,6 +77,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 
     });
     
+    console.log("Layout Recommendation",output)
     return output    
 }
 
