@@ -91,14 +91,14 @@ module.exports=[
 },{}],6:[function(require,module,exports){
 module.exports=[
 {"layout":"linear","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
-{"layout":"circular","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
+{"layout":"circular","d_viewconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
 {"layout":"hilbert","d_viewconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]
 
 },{}],7:[function(require,module,exports){
 module.exports=[
-{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_identify":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1"},
-{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_identify":"-1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1"}
+{"partition":"contiguous","d_multivars":"1","d_multisequences":"1","d_connection":"1","t_overview":"1","t_identify":"1","t_comparerois":"1","s_circularlayout":"1","s_linearlayout":"1","s_hilbert":"1"},
+{"partition":"segregated","d_multivars":"-1","d_multisequences":"-1","d_connection":"-1","t_overview":"1","t_identify":"-1","t_comparerois":"-1","s_circularlayout":"-1","s_linearlayout":"1","s_hilbert":"-1"}
 ]
 
 },{}],8:[function(require,module,exports){
@@ -11905,7 +11905,9 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-     input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    //input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
+
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
      //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
@@ -12315,6 +12317,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
   const getProductProperties = require("./utils.js").productProperties;
   const computeSimilarity = require("./utils.js").computeSimilarity;
   const recommendedProducts = require("./utils.js").recommendedProducts;
+  const recommendedProductsAllRanked = require("./utils.js").recommendedProductsAllRanked;
   //Product vector only needs to be computed once
   const productVector = getProductProperties(stage1Model, vectorKeys);
   const cartesian = require("./utils.js").cartesian;
@@ -12339,9 +12342,15 @@ function encodeAttributeUpdated(dataspec, tasks) {
         inputVectorObject,
         productVector
       );
-      console.log("Encoding All Options:",similarityScores);
-      var recommendation = recommendedProducts(similarityScores);
-    //   console.log(recommendation);
+      //console.log("Encoding All Options:",similarityScores);
+      //This is the original recommendation logic
+      //It filters the top choice
+      //var recommendation = recommendedProducts(similarityScores);
+      //Updating it to consider all options
+      var recommendation = Object.keys(similarityScores);
+      console.log(recommendation);
+      var recommendedProductsRanked =  recommendedProductsAllRanked(similarityScores);
+      //console.log(recommendedProductsRanked);
       var attributeId = currentFeature.attributes[j].attrId;
       var fileName = currentFeature.attributes[j].fileName;
       var encodingName = currentFeature.attributes[j].encodingName;
@@ -12366,6 +12375,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
           encodingPredictionScore: similarityScores[val],
           denseInterconnection,
           featureInterconnection,
+          finalScore: similarityScores[val]
         });
       });
 
@@ -12382,68 +12392,115 @@ module.exports = encodeAttributeUpdated;
 },{"../model/stage1updated.json":3,"./modelDataProcessing.js":21,"./utils.js":27}],23:[function(require,module,exports){
 // const { GLOBAL_INDEX_DATA } = require("./inputspec.js");
 
-function createInputVector(spec){
-    const inputVectorObject = {};
-    const inputArray = [];
+function createInputVector(spec) {
+  const inputVectorObject = {};
+  const inputArray = [];
 
-    //File Type 
-    const tracksSameFile = spec.every( (val, i, arr) => val["fileName"] === arr[0]["fileName"]);  
-    inputArray.push(inputVectorObject["d_trackssamefile"] = tracksSameFile ? 1 : 0);
-    inputArray.push(inputVectorObject["d_tracksdifffile"] = !tracksSameFile ? 1 : 0);
+  //File Type
+  const tracksSameFile = spec.every(
+    (val, i, arr) => val["fileName"] === arr[0]["fileName"]
+  );
+  inputArray.push(
+    (inputVectorObject["d_trackssamefile"] = tracksSameFile ? 1 : 0)
+  );
+  inputArray.push(
+    (inputVectorObject["d_tracksdifffile"] = !tracksSameFile ? 1 : 0)
+  );
 
-    //Data Type
-    const allDataType = spec.map( (val) => val["encodingName"])
-    allDataTypeSame = allDataType.every(val => val.includes("Categorical")) || allDataType.every(val => val.includes("Quantitative")) || allDataType.every(val => val.includes("Text"))
-    inputArray.push(inputVectorObject["d_samedatatype"] = allDataTypeSame ? 1 : 0);
-    inputArray.push(inputVectorObject["d_differentdatatype"] = !allDataTypeSame ? 1 : 0);
+  //Data Type
+  const allDataType = spec.map((val) => val["encodingName"]);
+  allDataTypeSame =
+    allDataType.every((val) => val.includes("Categorical")) ||
+    allDataType.every((val) => val.includes("Quantitative")) ||
+    allDataType.every((val) => val.includes("Text"));
+  inputArray.push(
+    (inputVectorObject["d_samedatatype"] = allDataTypeSame ? 1 : 0)
+  );
+  inputArray.push(
+    (inputVectorObject["d_differentdatatype"] = !allDataTypeSame ? 1 : 0)
+  );
 
-    //Tracks (are pseudo of vars)
-    inputArray.push(inputVectorObject["d_singlevar"] = spec.length <= 1 ? 1 : 0);
+  //Tracks (are pseudo of vars)
+  inputArray.push(
+    (inputVectorObject["d_singlevar"] = spec.length <= 1 ? 1 : 0)
+  );
 
-    //Encoding Type
-    const lineChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "lineChart");
-    const barChartEncoding = spec.every( (val, i, arr) => val["encoding"] === "barChart" || val["encoding"] === "intervalBarChart");
-    inputArray.push(inputVectorObject["s_alllinechart"] = lineChartEncoding ? 1 : 0);
-    inputArray.push(inputVectorObject["s_allbarchart"] = barChartEncoding ? 1 : 0);
-    inputArray.push(inputVectorObject["s_otherencoding"] = ! (lineChartEncoding || barChartEncoding) ? 1 : 0);
- 
+  //Encoding Type
+  const lineChartEncoding = spec.every(
+    (val, i, arr) => val["encoding"] === "lineChart"
+  );
+  const barChartEncoding = spec.every(
+    (val, i, arr) =>
+      val["encoding"] === "barChart" || val["encoding"] === "intervalBarChart"
+  );
+  inputArray.push(
+    (inputVectorObject["s_alllinechart"] = lineChartEncoding ? 1 : 0)
+  );
+  inputArray.push(
+    (inputVectorObject["s_allbarchart"] = barChartEncoding ? 1 : 0)
+  );
+  inputArray.push(
+    (inputVectorObject["s_otherencoding"] = !(
+      lineChartEncoding || barChartEncoding
+    )
+      ? 1
+      : 0)
+  );
 
-    return{inputVectorObject,inputArray};
+  return { inputVectorObject, inputArray };
 }
 
-function getAlignmentUpdated(visoptions)
-{
-    // console.log(GLOBAL_INDEX_DATA)
+function getAlignmentUpdated(visoptions) {
+  const vectorKeys = [
+    "d_trackssamefile",
+    "d_tracksdifffile",
+    "d_samedatatype",
+    "d_differentdatatype",
+    "d_singlevar",
+    "s_alllinechart",
+    "s_allbarchart",
+    "s_otherencoding",
+  ];
 
-    const vectorKeys = ["d_trackssamefile","d_tracksdifffile","d_samedatatype","d_differentdatatype","d_singlevar","s_alllinechart","s_allbarchart","s_otherencoding"];
-    
-    const globalData = require("./modelDataProcessing.js");
-    const model = globalData.model2Updated;
-    const getProductProperties  = require("./utils.js").productProperties;
-    const computeSimilarity = require("./utils.js").computeSimilarity;
-    const recommendedProducts = require("./utils.js").recommendedProducts;
+  const globalData = require("./modelDataProcessing.js");
+  const model = globalData.model2Updated;
+  const getProductProperties = require("./utils.js").productProperties;
+  const computeSimilarity = require("./utils.js").computeSimilarity;
+  const recommendedProducts = require("./utils.js").recommendedProducts;
 
-    const productVector = getProductProperties(model,vectorKeys);
-    const output = [];
+  const productVector = getProductProperties(model, vectorKeys);
+  const output = [];
 
-    visoptions.forEach(element => {
-        const inputVectorObject = createInputVector(element);
-        // console.log(inputVectorObject,productVector);
-        const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        console.log("Alignment All Options:", similarityScores);
-        const recommendation = recommendedProducts(similarityScores);
-        var tempAttributeStorage = {};
-        recommendation.forEach((val)=>{
-            tempAttributeStorage = {"trackAlignment":val,"trackAlignmentPrediction":similarityScores[val],"tracks":element};
-        })
-        output.push(tempAttributeStorage);
+  visoptions.forEach((element) => {
+    const inputVectorObject = createInputVector(element);
+    // console.log(inputVectorObject,productVector);
+    const similarityScores = computeSimilarity(
+      inputVectorObject,
+      productVector
+    );
+    // console.log("Alignment All Options:", similarityScores);
+    //It filters the top choice
+    //var recommendation = recommendedProducts(similarityScores);
+    //Updating it to consider all options
+    var recommendation = Object.keys(similarityScores);
+
+    var tempAttributeStorage = {};
+    recommendation.forEach((val) => {
+      tempAttributeStorage = {
+        trackAlignment: val,
+        trackAlignmentPrediction: similarityScores[val],
+        tracks: element,
+        finalScore: similarityScores[val] + element[0]["finalScore"],
+      };
     });
-    console.log("Alignment Recommendation:",output);
-    return output;
+    output.push(tempAttributeStorage);
+  });
+  console.log("Alignment Recommendation:", output);
+  return output;
 }
 
+module.exports = getAlignmentUpdated;
 
-module.exports = getAlignmentUpdated
 },{"./modelDataProcessing.js":21,"./utils.js":27}],24:[function(require,module,exports){
 function createInputVector(spec,tasks,stage1,viewConnectionType)
 {
@@ -12491,8 +12548,8 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
     visOptions.forEach(element => {
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        console.log("Layout All Options",similarityScores);
-        const recommendation = recommendedProducts(similarityScores);
+        //const recommendation = recommendedProducts(similarityScores);
+        const recommendation = Object.keys(similarityScores);
 
              recommendation.forEach(rec =>{
                  var tempOutput;
@@ -12518,7 +12575,9 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
                     })()
                     tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnectionType});
                 })
-                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
+                layoutScores = tracksTemp.map(val => val["layoutPredictionScore"])
+                layoutScoresAvg = (layoutScores.reduce((a,b) => {return a+b},0))/layoutScores.length
+                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp, finalScore: element["finalScore"]+layoutScoresAvg};
                 output.push(tempOutput)
              })
 
@@ -12574,6 +12633,8 @@ function createInputVector(specs,tasks,network)
     allLayouts = allLayouts.flat(1);
     inputArray.push(inputVectorObject["s_circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
     inputArray.push(inputVectorObject["s_linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
+    inputArray.push(inputVectorObject["s_hilbert"] = allLayouts.includes("hilbert") ? 1 : 0);
+
    
     // console.log(inputVectorObject)
     return{inputVectorObject,inputArray};
@@ -12581,7 +12642,7 @@ function createInputVector(specs,tasks,network)
 
 function getPartitionUpdated(input,tasks,network)
 {
-    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout"];
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout","s_hilbert"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;
@@ -12595,14 +12656,18 @@ function getPartitionUpdated(input,tasks,network)
     allVisOptions.forEach(views =>{
         const inputVectorObject = createInputVector(views,tasks,network);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        const recommendation = recommendedProducts(similarityScores);
+        //const recommendation = recommendedProducts(similarityScores);
+        //console.log(recommendation);
+        const recommendation = Object.keys(similarityScores);
+
         recommendation.forEach(val => {
             const viewPartition = val;
             const partitionPredictionScore = similarityScores[val];
-            output.push({viewPartition,partitionPredictionScore,views});
+            const finalScore = views[0]["finalScore"] + partitionPredictionScore
+            output.push({viewPartition,partitionPredictionScore,views,finalScore});
         })
     })
-
+    console.log("Partition Recommendation:",output);
     return output
 }
 
@@ -12666,7 +12731,9 @@ function getArrangementUpdated(input,networkData,tasks)
     input.forEach(element => {
         const inputVectorObject = createInputVector(element["views"],networkData,tasks);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        const recommendation = recommendedProducts(similarityScores);
+        //console.log("Arrangement All Options",similarityScores);
+        // const recommendation = recommendedProducts(similarityScores);
+        const recommendation = Object.keys(similarityScores);
         recommendation.forEach(rec=>{
             const viewArrangement = rec;
             const viewArrangementPredictionScore = similarityScores[rec];
@@ -12676,11 +12743,13 @@ function getArrangementUpdated(input,networkData,tasks)
             const views = element["views"];
             const viewPartition = element["viewPartition"];
             const partitionPredictionScore = element["partitionPredictionScore"];
-            const tempOutput = {viewPartition,partitionPredictionScore,views,viewArrangement,viewArrangementPredictionScore,viewConnectionType:networkData["connectionType"]}
+            const finalScore = element["finalScore"] + viewArrangementPredictionScore;
+            const tempOutput = {viewPartition,partitionPredictionScore,views,viewArrangement,viewArrangementPredictionScore,viewConnectionType:networkData["connectionType"],finalScore};
             output.push(tempOutput);
         })
     });
 
+    //console.log("Arrangement Recommendations",output);
     return output;
 }
 
@@ -12688,247 +12757,271 @@ module.exports = getArrangementUpdated;
 },{"./modelDataProcessing.js":21,"./utils.js":27}],27:[function(require,module,exports){
 //https://github.com/mljs/distance#ml-distance
 
-var dsMetric = require("ml-distance")
-var metric="cosine"
+var dsMetric = require("ml-distance");
+var metric = "cosine";
 
-function getProductProperties(model,vectorKeys){
-  var getProductProperties = []
+function getProductProperties(model, vectorKeys) {
+  var getProductProperties = [];
 
-  var productKeys = Object.keys(model)
+  var productKeys = Object.keys(model);
 
-  for (var i=0;i<productKeys.length;i++)
-  {
-    var currentProduct = productKeys[i]
-    var tempgetProductProperties = {}
+  for (var i = 0; i < productKeys.length; i++) {
+    var currentProduct = productKeys[i];
+    var tempgetProductProperties = {};
 
-    tempgetProductProperties[currentProduct]=[]
-    vectorKeys.map(val => {
-      tempgetProductProperties[currentProduct].push(parseInt(model[currentProduct][val]))
-    })
-    getProductProperties.push(tempgetProductProperties)
+    tempgetProductProperties[currentProduct] = [];
+    vectorKeys.map((val) => {
+      tempgetProductProperties[currentProduct].push(
+        parseInt(model[currentProduct][val])
+      );
+    });
+    getProductProperties.push(tempgetProductProperties);
   }
-  return getProductProperties
+  return getProductProperties;
 }
 
 // Description: Calculate the recommendation
 // Input: product and input vector
 // Output: similarity score corresponding to each output
-function computeSimilarity(inputVectorObject,productVector){
-  var inpVec = inputVectorObject["inputArray"]
-  var resultSimilarity = {}
-  for (var i =0;i<productVector.length;i++){
+function computeSimilarity(inputVectorObject, productVector) {
+  var inpVec = inputVectorObject["inputArray"];
+  var resultSimilarity = {};
+  for (var i = 0; i < productVector.length; i++) {
     var obj = productVector[i];
-    var key = Object.keys(obj)[0]
-    var proVec = obj[key]
-    var similarity = dsMetric.similarity[metric](inpVec,proVec)
-    resultSimilarity[key] = similarity
+    var key = Object.keys(obj)[0];
+    var proVec = obj[key];
+    var similarity = dsMetric.similarity[metric](inpVec, proVec);
+    resultSimilarity[key] = similarity;
   }
-  return resultSimilarity
+  return resultSimilarity;
 }
 
 //Input: An object with vis techniques as keys and similarity scores. Additionally, key for the similarity metric to use.
 //Output: Array of recommendation. The array allows for mutiple output in the cases where the scores are exactly similar.
-function recommendedProducts (similarityScores)
-{
-  
+function recommendedProducts(similarityScores) {
   let arr = Object.values(similarityScores);
 
   let max = Math.max(...arr);
-  var recommendedProducts = []
-  var secondHighest = arr.sort(function(a, b) { return b - a; })[1];
+  var recommendedProducts = [];
+  var secondHighest = arr.sort(function (a, b) {
+    return b - a;
+  })[1];
 
   Object.keys(similarityScores).map((val) => {
-    if(similarityScores[val] == max) {recommendedProducts.push(val) }
-  })
-
+    if (similarityScores[val] == max) {
+      recommendedProducts.push(val);
+    }
+  });
 
   // //To add more recommendation objects
   // if(recommendedProducts.length==1){
   //   Object.keys(similarityScores).map((val) => {
   //     if(similarityScores[val] == secondHighest && secondHighest>0.50) {recommendedProducts.push(val) }
   //   })
-  
+
   // }
 
-  return recommendedProducts
+  return recommendedProducts;
+}
+
+
+function recommendedProductsAllRanked(similarityScores) {
+  let arr = Object.values(similarityScores);
+  var set = new Set(arr);
+
+  var sortedArr = [...(set)].sort(); // with spread.
+  console.log(sortedArr);
+
+  let max = sortedArr[sortedArr.length-1];
+  let least = sortedArr[0];
+  let midVal = sortedArr[Math.ceil(sortedArr.length -1)/2]
+  var recommendedProducts = { top: [], mid: [], low: [] };
+  var secondHighest = arr.sort(function (a, b) {
+    return b - a;
+  })[1];
+
+  Object.keys(similarityScores).map((val) => {
+    if (similarityScores[val] == max) {
+      recommendedProducts.top.push(val);
+    }
+  });
+  Object.keys(similarityScores).map((val) => {
+    if (similarityScores[val] == midVal) {
+      recommendedProducts.mid.push(val);
+    }
+  });
+
+  if (least < midVal) {
+    Object.keys(similarityScores).map((val) => {
+      if (similarityScores[val] == least) {
+        recommendedProducts.low.push(val);
+      }
+    });
+  }
+
+  return recommendedProducts;
 }
 
 //Description: Test function to evaluate combinations of attributes
 //Input: Array of arrays that have to be combined
 //Output: All possible combinations of the arrays
 function cartesian(args) {
-  var r = [], max = args.length-1;
+  var r = [],
+    max = args.length - 1;
   function helper(arr, i) {
-      for (var j=0, l=args[i].length; j<l; j++) {
-          var a = arr.slice(0); // clone arr
-          a.push(args[i][j]);
-          if (i==max)
-              r.push(a);
-          else
-              helper(a, i+1);
-      }
+    for (var j = 0, l = args[i].length; j < l; j++) {
+      var a = arr.slice(0); // clone arr
+      a.push(args[i][j]);
+      if (i == max) r.push(a);
+      else helper(a, i + 1);
+    }
   }
   helper([], 0);
   return r;
 }
 
-//Input: Object of features. Each feature consists of an array of elements. 
-//Output: Merge by performing a cartesian product. 
-//Output Schema: {'visid':[a:{information},b,c], 'visid2':[a,b]} 
-//Information: {featureid:[] ,encoding/s:[], layoutrecommendation} 
-function getVisOptions(tracks)
-{
-  var features = Object.keys(tracks)
-  var trackPossibilitiesArray = features.map((val,i) =>{
-    var index = i
-    var localTrackPossilities = tracks[val]['trackPossibilities']
+//Input: Object of features. Each feature consists of an array of elements.
+//Output: Merge by performing a cartesian product.
+//Output Schema: {'visid':[a:{information},b,c], 'visid2':[a,b]}
+//Information: {featureid:[] ,encoding/s:[], layoutrecommendation}
+function getVisOptions(tracks) {
+  var features = Object.keys(tracks);
+  var trackPossibilitiesArray = features.map((val, i) => {
+    var index = i;
+    var localTrackPossilities = tracks[val]["trackPossibilities"];
     localTrackPossilities.every((val1) => {
-      return val1["featureId"] = "feature_"+index
-    })
-    return localTrackPossilities
-  })
+      return (val1["featureId"] = "feature_" + index);
+    });
+    return localTrackPossilities;
+  });
 
-  var visOptions = cartesian(trackPossibilitiesArray) 
-  
+  var visOptions = cartesian(trackPossibilitiesArray);
+
   // if(visOptions.every(val => val.length==1)){
   //   let tempVisOptions = [...visOptions]
   //   let predictedLayout = uniformizeSingleFeaturePrediction(tempVisOptions)
   // }
 
-  var returnVisOptions = {}
+  var returnVisOptions = {};
 
-  for (var j=0;j<visOptions.length;j++){
-    returnVisOptions['vis_'+j] = arrayToObject(visOptions[j],"featureId")    
+  for (var j = 0; j < visOptions.length; j++) {
+    returnVisOptions["vis_" + j] = arrayToObject(visOptions[j], "featureId");
 
     // let predictedLayout = uniformizeLayoutPrediction(JSON.stringify(visOptions[j]))
-    // returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")    
+    // returnVisOptions['vis_'+j] = arrayToObject(predictedLayout,"featureId")
   }
-  
-  return returnVisOptions
+
+  return returnVisOptions;
 }
 
 //Description -> Assigns all features in a vis the same layout
 // Function uses prediction score to find the more prominent layout and then uses for the assignment
-function uniformizeLayoutPrediction (vis)
-{
-  let testVis = JSON.parse(vis)
-  var predictionScore = 0
-  var layout
+function uniformizeLayoutPrediction(vis) {
+  let testVis = JSON.parse(vis);
+  var predictionScore = 0;
+  var layout;
 
-  testVis.map(val => {
-    if(val["predictionScore"] >= predictionScore) layout = val["layoutRecommendation"]
-  }) 
-   testVis.map(val=> 
-    {
-      val["layoutRecommendation"] = layout
-    })
-  return testVis
+  testVis.map((val) => {
+    if (val["predictionScore"] >= predictionScore)
+      layout = val["layoutRecommendation"];
+  });
+  testVis.map((val) => {
+    val["layoutRecommendation"] = layout;
+  });
+  return testVis;
 }
 
 //
-function uniformizeSingleFeaturePrediction(vis)
-{
-  let testVis = vis
-  var predictionScore = 0
-  var layout
+function uniformizeSingleFeaturePrediction(vis) {
+  let testVis = vis;
+  var predictionScore = 0;
+  var layout;
 
-  testVis.map(val => {
-    if(val[0]["predictionScore"] >= predictionScore) layout = val[0]["layoutRecommendation"]
-  }) 
-   testVis.map(val=> 
-    {
-      val[0]["layoutRecommendation"] = layout
-    })
-  return testVis
+  testVis.map((val) => {
+    if (val[0]["predictionScore"] >= predictionScore)
+      layout = val[0]["layoutRecommendation"];
+  });
+  testVis.map((val) => {
+    val[0]["layoutRecommendation"] = layout;
+  });
+  return testVis;
 }
 
-//Description -> Converts an arra [id:val, key: val] to id:{id,val} 
+//Description -> Converts an arra [id:val, key: val] to id:{id,val}
 const arrayToObject = (array, keyField) =>
-   array.reduce((obj, item) => {
-     obj[item[keyField]] = item
-     return obj
-   }, {})
+  array.reduce((obj, item) => {
+    obj[item[keyField]] = item;
+    return obj;
+  }, {});
 
+function mode(array) {
+  if (array.length == 0) return null;
+  var modeMap = {};
+  var maxEl = array[0],
+    maxCount = 1;
+  for (var i = 0; i < array.length; i++) {
+    var el = array[i];
+    if (modeMap[el] == null) modeMap[el] = 1;
+    else modeMap[el]++;
+    if (modeMap[el] > maxCount) {
+      maxEl = el;
+      maxCount = modeMap[el];
+    }
+  }
+  return maxEl;
+}
 
-
-   function mode(array)
-   {
-       if(array.length == 0)
-           return null;
-       var modeMap = {};
-       var maxEl = array[0], maxCount = 1;
-       for(var i = 0; i < array.length; i++)
-       {
-           var el = array[i];
-           if(modeMap[el] == null)
-               modeMap[el] = 1;
-           else
-               modeMap[el]++;  
-           if(modeMap[el] > maxCount)
-           {
-               maxEl = el;
-               maxCount = modeMap[el];
-           }
-       }
-       return maxEl;
-   }
-
-  //Check duplicate recommendation spec string
-  function checkDuplicates(inputArray)
-  {
-    var output = {}
-    for(let i=0;i<inputArray.length-1;i++)
-    {
-      for(let j = i+1;j<inputArray.length;j++)
-      {
-       // console.log(inputArray[i])
-        if (JSON.stringify(inputArray[i]) === JSON.stringify(inputArray[j]))
-        {
-          inputArray.splice(j, 1)
-        }
+//Check duplicate recommendation spec string
+function checkDuplicates(inputArray) {
+  var output = {};
+  for (let i = 0; i < inputArray.length - 1; i++) {
+    for (let j = i + 1; j < inputArray.length; j++) {
+      // console.log(inputArray[i])
+      if (JSON.stringify(inputArray[i]) === JSON.stringify(inputArray[j])) {
+        inputArray.splice(j, 1);
       }
     }
-
-    // inputArray.forEach((element,index) => {
-    //   output["recommendation_"+index] = element 
-    // });
-    
-    return inputArray;
   }
 
-  //Test if no attributes are provided in the input data
-  function checkMissingAttributes(input)
+  // inputArray.forEach((element,index) => {
+  //   output["recommendation_"+index] = element
+  // });
+
+  return inputArray;
+}
+
+//Test if no attributes are provided in the input data
+function checkMissingAttributes(input) {
+  return input["sequences"].some((sequence) => {
+    return sequence["features"].length === 0;
+  });
+}
+
+const coolerOutput = [
   {
-  return(input["sequences"].some(sequence=>{
-    return sequence["features"].length === 0
-  }));
-  }
+    viewPartition: "contiguous",
+    partitionPredictionScore: 0.5345224838248487,
+    views: [],
+    viewArrangement: "orthogonal",
+    viewArrangementPredictionScore: 0.5773502691896257,
+    viewConnectionType: "dense",
+    geneAnnotation: true,
+    ideogramDisplayed: true,
+    tasks: [],
+  },
+];
 
-  const coolerOutput = [{
-    "viewPartition": "contiguous",
-    "partitionPredictionScore": 0.5345224838248487,
-    "views": [],
-    "viewArrangement": "orthogonal",
-    "viewArrangementPredictionScore": 0.5773502691896257,
-    "viewConnectionType": "dense",
-    "geneAnnotation": true,
-    "ideogramDisplayed": true,
-    "tasks": []
-}]
-
-
-
-
-module.exports =
-{
+module.exports = {
   productProperties: getProductProperties,
   computeSimilarity: computeSimilarity,
-  recommendedProducts:  recommendedProducts ,
+  recommendedProducts: recommendedProducts,
   cartesian: cartesian,
   getVisOptions: getVisOptions,
-  mode:mode,
-  checkDuplicates:checkDuplicates,
-  checkMissingAttributes:checkMissingAttributes,
-  coolerOutput: coolerOutput
-}
+  mode: mode,
+  checkDuplicates: checkDuplicates,
+  checkMissingAttributes: checkMissingAttributes,
+  recommendedProductsAllRanked: recommendedProductsAllRanked,
+  coolerOutput: coolerOutput,
+};
+
 },{"ml-distance":16}]},{},[19]);

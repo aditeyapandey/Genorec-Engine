@@ -44,8 +44,8 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
     visOptions.forEach(element => {
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        console.log("Layout All Options",similarityScores);
-        const recommendation = recommendedProducts(similarityScores);
+        //const recommendation = recommendedProducts(similarityScores);
+        const recommendation = Object.keys(similarityScores);
 
              recommendation.forEach(rec =>{
                  var tempOutput;
@@ -71,7 +71,9 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
                     })()
                     tracksTemp.push({layout,layoutPredictionScore,fileName,encodings,interconnectionType});
                 })
-                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp};
+                layoutScores = tracksTemp.map(val => val["layoutPredictionScore"])
+                layoutScoresAvg = (layoutScores.reduce((a,b) => {return a+b},0))/layoutScores.length
+                var tempOutput = {"trackAlignment":element["trackAlignment"],"trackAlignmentPrediction": element["trackAlignmentPrediction"], tracks: tracksTemp, finalScore: element["finalScore"]+layoutScoresAvg};
                 output.push(tempOutput)
              })
 

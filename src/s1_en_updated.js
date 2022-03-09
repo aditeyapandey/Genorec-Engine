@@ -56,6 +56,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
   const getProductProperties = require("./utils.js").productProperties;
   const computeSimilarity = require("./utils.js").computeSimilarity;
   const recommendedProducts = require("./utils.js").recommendedProducts;
+  const recommendedProductsAllRanked = require("./utils.js").recommendedProductsAllRanked;
   //Product vector only needs to be computed once
   const productVector = getProductProperties(stage1Model, vectorKeys);
   const cartesian = require("./utils.js").cartesian;
@@ -80,9 +81,15 @@ function encodeAttributeUpdated(dataspec, tasks) {
         inputVectorObject,
         productVector
       );
-      console.log("Encoding All Options:",similarityScores);
-      var recommendation = recommendedProducts(similarityScores);
-    //   console.log(recommendation);
+      //console.log("Encoding All Options:",similarityScores);
+      //This is the original recommendation logic
+      //It filters the top choice
+      //var recommendation = recommendedProducts(similarityScores);
+      //Updating it to consider all options
+      var recommendation = Object.keys(similarityScores);
+      console.log(recommendation);
+      var recommendedProductsRanked =  recommendedProductsAllRanked(similarityScores);
+      //console.log(recommendedProductsRanked);
       var attributeId = currentFeature.attributes[j].attrId;
       var fileName = currentFeature.attributes[j].fileName;
       var encodingName = currentFeature.attributes[j].encodingName;
@@ -107,6 +114,7 @@ function encodeAttributeUpdated(dataspec, tasks) {
           encodingPredictionScore: similarityScores[val],
           denseInterconnection,
           featureInterconnection,
+          finalScore: similarityScores[val]
         });
       });
 

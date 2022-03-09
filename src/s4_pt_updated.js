@@ -42,6 +42,8 @@ function createInputVector(specs,tasks,network)
     allLayouts = allLayouts.flat(1);
     inputArray.push(inputVectorObject["s_circularlayout"] = allLayouts.includes("circular") ? 1 : 0);
     inputArray.push(inputVectorObject["s_linearlayout"] = allLayouts.includes("linear") ? 1 : 0);
+    inputArray.push(inputVectorObject["s_hilbert"] = allLayouts.includes("hilbert") ? 1 : 0);
+
    
     // console.log(inputVectorObject)
     return{inputVectorObject,inputArray};
@@ -49,7 +51,7 @@ function createInputVector(specs,tasks,network)
 
 function getPartitionUpdated(input,tasks,network)
 {
-    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout"];
+    const vectorKeys = ["d_multivars","d_multisequences","d_connection","t_overview","t_identify","t_comparerois","s_circularlayout","s_linearlayout","s_hilbert"];
     const globalData = require("./modelDataProcessing.js");
     const model = globalData.model4Updated;
     const getProductProperties  = require("./utils.js").productProperties;
@@ -63,14 +65,18 @@ function getPartitionUpdated(input,tasks,network)
     allVisOptions.forEach(views =>{
         const inputVectorObject = createInputVector(views,tasks,network);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        const recommendation = recommendedProducts(similarityScores);
+        //const recommendation = recommendedProducts(similarityScores);
+        //console.log(recommendation);
+        const recommendation = Object.keys(similarityScores);
+
         recommendation.forEach(val => {
             const viewPartition = val;
             const partitionPredictionScore = similarityScores[val];
-            output.push({viewPartition,partitionPredictionScore,views});
+            const finalScore = views[0]["finalScore"] + partitionPredictionScore
+            output.push({viewPartition,partitionPredictionScore,views,finalScore});
         })
     })
-
+    console.log("Partition Recommendation:",output);
     return output
 }
 

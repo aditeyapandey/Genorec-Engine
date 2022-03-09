@@ -1,5 +1,5 @@
 [
 {"layout":"linear","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
-{"layout":"circular","d_viewconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"1","s_color":"1","s_text":"1"},
+{"layout":"circular","d_viewconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","t_identify":"1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"1"},
 {"layout":"hilbert","d_viewconnection":"-1","d_sparseinterconnection":"-1","d_denseinterconnection":"-1","t_identify":"-1","t_overview":"1","s_length":"-1","s_color":"1","s_text":"-1"}
 ]

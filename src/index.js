@@ -22,7 +22,9 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-     input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    //input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
+
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
      //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});

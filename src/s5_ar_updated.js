@@ -55,7 +55,9 @@ function getArrangementUpdated(input,networkData,tasks)
     input.forEach(element => {
         const inputVectorObject = createInputVector(element["views"],networkData,tasks);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        const recommendation = recommendedProducts(similarityScores);
+        //console.log("Arrangement All Options",similarityScores);
+        // const recommendation = recommendedProducts(similarityScores);
+        const recommendation = Object.keys(similarityScores);
         recommendation.forEach(rec=>{
             const viewArrangement = rec;
             const viewArrangementPredictionScore = similarityScores[rec];
@@ -65,11 +67,13 @@ function getArrangementUpdated(input,networkData,tasks)
             const views = element["views"];
             const viewPartition = element["viewPartition"];
             const partitionPredictionScore = element["partitionPredictionScore"];
-            const tempOutput = {viewPartition,partitionPredictionScore,views,viewArrangement,viewArrangementPredictionScore,viewConnectionType:networkData["connectionType"]}
+            const finalScore = element["finalScore"] + viewArrangementPredictionScore;
+            const tempOutput = {viewPartition,partitionPredictionScore,views,viewArrangement,viewArrangementPredictionScore,viewConnectionType:networkData["connectionType"],finalScore};
             output.push(tempOutput);
         })
     });
 
+    //console.log("Arrangement Recommendations",output);
     return output;
 }
 
