@@ -48,7 +48,7 @@ function getAlignmentUpdated(visoptions)
         const inputVectorObject = createInputVector(element);
         // console.log(inputVectorObject,productVector);
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
-        // console.log(similarityScores);
+        //console.log(similarityScores);
         const recommendation = recommendedProducts(similarityScores);
         var tempAttributeStorage = {};
         recommendation.forEach((val)=>{
@@ -56,7 +56,7 @@ function getAlignmentUpdated(visoptions)
         })
         output.push(tempAttributeStorage);
     });
-
+    console.log(output);
     return output;
 }
 

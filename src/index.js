@@ -2,7 +2,7 @@ var Dataspec = require('./inputspec.js')['Dataspec']
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
 const coolerOutput = require("./utils.js").coolerOutput
-const testVersion = false;
+const testVersion = true;
 
 
 //Updated variables
@@ -12,6 +12,9 @@ var getLayoutUpdated  = require("./s3_ls_updated.js");
 var getPartitionUpdated  = require("./s4_pt_updated.js");
 var getArrangementUpdated  = require("./s5_ar_updated.js");
 
+//test branch
+console.log("Test branch");
+
 
 //Local validation of the backend
 
@@ -19,10 +22,10 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    // input.push({"chart":"Updated Input", "data":require("../TestInput/V2UpdatedInput.json"),"tasks":["explore"]});
+     input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
      //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
-  //  input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
+    //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixSingleSeq.json"),"tasks":["explore"]});

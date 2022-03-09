@@ -44,6 +44,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
     visOptions.forEach(element => {
         const inputVectorObject = createInputVector(element,tasks,stage1Model,viewConnectionType)
         const similarityScores = computeSimilarity(inputVectorObject,productVector);
+        console.log(similarityScores);
         const recommendation = recommendedProducts(similarityScores);
 
              recommendation.forEach(rec =>{
