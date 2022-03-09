@@ -11884,6 +11884,8 @@ exports.descending = (left, right) => {
 var Dataspec = require('./inputspec.js')['Dataspec']
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
+const createFrequencyTableForScores = require("./utils.js").createFrequencyTableForScores
+
 const coolerOutput = require("./utils.js").coolerOutput
 const testVersion = true;
 
@@ -11906,6 +11908,12 @@ if(testVersion)
     var input = [];
     //Inputs
     input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task3.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task4.json"),"tasks":["explore"]});
+
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task5.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task6.json"),"tasks":["explore"]});
+
     //input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
 
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
@@ -11986,6 +11994,7 @@ if(testVersion)
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         console.log(recommendationSpecNonDuplicatesUpdated);
+        createFrequencyTableForScores(recommendationSpecNonDuplicatesUpdated)
 
     }
 }
@@ -12997,6 +13006,60 @@ function checkMissingAttributes(input) {
   });
 }
 
+//Create a frequency table for all 
+function createFrequencyTableForScores(recOutput)
+{
+  /*
+  {
+    score:val,
+    elements:[]//array of objects
+  }
+  */
+ let scoreFreqObject = {};
+
+ recOutput.forEach(val=>{
+   let scoreConverted = val["finalScore"].toFixed(1);
+   if(scoreFreqObject[scoreConverted]===undefined)
+   {
+    scoreFreqObject[scoreConverted] = {};
+    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
+    {
+     scoreFreqObject[scoreConverted]["specs"] = [];
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+    else{
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+   }
+   else{
+    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
+    {
+     scoreFreqObject[scoreConverted]["specs"] = [];
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+    else{
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+   }
+ })
+
+ //creating a presentable format for the output
+ var finalScoreStorage = []; 
+ Object.keys(scoreFreqObject).forEach(val=>{
+   var localObj = {};
+   localObj["score"] = parseFloat(val);
+   localObj["count"] =  scoreFreqObject[val]["specs"].length;
+   localObj["outputspec"] = scoreFreqObject[val]["specs"];
+
+   finalScoreStorage.push(localObj);
+ })
+ finalScoreStorage.sort((a,b) => b["score"]-a["score"]);
+ console.table(finalScoreStorage);
+ console.log(finalScoreStorage);
+
+}
+
+
 const coolerOutput = [
   {
     viewPartition: "contiguous",
@@ -13022,6 +13085,7 @@ module.exports = {
   checkMissingAttributes: checkMissingAttributes,
   recommendedProductsAllRanked: recommendedProductsAllRanked,
   coolerOutput: coolerOutput,
+  createFrequencyTableForScores:createFrequencyTableForScores
 };
 
 },{"ml-distance":16}]},{},[19]);

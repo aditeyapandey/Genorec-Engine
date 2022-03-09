@@ -1,0 +1,50 @@
+{
+    "sequences": [
+        {
+            "sequenceId": "sequence_0",
+            "sequenceName": "hg38",
+            "interFeatureTasks": {
+                "compare": [],
+                "correlate": []
+            },
+            "features": [
+                {
+                    "featureId": "feature_0",
+                    "featureGranularity": "segment",
+                    "featureDensity": "sparse",
+                    "featureLabel": "Segment_Sparse",
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks": [],
+                    "interactivity": true,
+                    "attr": [
+                        {
+                            "attrId": "attribute_0",
+                            "dataType": "quantitative",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": true,
+                            "denseInterconnection": false,
+                            "fileName": "BEDPE1",
+                            "encodingName": "QUANT1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "intraSequenceTask": {
+        "connectedNodes": [],
+        "sequenceConservation": [],
+        "edgeValues": []
+    },
+    "denseConnection": false,
+    "sparseConnection": false,
+    "connectionType": "none",
+    "tasks": [
+        ""
+    ],
+    "geneAnnotation": true,
+    "ideogramDisplayed": false
+}

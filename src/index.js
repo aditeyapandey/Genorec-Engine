@@ -1,6 +1,8 @@
 var Dataspec = require('./inputspec.js')['Dataspec']
 const checkDuplicates = require("./utils.js").checkDuplicates
 const checkMissingAttributes = require("./utils.js").checkMissingAttributes
+const createFrequencyTableForScores = require("./utils.js").createFrequencyTableForScores
+
 const coolerOutput = require("./utils.js").coolerOutput
 const testVersion = true;
 
@@ -23,6 +25,12 @@ if(testVersion)
     var input = [];
     //Inputs
     input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task3.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task4.json"),"tasks":["explore"]});
+
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task5.json"),"tasks":["explore"]});
+    // input.push({"chart":"Updated Input", "data":require("../evalspec/task6.json"),"tasks":["explore"]});
+
     //input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
 
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
@@ -103,6 +111,7 @@ if(testVersion)
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         console.log(recommendationSpecNonDuplicatesUpdated);
+        createFrequencyTableForScores(recommendationSpecNonDuplicatesUpdated)
 
     }
 }

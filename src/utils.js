@@ -240,6 +240,60 @@ function checkMissingAttributes(input) {
   });
 }
 
+//Create a frequency table for all 
+function createFrequencyTableForScores(recOutput)
+{
+  /*
+  {
+    score:val,
+    elements:[]//array of objects
+  }
+  */
+ let scoreFreqObject = {};
+
+ recOutput.forEach(val=>{
+   let scoreConverted = val["finalScore"].toFixed(1);
+   if(scoreFreqObject[scoreConverted]===undefined)
+   {
+    scoreFreqObject[scoreConverted] = {};
+    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
+    {
+     scoreFreqObject[scoreConverted]["specs"] = [];
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+    else{
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+   }
+   else{
+    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
+    {
+     scoreFreqObject[scoreConverted]["specs"] = [];
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+    else{
+     scoreFreqObject[scoreConverted]["specs"].push(val)
+    }
+   }
+ })
+
+ //creating a presentable format for the output
+ var finalScoreStorage = []; 
+ Object.keys(scoreFreqObject).forEach(val=>{
+   var localObj = {};
+   localObj["score"] = parseFloat(val);
+   localObj["count"] =  scoreFreqObject[val]["specs"].length;
+   localObj["outputspec"] = scoreFreqObject[val]["specs"];
+
+   finalScoreStorage.push(localObj);
+ })
+ finalScoreStorage.sort((a,b) => b["score"]-a["score"]);
+ console.table(finalScoreStorage);
+ console.log(finalScoreStorage);
+
+}
+
+
 const coolerOutput = [
   {
     viewPartition: "contiguous",
@@ -265,4 +319,5 @@ module.exports = {
   checkMissingAttributes: checkMissingAttributes,
   recommendedProductsAllRanked: recommendedProductsAllRanked,
   coolerOutput: coolerOutput,
+  createFrequencyTableForScores:createFrequencyTableForScores
 };
