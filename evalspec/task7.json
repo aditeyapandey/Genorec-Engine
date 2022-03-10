@@ -28,29 +28,17 @@
                             "denseInterconnection": false,
                             "fileName": "BIGWIG1",
                             "encodingName": "QUANT1"
-                        }
-                    ]
-                },
-                {
-                    "featureId": "feature_1",
-                    "featureGranularity": "segment",
-                    "featureDensity": "sparse",
-                    "featureLabel": "Segment_Sparse",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks": [],
-                    "interactivity": true,
-                    "attr": [
+                        },
                         {
-                            "attrId": "attribute_0",
-                            "dataType": "categorical",
+                            "attrId": "attribute_1",
+                            "dataType": "quantitative",
                             "intraAttrTask": [
                                 "identify"
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "BED1",
-                            "encodingName": "CAT1"
+                            "fileName": "BIGWIG2",
+                            "encodingName": "QUANT1"
                         }
                     ]
                 }
@@ -66,7 +54,7 @@
     "sparseConnection": false,
     "connectionType": "none",
     "tasks": [
-        "singleROI"
+        "compareMultipleROI"
     ],
     "geneAnnotation": true,
     "ideogramDisplayed": false

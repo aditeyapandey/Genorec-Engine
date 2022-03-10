@@ -103,7 +103,7 @@ function getAlignmentUpdated(visoptions) {
     });
     output.push(tempAttributeStorage);
   });
-  console.log("Alignment Recommendation:", output);
+  // console.log("Alignment Recommendation:", output);
   return output;
 }
 

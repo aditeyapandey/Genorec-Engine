@@ -10,9 +10,32 @@
             "features": [
                 {
                     "featureId": "feature_0",
+                    "featureGranularity": "segment",
+                    "featureDensity": "sparse",
+                    "featureLabel": "Segment_Sparse",
+                    "featureInterconnection": true,
+                    "denseInterconnection": false,
+                    "intraFeatureTasks": [],
+                    "interactivity": true,
+                    "attr": [
+                        {
+                            "attrId": "attribute_0",
+                            "dataType": "quantitative",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": true,
+                            "denseInterconnection": false,
+                            "fileName": "BEDPE1",
+                            "encodingName": "QUANT1"
+                        }
+                    ]
+                },
+                {
+                    "featureId": "feature_1",
                     "featureGranularity": "point",
-                    "featureDensity": "continous",
-                    "featureLabel": "Point_Continous",
+                    "featureDensity": "sparse",
+                    "featureLabel": "Point_Sparse",
                     "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks": [],
@@ -26,31 +49,8 @@
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "BIGWIG1",
+                            "fileName": "VCF1",
                             "encodingName": "QUANT1"
-                        }
-                    ]
-                },
-                {
-                    "featureId": "feature_1",
-                    "featureGranularity": "segment",
-                    "featureDensity": "sparse",
-                    "featureLabel": "Segment_Sparse",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks": [],
-                    "interactivity": true,
-                    "attr": [
-                        {
-                            "attrId": "attribute_0",
-                            "dataType": "categorical",
-                            "intraAttrTask": [
-                                "identify"
-                            ],
-                            "featureInterconnection": false,
-                            "denseInterconnection": false,
-                            "fileName": "BED1",
-                            "encodingName": "CAT1"
                         }
                     ]
                 }
@@ -66,7 +66,7 @@
     "sparseConnection": false,
     "connectionType": "none",
     "tasks": [
-        "singleROI"
+        ""
     ],
     "geneAnnotation": true,
     "ideogramDisplayed": false

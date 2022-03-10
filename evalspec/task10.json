@@ -51,6 +51,17 @@
                             "denseInterconnection": false,
                             "fileName": "BED1",
                             "encodingName": "CAT1"
+                        },
+                        {
+                            "attrId": "attribute_1",
+                            "dataType": "quantitative",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": false,
+                            "denseInterconnection": false,
+                            "fileName": "SEG1",
+                            "encodingName": "QUANT1"
                         }
                     ]
                 }
@@ -66,7 +77,7 @@
     "sparseConnection": false,
     "connectionType": "none",
     "tasks": [
-        "singleROI"
+        ""
     ],
     "geneAnnotation": true,
     "ideogramDisplayed": false

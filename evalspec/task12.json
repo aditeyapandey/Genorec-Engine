@@ -10,9 +10,9 @@
             "features": [
                 {
                     "featureId": "feature_0",
-                    "featureGranularity": "point",
-                    "featureDensity": "continous",
-                    "featureLabel": "Point_Continous",
+                    "featureGranularity": "segment",
+                    "featureDensity": "sparse",
+                    "featureLabel": "Segment_Sparse",
                     "featureInterconnection": false,
                     "denseInterconnection": false,
                     "intraFeatureTasks": [],
@@ -26,23 +26,11 @@
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "BIGWIG1",
+                            "fileName": "BED1",
                             "encodingName": "QUANT1"
-                        }
-                    ]
-                },
-                {
-                    "featureId": "feature_1",
-                    "featureGranularity": "segment",
-                    "featureDensity": "sparse",
-                    "featureLabel": "Segment_Sparse",
-                    "featureInterconnection": false,
-                    "denseInterconnection": false,
-                    "intraFeatureTasks": [],
-                    "interactivity": true,
-                    "attr": [
+                        },
                         {
-                            "attrId": "attribute_0",
+                            "attrId": "attribute_1",
                             "dataType": "categorical",
                             "intraAttrTask": [
                                 "identify"
@@ -51,6 +39,17 @@
                             "denseInterconnection": false,
                             "fileName": "BED1",
                             "encodingName": "CAT1"
+                        },
+                        {
+                            "attrId": "attribute_2",
+                            "dataType": "text",
+                            "intraAttrTask": [
+                                "identify"
+                            ],
+                            "featureInterconnection": false,
+                            "denseInterconnection": false,
+                            "fileName": "BED1",
+                            "encodingName": "TEXT1"
                         }
                     ]
                 }
@@ -66,7 +65,7 @@
     "sparseConnection": false,
     "connectionType": "none",
     "tasks": [
-        "singleROI"
+        ""
     ],
     "geneAnnotation": true,
     "ideogramDisplayed": false

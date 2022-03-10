@@ -76,7 +76,7 @@ function getPartitionUpdated(input,tasks,network)
             output.push({viewPartition,partitionPredictionScore,views,finalScore});
         })
     })
-    console.log("Partition Recommendation:",output);
+    // console.log("Partition Recommendation:",output);
     return output
 }
 

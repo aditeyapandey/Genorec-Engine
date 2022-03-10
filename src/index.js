@@ -24,9 +24,9 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    input.push({"chart":"Updated Input", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../evalspec/task3.json"),"tasks":["explore"]});
-    // input.push({"chart":"Updated Input", "data":require("../evalspec/task4.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../evalspec/task7.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../evalspec/task8.json"),"tasks":["explore"]});
+    input.push({"chart":"Updated Input", "data":require("../evalspec/task9.json"),"tasks":["explore"]});
 
     // input.push({"chart":"Updated Input", "data":require("../evalspec/task5.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../evalspec/task6.json"),"tasks":["explore"]});
@@ -34,7 +34,7 @@ if(testVersion)
     //input.push({"chart":"Updated Input", "data":require("../TestInput/bedpe_seg.json"),"tasks":["explore"]});
 
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackMultipleView.json"),"tasks":["explore"]});
-     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
+    //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleTrackSingleView.json"),"tasks":["explore"]});
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2SingleViewMultiAttrDiffType.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixTracks.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../TestInput/V2CircularConnection.json"),"tasks":["explore"]});

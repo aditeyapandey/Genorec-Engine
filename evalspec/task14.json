@@ -43,14 +43,14 @@
                     "attr": [
                         {
                             "attrId": "attribute_0",
-                            "dataType": "categorical",
+                            "dataType": "quantitative",
                             "intraAttrTask": [
                                 "identify"
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
                             "fileName": "BED1",
-                            "encodingName": "CAT1"
+                            "encodingName": "QUANT1"
                         }
                     ]
                 }
@@ -62,11 +62,11 @@
         "sequenceConservation": [],
         "edgeValues": []
     },
-    "denseConnection": false,
+    "denseConnection": true,
     "sparseConnection": false,
-    "connectionType": "none",
+    "connectionType": "dense",
     "tasks": [
-        "singleROI"
+        ""
     ],
     "geneAnnotation": true,
     "ideogramDisplayed": false

@@ -79,7 +79,7 @@ function getLayoutUpdated(visOptions,tasks,viewConnectionType)
 
     });
     
-    console.log("Layout Recommendation",output)
+    // console.log("Layout Recommendation",output)
     return output    
 }
 
