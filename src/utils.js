@@ -289,7 +289,14 @@ function createFrequencyTableForScores(recOutput)
  })
  finalScoreStorage.sort((a,b) => b["score"]-a["score"]);
  console.table(finalScoreStorage);
- console.log(finalScoreStorage);
+//  console.log(finalScoreStorage);
+ console.log(finalScoreStorage[0]["score"])
+ const binRange = finalScoreStorage[0]["score"]/3;
+ const highBin = `${finalScoreStorage[0]["score"]} - ${(finalScoreStorage[0]["score"]-binRange).toFixed(1)}`
+ const midBin = `${(finalScoreStorage[0]["score"]-binRange).toFixed(1)} - ${(finalScoreStorage[0]["score"]-2*binRange).toFixed(1)}`
+ const lowBin = `${(finalScoreStorage[0]["score"]-2*binRange).toFixed(1)} - ${(finalScoreStorage[0]["score"]-3*binRange).toFixed(1)}`
+
+ console.log(`Bins: high(${highBin}), mid(${midBin}), low(${lowBin})` )
 
 }
 

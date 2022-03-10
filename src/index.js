@@ -24,9 +24,29 @@ if(testVersion)
 {
     var input = [];
     //Inputs
-    input.push({"chart":"Updated Input", "data":require("../evalspec/task7.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../evalspec/task8.json"),"tasks":["explore"]});
-    input.push({"chart":"Updated Input", "data":require("../evalspec/task9.json"),"tasks":["explore"]});
+     input.push({"task":"task1", "data":require("../evalspec/task1.json"),"tasks":["explore"]});
+     input.push({"task":"task3", "data":require("../evalspec/task3.json"),"tasks":["explore"]});
+    // input.push({"task":"task4", "data":require("../evalspec/task4.json"),"tasks":["explore"]});
+    // input.push({"task":"task5", "data":require("../evalspec/task5.json"),"tasks":["explore"]});
+    // input.push({"task":"task6", "data":require("../evalspec/task6.json"),"tasks":["explore"]});
+    // input.push({"task":"task7", "data":require("../evalspec/task7.json"),"tasks":["explore"]});
+    // input.push({"task":"task8", "data":require("../evalspec/task8.json"),"tasks":["explore"]});
+    // input.push({"task":"task9", "data":require("../evalspec/task9.json"),"tasks":["explore"]});
+    // input.push({"task":"task13", "data":require("../evalspec/task13.json"),"tasks":["explore"]});
+    // input.push({"task":"task14", "data":require("../evalspec/task14.json"),"tasks":["explore"]});
+    
+    //Three or more files
+    //input.push({"task":"task2", "data":require("../evalspec/task2.json"),"tasks":["explore"]});
+    //input.push({"task":"task2", "data":require("../evalspec/task10.json"),"tasks":["explore"]});
+    //input.push({"task":"task2", "data":require("../evalspec/task11.json"),"tasks":["explore"]});
+    //input.push({"task":"task2", "data":require("../evalspec/task12.json"),"tasks":["explore"]});
+
+
+
+
+
+    //input.push({"chart":"Updated Input", "data":require("../evalspec/task8.json"),"tasks":["explore"]});
+    //input.push({"chart":"Updated Input", "data":require("../evalspec/task9.json"),"tasks":["explore"]});
 
     // input.push({"chart":"Updated Input", "data":require("../evalspec/task5.json"),"tasks":["explore"]});
     // input.push({"chart":"Updated Input", "data":require("../evalspec/task6.json"),"tasks":["explore"]});
@@ -47,12 +67,13 @@ if(testVersion)
     //input.push({"chart":"Updated Input", "data":require("../TestInput/V2MatrixNoTracks.json"),"tasks":["explore"]});
 
     input.forEach(val=>{
-        getRecommendation(val["data"],val["chart"],val['tasks'])
+        getRecommendation(val["data"],val["task"])
     })
 
     //Validate the input dataspecification to ensure correctness of input data
-    function getRecommendation(inputData,file,tasks)
+    function getRecommendation(inputData,taskId)
     {
+
         let attrMissing = checkMissingAttributes(inputData);
         if(attrMissing)
         {
@@ -110,6 +131,7 @@ if(testVersion)
 
         //Return the rec non dupicates
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
+        console.log("-----------",taskId, "-------------")
         console.log(recommendationSpecNonDuplicatesUpdated);
         createFrequencyTableForScores(recommendationSpecNonDuplicatesUpdated)
 
@@ -181,6 +203,7 @@ if(!testVersion)
         var recommendationSpecNonDuplicatesUpdated = checkDuplicates(Object.values(arrangement))
         // console.log(recommendationSpecNonDuplicatesUpdated);
 
+        createFrequencyTableForScores(recommendationSpecNonDuplicatesUpdated);
         return recommendationSpecNonDuplicatesUpdated;
 
     }  
