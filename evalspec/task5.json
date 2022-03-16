@@ -20,14 +20,14 @@
                     "attr": [
                         {
                             "attrId": "attribute_0",
-                            "dataType": "quantitative",
+                            "dataType": "text",
                             "intraAttrTask": [
                                 "identify"
                             ],
                             "featureInterconnection": false,
                             "denseInterconnection": false,
-                            "fileName": "VCF1",
-                            "encodingName": "QUANT1"
+                            "fileName": "BED1",
+                            "encodingName": "TEXT1"
                         }
                     ]
                 }

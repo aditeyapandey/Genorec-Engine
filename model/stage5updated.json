@@ -1,5 +1,5 @@
 [
 {"arrangement":"stack","d_nointerconnection":"1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"1","t_compareacrosstracks":"1"},
-{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"-1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"},
+{"arrangement":"adjacent","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"-1","d_twosequences":"1","d_otherthantwosequences":"-1","s_circularlayout":"1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"1"},
 {"arrangement":"orthogonal","d_nointerconnection":"-1","d_sparseinterconnection":"1","d_denseinterconnection":"1","d_twosequences":"1","d_otherthantwosequences":"1","s_circularlayout":"-1","s_linearlayout":"1","s_mixedlayout":"-1","t_compareacrosstracks":"-1"}
 ]

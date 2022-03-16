@@ -67,17 +67,16 @@ function recommendedProducts(similarityScores) {
   return recommendedProducts;
 }
 
-
 function recommendedProductsAllRanked(similarityScores) {
   let arr = Object.values(similarityScores);
   var set = new Set(arr);
 
-  var sortedArr = [...(set)].sort(); // with spread.
+  var sortedArr = [...set].sort(); // with spread.
   // console.log(sortedArr);
 
-  let max = sortedArr[sortedArr.length-1];
+  let max = sortedArr[sortedArr.length - 1];
   let least = sortedArr[0];
-  let midVal = sortedArr[Math.ceil(sortedArr.length -1)/2]
+  let midVal = sortedArr[Math.ceil(sortedArr.length - 1) / 2];
   var recommendedProducts = { top: [], mid: [], low: [] };
   var secondHighest = arr.sort(function (a, b) {
     return b - a;
@@ -240,66 +239,81 @@ function checkMissingAttributes(input) {
   });
 }
 
-//Create a frequency table for all 
-function createFrequencyTableForScores(recOutput)
-{
+//Create a frequency table for all
+function createFrequencyTableForScores(recOutput) {
   /*
   {
     score:val,
     elements:[]//array of objects
   }
   */
- let scoreFreqObject = {};
+  let scoreFreqObject = {};
+  let scoreAllVals = [];
 
- recOutput.forEach(val=>{
-   let scoreConverted = val["finalScore"].toFixed(1);
-   if(scoreFreqObject[scoreConverted]===undefined)
-   {
-    scoreFreqObject[scoreConverted] = {};
-    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
-    {
-     scoreFreqObject[scoreConverted]["specs"] = [];
-     scoreFreqObject[scoreConverted]["specs"].push(val)
+  recOutput.forEach((val) => {
+    let scoreConverted = val["finalScore"].toFixed(1);
+    scoreAllVals.push(parseFloat(scoreConverted));
+    if (scoreFreqObject[scoreConverted] === undefined) {
+      scoreFreqObject[scoreConverted] = {};
+      if (scoreFreqObject[scoreConverted]["specs"] === undefined) {
+        scoreFreqObject[scoreConverted]["specs"] = [];
+        scoreFreqObject[scoreConverted]["specs"].push(val);
+      } else {
+        scoreFreqObject[scoreConverted]["specs"].push(val);
+      }
+    } else {
+      if (scoreFreqObject[scoreConverted]["specs"] === undefined) {
+        scoreFreqObject[scoreConverted]["specs"] = [];
+        scoreFreqObject[scoreConverted]["specs"].push(val);
+      } else {
+        scoreFreqObject[scoreConverted]["specs"].push(val);
+      }
     }
-    else{
-     scoreFreqObject[scoreConverted]["specs"].push(val)
-    }
-   }
-   else{
-    if(scoreFreqObject[scoreConverted]["specs"] === undefined)
-    {
-     scoreFreqObject[scoreConverted]["specs"] = [];
-     scoreFreqObject[scoreConverted]["specs"].push(val)
-    }
-    else{
-     scoreFreqObject[scoreConverted]["specs"].push(val)
-    }
-   }
- })
+  });
 
- //creating a presentable format for the output
- var finalScoreStorage = []; 
- Object.keys(scoreFreqObject).forEach(val=>{
-   var localObj = {};
-   localObj["score"] = parseFloat(val);
-   localObj["count"] =  scoreFreqObject[val]["specs"].length;
-   localObj["outputspec"] = scoreFreqObject[val]["specs"];
+  //Calculating Median score
+  scoreAllValsSorted = scoreAllVals.sort((a, b) => a - b);
+  console.log(scoreAllValsSorted);
+  let half = Math.floor(scoreAllValsSorted.length / 2);
+  let medianScore;
 
-   finalScoreStorage.push(localObj);
- })
- finalScoreStorage.sort((a,b) => b["score"]-a["score"]);
- console.table(finalScoreStorage);
-//  console.log(finalScoreStorage);
- console.log(finalScoreStorage[0]["score"])
- const binRange = finalScoreStorage[0]["score"]/3;
- const highBin = `${finalScoreStorage[0]["score"]} - ${(finalScoreStorage[0]["score"]-binRange).toFixed(1)}`
- const midBin = `${(finalScoreStorage[0]["score"]-binRange).toFixed(1)} - ${(finalScoreStorage[0]["score"]-2*binRange).toFixed(1)}`
- const lowBin = `${(finalScoreStorage[0]["score"]-2*binRange).toFixed(1)} - ${(finalScoreStorage[0]["score"]-3*binRange).toFixed(1)}`
+  if (scoreAllValsSorted.length % 2) {
+    medianScore = scoreAllValsSorted[half];
+  } else {
+    medianScore =
+      (scoreAllValsSorted[half - 1] + scoreAllValsSorted[half]) / 2.0;
+  }
 
- console.log(`Bins: high(${highBin}), mid(${midBin}), low(${lowBin})` )
+  console.log("median score", medianScore);
 
+  //creating a presentable format for the output
+  var finalScoreStorage = [];
+  Object.keys(scoreFreqObject).forEach((val) => {
+    var localObj = {};
+    localObj["score"] = parseFloat(val);
+    localObj["count"] = scoreFreqObject[val]["specs"].length;
+    localObj["outputspec"] = scoreFreqObject[val]["specs"];
+
+    finalScoreStorage.push(localObj);
+  });
+  finalScoreStorage.sort((a, b) => b["score"] - a["score"]);
+  console.table(finalScoreStorage);
+  //  console.log(finalScoreStorage);
+  console.log(finalScoreStorage[0]["score"]);
+  const binRange = finalScoreStorage[0]["score"] / 3;
+  const highBin = `${finalScoreStorage[0]["score"]} - ${(
+    finalScoreStorage[0]["score"] - binRange
+  ).toFixed(1)}`;
+  const midBin = `${(finalScoreStorage[0]["score"] - binRange).toFixed(1)} - ${(
+    finalScoreStorage[0]["score"] -
+    2 * binRange
+  ).toFixed(1)}`;
+  const lowBin = `${(finalScoreStorage[0]["score"] - 2 * binRange).toFixed(
+    1
+  )} - ${(finalScoreStorage[0]["score"] - 3 * binRange).toFixed(1)}`;
+
+  console.log(`Bins: high(${highBin}), mid(${midBin}), low(${lowBin})`);
 }
-
 
 const coolerOutput = [
   {
@@ -326,5 +340,5 @@ module.exports = {
   checkMissingAttributes: checkMissingAttributes,
   recommendedProductsAllRanked: recommendedProductsAllRanked,
   coolerOutput: coolerOutput,
-  createFrequencyTableForScores:createFrequencyTableForScores
+  createFrequencyTableForScores: createFrequencyTableForScores,
 };

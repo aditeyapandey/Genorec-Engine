@@ -43,17 +43,6 @@
                     "attr": [
                         {
                             "attrId": "attribute_0",
-                            "dataType": "categorical",
-                            "intraAttrTask": [
-                                "identify"
-                            ],
-                            "featureInterconnection": false,
-                            "denseInterconnection": false,
-                            "fileName": "BED1",
-                            "encodingName": "CAT1"
-                        },
-                        {
-                            "attrId": "attribute_1",
                             "dataType": "quantitative",
                             "intraAttrTask": [
                                 "identify"
